@@ -6,6 +6,8 @@ This bot is Salim.
 
 Thank you for **Quality** Salim Quote from <a href="https://github.com/narze/awesome-salim-quotes">narze/awesome-salim-quotes</a>
 
+Also, this repo is inspired by seeing above repo
+
 ## Implement-kata
 
 In case you want to
