@@ -5,6 +5,8 @@ const Discord = require("discord.js")
 const client = new Discord.Client()
 const auth = require("./auth.json")
 
+const salimDict = require("./keywords.json")
+
 // * Pull Quote from Github
 let plaintxt = ""
 let quoteArray = []
@@ -42,6 +44,8 @@ function eval(msg) {
         return
     }
 
+    logconsole(`Recieve message from ${msg.author.username} : ${msg.content}`)
+
     if (msg.mentions.has(client.user)) {
         if (msg.content.includes("แนะนำตัว")) {
             logconsole("Introduced myself")
@@ -50,8 +54,7 @@ function eval(msg) {
         }
     }
 
-    logconsole(`Recieve message from ${msg.author.username} : ${msg.content}`)
-    if (msg.content.includes("สลิ่ม")) {
+    if (isChangChard(msg)) {
         let tosentmsg = randomQuote()
         msg.channel.send(`${tosentmsg}`)
         logconsole(`Sent message : ${tosentmsg}`)
@@ -90,4 +93,13 @@ function getFormattedTime() {
 function introduceMyself() {
     let istr = `ซาหวาาดีคร้าบ ท่านสมาชิกชมรมคนชอบกะสัส\nผมเป็นสลิ่ม\nสามารถไปแงะสมองของผมได้ที่ https://github.com/Leomotors/Salim-Bot\nอย่าลืมไปกดให้ดาวด้วยน้า เดี๋ยวเจ้าของผมงอน`
     return istr
+}
+
+function isChangChard(msg) {
+    for (let word of salimDict.ชังชาติ) {
+        if (msg.content.includes(word)) {
+            return true
+        }
+    }
+    return false
 }
