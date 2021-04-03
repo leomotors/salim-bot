@@ -33,12 +33,21 @@ client.on("ready", () => {
 // * If recieve message, process it
 client.on("message", eval)
 
+// * Login
 client.login(auth.token);
 
 function eval(msg) {
-    if(msg.author.id == 827812132242325504){
+    if (msg.author.id == 827812132242325504) {
         // * It's your own message!
         return
+    }
+
+    if (msg.mentions.has(client.user)) {
+        if (msg.content.includes("แนะนำตัว")) {
+            logconsole("Introduced myself")
+            msg.channel.send(introduceMyself())
+            return
+        }
     }
 
     logconsole(`Recieve message from ${msg.author.username} : ${msg.content}`)
@@ -76,4 +85,9 @@ function getFormattedTime() {
     let sec = d.getSeconds()
     let formattedDate = `${year}-${addZero(month)}-${addZero(day)} ${addZero(hour)}:${addZero(min)}:${addZero(sec)}`
     return formattedDate
+}
+
+function introduceMyself() {
+    let istr = `ซาหวาาดีคร้าบ ท่านสมาชิกชมรมคนชอบกะสัส\nผมเป็นสลิ่ม\nสามารถไปแงะสมองของผมได้ที่https://github.com/Leomotors/Salim-Bot`
+    return istr
 }
