@@ -6,7 +6,7 @@ const client = new Discord.Client()
 const auth = require("./auth.json")
 
 const salimDict = require("./keywords.json")
-const moreWord = require("./morewords.json")
+const moreWord = require("./morequotes.json")
 const songList = require("./ytlink.json")
 
 let RoyalSongArray = songList.เทิดทูนสถาบัน
@@ -30,7 +30,7 @@ request({
             quoteArray.push(line.slice(2))
         }
     }
-    console.log("SalimQuote.js/ getQuote(): Successfully pulled quote data")
+    console.log("SalimQuote.js/ getQuote(): Successfully pulled quote data from narze's repository")
 })
 
 // * Add more วาทกรรมสลิ่ม from morewords.json
