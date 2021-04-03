@@ -30,7 +30,7 @@ request({
             quoteArray.push(line.slice(2))
         }
     }
-    console.log("SalimQuote.js/ getQuote(): Successfully pulled quote data from narze's repository")
+    console.log("Successfully pulled quote data from narze's repository")
 })
 
 // * Add more วาทกรรมสลิ่ม from morequotes.json
