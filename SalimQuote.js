@@ -1,5 +1,5 @@
 // * Return array of all quote available
-function getQuote() {
+export function getQuote() {
     let plaintxt = ""
     let quoteArray = []
     const request = require("request")
@@ -21,5 +21,3 @@ function getQuote() {
         return quoteArray
     })
 }
-
-export {getQuote}
