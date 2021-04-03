@@ -7,6 +7,9 @@ const auth = require("./auth.json")
 
 const salimDict = require("./keywords.json")
 const moreWord = require("./morewords.json")
+const songList = require("./ytlink.json")
+
+let RoyalSongArray = songList.เทิดทูนสถาบัน
 
 // * Pull Quote from Github
 let plaintxt = ""
@@ -31,14 +34,13 @@ request({
 })
 
 // * Add more วาทกรรมสลิ่ม from morewords.json
-for (let word of moreWord.วาทกรรมสลิ่ม)
-{
+for (let word of moreWord.วาทกรรมสลิ่ม) {
     quoteArray.push(word)
 }
 
 // * Log if successfully logged in
 client.on("ready", () => {
-    console.log(`Successfully loggged in as ${client.user.tag}.`)
+    console.log(`Successfully logged in as ${client.user.tag}.`)
 })
 
 // * If recieve message, process it
@@ -61,6 +63,12 @@ function eval(msg) {
             msg.channel.send(introduceMyself())
             return
         }
+        if (msg.content.includes("เปิดเพลง")) {
+            let tosentmsg = randomSong()
+            msg.channel.send(`${tosentmsg}`)
+            logconsole(`Sent music : ${tosentmsg}`)
+            return
+        }
     }
 
     if (isChangChard(msg)) {
@@ -73,6 +81,11 @@ function eval(msg) {
 function randomQuote() {
     let randIndex = Math.floor(Math.random() * quoteArray.length)
     return quoteArray[randIndex]
+}
+
+function randomSong() {
+    let randIndex = Math.floor(Math.random() * RoyalSongArray.length)
+    return RoyalSongArray[randIndex]
 }
 
 function logconsole(logmsg, status = "Normal") {
