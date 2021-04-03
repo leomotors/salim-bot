@@ -36,10 +36,16 @@ client.on("message", eval)
 client.login(auth.token);
 
 function eval(msg) {
-    logconsole(`Recieve message from ${msg.author.id} : ${msg.content}`)
+    if(msg.author.id == 827812132242325504){
+        // * It's your own message!
+        return
+    }
+
+    logconsole(`Recieve message from ${msg.author.username} : ${msg.content}`)
     if (msg.content === "สลิ่ม") {
-        msg.channel.send(`${randomQuote()}`)
-        logconsole("Sent message")
+        let tosentmsg = randomQuote()
+        msg.channel.send(`${tosentmsg}`)
+        logconsole(`Sent message : ${tosentmsg}`)
     }
 }
 
