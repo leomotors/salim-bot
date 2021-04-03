@@ -33,7 +33,7 @@ request({
     console.log("SalimQuote.js/ getQuote(): Successfully pulled quote data from narze's repository")
 })
 
-// * Add more วาทกรรมสลิ่ม from morewords.json
+// * Add more วาทกรรมสลิ่ม from morequotes.json
 for (let word of moreWord.วาทกรรมสลิ่ม) {
     quoteArray.push(word)
 }
