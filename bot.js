@@ -50,7 +50,7 @@ client.on("message", eval)
 client.login(auth.token);
 
 function eval(msg) {
-    if (msg.author.id == 827812132242325504) {
+    if (msg.author.id == client.user.id) {
         // * It's your own message!
         return
     }
