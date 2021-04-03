@@ -10,7 +10,7 @@ Also, this repo is inspired by seeing above repo
 
 ## Special Thanks
 
-ขอบคุณเพจ <a href="https://www.facebook.com/thaimoveinstitute/">สถาบันทิศทางไทย</a> ที่ช่วยเติมตำ `Salim Quote`
+ขอบคุณเพจ <a href="https://www.facebook.com/thaimoveinstitute/">สถาบันทิศทางไทย</a> ที่ช่วยเติมเต็ม `Salim Quote`
 
 ## Implement-kata
 
