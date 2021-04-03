@@ -8,6 +8,10 @@ Thank you for **Quality** Salim Quote from <a href="https://github.com/narze/awe
 
 Also, this repo is inspired by seeing above repo
 
+## Special Thanks
+
+ขอบคุณเพจ <a href="https://www.facebook.com/thaimoveinstitute/">สถาบันทิศทางไทย</a> ที่ช่วยเติมตำ `Salim Quote`
+
 ## Implement-kata
 
 In case you want to
