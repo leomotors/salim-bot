@@ -30,18 +30,18 @@ request({
             quoteArray.push(line.slice(2))
         }
     }
-    console.log("Successfully pulled quote data from narze's repository")
+    console.log("[DATA FETCHED] Successfully pulled quote data from narze's repository")
 })
 
 // * Add more วาทกรรมสลิ่ม from morequotes.json
 for (let word of moreWord.วาทกรรมสลิ่ม) {
     quoteArray.push(word)
 }
-console.log("Successfully pulled quote data from morequotes.json")
+console.log("[DATA FETCHED] Successfully pulled quote data from morequotes.json")
 
 // * Log if successfully logged in
 client.on("ready", () => {
-    console.log(`Successfully logged in as ${client.user.tag}.`)
+    console.log(`[READY] Successfully logged in as ${client.user.tag}.`)
 })
 
 // * If recieve message, process it
