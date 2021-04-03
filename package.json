@@ -1,0 +1,23 @@
+{
+  "name": "Salim-Bot",
+  "version": "1.0.0",
+  "description": "This bot is Salim.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Leomotors/Salim-Bot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Leomotors/Salim-Bot/issues"
+  },
+  "homepage": "https://github.com/Leomotors/Salim-Bot#readme",
+  "dependencies": {
+    "discord.js": "^12.5.3"
+  }
+}
