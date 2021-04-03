@@ -4,7 +4,7 @@ This bot is Salim.
 
 ## Quality Quote
 
-Thank you for quality Salim Quote from <a href="https://github.com/narze/awesome-salim-quotes">narze/awesome-salim-quotes</a>
+Thank you for **Quality** Salim Quote from <a href="https://github.com/narze/awesome-salim-quotes">narze/awesome-salim-quotes</a>
 
 ## Implement-kata
 
