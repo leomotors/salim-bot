@@ -18,14 +18,14 @@ Also, this repo is inspired by seeing above repo
 
 ขอบคุณเพจ <a href="https://www.facebook.com/thaimoveinstitute/">สถาบันทิศทางไทย</a> ที่ช่วยเติมเต็ม `Salim Quote`
 
-## Implement-方
+## Implement方
 
-In case you want to
+In case you want to (not recommend)
 
-Install node_modules by this command
+* Install node_modules by this command
 
-```npm install discord.js --save```
+  ```npm install discord.js --save```
 
-Then, create auth.json with Token
+* Then, create auth.json with Token
 
-Run bot.js and done!
+* Run bot.js and done!
