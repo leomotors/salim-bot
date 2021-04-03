@@ -18,7 +18,7 @@ Also, this repo is inspired by seeing above repo
 
 ขอบคุณเพจ <a href="https://www.facebook.com/thaimoveinstitute/">สถาบันทิศทางไทย</a> ที่ช่วยเติมเต็ม `Salim Quote`
 
-## Implement-kata
+## Implement-方
 
 In case you want to
 
