@@ -37,6 +37,7 @@ request({
 for (let word of moreWord.วาทกรรมสลิ่ม) {
     quoteArray.push(word)
 }
+console.log("Successfully pulled quote data from morequotes.json")
 
 // * Log if successfully logged in
 client.on("ready", () => {
@@ -64,9 +65,9 @@ function eval(msg) {
             return
         }
         if (msg.content.includes("เพลง")) {
-            let tosentmsg = randomSong()
-            msg.channel.send(`${tosentmsg}`)
-            logconsole(`Sent music : ${tosentmsg}`)
+            let musicurl = randomSong()
+            msg.channel.send(`${musicurl}`)
+            logconsole(`Sent music : ${musicurl}`)
             return
         }
     }
