@@ -6,10 +6,13 @@ const client = new Discord.Client()
 const auth = require("./auth.json")
 
 const salimDict = require("./keywords.json")
+const moreWord = require("./morewords.json")
 
 // * Pull Quote from Github
 let plaintxt = ""
 let quoteArray = []
+
+// * Add วาทกรรมสลิ่ม from narze's repo
 const request = require("request")
 
 request({
@@ -26,6 +29,12 @@ request({
     }
     console.log("SalimQuote.js/ getQuote(): Successfully pulled quote data")
 })
+
+// * Add more วาทกรรมสลิ่ม from morewords.json
+for (let word of moreWord.วาทกรรมสลิ่ม)
+{
+    quoteArray.push(word)
+}
 
 // * Log if successfully logged in
 client.on("ready", () => {
