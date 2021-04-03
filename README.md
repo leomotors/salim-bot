@@ -12,7 +12,7 @@ In case you want to
 
 Install node_modules by this command
 
-`npm install discord.js --save`
+```npm install discord.js --save```
 
 Then, create auth.json with Token
 
