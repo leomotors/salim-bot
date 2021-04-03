@@ -51,7 +51,7 @@ function eval(msg) {
     }
 
     logconsole(`Recieve message from ${msg.author.username} : ${msg.content}`)
-    if (msg.content === "สลิ่ม") {
+    if (msg.content.includes("สลิ่ม")) {
         let tosentmsg = randomQuote()
         msg.channel.send(`${tosentmsg}`)
         logconsole(`Sent message : ${tosentmsg}`)
