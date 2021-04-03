@@ -2,6 +2,8 @@
 
 This bot is Salim.
 
+**April Fools!!!** Wait, it passed? nvm, idc.
+
 ## Quality Quote
 
 Thank you for **Quality** Salim Quote from <a href="https://github.com/narze/awesome-salim-quotes">narze/awesome-salim-quotes</a>
