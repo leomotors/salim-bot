@@ -63,7 +63,7 @@ function eval(msg) {
             msg.channel.send(introduceMyself())
             return
         }
-        if (msg.content.includes("เปิดเพลง")) {
+        if (msg.content.includes("เพลง")) {
             let tosentmsg = randomSong()
             msg.channel.send(`${tosentmsg}`)
             logconsole(`Sent music : ${tosentmsg}`)
