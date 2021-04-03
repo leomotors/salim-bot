@@ -1,6 +1,6 @@
-# Salim-Bot
+# Salim Discord Bot
 
-This bot is Salim.
+This bot is Salim. Whenever you trigger it, It become mad.
 
 **April Fools!!!** Wait, it passed? nvm, idc.
 
