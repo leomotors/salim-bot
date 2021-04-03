@@ -5,6 +5,26 @@ const Discord = require("discord.js")
 const client = new Discord.Client()
 const auth = require("./auth.json")
 
+// * Pull Quote from Github
+let plaintxt = ""
+let quoteArray = []
+const request = require("request")
+
+request({
+    url: "https://raw.githubusercontent.com/narze/awesome-salim-quotes/main/README.md",
+    json: false
+}, (err, response, body) => {
+    plaintxt = body
+    let txtarray = plaintxt.split(/\r?\n/)
+    for (const index in txtarray) {
+        line = txtarray[index]
+        if (line.startsWith("-")) {
+            quoteArray.push(line.slice(2))
+        }
+    }
+    console.log("SalimQuote.js/ getQuote(): Successfully pulled quote data")
+})
+
 // * Log if successfully logged in
 client.on("ready", () => {
     console.log(`Successfully loggged in as ${client.user.tag}.`)
@@ -16,15 +36,20 @@ client.on("message", eval)
 client.login(auth.token);
 
 function eval(msg) {
+    logconsole(`Recieve message from ${msg.author.id} : ${msg.content}`)
     if (msg.content === "สลิ่ม") {
-        msg.channel.send("Hello!")
+        msg.channel.send(`${randomQuote()}`)
         logconsole("Sent message")
     }
 }
 
-function logconsole(logmsg, status = "normal") {
+function randomQuote() {
+    let randIndex = Math.floor(Math.random() * quoteArray.length)
+    return quoteArray[randIndex]
+}
 
-    console.log(`[${getFormattedTime()}][Normal] ${logmsg}`)
+function logconsole(logmsg, status = "Normal") {
+    console.log(`[${getFormattedTime()}][${status}] ${logmsg}`)
 }
 
 function getFormattedTime() {
