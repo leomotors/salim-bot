@@ -62,7 +62,7 @@ function eval(msg) {
         if (msg.author.id == auth.ownerid) {
             debug(msg)
         }
-        else{
+        else {
             msg.channel.send("Only owner can do this!")
         }
     }
@@ -130,6 +130,7 @@ function introduceMyself() {
 function isChangChard(msg) {
     for (let word of salimDict.ชังชาติ) {
         if (msg.content.includes(word)) {
+            logconsole(`isChangChard : Detected "${word}"`)
             return true
         }
     }
@@ -139,8 +140,8 @@ function isChangChard(msg) {
 // * Debug น้อน
 function debug(msg) {
     let msgcomponent = msg.content.split(" ")
-    if (msgcomponent[1] == "quote"){
+    if (msgcomponent[1] == "quote") {
         msg.channel.send(quoteArray[msgcomponent[2]])
-        logconsole(`Sent quote #${msgcomponent[2]}`,"DEBUG")
+        logconsole(`Sent quote #${msgcomponent[2]}`, "DEBUG")
     }
 }
