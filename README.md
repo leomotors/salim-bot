@@ -26,6 +26,6 @@ In case you want to (not recommend)
 
   ```npm install discord.js --save```
 
-* Then, create auth.json with Token
+* Then, create auth.json with "token" ("ownerid" in case you wanna debug)
 
 * Run bot.js and done!
