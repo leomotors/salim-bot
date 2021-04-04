@@ -56,7 +56,16 @@ function eval(msg) {
         return
     }
 
-    logconsole(`Recieve message from ${msg.author.username} : ${msg.content}`)
+    logconsole(`Recieve message from ${msg.author.tag} : ${msg.content}`)
+
+    if (msg.content.startsWith("!debug")) {
+        if (msg.author.id == auth.ownerid) {
+            debug(msg)
+        }
+        else{
+            msg.channel.send("Only owner can do this!")
+        }
+    }
 
     if (msg.mentions.has(client.user)) {
         if (msg.content.includes("แนะนำตัว")) {
@@ -125,4 +134,13 @@ function isChangChard(msg) {
         }
     }
     return false
+}
+
+// * Debug น้อน
+function debug(msg) {
+    let msgcomponent = msg.content.split(" ")
+    if (msgcomponent[1] == "quote"){
+        msg.channel.send(quoteArray[msgcomponent[2]])
+        logconsole(`Sent quote #${msgcomponent[2]}`,"DEBUG")
+    }
 }
