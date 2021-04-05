@@ -16,7 +16,7 @@ Also, this repo is inspired by seeing above repo
 
 ## Special Thanks
 
-ขอบคุณเพจ <a href="https://www.facebook.com/thaimoveinstitute/">สถาบันทิศทางไทย</a> ที่ช่วยเติมเต็ม `Salim Quote`
+ขอบคุณเพจ <a href="https://www.facebook.com/thaimoveinstitute/">สถาบัน~~ทิศทางไทย~~หลงทิศหลงทาง</a> ที่ช่วยเติมเต็ม `Salim Quote` อันแสนงี่เง่านี้
 
 ## Implement方
 
