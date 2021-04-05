@@ -1,23 +1,20 @@
-// * Main Program, run this
+// * Main Program, run this with nodejs
 
-// * Setup process
-const Discord = require("discord.js")
-const client = new Discord.Client()
+// * Import data from other file
 const auth = require("./auth.json")
-
 const salimDict = require("./keywords.json")
 const moreWord = require("./morequotes.json")
 const songList = require("./ytlink.json")
+const getFormattedTime = require("./time.js")
 
-let RoyalSongArray = songList.เทิดทูนสถาบัน
-
-// * Pull Quote from Github
+// * Init Variable
 let plaintxt = ""
 let quoteArray = []
+let lastchannel = undefined
+let RoyalSongArray = songList.เทิดทูนสถาบัน
 
-// * Add วาทกรรมสลิ่ม from narze's repo
+// * Import วาทกรรมสลิ่ม from narze's repo
 const request = require("request")
-
 request({
     url: "https://raw.githubusercontent.com/narze/awesome-salim-quotes/main/README.md",
     json: false
@@ -39,34 +36,25 @@ for (let word of moreWord.วาทกรรมสลิ่ม) {
 }
 console.log("[DATA FETCHED] Successfully pulled quote data from morequotes.json")
 
-// * Log if successfully logged in
+// * Discord Zone: Define on_setup() and Login
+const Discord = require("discord.js")
+const client = new Discord.Client()
 client.on("ready", () => {
-    console.log(`[READY] Successfully logged in as ${client.user.tag}.`)
+    console.log(`[BOT READY] Successfully logged in as ${client.user.tag}.`)
 })
 
-// * If recieve message, process it
-client.on("message", eval)
-
-// * Login
 client.login(auth.token);
 
+// * On recieving message, process it
+client.on("message", eval)
 function eval(msg) {
+    lastchannel = msg.channel
     if (msg.author.id == client.user.id) {
         // * It's your own message!
         return
     }
 
     logconsole(`Recieve message from ${msg.author.tag} : ${msg.content}`)
-
-    if (msg.content.startsWith("!debug")) {
-        if (msg.author.id == auth.ownerid) {
-            debug(msg)
-        }
-        else {
-            msg.channel.send("Only owner can do this!")
-        }
-        return
-    }
 
     if (msg.mentions.has(client.user)) {
         if (msg.content.includes("แนะนำตัว")) {
@@ -89,6 +77,7 @@ function eval(msg) {
     }
 }
 
+// * All other support function
 function randomQuote() {
     let randIndex = Math.floor(Math.random() * quoteArray.length)
     return quoteArray[randIndex]
@@ -101,26 +90,6 @@ function randomSong() {
 
 function logconsole(logmsg, status = "Normal") {
     console.log(`[${getFormattedTime()}][${status}] ${logmsg}`)
-}
-
-function getFormattedTime() {
-    function addZero(num) {
-        if (num < 10) {
-            return `0${num}`
-        }
-        else {
-            return `${num}`
-        }
-    }
-    let d = new Date()
-    let year = d.getFullYear()
-    let month = d.getMonth() + 1
-    let day = d.getDate()
-    let hour = d.getHours()
-    let min = d.getMinutes()
-    let sec = d.getSeconds()
-    let formattedDate = `${year}-${addZero(month)}-${addZero(day)} ${addZero(hour)}:${addZero(min)}:${addZero(sec)}`
-    return formattedDate
 }
 
 function introduceMyself() {
@@ -138,21 +107,33 @@ function isชังชาติ(msg) {
     return false
 }
 
+
 // * Debug น้อน
-function debug(msg) {
-    let msgcomponent = msg.content.split(" ")
-    switch (msgcomponent[1]) {
+const readline = require("readline")
+
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+rl.on('line', (input) => {
+    debug(input)
+});
+
+function debug(commandstr) {
+    let command = commandstr.split(" ")
+    switch (command[0]) {
         case "quote":
-            msg.channel.send(quoteArray[msgcomponent[2]])
-            logconsole(`Sent quote #${msgcomponent[2]}`, "DEBUG")
+            lastchannel.send(quoteArray[command[1]])
+            logconsole(`quote : Sent quote #${command[1]}`, "DEBUG")
             return
         case "say":
-            let arr = ""
-            for (let i = 2; i < msgcomponent.length; i++) {
-                arr += (msgcomponent[i] + " ")
-            }
-            msg.channel.send(arr)
-            logconsole(`Sent message (echo) : ${arr}`, "DEBUG")
+            let arr = commandstr.slice(4)
+            lastchannel.send(arr)
+            logconsole(`say : Sent message ${arr}`, "DEBUG")
             return
     }
 }
+
+// * End of code -> Setup complete
+console.log("[SETUP COMPLETED] All Imports, Events, Functions are set")
