@@ -29,3 +29,10 @@ In case you want to (not recommend)
 * Then, create auth.json with "token" ("ownerid" in case you wanna debug)
 
 * Run bot.js and done!
+
+## How to train น้อน
+
+Manual Training a.k.a hard code (Idk what to do 😅)
+
+Maybe sentiment analysis in the future
+
