@@ -1,7 +1,7 @@
 // * Main Program, run this with nodejs
 
 // * Import data from other file
-const auth = require(".assets/json/auth.json")
+const auth = require(".auth.json")
 const salimDict = require(".assets/json/keywords.json")
 const moreWord = require(".assets/json/morequotes.json")
 const songList = require(".assets/json/ytlink.json")
