@@ -65,6 +65,7 @@ function eval(msg) {
         else {
             msg.channel.send("Only owner can do this!")
         }
+        return
     }
 
     if (msg.mentions.has(client.user)) {
@@ -81,7 +82,7 @@ function eval(msg) {
         }
     }
 
-    if (isChangChard(msg)) {
+    if (isชังชาติ(msg)) {
         let tosentmsg = randomQuote()
         msg.channel.send(`${tosentmsg}`)
         logconsole(`Sent message : ${tosentmsg}`)
@@ -127,10 +128,10 @@ function introduceMyself() {
     return istr
 }
 
-function isChangChard(msg) {
+function isชังชาติ(msg) {
     for (let word of salimDict.ชังชาติ) {
         if (msg.content.includes(word)) {
-            logconsole(`isChangChard : Detected "${word}"`)
+            logconsole(`isชังชาติ : Detected "${word}"`)
             return true
         }
     }
@@ -140,8 +141,18 @@ function isChangChard(msg) {
 // * Debug น้อน
 function debug(msg) {
     let msgcomponent = msg.content.split(" ")
-    if (msgcomponent[1] == "quote") {
-        msg.channel.send(quoteArray[msgcomponent[2]])
-        logconsole(`Sent quote #${msgcomponent[2]}`, "DEBUG")
+    switch (msgcomponent[1]) {
+        case "quote":
+            msg.channel.send(quoteArray[msgcomponent[2]])
+            logconsole(`Sent quote #${msgcomponent[2]}`, "DEBUG")
+            return
+        case "say":
+            let arr = ""
+            for (let i = 2; i < msgcomponent.length; i++) {
+                arr += (msgcomponent[i] + " ")
+            }
+            msg.channel.send(arr)
+            logconsole(`Sent message (echo) : ${arr}`, "DEBUG")
+            return
     }
 }
