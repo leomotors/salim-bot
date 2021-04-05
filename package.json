@@ -1,6 +1,6 @@
 {
   "name": "salim-bot",
-  "version": "1.2",
+  "version": "1.4",
   "description": "This bot is Salim.",
   "main": "index.js",
   "scripts": {
