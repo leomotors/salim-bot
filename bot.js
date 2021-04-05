@@ -5,7 +5,7 @@ const auth = require("./auth.json")
 const salimDict = require("./keywords.json")
 const moreWord = require("./morequotes.json")
 const songList = require("./ytlink.json")
-const getFormattedTime = require("./time.js")
+const getFormattedTime = require("./utils/time.js")
 
 // * Init Variable
 let plaintxt = ""
