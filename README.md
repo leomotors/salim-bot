@@ -34,5 +34,12 @@ In case you want to (not recommend)
 
 Manual Training a.k.a hard code (Idk what to do 😅)
 
-Maybe sentiment analysis in the future
+```./assets/json/```
 
+* keywords.json : Keywords to trigger น้อน  
+
+* morequotes.json : Aggressive stuff for น้อน to say on top of narze's repo's quote
+
+* ytlink.json : Youtube Link น้อน can send
+
+Maybe sentiment analysis in the future
