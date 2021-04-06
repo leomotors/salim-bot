@@ -30,6 +30,14 @@ In case you want to (not recommend)
 
 * Run bot.js and done!
 
+### Required npm Package
+
+**Discord** (Of course you need this) ```npm i discord.js```
+
+### Required non-npm Package
+
+**FFmpeg** : ```sudo apt install ffmpeg```
+
 ## How to train น้อน
 
 Manual Training a.k.a hard code (Idk what to do 😅)
