@@ -69,6 +69,12 @@ function eval(msg) {
         }
 
         let vc = msg.member.voice.channel
+        // * Check for possible error
+        if (currVC == vc) {
+            logconsole(`Trying to enter the VC that already in. Aborted. Commanded by ${msg.author.tag}`, "DECLINE")
+            return
+        }
+
         vc.join().then(connection => {
             logconsole(`Successfully joined voice channel ${vc.name}`)
             VCconnection = connection
@@ -207,7 +213,7 @@ function debug(commandstr) {
             return
         // * To Clear Screen, do Ctrl + L
         default:
-            logconsole(`Unknown Command "${command[0]}"`,"DEBUG-ERROR")
+            logconsole(`Unknown Command "${command[0]}"`, "DEBUG-ERROR")
     }
 }
 
