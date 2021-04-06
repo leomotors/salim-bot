@@ -62,6 +62,12 @@ function eval(msg) {
 
     // * Voice Channel Zone
     if (msg.content.startsWith("!salim")) {
+        if (!settings.allow_vc) {
+            logconsole(`${msg.author.tag} trying to pull this bot to VC`, "DECLINE")
+            msg.channel.send("My Owner don't allow me to join VC :(")
+            return
+        }
+
         let vc = msg.member.voice.channel
         vc.join().then(connection => {
             logconsole(`Successfully joined voice channel ${vc.name}`)
@@ -73,7 +79,16 @@ function eval(msg) {
     }
 
     if (msg.content.startsWith("!dc") || msg.content.startsWith("!leave")) {
-        currVC.leave()
+        if (currVC) {
+            currVC.leave()
+            currVC = undefined
+            logconsole(`Left Voice Chat by desire of ${msg.author.tag}`)
+        }
+        else {
+            logconsole(`${msg.author.tag} want me to leave, but I'm not in VC`, "DECLINE")
+            msg.channel.send("Can't leave, I'm not in any Voice Chat")
+        }
+
     }
 
     // * Mentioning Bot
@@ -155,7 +170,10 @@ function speak(phrase, isDebug = false) {
 
 }
 
+
 // * Debug น้อน
+// ! Error Check not present here
+
 const readline = require("readline")
 
 const rl = readline.createInterface({

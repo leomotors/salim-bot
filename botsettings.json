@@ -1,3 +1,4 @@
 {
-    "python_prefix" : "python"
+    "allow_vc": true,
+    "python_prefix": "python"
 }
