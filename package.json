@@ -2,7 +2,7 @@
   "name": "salim-bot",
   "version": "1.5",
   "description": "This bot is Salim.",
-  "main": "index.js",
+  "main": "bot.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
