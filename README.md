@@ -46,6 +46,12 @@ In case you want to (not recommend)
 
 **FFmpeg** : ```sudo apt install ffmpeg```
 
+### Required Python Package
+
+**gTTS** : ```pip3 install gTTS```
+
+**pytube** : ```pip3 install pytube```
+
 ## How to train น้อน
 
 Manual Training a.k.a hard code (Idk what to do 😅)
