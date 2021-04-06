@@ -6,8 +6,9 @@ const salimDict = require("./assets/json/keywords.json")
 const moreWord = require("./assets/json/morequotes.json")
 const songList = require("./assets/json/ytlink.json")
 const getFormattedTime = require("./utils/time.js")
-const { exec } = require("child_process")
 const settings = require("./botsettings.json")
+// * Import required module
+const { exec } = require("child_process")
 
 // * Init Variable
 let plaintxt = ""
