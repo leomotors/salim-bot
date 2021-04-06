@@ -6,4 +6,4 @@ from gtts import gTTS
 inputstr = input()
 
 tts = gTTS(text = inputstr, lang = "th")
-tts.save("./temp/bot_temp.mp3")
+tts.save("./temp/temp_tts.mp3")

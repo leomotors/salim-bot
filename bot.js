@@ -173,7 +173,7 @@ function speak(phrase, isDebug = false) {
             logconsole(`stderr on calling python : ${stderr}`, "ERROR")
             return
         }
-        let dispatcher = VCconnection.play('./temp/bot_temp.mp3')
+        let dispatcher = VCconnection.play('./temp/temp_tts.mp3')
         logconsole(`Start playing "${phrase}" on ${currVC.name}`, debugstr)
         dispatcher.on("end", end => { logconsole(`Successfully play sound (Dispatcher end) : ${phrase}`, debugstr) })
     })
