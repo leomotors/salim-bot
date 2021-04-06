@@ -171,7 +171,7 @@ function speak(phrase, isDebug = false) {
             return
         }
         let dispatcher = VCconnection.play('./temp/bot_temp.mp3')
-        logconsole(`Start playing quote "${phrase}" on ${currVC.name}`, debugstr)
+        logconsole(`Start playing "${phrase}" on ${currVC.name}`, debugstr)
         dispatcher.on("end", end => { logconsole(`Successfully play sound (Dispatcher end) : ${phrase}`, debugstr) })
     })
 
