@@ -77,7 +77,7 @@ function eval(msg) {
         }
 
         vc.join().then(connection => {
-            logconsole(`Successfully joined voice channel ${vc.name}`)
+            logconsole(`Successfully joined voice channel ${vc.name} by desire of ${msg.author.tag}`)
             VCconnection = connection
             currVC = vc
         }).catch(err => {
@@ -191,13 +191,14 @@ function playYoutube(url, isDebug = false) {
             logconsole(`stderr on calling python : ${stderr}`, "ERROR")
             return
         }
+        let ytname = stdout
         VCconnection.play('./temp/tempmusic.mp4')
-        logconsole(`Start playing ${url} on current channel`, debugstr)
+        logconsole(`Start playing ${ytname} (YouTube) on current channel`, debugstr)
     })
 }
 
 // * Debug น้อน
-// ! Error Check not present here
+// ! Error Check not present here, proceed with caution
 
 const readline = require("readline")
 
