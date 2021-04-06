@@ -28,7 +28,7 @@ In case you want to (not recommend)
 
   **Note**: Admin might be needed to successfully do this.
 
-* Then, create auth.json with "token" ("ownerid" in case you wanna debug)
+* Then, create auth.json with "token"
 
 * Run bot.js and done!
 
