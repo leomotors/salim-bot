@@ -38,6 +38,8 @@ In case you want to (not recommend)
 
 ### Required non-npm Package
 
+**Python** : ```sudo apt install python3```
+
 **FFmpeg** : ```sudo apt install ffmpeg```
 
 ## How to train น้อน
