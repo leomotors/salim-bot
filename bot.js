@@ -60,6 +60,7 @@ function eval(msg) {
 
     logconsole(`Recieve message from ${msg.author.tag} : ${msg.content}`)
 
+    // * Voice Channel Zone
     if (msg.content.startsWith("!salim")) {
         let vc = msg.member.voice.channel
         vc.join().then(connection => {
@@ -75,6 +76,7 @@ function eval(msg) {
         currVC.leave()
     }
 
+    // * Mentioning Bot
     if (msg.mentions.has(client.user)) {
         if (msg.content.includes("แนะนำตัว")) {
             logconsole("Introduced myself")
@@ -89,10 +91,15 @@ function eval(msg) {
         }
     }
 
+    // * Regular Detection
     if (isชังชาติ(msg)) {
         let tosentmsg = randomQuote()
         msg.channel.send(`${tosentmsg}`)
         logconsole(`Sent message : ${tosentmsg}`)
+        // * If in VC and the ชังชาติ person is in the same one, SPEAK!
+        if (msg.member.voice.channel == currVC) {
+            speak(tosentmsg)
+        }
     }
 }
 
@@ -127,6 +134,11 @@ function isชังชาติ(msg) {
 }
 
 function speak(phrase, isDebug = false) {
+    let debugstr
+    if (isDebug)
+        debugstr = "DEBUG"
+    else
+        debugstr = "Normal"
     exec(`echo "${phrase}" | ${settings.python_prefix} "tts.py"`, (error, stdout, stderr) => {
         if (error) {
             logconsole(`Error on calling python : ${error.message}`, "ERROR")
@@ -137,12 +149,8 @@ function speak(phrase, isDebug = false) {
             return
         }
         let dispatcher = VCconnection.play('./temp/bot_temp.mp3')
-        let debugstr
-        if (isDebug)
-            debugstr = "DEBUG"
-        else
-            debugstr = "Normal"
-        dispatcher.on("end", end => { logconsole(`Successfully play sound : ${phrase}`, debugstr) })
+        logconsole(`Start playing quote "${phrase} on ${currVC.name}`, debugstr)
+        dispatcher.on("end", end => { logconsole(`Successfully play sound (Dispatcher end) : ${phrase}`, debugstr) })
     })
 
 }
@@ -186,7 +194,7 @@ function debug(commandstr) {
             return
         case "speak":
             let speakarr = commandstr.slice(6)
-            speak(speakarr)
+            speak(speakarr, true)
             return
     }
 }
