@@ -17,7 +17,6 @@ let quoteArray = []
 let lastchannel = undefined
 let currVC = undefined
 let VCconnection = undefined
-let RoyalSongArray = songList.เทิดทูนสถาบัน
 
 // * Import วาทกรรมสลิ่ม from narze's repo
 const request = require("request")
@@ -144,11 +143,6 @@ function randomQuote() {
     return quoteArray[randIndex]
 }
 
-function randomSong() {
-    let randIndex = Math.floor(Math.random() * RoyalSongArray.length)
-    return RoyalSongArray[randIndex]
-}
-
 function logconsole(logmsg, status = "Normal") {
     console.log(`[${getFormattedTime()}][${status}] ${logmsg}`)
 }
@@ -169,11 +163,7 @@ function isชังชาติ(msg) {
 }
 
 function speak(phrase, isDebug = false) {
-    let debugstr
-    if (isDebug)
-        debugstr = "DEBUG"
-    else
-        debugstr = "Normal"
+    let debugstr = isDebug ? "DEBUG" : "Normal"
     exec(`echo "${phrase}" | ${settings.python_prefix} "tts.py"`, (error, stdout, stderr) => {
         if (error) {
             logconsole(`Error on calling python : ${error.message}`, "ERROR")
@@ -190,6 +180,21 @@ function speak(phrase, isDebug = false) {
 
 }
 
+function playYoutube(url, isDebug = false) {
+    let debugstr = isDebug ? "DEBUG" : "Normal"
+    exec(`echo "${url}" | ${settings.python_prefix} "ytdownload.py"`, (error, stdout, stderr) => {
+        if (error) {
+            logconsole(`Error on calling python : ${error.message}`, "ERROR")
+            return
+        }
+        if (stderr) {
+            logconsole(`stderr on calling python : ${stderr}`, "ERROR")
+            return
+        }
+        VCconnection.play('./temp/tempmusic.mp4')
+        logconsole(`Start playing ${url} on current channel`, debugstr)
+    })
+}
 
 // * Debug น้อน
 // ! Error Check not present here
@@ -225,6 +230,20 @@ function debug(commandstr) {
             speak(quoteArray[command[1]])
             logconsole(`speakquote : Spoke quote #${command[1]}`, "DEBUG")
             return
+        case "music":
+            let keyarr = []
+            for (let key in musicList) {
+                keyarr.push(key)
+            }
+            SongIndex = parseInt(commandstr.slice(6))
+            let musicname = musicList[keyarr[SongIndex]]["song_name"]
+            let musicfilename = musicList[keyarr[SongIndex]]["file_name"]
+            VCconnection.play(`./assets/music/${musicfilename}`)
+            logconsole(`Playing ${musicname} to current voice channel`, "DEBUG")
+            break
+        case "youtube":
+            playYoutube(commandstr.slice(8),true)
+            break
         // * To Clear Screen, do Ctrl + L
         default:
             logconsole(`Unknown Command "${command[0]}"`, "DEBUG-ERROR")
