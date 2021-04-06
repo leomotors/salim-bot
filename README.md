@@ -24,7 +24,9 @@ In case you want to (not recommend)
 
 * Install node_modules by this command
 
-  ```sudo npm install discord.js --save```
+  ```npm install discord.js --save```
+
+  **Note**: Admin might be needed to successfully do this.
 
 * Then, create auth.json with "token" ("ownerid" in case you wanna debug)
 
@@ -32,9 +34,11 @@ In case you want to (not recommend)
 
 ### Required npm Package
 
-**Discord** (Of course you need this) : ```sudo npm i discord.js```
+**Discord** (Of course you need this) : ```npm i discord.js```
 
-**@discordjs/opus** : ```sudo npm i @discordjs/opus```
+**@discordjs/opus** : ```npm i @discordjs/opus```
+
+**Note**: Admin might be needed to install these packages.
 
 ### Required non-npm Package
 
