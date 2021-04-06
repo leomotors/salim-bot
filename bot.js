@@ -6,11 +6,15 @@ const salimDict = require("./assets/json/keywords.json")
 const moreWord = require("./assets/json/morequotes.json")
 const songList = require("./assets/json/ytlink.json")
 const getFormattedTime = require("./utils/time.js")
+const { exec } = require("child_process")
+const settings = require("./botsettings.json")
 
 // * Init Variable
 let plaintxt = ""
 let quoteArray = []
 let lastchannel = undefined
+let currVC = undefined
+let VCconnection = undefined
 let RoyalSongArray = songList.เทิดทูนสถาบัน
 
 // * Import วาทกรรมสลิ่ม from narze's repo
@@ -43,7 +47,7 @@ client.on("ready", () => {
     console.log(`[BOT READY] Successfully logged in as ${client.user.tag}.`)
 })
 
-client.login(auth.token);
+client.login(auth.token)
 
 // * On recieving message, process it
 client.on("message", eval)
@@ -55,6 +59,21 @@ function eval(msg) {
     }
 
     logconsole(`Recieve message from ${msg.author.tag} : ${msg.content}`)
+
+    if (msg.content.startsWith("!salim")) {
+        let vc = msg.member.voice.channel
+        vc.join().then(connection => {
+            logconsole(`Successfully joined voice channel ${vc.name}`)
+            VCconnection = connection
+            currVC = vc
+        }).catch(err => {
+            logconsole(`${err}`, "ERROR")
+        })
+    }
+
+    if (msg.content.startsWith("!dc") || msg.content.startsWith("!leave")) {
+        currVC.leave()
+    }
 
     if (msg.mentions.has(client.user)) {
         if (msg.content.includes("แนะนำตัว")) {
@@ -107,6 +126,26 @@ function isชังชาติ(msg) {
     return false
 }
 
+function speak(phrase, isDebug = false) {
+    exec(`echo "${phrase}" | ${settings.python_prefix} "tts.py"`, (error, stdout, stderr) => {
+        if (error) {
+            logconsole(`Error on calling python : ${error.message}`, "ERROR")
+            return
+        }
+        if (stderr) {
+            logconsole(`stderr on calling python : ${stderr}`, "ERROR")
+            return
+        }
+        let dispatcher = VCconnection.play('./temp/bot_temp.mp3')
+        let debugstr
+        if (isDebug)
+            debugstr = "DEBUG"
+        else
+            debugstr = "Normal"
+        dispatcher.on("end", end => { logconsole(`Successfully play sound : ${phrase}`, debugstr) })
+    })
+
+}
 
 // * Debug น้อน
 const readline = require("readline")
@@ -114,11 +153,11 @@ const readline = require("readline")
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
-});
+})
 
 rl.on('line', (input) => {
     debug(input)
-});
+})
 
 function debug(commandstr) {
     let command = commandstr.split(" ")
@@ -128,9 +167,26 @@ function debug(commandstr) {
             logconsole(`quote : Sent quote #${command[1]}`, "DEBUG")
             return
         case "say":
-            let arr = commandstr.slice(4)
-            lastchannel.send(arr)
-            logconsole(`say : Sent message ${arr}`, "DEBUG")
+            let sayarr = commandstr.slice(4)
+            lastchannel.send(sayarr)
+            logconsole(`say : Sent message ${sayarr}`, "DEBUG")
+            return
+        case "cls":
+            exec("clear", (error, stdout, stderr) => {
+                if (error) {
+                    logconsole(`Error on "cls" : ${error.message}`, "ERROR")
+                    return
+                }
+                if (stderr) {
+                    logconsole(`stderr on "cls" : ${stderr}`, "ERROR")
+                    return
+                }
+                logconsole("Cleared Screen", "DEBUG")
+            })
+            return
+        case "speak":
+            let speakarr = commandstr.slice(6)
+            speak(speakarr)
             return
     }
 }
