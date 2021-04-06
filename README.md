@@ -32,7 +32,9 @@ In case you want to (not recommend)
 
 ### Required npm Package
 
-**Discord** (Of course you need this) ```npm i discord.js```
+**Discord** (Of course you need this) : ```npm i discord.js```
+
+**@discordjs/opus** : ```npm i @discordjs/opus```
 
 ### Required non-npm Package
 
