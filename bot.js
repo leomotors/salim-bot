@@ -164,7 +164,7 @@ function speak(phrase, isDebug = false) {
             return
         }
         let dispatcher = VCconnection.play('./temp/bot_temp.mp3')
-        logconsole(`Start playing quote "${phrase} on ${currVC.name}`, debugstr)
+        logconsole(`Start playing quote "${phrase}" on ${currVC.name}`, debugstr)
         dispatcher.on("end", end => { logconsole(`Successfully play sound (Dispatcher end) : ${phrase}`, debugstr) })
     })
 
@@ -197,23 +197,17 @@ function debug(commandstr) {
             lastchannel.send(sayarr)
             logconsole(`say : Sent message ${sayarr}`, "DEBUG")
             return
-        case "cls":
-            exec("clear", (error, stdout, stderr) => {
-                if (error) {
-                    logconsole(`Error on "cls" : ${error.message}`, "ERROR")
-                    return
-                }
-                if (stderr) {
-                    logconsole(`stderr on "cls" : ${stderr}`, "ERROR")
-                    return
-                }
-                logconsole("Cleared Screen", "DEBUG")
-            })
-            return
         case "speak":
             let speakarr = commandstr.slice(6)
             speak(speakarr, true)
             return
+        case "speakquote":
+            speak(quoteArray[command[1]])
+            logconsole(`speakquote : Spoke quote #${command[1]}`, "DEBUG")
+            return
+        // * To Clear Screen, do Ctrl + L
+        default:
+            logconsole(`Unknown Command "${command[0]}"`,"DEBUG-ERROR")
     }
 }
 
