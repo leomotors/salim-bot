@@ -106,3 +106,6 @@ dist
 # It is private!!!
 auth.json
 topsecret.txt
+
+# Temporary Folder
+temp
