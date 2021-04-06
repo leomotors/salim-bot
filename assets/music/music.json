@@ -1,0 +1,14 @@
+{
+    "rickroll": {
+        "song_name": "Rick Astley \"Never gonna give you up\"",
+        "file_name": "RickRoll.mp3"
+    },
+    "สรรเสริญไอดอล": {
+        "song_name": "渡辺しのすげ 「สรรเสริญพระบารมี アイドルリミックス」",
+        "file_name": "RoyalIdol.mp3"
+    },
+    "ROTC_NewGen":{
+        "song_name": "หน่วยบัญชาการรักษาดินแดน \"รด.รุ่นใหม่ หัวใจ New Gen\"",
+        "file_name": "ROTC_NewGen.mp3"
+    }
+}

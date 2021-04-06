@@ -4,9 +4,10 @@
 const auth = require("./auth.json")
 const salimDict = require("./assets/json/keywords.json")
 const moreWord = require("./assets/json/morequotes.json")
-const songList = require("./assets/json/ytlink.json")
 const getFormattedTime = require("./utils/time.js")
 const settings = require("./botsettings.json")
+const musicList = require("./assets/music/music.json")
+
 // * Import required module
 const { exec } = require("child_process")
 
@@ -106,10 +107,22 @@ function eval(msg) {
             return
         }
         if (msg.content.includes("เพลง")) {
-            let musicurl = randomSong()
-            msg.channel.send(`${musicurl}`)
-            logconsole(`Sent music : ${musicurl}`)
-            return
+            if (msg.member.voice.channel == currVC) {
+                let keyarr = []
+                for (let key in musicList) {
+                    keyarr.push(key)
+                }
+                let SongIndex = Math.floor(Math.random() * keyarr.length)
+                let musicname = musicList[keyarr[SongIndex]]["song_name"]
+                let musicfilename = musicList[keyarr[SongIndex]]["file_name"]
+                VCconnection.play(`./assets/music/${musicfilename}`)
+                logconsole(`Offered ${musicname} to ${msg.author.tag} and others in vc`)
+                msg.channel.send(`Playing ${musicname}`)
+            }
+            else {
+                logconsole(`${msg.author.tag} requested song but not in the same voice chat`, "DECLINE")
+                msg.channel.send("I must be in the same channel to play song")
+            }
         }
     }
 
