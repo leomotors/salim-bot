@@ -1,5 +1,5 @@
 
-# * Get input and store it in ./temp/bot_temp.mp3
+# * Get input and store it in ./temp/temp_tts.mp3
 
 from gtts import gTTS
 
