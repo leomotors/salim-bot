@@ -117,7 +117,7 @@ function eval(msg) {
         }
         if (msg.content.includes("เพลง")) {
             if (msg.member.voice.channel == currVC) {
-                logconsole(`Requested for Song by ${msg.author.tag}`,"REQUESTED")
+                logconsole(`Requested for Song by ${msg.author.tag}`, "REQUESTED")
                 randomSong(msg.channel)
                 return
             }
@@ -286,6 +286,11 @@ function debug(commandstr) {
                 default:
                     logconsole(`Unknown Query "${command[1]}"`, "DEBUG-ERROR")
             }
+            break
+        case "dc":
+            currVC.leave()
+            currVC = undefined
+            logconsole("Left Current Voice Channel", "DEBUG")
             break
         // * To Clear Screen, do Ctrl + L
         default:

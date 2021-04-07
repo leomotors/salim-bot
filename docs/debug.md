@@ -83,3 +83,7 @@ Args: Thing want to query
 #### songs
 
 Print full list of songs available
+
+### dc
+
+Leave current voice chat
