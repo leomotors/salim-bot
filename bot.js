@@ -256,7 +256,7 @@ function debug(commandstr) {
             speak(quoteArray[command[1]])
             logconsole(`speakquote : Spoke quote #${command[1]}`, "DEBUG")
             return
-        case "music":
+        case "song":
             let playsongid = parseInt(commandstr.slice(6))
             randomSong(undefined, playsongid)
             logconsole(`Going to play song #${playsongid}`, "DEBUG")
