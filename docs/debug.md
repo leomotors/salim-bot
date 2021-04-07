@@ -84,6 +84,17 @@ Args: Thing want to query
 
 Print full list of songs available
 
+#### quotes
+
+Args: Start Index ; Query Count
+
+Print list of quote starting at Start Index with given Numbers of Count
+
+```
+> query quotes 30 10
+Will print quote #30-39
+```
+
 ### dc
 
 Leave current voice chat

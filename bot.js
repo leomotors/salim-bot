@@ -283,6 +283,15 @@ function debug(commandstr) {
                     }
                     logconsole("Query for Songs Completed", "DEBUG")
                     break
+                case "quotes":
+                    let startIndex = parseInt(command[2])
+                    let queryCount = parseInt(command[3])
+                    console.log(`QUERY: Quotes #${startIndex}-${startIndex + queryCount - 1}`)
+                    for (let i = startIndex; i < startIndex + queryCount; i++) {
+                        console.log(`Quote #${i} : ${quoteArray[i]}`)
+                    }
+                    logconsole("Query for Quotes Completed", "DEBUG")
+                    break
                 default:
                     logconsole(`Unknown Query "${command[1]}"`, "DEBUG-ERROR")
             }
