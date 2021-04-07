@@ -3,12 +3,24 @@
         {
             "name": "Rick Astley \"Never Gonna Give You Up\"",
             "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        },
+        {
+            "name": "渡辺しのすげ 「สรรเสริญพระบารมี アイドルリミックス」",
+            "url": "https://www.youtube.com/watch?v=bro43Sx4ppY"
         }
     ],
     "รักชาติ": [
         {
             "name": "เพลงชาติไทย",
             "url": "https://www.youtube.com/watch?v=YTgVDlE1HII"
+        },
+        {
+            "name": "เพลงสรรเสริญพระบารมี",
+            "url": "https://www.youtube.com/watch?v=QlZc-AuwhPM"
+        },
+        {
+            "name": "เพลงสดุดีจอมราชา",
+            "url": "https://www.youtube.com/watch?v=vIgghnnE5Lg"
         }
     ]
 }

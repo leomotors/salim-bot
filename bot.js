@@ -26,6 +26,7 @@ let quoteArray = []
 let lastchannel = undefined
 let currVC = undefined
 let VCconnection = undefined
+
 // * Add วาทกรรมสลิ่ม from morequotes.json
 for (let word of moreWord.วาทกรรมสลิ่ม) {
     quoteArray.push(word)
@@ -174,13 +175,13 @@ function randomSong(channel, index = -1) {
         let targetsong = songs.รักชาติ[randIndex - easterlength]
         playYoutube(targetsong["url"], isDebug)
         if (channel)
-            channel.send(`Playing ${targetsong["name"]}`)
+            channel.send(`Playing ${targetsong["name"]} 🎵`)
     }
     else {
         let targetsong = songs.easter_egg[randIndex]
         playYoutube(targetsong["url"], isDebug)
         if (channel)
-            channel.send(`Easter Egg จ้า! Have fun with ${targetsong["name"]}`)
+            channel.send(`Easter Egg จ้า! Have fun with ${targetsong["name"]} 😁`)
     }
     // ? Logconsole inside playYoutube function
 }
