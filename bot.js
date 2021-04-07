@@ -257,7 +257,7 @@ function debug(commandstr) {
             logconsole(`speakquote : Spoke quote #${command[1]}`, "DEBUG")
             return
         case "song":
-            let playsongid = parseInt(commandstr.slice(6))
+            let playsongid = parseInt(commandstr.slice(5))
             randomSong(undefined, playsongid)
             logconsole(`Going to play song #${playsongid}`, "DEBUG")
             break
