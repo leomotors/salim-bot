@@ -79,3 +79,11 @@ Value : Array of Music Dictionary
 name : Music Name & Author Name if exists
 
 url : Youtube URL to music
+
+### Spread the hype!
+
+<img src="./assets/images/long-live-hm-queen.jpg" alt="#ทรงพระเจริญ">
+
+<img src="./assets/images/SAFETY_FIRST.jpg" alt="ปลอดภัยไว้ก่อน">
+
+(ทรงพระเจริญ ยิ่งยืนนาน ยิ่งเมื่อย ข อ บ คุ ณ ค รั บ)
