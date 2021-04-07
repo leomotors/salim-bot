@@ -12,7 +12,7 @@ const auth = require("./auth.json")
 const salimDict = require("./assets/json/keywords.json")
 const moreWord = require("./assets/json/morequotes.json")
 const settings = require("./botsettings.json")
-const musicList = require("./assets/music/music.json")
+const songs = require("./assets/music/songs.json")
 
 // * Import required module & function
 const request = require("request")
@@ -116,16 +116,7 @@ function eval(msg) {
         }
         if (msg.content.includes("เพลง")) {
             if (msg.member.voice.channel == currVC) {
-                let keyarr = []
-                for (let key in musicList) {
-                    keyarr.push(key)
-                }
-                let SongIndex = Math.floor(Math.random() * keyarr.length)
-                let musicname = musicList[keyarr[SongIndex]]["song_name"]
-                let musicfilename = musicList[keyarr[SongIndex]]["file_name"]
-                VCconnection.play(`./assets/music/${musicfilename}`)
-                logconsole(`Offered ${musicname} to ${msg.author.tag} and others in vc`)
-                msg.channel.send(`Playing ${musicname}`)
+                randomSong(msg.channel)
             }
             else {
                 logconsole(`${msg.author.tag} requested song but not in the same voice chat`, "DECLINE")
@@ -148,11 +139,6 @@ function eval(msg) {
 
 
 // * All other support function
-function randomQuote() {
-    let randIndex = Math.floor(Math.random() * quoteArray.length)
-    return quoteArray[randIndex]
-}
-
 function isชังชาติ(msg) {
     for (let word of salimDict.ชังชาติ) {
         if (msg.content.includes(word)) {
@@ -162,6 +148,43 @@ function isชังชาติ(msg) {
     }
     return false
 }
+
+function randomQuote() {
+    let randIndex = Math.floor(Math.random() * quoteArray.length)
+    return quoteArray[randIndex]
+}
+
+function randomSong(channel, index = -1) {
+    // * Only two categories: easter_egg and รักชาติ
+    let easterlength = songs.easter_egg.length
+    let รักชาติlength = songs.รักชาติ.length
+
+    // * Random Index
+    let randIndex, debugstr = "Normal"
+    if (index != -1) {
+        randIndex = index
+        debugstr = "DEBUG"
+    }
+    else {
+        randIndex = Math.floor(Math.random() * (easterlength + รักชาติlength))
+    }
+
+    // * Play Song
+    if (randIndex >= easterlength) { // * Normal
+        let targetsong = songs.รักชาติ[randIndex - easterlength]
+        playYoutube(targetsong["url"], debugstr)
+        if (channel)
+            channel.send(`Playing ${targetsong["name"]}`)
+    }
+    else {
+        let targetsong = songs.easter_egg[randIndex]
+        playYoutube(targetsong["url"], debugstr)
+        if (channel)
+            channel.send(`Easter Egg จ้า! Have fun with ${targetsong["name"]}`)
+    }
+    // ? Logconsole inside playYoutube function
+}
+
 
 // * Support Function: Audio playing
 function speak(phrase, isDebug = false) {
@@ -233,15 +256,9 @@ function debug(commandstr) {
             logconsole(`speakquote : Spoke quote #${command[1]}`, "DEBUG")
             return
         case "music":
-            let keyarr = []
-            for (let key in musicList) {
-                keyarr.push(key)
-            }
-            SongIndex = parseInt(commandstr.slice(6))
-            let musicname = musicList[keyarr[SongIndex]]["song_name"]
-            let musicfilename = musicList[keyarr[SongIndex]]["file_name"]
-            VCconnection.play(`./assets/music/${musicfilename}`)
-            logconsole(`Playing ${musicname} to current voice channel`, "DEBUG")
+            let playsongid = parseInt(commandstr.slice(6))
+            randomSong(undefined, playsongid)
+            logconsole(`Playing Song #${playsongid}`, "DEBUG")
             break
         case "youtube":
             playYoutube(commandstr.slice(8), true)
