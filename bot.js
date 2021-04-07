@@ -1,15 +1,24 @@
-// * Main Program, run this with nodejs
+/**
+ * * bot.js
+ * * This is Main Program for bot, run this with nodejs
+ * * Made by @Leomotors
+ * * https://github.com/Leomotors/Salim-Bot
+ * * You are free to use this but don't forget to read instruction!
+ * ! WARNING: Proceed at your own risk!
+ */
 
 // * Import data from other file
 const auth = require("./auth.json")
 const salimDict = require("./assets/json/keywords.json")
 const moreWord = require("./assets/json/morequotes.json")
-const getFormattedTime = require("./utils/time.js")
 const settings = require("./botsettings.json")
 const musicList = require("./assets/music/music.json")
 
-// * Import required module
+// * Import required module & function
+const request = require("request")
 const { exec } = require("child_process")
+const logconsole = require("./utils/logconsole")
+const introduceMyself = require("./utils/introduce.js")
 
 // * Init Variable
 let plaintxt = ""
@@ -17,9 +26,13 @@ let quoteArray = []
 let lastchannel = undefined
 let currVC = undefined
 let VCconnection = undefined
+// * Add วาทกรรมสลิ่ม from morequotes.json
+for (let word of moreWord.วาทกรรมสลิ่ม) {
+    quoteArray.push(word)
+}
+console.log("[DATA FETCHED] Successfully pulled quote data from morequotes.json")
 
-// * Import วาทกรรมสลิ่ม from narze's repo
-const request = require("request")
+// * Import วาทกรรมสลิ่ม from narze's repo & add to quoteArray
 request({
     url: "https://raw.githubusercontent.com/narze/awesome-salim-quotes/main/README.md",
     json: false
@@ -35,11 +48,6 @@ request({
     console.log("[DATA FETCHED] Successfully pulled quote data from narze's repository")
 })
 
-// * Add more วาทกรรมสลิ่ม from morequotes.json
-for (let word of moreWord.วาทกรรมสลิ่ม) {
-    quoteArray.push(word)
-}
-console.log("[DATA FETCHED] Successfully pulled quote data from morequotes.json")
 
 // * Discord Zone: Define on_setup() and Login
 const Discord = require("discord.js")
@@ -50,7 +58,8 @@ client.on("ready", () => {
 
 client.login(auth.token)
 
-// * On recieving message, process it
+
+// * MAIN EVENT: Upon recieving message, process it
 client.on("message", eval)
 function eval(msg) {
     lastchannel = msg.channel
@@ -137,19 +146,11 @@ function eval(msg) {
     }
 }
 
+
 // * All other support function
 function randomQuote() {
     let randIndex = Math.floor(Math.random() * quoteArray.length)
     return quoteArray[randIndex]
-}
-
-function logconsole(logmsg, status = "Normal") {
-    console.log(`[${getFormattedTime()}][${status}] ${logmsg}`)
-}
-
-function introduceMyself() {
-    let istr = `ซาหวาาดีคร้าบ ท่านสมาชิกชมรมคนชอบกะสัส\nผมเป็นสลิ่ม\nสามารถไปแงะสมองของผมได้ที่ https://github.com/Leomotors/Salim-Bot\nอย่าลืมไปกดให้ดาวด้วยน้า เดี๋ยวเจ้าของผมงอน`
-    return istr
 }
 
 function isชังชาติ(msg) {
@@ -162,6 +163,7 @@ function isชังชาติ(msg) {
     return false
 }
 
+// * Support Function: Audio playing
 function speak(phrase, isDebug = false) {
     let debugstr = isDebug ? "DEBUG" : "Normal"
     exec(`echo "${phrase}" | ${settings.python_prefix} "tts.py"`, (error, stdout, stderr) => {
@@ -173,11 +175,9 @@ function speak(phrase, isDebug = false) {
             logconsole(`stderr on calling python : ${stderr}`, "ERROR")
             return
         }
-        let dispatcher = VCconnection.play('./temp/temp_tts.mp3')
+        VCconnection.play('./temp/temp_tts.mp3')
         logconsole(`Start playing "${phrase}" on ${currVC.name}`, debugstr)
-        dispatcher.on("end", end => { logconsole(`Successfully play sound (Dispatcher end) : ${phrase}`, debugstr) })
     })
-
 }
 
 function playYoutube(url, isDebug = false) {
@@ -197,10 +197,11 @@ function playYoutube(url, isDebug = false) {
     })
 }
 
-// * Debug น้อน
+
+// * Debug น้อน Zone
 // ! Error Check not present here, proceed with caution
 
-const readline = require("readline")
+const readline = require("readline") // * Module for debug only
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -243,7 +244,7 @@ function debug(commandstr) {
             logconsole(`Playing ${musicname} to current voice channel`, "DEBUG")
             break
         case "youtube":
-            playYoutube(commandstr.slice(8),true)
+            playYoutube(commandstr.slice(8), true)
             break
         // * To Clear Screen, do Ctrl + L
         default:
