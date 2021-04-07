@@ -264,6 +264,27 @@ function debug(commandstr) {
         case "youtube":
             playYoutube(commandstr.slice(8), true)
             break
+        case "query":
+            switch (command[1]) {
+                case "songs":
+                    let index = 0
+                    console.log("QUERY: Songs")
+                    console.log("Category: Easter Egg")
+                    for (let song of songs.easter_egg) {
+                        console.log(`#${index} : ${song["name"]}`)
+                        index += 1
+                    }
+                    console.log("Category: รักชาติ")
+                    for (let song of songs.รักชาติ) {
+                        console.log(`#${index} : ${song["name"]}`)
+                        index += 1
+                    }
+                    logconsole("Query for Songs Completed", "DEBUG")
+                    break
+                default:
+                    logconsole(`Unknown Query "${command[1]}"`, "DEBUG-ERROR")
+            }
+            break
         // * To Clear Screen, do Ctrl + L
         default:
             logconsole(`Unknown Command "${command[0]}"`, "DEBUG-ERROR")
