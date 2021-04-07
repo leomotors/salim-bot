@@ -80,6 +80,10 @@ name : Music Name & Author Name if exists
 
 url : Youtube URL to music
 
+## Debug น้อน
+
+Read Doc <a href="https://github.com/Leomotors/Salim-Bot/blob/main/docs/debug.md">Here</a>
+
 ### Spread the hype!
 
 <img src="./assets/images/long-live-hm-queen.jpg" alt="#ทรงพระเจริญ">
