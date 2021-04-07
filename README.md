@@ -62,6 +62,20 @@ Manual Training a.k.a hard code (Idk what to do 😅)
 
 * morequotes.json : Aggressive stuff for น้อน to say on top of narze's repo's quote
 
-* ytlink.json : Youtube Link น้อน can send
-
 Maybe sentiment analysis in the future
+
+## น้อน as DJ
+
+```./assets/music/music.json```
+
+### Main Dictionary
+
+Key : Category
+
+Value : Array of Music Dictionary
+
+### Music Dictionary
+
+name : Music Name & Author Name if exists
+
+url : Youtube URL to music
