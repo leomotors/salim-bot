@@ -244,20 +244,20 @@ function debug(commandstr) {
         case "quote":
             lastchannel.send(quoteArray[command[1]])
             logconsole(`quote : Sent quote #${command[1]}`, "DEBUG")
-            return
+            break
         case "say":
             let sayarr = commandstr.slice(4)
             lastchannel.send(sayarr)
             logconsole(`say : Sent message ${sayarr}`, "DEBUG")
-            return
+            break
         case "speak":
             let speakarr = commandstr.slice(6)
             speak(speakarr, true)
-            return
+            break
         case "speakquote":
             speak(quoteArray[command[1]])
             logconsole(`speakquote : Spoke quote #${command[1]}`, "DEBUG")
-            return
+            break
         case "song":
             let playsongid = parseInt(commandstr.slice(5))
             randomSong(undefined, playsongid)
