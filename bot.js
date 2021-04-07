@@ -118,6 +118,7 @@ function eval(msg) {
         if (msg.content.includes("เพลง")) {
             if (msg.member.voice.channel == currVC) {
                 randomSong(msg.channel)
+                return
             }
             else {
                 logconsole(`${msg.author.tag} requested song but not in the same voice chat`, "DECLINE")
