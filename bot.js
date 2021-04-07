@@ -292,6 +292,10 @@ function debug(commandstr) {
                     }
                     logconsole("Query for Quotes Completed", "DEBUG")
                     break
+                case "quotecount":
+                    console.log(`There are ${quoteArray.length} quotes`)
+                    logconsole("Query for Quotes Count Completed", "DEBUG")
+                    break
                 default:
                     logconsole(`Unknown Query "${command[1]}"`, "DEBUG-ERROR")
             }

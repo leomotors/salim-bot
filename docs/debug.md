@@ -95,6 +95,12 @@ Print list of quote starting at Start Index with given Numbers of Count
 Will print quote #30-39
 ```
 
+#### quotecount
+
+Args: None
+
+Show counts of all quote available
+
 ### dc
 
 Leave current voice chat
