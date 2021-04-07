@@ -110,7 +110,7 @@ function eval(msg) {
 
     // * Mentioning Bot
     if (msg.mentions.has(client.user)) {
-        if (msg.content.includes("แนะนำตัว")) {
+        if (msg.content.includes("แนะนำตัว") || msg.content.includes("github")) {
             logconsole("Introduced myself")
             msg.channel.send(introduceMyself())
             return
