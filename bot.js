@@ -160,10 +160,10 @@ function randomSong(channel, index = -1) {
     let รักชาติlength = songs.รักชาติ.length
 
     // * Random Index
-    let randIndex, debugstr = "Normal"
+    let randIndex, isDebug = false
     if (index != -1) {
         randIndex = index
-        debugstr = "DEBUG"
+        isDebug = true
     }
     else {
         randIndex = Math.floor(Math.random() * (easterlength + รักชาติlength))
@@ -172,13 +172,13 @@ function randomSong(channel, index = -1) {
     // * Play Song
     if (randIndex >= easterlength) { // * Normal
         let targetsong = songs.รักชาติ[randIndex - easterlength]
-        playYoutube(targetsong["url"], debugstr)
+        playYoutube(targetsong["url"], isDebug)
         if (channel)
             channel.send(`Playing ${targetsong["name"]}`)
     }
     else {
         let targetsong = songs.easter_egg[randIndex]
-        playYoutube(targetsong["url"], debugstr)
+        playYoutube(targetsong["url"], isDebug)
         if (channel)
             channel.send(`Easter Egg จ้า! Have fun with ${targetsong["name"]}`)
     }
@@ -258,7 +258,7 @@ function debug(commandstr) {
         case "music":
             let playsongid = parseInt(commandstr.slice(6))
             randomSong(undefined, playsongid)
-            logconsole(`Playing Song #${playsongid}`, "DEBUG")
+            logconsole(`Going to play song #${playsongid}`, "DEBUG")
             break
         case "youtube":
             playYoutube(commandstr.slice(8), true)
