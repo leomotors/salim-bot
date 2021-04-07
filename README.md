@@ -52,6 +52,8 @@ In case you want to (not recommend)
 
 **pytube** : ```pip3 install pytube```
 
+**pydub** : ```pip3 install pydub```
+
 ## How to train น้อน
 
 Manual Training a.k.a hard code (Idk what to do 😅)
