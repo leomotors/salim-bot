@@ -166,7 +166,7 @@ function isชังชาติ(msg) {
 // * Support Function: Audio playing
 function speak(phrase, isDebug = false) {
     let debugstr = isDebug ? "DEBUG" : "Normal"
-    exec(`echo "${phrase}" | ${settings.python_prefix} "tts.py"`, (error, stdout, stderr) => {
+    exec(`echo "${phrase}" | ${settings.python_prefix} "./python/tts.py"`, (error, stdout, stderr) => {
         if (error) {
             logconsole(`Error on calling python : ${error.message}`, "ERROR")
             return
@@ -182,7 +182,7 @@ function speak(phrase, isDebug = false) {
 
 function playYoutube(url, isDebug = false) {
     let debugstr = isDebug ? "DEBUG" : "Normal"
-    exec(`echo "${url}" | ${settings.python_prefix} "ytdownload.py"`, (error, stdout, stderr) => {
+    exec(`echo "${url}" | ${settings.python_prefix} "./python/ytdownload.py"`, (error, stdout, stderr) => {
         if (error) {
             logconsole(`Error on calling python : ${error.message}`, "ERROR")
             return
