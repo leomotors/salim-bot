@@ -117,6 +117,7 @@ function eval(msg) {
         }
         if (msg.content.includes("เพลง")) {
             if (msg.member.voice.channel == currVC) {
+                logconsole(`Requested for Song by ${msg.author.tag}`,"REQUESTED")
                 randomSong(msg.channel)
                 return
             }
