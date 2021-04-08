@@ -1,5 +1,6 @@
 {
     "allow_vc": true,
     "python_prefix": "python",
-    "do_log": true
+    "do_log": true,
+    "message_cache": 10
 }

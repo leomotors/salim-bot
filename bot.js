@@ -26,6 +26,7 @@ let quoteArray = []
 let lastchannel = undefined
 let currVC = undefined
 let VCconnection = undefined
+let sentmsg = []
 
 // * Add วาทกรรมสลิ่ม from morequotes.json
 for (let word of moreWord.วาทกรรมสลิ่ม) {
@@ -69,6 +70,9 @@ function eval(msg) {
     lastchannel = msg.channel
     if (msg.author.id == client.user.id) {
         // * It's your own message!
+        sentmsg = [msg].concat(sentmsg)
+        if (sentmsg.length > bot_settings.message_cache)
+            sentmsg.pop()
         return
     }
 
@@ -305,6 +309,14 @@ function debug(commandstr) {
                     console.log(`There are ${quoteArray.length} quotes`)
                     logconsole("Query for Quotes Count Completed", "DEBUG")
                     break
+                case "sentmsg":
+                    console.log(`Showing last ${sentmsg.length} sent messages`)
+                    for (let i = 0; i < sentmsg.length; i++) {
+                        let currmsg = sentmsg[i]
+                        console.log(`#${i} -> ${currmsg.channel.name} : ${currmsg.content}`)
+                    }
+                    logconsole("Query for sent messages completed", "DEBUG")
+                    break
                 default:
                     logconsole(`Unknown Query "${command[1]}"`, "DEBUG-ERROR")
             }
@@ -329,6 +341,13 @@ function debug(commandstr) {
                 }
                 console.log(stdout.replace(/\n$/, ""));
             })
+            break
+        case "unsend":
+            let unsendloc = 0
+            if (command.length >= 2)
+                unsendloc = parseInt(command[1])
+            sentmsg[unsendloc].delete()
+            sentmsg[unsendloc].content = "[DELETED]"
             break
         case "logout":
             client.destroy()

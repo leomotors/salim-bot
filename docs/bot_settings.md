@@ -13,3 +13,7 @@ Python 3's Prefix of that environment (either python or python3)
 ## do_log (Default: true)
 
 Save bot log to file
+
+## message_cache (Default: 10)
+
+Number of last sent messages that bot will keep

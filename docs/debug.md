@@ -101,6 +101,12 @@ Args: None
 
 Show counts of all quote available
 
+#### sentmsg
+
+Args: None
+
+Show all previously sent message (up to amount in settings)
+
 ### dc
 
 Leave current voice chat
@@ -121,6 +127,12 @@ Remove all temporary files like mp3 and mp4
 > rmtemp
 [rmtemp] Successfully delete all temp files.
 ```
+
+### unsend
+
+Args: Index of message (Default: 0)
+
+Remove (index +1 )th last message
 
 ### logout
 
