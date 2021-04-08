@@ -32,7 +32,6 @@ let sentmsg = []
 for (let word of moreWord.วาทกรรมสลิ่ม) {
     quoteArray.push(word)
 }
-console.log("[DATA FETCHED] Successfully pulled quote data from morequotes.json")
 
 // * Import วาทกรรมสลิ่ม from narze's repo & add to quoteArray
 request({
