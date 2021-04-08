@@ -107,6 +107,12 @@ Args: None
 
 Show all previously sent message (up to amount in settings)
 
+#### status
+
+Args: None
+
+Show all status available to use
+
 ### dc
 
 Leave current voice chat
@@ -133,6 +139,12 @@ Remove all temporary files like mp3 and mp4
 Args: Index of message (Default: 0)
 
 Remove (index+1)th last message
+
+### setstatus
+
+Args: Status ID (Default: Random)
+
+Set Current Status to Status with that ID
 
 ### logout
 

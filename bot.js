@@ -74,10 +74,22 @@ const Discord = require("discord.js")
 const client = new Discord.Client()
 client.on("ready", () => {
     console.log(`[BOT READY] Successfully logged in as ${client.user.tag}.`)
-    client.user.setActivity("TOP NEWS", { type: "WATCHING" })
-        .then(presence => console.log(`[PRESENCE SETTED] Activity set to ${presence.activities[0].name}`))
-        .catch(console.error);
+    setStatus()
 })
+
+function setStatus(id = -1, isDebug = false) {
+    let ac_list = bot_settings.activity_list
+    if (id == -1)
+        id = Math.floor(Math.random() * ac_list.length)
+    client.user.setActivity(`${ac_list[id].name}`, { type: ac_list[id].type })
+        .then(presence => {
+            if (isDebug)
+                logconsole(`Activity changed to ${presence.activities[0].name}`, "DEBUG")
+            else
+                console.log(`[PRESENCE SETTED] Activity set to ${presence.activities[0].name}`)
+        })
+        .catch(console.error)
+}
 
 client.login(auth.token)
 
@@ -335,6 +347,15 @@ function debug(commandstr) {
                     }
                     logconsole("Query for sent messages completed", "DEBUG")
                     break
+                case "status":
+                    console.log("Showing all activities available")
+                    let a_index = 0
+                    for (let activity of bot_settings.activity_list) {
+                        console.log(`#${a_index} ${activity.type} ${activity.name}`)
+                        a_index++
+                    }
+                    logconsole("Query for status completed", "DEBUG")
+                    break
                 default:
                     logconsole(`Unknown Query "${command[1]}"`, "DEBUG-ERROR")
             }
@@ -367,6 +388,13 @@ function debug(commandstr) {
             sentmsg[unsendloc].delete()
             sentmsg[unsendloc].content = "[DELETED]"
             logconsole(`Deleted Quote ID #${unsendloc}`, "DEBUG")
+            break
+        case "setstatus":
+            let tstatus = -1
+            if (commandstr.length > 10) {
+                tstatus = parseInt(command[1])
+            }
+            setStatus(tstatus, true)
             break
         case "logout":
             client.destroy()
