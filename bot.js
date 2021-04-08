@@ -347,6 +347,7 @@ function debug(commandstr) {
                 unsendloc = parseInt(command[1])
             sentmsg[unsendloc].delete()
             sentmsg[unsendloc].content = "[DELETED]"
+            logconsole(`Deleted Quote ID #${unsendloc}`, "DEBUG")
             break
         case "logout":
             client.destroy()
