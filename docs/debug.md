@@ -104,3 +104,9 @@ Show counts of all quote available
 ### dc
 
 Leave current voice chat
+
+### cls
+
+To clear screen, do Ctrl + L (Terminal shortcut)
+
+However, calling this debug function will tell you how to do it.

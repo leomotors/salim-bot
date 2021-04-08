@@ -11,7 +11,7 @@
 const auth = require("./auth.json")
 const salimDict = require("./assets/json/keywords.json")
 const moreWord = require("./assets/json/morequotes.json")
-const settings = require("./botsettings.json")
+const bot_settings = require("./botsettings.json")
 const songs = require("./assets/music/songs.json")
 
 // * Import required module & function
@@ -73,7 +73,7 @@ function eval(msg) {
 
     // * Voice Channel Zone
     if (msg.content.startsWith("!salim")) {
-        if (!settings.allow_vc) {
+        if (!bot_settings.allow_vc) {
             logconsole(`${msg.author.tag} trying to pull this bot to VC`, "DECLINE")
             msg.channel.send("My Owner don't allow me to join VC :(")
             return
@@ -192,7 +192,7 @@ function randomSong(channel, index = -1) {
 // * Support Function: Audio playing
 function speak(phrase, isDebug = false) {
     let debugstr = isDebug ? "DEBUG" : "Normal"
-    exec(`echo "${phrase}" | ${settings.python_prefix} "./python/tts.py"`, (error, stdout, stderr) => {
+    exec(`echo "${phrase}" | ${bot_settings.python_prefix} "./python/tts.py"`, (error, stdout, stderr) => {
         if (error) {
             logconsole(`Error on calling python : ${error.message}`, "ERROR")
             return
@@ -208,7 +208,7 @@ function speak(phrase, isDebug = false) {
 
 function playYoutube(url, isDebug = false) {
     let debugstr = isDebug ? "DEBUG" : "Normal"
-    exec(`echo "${url}" | ${settings.python_prefix} "./python/ytdownload.py"`, (error, stdout, stderr) => {
+    exec(`echo "${url}" | ${bot_settings.python_prefix} "./python/ytdownload.py"`, (error, stdout, stderr) => {
         if (error) {
             logconsole(`Error on calling python : ${error.message}`, "ERROR")
             return
@@ -305,7 +305,9 @@ function debug(commandstr) {
             currVC = undefined
             logconsole("Left Current Voice Channel", "DEBUG")
             break
-        // * To Clear Screen, do Ctrl + L
+        case "cls":
+            console.log("To clear screen, do Ctrl + L")
+            break
         default:
             logconsole(`Unknown Command "${command[0]}"`, "DEBUG-ERROR")
     }
