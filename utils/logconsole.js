@@ -8,7 +8,7 @@ let initstr = `Created at ${getFormattedTime()}\n\n`
 let initfname = `${getFormattedTime(true)}.txt`
 
 if (bot_settings_log) {
-    fs.writeFile(`./temp/log/${initfname}`, initstr, (err) => {
+    fs.writeFile(`./log/${initfname}`, initstr, (err) => {
         if (err)
             console.log(`[LOG ERROR] Error on initing file: ${err}`)
         console.log("[FILE SUCCESS] Log File Inited")
@@ -19,7 +19,7 @@ function logconsole(logmsg, status = "Normal") {
     let logstr = `[${getFormattedTime()}][${status}] ${logmsg}`
     console.log(logstr)
     if (bot_settings_log)
-        fs.appendFile(`./temp/log/${initfname}`, logstr + "\n", (err) => {
+        fs.appendFile(`./log/${initfname}`, logstr + "\n", (err) => {
             if (err)
                 console.log(`[LOG ERROR] Error on writing log file: ${err}`)
         })
