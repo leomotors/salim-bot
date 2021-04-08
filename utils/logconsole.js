@@ -2,22 +2,27 @@
 
 let getFormattedTime = require("./time.js")
 const fs = require("fs")
+const bot_settings_log = require("../botsettings.json").do_log
 
 let initstr = `Created at ${getFormattedTime()}\n\n`
+let initfname = `${getFormattedTime(true)}.txt`
 
-fs.writeFile("./temp/log.txt", initstr, (err) => {
-    if (err)
-        console.log(`[LOG ERROR] Error on initing file: ${err}`)
-    console.log("[FILE SUCCESS] Log File Inited")
-})
+if (bot_settings_log) {
+    fs.writeFile(`./temp/log/${initfname}`, initstr, (err) => {
+        if (err)
+            console.log(`[LOG ERROR] Error on initing file: ${err}`)
+        console.log("[FILE SUCCESS] Log File Inited")
+    })
+}
 
 function logconsole(logmsg, status = "Normal") {
     let logstr = `[${getFormattedTime()}][${status}] ${logmsg}`
     console.log(logstr)
-    fs.appendFile("./temp/log.txt", logstr+"\n", (err) => {
-        if (err)
-            console.log(`[LOG ERROR] Error on writing log file: ${err}`)
-    })
+    if (bot_settings_log)
+        fs.appendFile(`./temp/log/${initfname}`, logstr + "\n", (err) => {
+            if (err)
+                console.log(`[LOG ERROR] Error on writing log file: ${err}`)
+        })
 }
 
 module.exports = logconsole

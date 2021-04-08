@@ -1,4 +1,5 @@
 {
     "allow_vc": true,
-    "python_prefix": "python"
+    "python_prefix": "python",
+    "do_log": true
 }
