@@ -8,17 +8,17 @@ This bot is Salim. Whenever you trigger it, It become mad.
 
 **คำเตือน**: Repo นี้ถูกสร้างขึ้นเพื่อความบันเทิงเท่านั้น มิได้มีเจตนาพาดพิงใคร ผู้ใดทั้งสิ้น หากรู้สึกว่าคำพูดบางคำแปลกๆ ก็ขอให้เข้าใจว่านี่คือ `การปั่น`
 
-## Quality Quote
+## 🤝 Quality Quote
 
 Thank you for **Quality** Salim Quote from <a href="https://github.com/narze/awesome-salim-quotes">narze/awesome-salim-quotes</a>
 
 Also, this repo is inspired by seeing above repo
 
-## Special Thanks
+## 🐃 Special Thanks
 
 ขอบคุณเพจ <a href="https://www.facebook.com/thaimoveinstitute/">สถาบัน~~ทิศทางไทย~~หลงทิศหลงทาง</a> ที่ช่วยเติมเต็ม `Salim Quote` อันแสนงี่เง่านี้
 
-## Implement方
+## 👨‍💻 Implement方
 
 In case you want to (not recommend)
 
@@ -54,7 +54,7 @@ In case you want to (not recommend)
 
 **pydub** : ```pip3 install pydub```
 
-## How to train น้อน
+## 🤖 How to train น้อน
 
 Manual Training a.k.a hard code (Idk what to do 😅)
 
@@ -66,7 +66,7 @@ Manual Training a.k.a hard code (Idk what to do 😅)
 
 Maybe sentiment analysis in the future
 
-## น้อน as DJ
+## 🎶 น้อน as DJ
 
 ```./assets/music/songs.json```
 
@@ -90,7 +90,7 @@ Bot Settings <a href="https://github.com/Leomotors/Salim-Bot/blob/main/docs/bot_
 
 Debug Manual <a href="https://github.com/Leomotors/Salim-Bot/blob/main/docs/debug.md">Here</a>
 
-## Spread the hype!
+## 🙏 Spread the hype!
 
 <img src="./assets/images/long-live-hm-queen.jpg" alt="#ทรงพระเจริญ">
 
