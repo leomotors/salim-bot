@@ -17,7 +17,3 @@ Save bot log to file
 ## message_cache (Default: 10)
 
 Number of last sent messages that bot will keep
-
-## activity_list
-
-All Activity able to use in array, Each Activity is dictionary consists of type and name

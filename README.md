@@ -60,6 +60,8 @@ Manual Training a.k.a hard code (Idk what to do 😅)
 
 ```./assets/json/```
 
+* activity.json : Status bot can use
+
 * keywords.json : Keywords to trigger น้อน  
 
 * morequotes.json : Aggressive stuff for น้อน to say on top of narze's repo's quote

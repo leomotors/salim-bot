@@ -13,6 +13,7 @@ const salimDict = require("./assets/json/keywords.json")
 const moreWord = require("./assets/json/morequotes.json")
 const bot_settings = require("./bot_settings.json")
 const songs = require("./assets/music/songs.json")
+const activity_list = require("./assets/json/activity.json").activities
 
 // * Import required module & function
 const request = require("request")
@@ -78,15 +79,14 @@ client.on("ready", () => {
 })
 
 function setStatus(id = -1, isDebug = false) {
-    let ac_list = bot_settings.activity_list
     if (id == -1)
-        id = Math.floor(Math.random() * ac_list.length)
-    client.user.setActivity(`${ac_list[id].name}`, { type: ac_list[id].type })
+        id = Math.floor(Math.random() * activity_list.length)
+    client.user.setActivity(`${activity_list[id].name}`, { type: activity_list[id].type })
         .then(presence => {
             if (isDebug)
-                logconsole(`Activity changed to ${presence.activities[0].name}`, "DEBUG")
+                logconsole(`Activity changed to ${presence.activities[0].type} ${presence.activities[0].name}`, "DEBUG")
             else
-                console.log(`[PRESENCE SETTED] Activity set to ${presence.activities[0].name}`)
+                console.log(`[PRESENCE SETTED] Activity set to ${presence.activities[0].type} ${presence.activities[0].name}`)
         })
         .catch(console.error)
 }
@@ -350,7 +350,7 @@ function debug(commandstr) {
                 case "status":
                     console.log("Showing all activities available")
                     let a_index = 0
-                    for (let activity of bot_settings.activity_list) {
+                    for (let activity of activity_list) {
                         console.log(`#${a_index} ${activity.type} ${activity.name}`)
                         a_index++
                     }

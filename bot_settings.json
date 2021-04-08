@@ -2,15 +2,5 @@
     "allow_vc": true,
     "python_prefix": "python",
     "do_log": true,
-    "message_cache": 10,
-    "activity_list": [
-        {
-            "type": "WATCHING",
-            "name": "TOP NEWS"
-        },
-        {
-            "type": "PLAYING",
-            "name": "Escape FishStop 3D"
-        }
-    ]
+    "message_cache": 10
 }

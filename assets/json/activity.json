@@ -1,0 +1,12 @@
+{
+    "activities": [
+        {
+            "type": "WATCHING",
+            "name": "TOP NEWS"
+        },
+        {
+            "type": "PLAYING",
+            "name": "Escape FishStop 3D"
+        }
+    ]
+}
