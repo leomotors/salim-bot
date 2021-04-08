@@ -84,8 +84,13 @@ function eval(msg) {
 
         let vc = msg.member.voice.channel
         // * Check for possible error
-        if (currVC == vc) {
+        if (!vc) {
+            logconsole(`${msg.author.tag} trying to pull me to the world of undefined!`, "DECLINE")
+            msg.channel.send("Can't enter \"undefined\" channel. You must be in the vc first!")
+        }
+        else if (currVC == vc) {
             logconsole(`Trying to enter the VC that already in. Aborted. Commanded by ${msg.author.tag}`, "DECLINE")
+            msg.channel.send("I'm already in that voice channel!")
             return
         }
 
@@ -137,7 +142,7 @@ function eval(msg) {
         msg.channel.send(`${tosentmsg}`)
         logconsole(`Sent message : ${tosentmsg}`)
         // * If in VC and the ชังชาติ person is in the same one, SPEAK!
-        if (msg.member.voice.channel == currVC) {
+        if (msg.member.voice.channel == currVC && currVC) {
             speak(tosentmsg)
         }
     }
@@ -327,7 +332,6 @@ function debug(commandstr) {
         case "logout":
             client.destroy()
             logconsole("Successfully safely logged out", "LOGOUT")
-            process.exit(0)
         default:
             logconsole(`Unknown Command "${command[0]}"`, "DEBUG-ERROR")
     }
