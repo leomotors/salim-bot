@@ -1,7 +1,6 @@
 {
   "name": "salim-bot",
-  "version": "1.6",
-  "description": "This bot is Salim.",
+  "description": "This bot is Salim. Whenever you trigger it, It become mad.",
   "main": "bot.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
