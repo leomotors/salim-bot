@@ -121,3 +121,7 @@ Remove all temporary files like mp3 and mp4
 > rmtemp
 [rmtemp] Successfully delete all temp files.
 ```
+
+### logout
+
+Logout and close program

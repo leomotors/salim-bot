@@ -55,6 +55,9 @@ const Discord = require("discord.js")
 const client = new Discord.Client()
 client.on("ready", () => {
     console.log(`[BOT READY] Successfully logged in as ${client.user.tag}.`)
+    client.user.setActivity("TOP NEWS", { type: "WATCHING" })
+        .then(presence => console.log(`[PRESENCE SETTED] Activity set to ${presence.activities[0].name}`))
+        .catch(console.error);
 })
 
 client.login(auth.token)
@@ -321,6 +324,10 @@ function debug(commandstr) {
                 console.log(stdout.replace(/\n$/, ""));
             })
             break
+        case "logout":
+            client.destroy()
+            logconsole("Successfully safely logged out", "LOGOUT")
+            process.exit(0)
         default:
             logconsole(`Unknown Command "${command[0]}"`, "DEBUG-ERROR")
     }
