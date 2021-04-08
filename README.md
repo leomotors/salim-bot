@@ -68,7 +68,7 @@ Maybe sentiment analysis in the future
 
 ## น้อน as DJ
 
-```./assets/music/music.json```
+```./assets/music/songs.json```
 
 ### Main Dictionary
 
@@ -81,6 +81,10 @@ Value : Array of Music Dictionary
 name : Music Name & Author Name if exists
 
 url : Youtube URL to music
+
+## น้อน Settings
+
+Read Doc <a href="https://github.com/Leomotors/Salim-Bot/blob/main/docs/bot_settings.md">Here</a>
 
 ## Debug น้อน
 
