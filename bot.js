@@ -28,12 +28,27 @@ let currVC = undefined
 let VCconnection = undefined
 let sentmsg = []
 
-// * Add วาทกรรมสลิ่ม from morequotes.json
-for (let word of moreWord.วาทกรรมสลิ่ม) {
-    quoteArray.push(word)
+// * Check for duplicate keyword
+let duplist = []
+for (let word_to_check of salimDict.ชังชาติ) {
+    let appearance = salimDict.ชังชาติ.filter(word => word == word_to_check).length
+    if (appearance > 1 && !duplist.includes(word_to_check))
+        duplist.push(word_to_check)
+}
+if (duplist.length > 0) {
+    for (let dupword of duplist)
+        console.log(`[IMPORT WARNING] Duplicate Keyword : ${dupword}`)
 }
 
-// * Import วาทกรรมสลิ่ม from narze's repo & add to quoteArray
+// * Add วาทกรรมสลิ่ม from morequotes.json w/ duplicate check
+for (let word of moreWord.วาทกรรมสลิ่ม) {
+    if (quoteArray.includes(word))
+        console.log(`[IMPORT WARNING] Duplicate Quote : ${word}`)
+    else
+        quoteArray.push(word)
+}
+
+// * Import วาทกรรมสลิ่ม from narze's repo & add to quoteArray w/ duplicate check
 request({
     url: "https://raw.githubusercontent.com/narze/awesome-salim-quotes/main/README.md",
     json: false
@@ -43,7 +58,11 @@ request({
     for (const index in txtarray) {
         line = txtarray[index]
         if (line.startsWith("-")) {
-            quoteArray.push(line.slice(2))
+            let oword = line.slice(2)
+            if (quoteArray.includes(oword))
+                console.log(`[IMPORT ONLINE WARNING] Duplicate Quote : ${oword}`)
+            else
+                quoteArray.push(oword)
         }
     }
     console.log("[DATA FETCHED] Successfully pulled quote data from narze's repository")
