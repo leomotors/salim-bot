@@ -132,7 +132,7 @@ Remove all temporary files like mp3 and mp4
 
 Args: Index of message (Default: 0)
 
-Remove (index +1 )th last message
+Remove (index+1)th last message
 
 ### logout
 
