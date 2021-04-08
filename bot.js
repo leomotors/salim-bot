@@ -308,6 +308,19 @@ function debug(commandstr) {
         case "cls":
             console.log("To clear screen, do Ctrl + L")
             break
+        case "rmtemp":
+            exec(`./rmtemp temp`, (error, stdout, stderr) => {
+                if (error) {
+                    logconsole(`Error on calling rmtemp : ${error.message}`, "ERROR")
+                    return
+                }
+                if (stderr) {
+                    logconsole(`stderr on calling rmtemp : ${stderr}`, "ERROR")
+                    return
+                }
+                console.log(stdout.replace(/\n$/, ""));
+            })
+            break
         default:
             logconsole(`Unknown Command "${command[0]}"`, "DEBUG-ERROR")
     }

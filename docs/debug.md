@@ -110,3 +110,14 @@ Leave current voice chat
 To clear screen, do Ctrl + L (Terminal shortcut)
 
 However, calling this debug function will tell you how to do it.
+
+### rmtemp
+
+Remove all temporary files like mp3 and mp4
+
+(Removing log files inside nodejs isn't supported)
+
+```
+> rmtemp
+[rmtemp] Successfully delete all temp files.
+```
