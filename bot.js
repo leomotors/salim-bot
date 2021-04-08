@@ -11,7 +11,7 @@
 const auth = require("./auth.json")
 const salimDict = require("./assets/json/keywords.json")
 const moreWord = require("./assets/json/morequotes.json")
-const bot_settings = require("./botsettings.json")
+const bot_settings = require("./bot_settings.json")
 const songs = require("./assets/music/songs.json")
 
 // * Import required module & function

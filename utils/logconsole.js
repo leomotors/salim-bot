@@ -2,7 +2,7 @@
 
 let getFormattedTime = require("./time.js")
 const fs = require("fs")
-const bot_settings_log = require("../botsettings.json").do_log
+const bot_settings_log = require("../bot_settings.json").do_log
 
 let initstr = `Created at ${getFormattedTime()}\n\n`
 let initfname = `${getFormattedTime(true)}.txt`
