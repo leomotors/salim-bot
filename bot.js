@@ -87,6 +87,7 @@ function eval(msg) {
         if (!vc) {
             logconsole(`${msg.author.tag} trying to pull me to the world of undefined!`, "DECLINE")
             msg.channel.send("Can't enter \"undefined\" channel. You must be in the vc first!")
+            return
         }
         else if (currVC == vc) {
             logconsole(`Trying to enter the VC that already in. Aborted. Commanded by ${msg.author.tag}`, "DECLINE")
@@ -332,6 +333,7 @@ function debug(commandstr) {
         case "logout":
             client.destroy()
             logconsole("Successfully safely logged out", "LOGOUT")
+            process.exit(0)
         default:
             logconsole(`Unknown Command "${command[0]}"`, "DEBUG-ERROR")
     }
