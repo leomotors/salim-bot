@@ -5,6 +5,18 @@
             "name": "TOP NEWS"
         },
         {
+            "type": "WATCHING",
+            "name": "ข่าวในพระราชสำนัก"
+        },
+        {
+            "type": "LISTENING",
+            "name": "เพลงสรรเสริญพระบารมี"
+        },
+        {
+            "type": "COMPETING",
+            "name": "รายการประกวดร้องเพลงพระราชนิพนธ์"
+        },
+        {
             "type": "PLAYING",
             "name": "Escape FishStop 3D"
         }
