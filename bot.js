@@ -20,6 +20,7 @@ const request = require("request")
 const { exec } = require("child_process")
 const logconsole = require("./utils/logconsole")
 const introduceMyself = require("./utils/introduce.js")
+const fs = require("fs")
 
 // * Init Variable
 let plaintxt = ""
@@ -171,6 +172,16 @@ function eval(msg) {
         }
     }
 
+    if(msg.content.startsWith("!train"))
+    {
+        let trainstr = msg.content.slice(0).replace("\n"," ")
+        fs.appendFile(`./utils/train.txt`, trainstr.slice(7) + "\n", (err) => {
+            if (err)
+                console.log(`[TRAIN ERROR] Error on writing log file: ${err}`)
+        })
+        msg.channel.send("กระผม นศท. น้อนสลิ่ม จะจดจำแล้วนำไปใช้ ครับ!")
+        return
+    }
     // * Regular Detection
     if (isชังชาติ(msg)) {
         let tosentmsg = randomQuote()

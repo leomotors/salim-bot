@@ -2,5 +2,6 @@
     "allow_vc": true,
     "python_prefix": "python",
     "do_log": true,
-    "message_cache": 10
+    "message_cache": 10,
+    "allow_training": true
 }
