@@ -18,6 +18,7 @@
   "homepage": "https://github.com/Leomotors/Salim-Bot#readme",
   "dependencies": {
     "@discordjs/opus": "^0.5.0",
-    "discord.js": "^12.5.3"
+    "discord.js": "^12.5.3",
+    "request": "^2.88.2"
   }
 }

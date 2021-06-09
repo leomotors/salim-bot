@@ -107,9 +107,10 @@ dist
 auth.json
 topsecret.txt
 
-# Temporary Folder
-temp
+# Temp
 todo.txt
 
-# Log folder
-log
+# package
+
+package-lock
+package-lock.json
