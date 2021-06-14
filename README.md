@@ -4,43 +4,57 @@ This bot is Salim. Whenever you trigger it, It become mad.
 
 **April Fools!!!** Wait, it passed? nvm, idc.
 
-**Disclaimer**: This repo is made for entertainment purpose only. I don't have any intention of referring to anyone. Please note that this is meant to be a joke.
+This repo is made to use for my own server. However, source code is free for anyone to implement it.
 
-**คำเตือน**: Repo นี้ถูกสร้างขึ้นเพื่อความบันเทิงเท่านั้น มิได้มีเจตนาพาดพิงใคร ผู้ใดทั้งสิ้น หากรู้สึกว่าคำพูดบางคำแปลกๆ ก็ขอให้เข้าใจว่านี่คือ `การปั่น`
+Spread headache to your friend!
+
+## ⚠️ Please Read
+
+**Warning**: This repo is made for closed group entertainment purpose only. This Repository's owner will not be responsible for any wrong uses.
+
+**คำเตือน**: Repo นี้ถูกสร้างขึ้นเพื่อความบันเทิงภายในกลุ่มเล็กๆ และจุดประสงค์ของบอทนี้คือ `เอาไว้ปั่น` เท่านั้น เจ้าของ Repo นี้จะไม่รับผิดชอบใดๆ อันเกิดจากการใช้งานผิดวัตถุประสงค์
 
 ## 🤝 Quality Quote
 
 Thank you for **Quality** Salim Quote from <a href="https://github.com/narze/awesome-salim-quotes">narze/awesome-salim-quotes</a>
 
-Also, this repo is inspired by seeing above repo
+This project is inspired from seeing above repo!
 
-## 👨‍💻 Implement方
+## 👨‍💻 To Implement
 
 In case you want to (not recommend)
+
+* Clone or Download Repo
 
 * Install node_modules by this command
 
   ```npm install discord.js --save```
 
-  **Note**: Admin might be needed to successfully do this.
-
 * Then, create auth.json with "token"
 
+  **Note**: You will have to create your own bot in Discord Developer
+  
 * Run bot.js and done!
 
-### Required npm Package
+## ⚙️ Dependencies
+
+To Implement this bot, here are dependencies.
+
+### Required Packages
+
+**Python** : ```sudo apt install python3```
+
+**FFmpeg** : ```sudo apt install ffmpeg```
+
+### Required npm Packages
 
 **Discord** (Of course you need this) : ```npm i discord.js```
 
 **@discordjs/opus** : ```npm i @discordjs/opus```
 
-**Note**: Admin might be needed to install these packages.
+**request**: Yes, I know this is deprecated but it is easiest to use. (Lazy finding new solution)
 
-### Required non-npm Package
-
-**Python** : ```sudo apt install python3```
-
-**FFmpeg** : ```sudo apt install ffmpeg```
+**Note**: If installation is failed, try again with elevation.
 
 ### Required Python Package
 
@@ -50,9 +64,11 @@ In case you want to (not recommend)
 
 **pydub** : ```pip3 install pydub```
 
+**Note**: These commands are for linux, for Windows please use approiate installation method.
+
 ## 🤖 How to train น้อน
 
-Manual Training a.k.a hard code (Idk what to do 😅)
+The only Method available is Manual Training a.k.a hard code (Idk what to do 😅)
 
 ```./assets/json/```
 
@@ -60,9 +76,9 @@ Manual Training a.k.a hard code (Idk what to do 😅)
 
 * keywords.json : Keywords to trigger น้อน  
 
-* morequotes.json : Aggressive stuff for น้อน to say on top of narze's repo's quote
+* morequotes.json : Aggressive stuff for น้อน to say other than quotes in narze's repo
 
-Maybe sentiment analysis in the future
+**Note**: Train my users feature is being developed (actually abandoned) and experimental.
 
 ## 🎶 น้อน as DJ
 
