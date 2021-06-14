@@ -64,7 +64,7 @@ To Implement this bot, here are dependencies.
 
 **pydub** : ```pip3 install pydub```
 
-**Note**: These commands are for linux, for Windows please use approiate installation method.
+**Note**: These commands are for linux, for Windows please use appropriate installation method.
 
 ## 🤖 How to train น้อน
 
