@@ -67,7 +67,7 @@ request({
                 quoteArray.push(oword)
         }
     }
-    console.log("[DATA FETCHED] Successfully pulled quote data from narze's repository")
+    console.log("[QUOTE FETCHED] Successfully pulled quote data from narze's repository")
 })
 
 
@@ -75,11 +75,11 @@ request({
 const Discord = require("discord.js")
 const client = new Discord.Client()
 client.on("ready", () => {
-    console.log(`[BOT READY] Successfully logged in as ${client.user.tag}.`)
-    setStatus()
+    console.log(`[LOGIN SUCCESS] Successfully logged in as ${client.user.tag}.`)
+    setStatus(-1, false, true)
 })
 
-function setStatus(id = -1, isDebug = false) {
+function setStatus(id = -1, isDebug = false, startup = false) {
     if (id == -1)
         id = Math.floor(Math.random() * activity_list.length)
     client.user.setActivity(`${activity_list[id].name}`, { type: activity_list[id].type })
@@ -88,6 +88,10 @@ function setStatus(id = -1, isDebug = false) {
                 logconsole(`Activity changed to ${presence.activities[0].type} ${presence.activities[0].name}`, "DEBUG")
             else
                 console.log(`[PRESENCE SETTED] Activity set to ${presence.activities[0].type} ${presence.activities[0].name}`)
+            if (startup) {
+                // * Since Setstatus is last process, doning this mean bot is started
+                console.log("==========> BOT READY TO USE <==========")
+            }
         })
         .catch(console.error)
 }
@@ -172,9 +176,8 @@ function eval(msg) {
         }
     }
 
-    if(msg.content.startsWith("!train"))
-    {
-        let trainstr = msg.content.slice(0).replace("\n"," ")
+    if (msg.content.startsWith("!train")) {
+        let trainstr = msg.content.slice(0).replace("\n", " ")
         fs.appendFile(`./utils/train.txt`, trainstr.slice(7) + "\n", (err) => {
             if (err)
                 console.log(`[TRAIN ERROR] Error on writing log file: ${err}`)
