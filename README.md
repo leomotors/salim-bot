@@ -78,7 +78,13 @@ The only Method available is Manual Training a.k.a hard code (Idk what to do �
 
 * morequotes.json : Aggressive stuff for น้อน to say other than quotes in narze's repo
 
-**Note**: Train my users feature is being developed (actually abandoned) and experimental.
+### Trained by People
+
+People in Discord can train bot by typing `!train <Quote>`
+
+This can also be disabled or limited to some person in bot settings
+
+Run utils/review.py to review pending words and add to file!
 
 ## 🎶 น้อน as DJ
 

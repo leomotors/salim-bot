@@ -29,6 +29,12 @@ Mention น้อน with keyword `เพลง`. น้อน will open song fo
 
 **Note**: น้อน is salim. So, only song salim like to listen to is available.
 
+## Train Bot
+
+เพิ่มคลังคำศัพท์ให้น้อนได้โดยพิมพ์ `!train <Quote>`
+
+**Note**: Owner can disable training by strangers
+
 ## Easter Egg
 
 It's there, and available to everyone.
