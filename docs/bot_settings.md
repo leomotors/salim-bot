@@ -17,3 +17,15 @@ Save bot log to file
 ## message_cache (Default: 10)
 
 Number of last sent messages that bot will keep
+
+## Limited Training (Default: false)
+
+Limit training to only some person.
+
+If not enabled, everyone can train this bot
+
+## trainer (Default: None)
+
+If Limited Training is enabled, only these people in this list can train bot.
+
+Add User's Username for Example "HelloWorld#1234"
