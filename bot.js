@@ -177,13 +177,22 @@ function eval(msg) {
     }
 
     if (msg.content.startsWith("!train")) {
-        let trainstr = msg.content.slice(0).replace("\n", " ")
-        fs.appendFile(`./utils/train.txt`, trainstr.slice(7) + "\n", (err) => {
-            if (err)
-                console.log(`[TRAIN ERROR] Error on writing log file: ${err}`)
-        })
-        msg.channel.send("กระผม นศท. น้อนสลิ่ม จะจดจำแล้วนำไปใช้ ครับ!")
-        return
+        if (bot_settings.limited_training &&
+            !bot_settings.trainer.includes(msg.author.username)) {
+            logconsole(`${msg.author.tag} tried to train me without permission!`, "DECLINE")
+            msg.channel.send("I'm not allowed to be trained by strangers like you!")
+        }
+        else {
+            let trainstr = msg.content.slice(0).replace("\n", " ")
+            fs.appendFile(`./utils/train.txt`, trainstr.slice(7) + "\n", (err) => {
+                if (err)
+                    console.log(`[TRAIN ERROR] Error on writing log file: ${err}`)
+            })
+            msg.channel.send("กระผม นศท. น้อนสลิ่ม จะจดจำแล้วนำไปใช้ ครับ!")
+            logconsole(`Trained by ${msg.author.tag}`, "TRAINED")
+            return
+        }
+
     }
     // * Regular Detection
     if (isชังชาติ(msg)) {

@@ -3,5 +3,7 @@
     "python_prefix": "python",
     "do_log": true,
     "message_cache": 10,
-    "allow_training": true
+    "allow_training": true,
+    "limited_training": false,
+    "trainer": []
 }
