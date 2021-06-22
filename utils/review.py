@@ -6,6 +6,7 @@
 import json
 
 quotes = []
+train_quotes = []
 
 with open("./assets/json/morequotes.json", "r") as quote_file:
     quotes = json.load(quote_file)
@@ -20,6 +21,10 @@ with open("./assets/json/morequotes.json", "r") as quote_file:
                 quotes["วาทกรรมสลิ่ม"].append(q)
             print()
 
+if len(train_quotes) <= 0:
+    print("Nothing to train here! Come back later!")
+    exit()
+    
 with open("./assets/json/morequotes.json", "w") as outfile:
     final_str = str(quotes)
     final_str = final_str.replace('"', '\\"')
