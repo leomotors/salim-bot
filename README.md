@@ -26,6 +26,8 @@ In case you want to (not recommend)
 
 * Clone or Download Repo
 
+* Initialize node package by ```npm init```
+
 * Install node_modules by this command
 
   ```npm install discord.js --save```
