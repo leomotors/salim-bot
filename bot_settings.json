@@ -5,5 +5,6 @@
     "message_cache": 10,
     "allow_training": true,
     "limited_training": false,
-    "trainer": []
+    "trainer": [],
+    "remote_quote": true
 }

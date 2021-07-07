@@ -51,24 +51,25 @@ for (let word of moreWord.วาทกรรมสลิ่ม) {
 }
 
 // * Import วาทกรรมสลิ่ม from narze's repo & add to quoteArray w/ duplicate check
-request({
-    url: "https://raw.githubusercontent.com/narze/awesome-salim-quotes/main/README.md",
-    json: false
-}, (err, response, body) => {
-    plaintxt = body
-    let txtarray = plaintxt.split(/\r?\n/)
-    for (const index in txtarray) {
-        line = txtarray[index]
-        if (line.startsWith("-")) {
-            let oword = line.slice(2)
-            if (quoteArray.includes(oword))
-                console.log(`[IMPORT ONLINE WARNING] Duplicate Quote : ${oword}`)
-            else
-                quoteArray.push(oword)
+if (bot_settings.remote_quote)
+    request({
+        url: "https://raw.githubusercontent.com/narze/awesome-salim-quotes/main/README.md",
+        json: false
+    }, (err, response, body) => {
+        plaintxt = body
+        let txtarray = plaintxt.split(/\r?\n/)
+        for (const index in txtarray) {
+            line = txtarray[index]
+            if (line.startsWith("-")) {
+                let oword = line.slice(2)
+                if (quoteArray.includes(oword))
+                    console.log(`[IMPORT ONLINE WARNING] Duplicate Quote : ${oword}`)
+                else
+                    quoteArray.push(oword)
+            }
         }
-    }
-    console.log("[QUOTE FETCHED] Successfully pulled quote data from narze's repository")
-})
+        console.log("[QUOTE FETCHED] Successfully pulled quote data from narze's repository")
+    })
 
 
 // * Discord Zone: Define on_setup() and Login

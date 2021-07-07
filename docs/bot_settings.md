@@ -29,3 +29,9 @@ If not enabled, everyone can train this bot
 If Limited Training is enabled, only these people in this list can train bot.
 
 Add User's Username for Example "HelloWorld#1234"
+
+## remote_quote (Default: true)
+
+Pull quality salim quotes from <a href="https://github.com/narze/awesome-salim-quotes">narze/awesome-salim-quotes</a>
+
+If disabled, only local quotes are used
