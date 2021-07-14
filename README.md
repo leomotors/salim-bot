@@ -10,15 +10,15 @@ Spread headache to your friend!
 
 ## ⚠️ Please Read
 
-**Warning**: This repo is made for closed group entertainment purpose only. This Repository's owner will not be responsible for any wrong uses.
+**Warning**: This repo is made for closed group entertainment purpose (say `ปั่น`) only. This Repository's owner *will not be responsible* for any wrong uses. Proceed at your own risk!
 
-**คำเตือน**: Repo นี้ถูกสร้างขึ้นเพื่อความบันเทิงภายในกลุ่มเล็กๆ และจุดประสงค์ของบอทนี้คือ `เอาไว้ปั่น` เท่านั้น เจ้าของ Repo นี้จะไม่รับผิดชอบใดๆ อันเกิดจากการใช้งานผิดวัตถุประสงค์
-
-## 🤝 Quality Quote
+## 🤝 Quality Quote & 💡 Inspiration
 
 Thank you for **Quality** Salim Quote from <a href="https://github.com/narze/awesome-salim-quotes">narze/awesome-salim-quotes</a>
 
-This project is inspired from seeing above repo!
+**Note**: This Bot on default will pull quotes from that repository everytime it starts.
+
+That Repository also inspire me to create this annoying 'ปั่น' Bot.
 
 ## 👨‍💻 To Implement
 
@@ -37,6 +37,14 @@ In case you want to (not recommend)
   **Note**: You will have to create your own bot in Discord Developer
   
 * Run bot.js and done!
+
+## 📚 Document
+
+~~Commoner~~User Manual <a href="https://github.com/Leomotors/Salim-Bot/blob/main/docs/user_manual.md">Here</a>
+
+Bot Settings <a href="https://github.com/Leomotors/Salim-Bot/blob/main/docs/bot_settings.md">Here</a>
+
+Debug Manual <a href="https://github.com/Leomotors/Salim-Bot/blob/main/docs/debug.md">Here</a>
 
 ## ⚙️ Dependencies
 
@@ -78,11 +86,11 @@ The only Method available is Manual Training a.k.a hard code (Idk what to do �
 
 * keywords.json : Keywords to trigger น้อน  
 
-* morequotes.json : Aggressive stuff for น้อน to say other than quotes in narze's repo
+* morequotes.json : Aggressive stuff for น้อน to say on top of already quality quotes in <a href="https://github.com/narze/awesome-salim-quotes">narze/awesome-salim-quotes</a>
 
 ### Trained by People
 
-People in Discord can train bot by typing `!train <Quote>`
+People in Discord can also train the bot by typing `!train <Quote>`
 
 This can also be disabled or limited to some person in bot settings
 
@@ -103,14 +111,6 @@ Value : Array of Music Dictionary
 name : Music Name & Author Name if exists
 
 url : Youtube URL to music
-
-## 📚 Document
-
-~~Commoner~~User Manual <a href="https://github.com/Leomotors/Salim-Bot/blob/main/docs/user_manual.md">Here</a>
-
-Bot Settings <a href="https://github.com/Leomotors/Salim-Bot/blob/main/docs/bot_settings.md">Here</a>
-
-Debug Manual <a href="https://github.com/Leomotors/Salim-Bot/blob/main/docs/debug.md">Here</a>
 
 ## 🙏 Spread the hype!
 
