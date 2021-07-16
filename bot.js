@@ -203,8 +203,13 @@ function eval(msg) {
         msg.channel.send(`${tosentmsg}`)
         logconsole(`Sent message : ${tosentmsg}`)
         // * If in VC and the ชังชาติ person is in the same one, SPEAK!
-        if (msg.member.voice.channel == currVC && currVC) {
-            speak(tosentmsg)
+        try {
+            if (currVC && msg.member.voice.channel == currVC) {
+                speak(tosentmsg)
+            }
+        }
+        catch (err) {
+            logconsole(`Exception Catched : ${err}`, "EXCEPTION HANDLED")
         }
     }
 }
