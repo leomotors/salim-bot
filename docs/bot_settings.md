@@ -34,4 +34,6 @@ Add User's Username for Example "HelloWorld#1234"
 
 Pull quality salim quotes from <a href="https://github.com/narze/awesome-salim-quotes">narze/awesome-salim-quotes</a>
 
-If disabled, only local quotes are used
+## local_quote (Default: true)
+
+Use quotes from morequotes.json

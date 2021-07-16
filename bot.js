@@ -43,11 +43,13 @@ if (duplist.length > 0) {
 }
 
 // * Add วาทกรรมสลิ่ม from morequotes.json w/ duplicate check
-for (let word of moreWord.วาทกรรมสลิ่ม) {
-    if (quoteArray.includes(word))
-        console.log(`[IMPORT WARNING] Duplicate Quote : ${word}`)
-    else
-        quoteArray.push(word)
+if (bot_settings.local_quote) {
+    for (let word of moreWord.วาทกรรมสลิ่ม) {
+        if (quoteArray.includes(word))
+            console.log(`[IMPORT WARNING] Duplicate Quote : ${word}`)
+        else
+            quoteArray.push(word)
+    }
 }
 
 // * Import วาทกรรมสลิ่ม from narze's repo & add to quoteArray w/ duplicate check

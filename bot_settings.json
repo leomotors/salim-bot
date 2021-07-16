@@ -6,5 +6,6 @@
     "allow_training": true,
     "limited_training": false,
     "trainer": [],
-    "remote_quote": true
+    "remote_quote": true,
+    "local_quote": true
 }
