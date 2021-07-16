@@ -149,3 +149,7 @@ Set Current Status to Status with that ID
 ### logout
 
 Logout and close program
+
+### help
+
+Warp you to this place

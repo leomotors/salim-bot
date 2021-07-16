@@ -424,6 +424,9 @@ function debug(commandstr) {
             client.destroy()
             logconsole("Successfully safely logged out", "LOGOUT")
             process.exit(0)
+        case "help":
+            console.log(`This might help: https://github.com/Leomotors/Salim-Bot/blob/main/docs/debug.md`)
+            break
         default:
             logconsole(`Unknown Command "${command[0]}"`, "DEBUG-ERROR")
     }

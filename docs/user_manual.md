@@ -43,6 +43,6 @@ It's there, and available to everyone.
 
 Send any message, Speak any Word or Open any Song
 
-Salim believes in **Monarchy**, these privilege are tied to owner only via **debug console**
+This Bot believes in **Monarchy**, so these privilege are tied to owner only via **debug console**
 
 <a href="https://github.com/Leomotors/Salim-Bot/blob/main/docs/debug.md">How to use Debug Console</a>
