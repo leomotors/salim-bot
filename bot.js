@@ -13,6 +13,7 @@ const salimDict = require("./assets/json/keywords.json")
 const moreWord = require("./assets/json/morequotes.json")
 const bot_settings = require("./bot_settings.json")
 const songs = require("./assets/music/songs.json")
+const chalk = require("chalk")
 const activity_list = require("./assets/json/activity.json").activities
 
 // * Import required module & function
@@ -39,14 +40,14 @@ for (let word_to_check of salimDict.ชังชาติ) {
 }
 if (duplist.length > 0) {
     for (let dupword of duplist)
-        console.log(`[IMPORT WARNING] Duplicate Keyword : ${dupword}`)
+        console.log(chalk.yellow(`[IMPORT WARNING] Duplicate Keyword : ${dupword}`))
 }
 
 // * Add วาทกรรมสลิ่ม from morequotes.json w/ duplicate check
 if (bot_settings.local_quote) {
     for (let word of moreWord.วาทกรรมสลิ่ม) {
         if (quoteArray.includes(word))
-            console.log(`[IMPORT WARNING] Duplicate Quote : ${word}`)
+            console.log(chalk.yellow(`[IMPORT WARNING] Duplicate Quote : ${word}`))
         else
             quoteArray.push(word)
     }
@@ -65,7 +66,7 @@ if (bot_settings.remote_quote)
             if (line.startsWith("-")) {
                 let oword = line.slice(2)
                 if (quoteArray.includes(oword))
-                    console.log(`[IMPORT ONLINE WARNING] Duplicate Quote : ${oword}`)
+                    console.log(chalk.yellow(`[IMPORT ONLINE WARNING] Duplicate Quote : ${oword}`))
                 else
                     quoteArray.push(oword)
             }
@@ -93,7 +94,7 @@ function setStatus(id = -1, isDebug = false, startup = false) {
                 console.log(`[PRESENCE SETTED] Activity set to ${presence.activities[0].type} ${presence.activities[0].name}`)
             if (startup) {
                 // * Since Setstatus is last process, doning this mean bot is started
-                console.log("==========> BOT READY TO USE <==========")
+                console.log(chalk.green("==========> BOT READY TO USE <=========="))
             }
         })
         .catch(console.error)
@@ -189,7 +190,7 @@ function eval(msg) {
             let trainstr = msg.content.slice(0).replace("\n", " ")
             fs.appendFile(`./utils/train.txt`, trainstr.slice(7) + "\n", (err) => {
                 if (err)
-                    console.log(`[TRAIN ERROR] Error on writing log file: ${err}`)
+                    console.log(chalk.red(`[TRAIN ERROR] Error on writing log file: ${err}`))
             })
             msg.channel.send("กระผม นศท. น้อนสลิ่ม จะจดจำแล้วนำไปใช้ ครับ!")
             logconsole(`Trained by ${msg.author.tag}`, "TRAINED")

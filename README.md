@@ -64,6 +64,8 @@ To Implement this bot, here are dependencies.
 
 **request**: Yes, I know this is deprecated but it is easiest to use. (Lazy finding new solution)
 
+**chalk**: ```npm i chalk```
+
 **Note**: If installation is failed, try again with elevation.
 
 ### Required Python Package
