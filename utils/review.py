@@ -35,6 +35,7 @@ with open("./assets/json/morequotes.json", "w") as outfile:
     outfile.write(final_str)
 
 print("Review Completed, Please use auto format in VSCode to format the json")
+print("Known Issue: \\u200b might appear in quotes, it should not affect much.")
 
 choice = input(
     "Do you want to delete train files? [Y for Yes, otherwise any key] => ")
