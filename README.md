@@ -60,9 +60,9 @@ To Implement this bot, here are dependencies.
 
 **Discord** (Of course you need this) : ```npm i discord.js```
 
-**@discordjs/opus** : ```npm i @discordjs/opus```
+**@discordjs/opus** : ```npm i @discordjs/opus``` or ```npm i discordjs/opus```
 
-**request**: Yes, I know this is deprecated but it is easiest to use. (Lazy finding new solution)
+**request**: ```npm i request``` (Deprecated but I'm lazy to find modern Solution)
 
 **chalk**: ```npm i chalk```
 
