@@ -38,6 +38,8 @@ In case you want to (not recommend)
   
 * Run bot.js and done!
 
+**Note**: If your system doesn't use python for Python 3, don't forget to set its prefix in `bot_settings.json`
+
 ## 📚 Document
 
 ~~Commoner~~User Manual <a href="https://github.com/Leomotors/Salim-Bot/blob/main/docs/user_manual.md">Here</a>
