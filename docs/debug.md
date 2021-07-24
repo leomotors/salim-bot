@@ -2,8 +2,6 @@
 
 Debug is accessible via console
 
-**Warning**: There is no error check here, bot may crashs upon inproper uses
-
 ## Note: Dictionary
 
 Latest channel : Latest channel that it recieved message
