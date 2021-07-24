@@ -118,3 +118,6 @@ package-lock.json
 
 # Other
 train.txt
+
+# Local Quotes
+assets/json/morequotes.json

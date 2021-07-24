@@ -10,17 +10,20 @@
 // * Import data from other file
 const auth = require("./auth.json")
 const salimDict = require("./assets/json/keywords.json")
+
 let moreWord
 try {
     moreWord = require("./assets/json/morequotes.json")
 }
 catch {
     moreWord = {
-        "วาทกรรมสลิ่ม": [
-            "Easter egg คับ https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-        ]
+        "วาทกรรมสลิ่ม": []
     }
+    if (bot_settings.local_quote)
+        console.log(`[LOCAL QUOTE WARNING] Can't open morequotes.json, you can close this warning by disable local_quote in settings.json, or if you want to have custom 'local'
+         quotes, create morequotes.json in assets/json/ with only one properties 'วาทกรรมสลิ่ม' its value is array of your custom words`)
 }
+
 const bot_settings = require("./bot_settings.json")
 const songs = require("./assets/music/songs.json")
 const chalk = require("chalk")
@@ -55,6 +58,8 @@ if (duplist.length > 0) {
 
 // * Add วาทกรรมสลิ่ม from morequotes.json w/ duplicate check
 if (bot_settings.local_quote) {
+    // * No one can evade Rick Roll
+    quoteArray.push("Easter egg คับ https://www.youtube.com/watch?v=dQw4w9WgXcQ")
     for (let word of moreWord.วาทกรรมสลิ่ม) {
         if (quoteArray.includes(word))
             console.log(chalk.yellow(`[IMPORT WARNING] Duplicate Quote : ${word}`))
