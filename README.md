@@ -92,7 +92,8 @@ The only Method available is Manual Training a.k.a hard code (Idk what to do �
 
 * keywords.json : Keywords to trigger น้อน  
 
-* morequotes.json : Aggressive stuff for น้อน to say on top of already quality quotes in <a href="https://github.com/narze/awesome-salim-quotes">narze/awesome-salim-quotes</a>
+* morequotes.json : Aggressive stuff for น้อน to say on top of already quality quotes in <a href="https://github.com/narze/awesome-salim-quotes">narze/awesome-salim-quotes</a>.
+   To use this feature, create this file with only one properties 'วาทกรรมสลิ่ม' set its value to array of your custom quotes.
 
 ### Trained by People
 
