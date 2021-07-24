@@ -10,7 +10,17 @@
 // * Import data from other file
 const auth = require("./auth.json")
 const salimDict = require("./assets/json/keywords.json")
-const moreWord = require("./assets/json/morequotes.json")
+let moreWord
+try {
+    moreWord = require("./assets/json/morequotes.json")
+}
+catch {
+    moreWord = {
+        "วาทกรรมสลิ่ม": [
+            "Easter egg คับ https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        ]
+    }
+}
 const bot_settings = require("./bot_settings.json")
 const songs = require("./assets/music/songs.json")
 const chalk = require("chalk")
