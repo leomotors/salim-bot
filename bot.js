@@ -21,8 +21,7 @@ catch {
         "วาทกรรมสลิ่ม": []
     }
     if (bot_settings.local_quote)
-        console.log(`[LOCAL QUOTE WARNING] Can't open morequotes.json, you can close this warning by disable local_quote in settings.json, or if you want to have custom 'local'
-         quotes, create morequotes.json in assets/json/ with only one properties 'วาทกรรมสลิ่ม' its value is array of your custom words`)
+        console.log(`[LOCAL QUOTE WARNING] Can't open morequotes.json, you can close this warning by disable local_quote in settings.json, or if you want to have custom 'local' quotes, create morequotes.json in assets/json/ with only one properties 'วาทกรรมสลิ่ม' its value is array of your custom words`)
 }
 
 const songs = require("./assets/music/songs.json")
@@ -330,128 +329,133 @@ rl.on('line', (input) => {
 
 function debug(commandstr) {
     let command = commandstr.split(" ")
-    switch (command[0]) {
-        case "quote":
-            lastchannel.send(quoteArray[command[1]])
-            logconsole(`quote : Sent quote #${command[1]}`, "DEBUG")
-            break
-        case "say":
-            let sayarr = commandstr.slice(4)
-            lastchannel.send(sayarr)
-            logconsole(`say : Sent message ${sayarr}`, "DEBUG")
-            break
-        case "speak":
-            let speakarr = commandstr.slice(6)
-            speak(speakarr, true)
-            break
-        case "speakquote":
-            speak(quoteArray[command[1]])
-            logconsole(`speakquote : Spoke quote #${command[1]}`, "DEBUG")
-            break
-        case "song":
-            let playsongid = parseInt(commandstr.slice(5))
-            randomSong(undefined, playsongid)
-            logconsole(`Going to play song #${playsongid}`, "DEBUG")
-            break
-        case "youtube":
-            playYoutube(commandstr.slice(8), true)
-            break
-        case "query":
-            switch (command[1]) {
-                case "songs":
-                    let index = 0
-                    console.log("QUERY: Songs")
-                    console.log("Category: Easter Egg")
-                    for (let song of songs.easter_egg) {
-                        console.log(`#${index} : ${song["name"]}`)
-                        index += 1
-                    }
-                    console.log("Category: รักชาติ")
-                    for (let song of songs.รักชาติ) {
-                        console.log(`#${index} : ${song["name"]}`)
-                        index += 1
-                    }
-                    logconsole("Query for Songs Completed", "DEBUG")
-                    break
-                case "quotes":
-                    let startIndex = parseInt(command[2])
-                    let queryCount = parseInt(command[3])
-                    console.log(`QUERY: Quotes #${startIndex}-${startIndex + queryCount - 1}`)
-                    for (let i = startIndex; i < startIndex + queryCount; i++) {
-                        console.log(`Quote #${i} : ${quoteArray[i]}`)
-                    }
-                    logconsole("Query for Quotes Completed", "DEBUG")
-                    break
-                case "quotecount":
-                    console.log(`There are ${quoteArray.length} quotes`)
-                    logconsole("Query for Quotes Count Completed", "DEBUG")
-                    break
-                case "sentmsg":
-                    console.log(`Showing last ${sentmsg.length} sent messages`)
-                    for (let i = 0; i < sentmsg.length; i++) {
-                        let currmsg = sentmsg[i]
-                        console.log(`#${i} -> ${currmsg.channel.name} : ${currmsg.content}`)
-                    }
-                    logconsole("Query for sent messages completed", "DEBUG")
-                    break
-                case "status":
-                    console.log("Showing all activities available")
-                    let a_index = 0
-                    for (let activity of activity_list) {
-                        console.log(`#${a_index} ${activity.type} ${activity.name}`)
-                        a_index++
-                    }
-                    logconsole("Query for status completed", "DEBUG")
-                    break
-                default:
-                    logconsole(`Unknown Query "${command[1]}"`, "DEBUG-ERROR")
-            }
-            break
-        case "dc":
-            currVC.leave()
-            currVC = undefined
-            logconsole("Left Current Voice Channel", "DEBUG")
-            break
-        case "cls":
-            console.log("To clear screen, do Ctrl + L")
-            break
-        case "rmtemp":
-            exec(`./rmtemp temp`, (error, stdout, stderr) => {
-                if (error) {
-                    logconsole(`Error on calling rmtemp : ${error.message}`, "ERROR")
-                    return
+    try {
+        switch (command[0]) {
+            case "quote":
+                lastchannel.send(quoteArray[command[1]])
+                logconsole(`quote : Sent quote #${command[1]}`, "DEBUG")
+                break
+            case "say":
+                let sayarr = commandstr.slice(4)
+                lastchannel.send(sayarr)
+                logconsole(`say : Sent message ${sayarr}`, "DEBUG")
+                break
+            case "speak":
+                let speakarr = commandstr.slice(6)
+                speak(speakarr, true)
+                break
+            case "speakquote":
+                speak(quoteArray[command[1]])
+                logconsole(`speakquote : Spoke quote #${command[1]}`, "DEBUG")
+                break
+            case "song":
+                let playsongid = parseInt(commandstr.slice(5))
+                randomSong(undefined, playsongid)
+                logconsole(`Going to play song #${playsongid}`, "DEBUG")
+                break
+            case "youtube":
+                playYoutube(commandstr.slice(8), true)
+                break
+            case "query":
+                switch (command[1]) {
+                    case "songs":
+                        let index = 0
+                        console.log("QUERY: Songs")
+                        console.log("Category: Easter Egg")
+                        for (let song of songs.easter_egg) {
+                            console.log(`#${index} : ${song["name"]}`)
+                            index += 1
+                        }
+                        console.log("Category: รักชาติ")
+                        for (let song of songs.รักชาติ) {
+                            console.log(`#${index} : ${song["name"]}`)
+                            index += 1
+                        }
+                        logconsole("Query for Songs Completed", "DEBUG")
+                        break
+                    case "quotes":
+                        let startIndex = parseInt(command[2])
+                        let queryCount = parseInt(command[3])
+                        console.log(`QUERY: Quotes #${startIndex}-${startIndex + queryCount - 1}`)
+                        for (let i = startIndex; i < startIndex + queryCount; i++) {
+                            console.log(`Quote #${i} : ${quoteArray[i]}`)
+                        }
+                        logconsole("Query for Quotes Completed", "DEBUG")
+                        break
+                    case "quotecount":
+                        console.log(`There are ${quoteArray.length} quotes`)
+                        logconsole("Query for Quotes Count Completed", "DEBUG")
+                        break
+                    case "sentmsg":
+                        console.log(`Showing last ${sentmsg.length} sent messages`)
+                        for (let i = 0; i < sentmsg.length; i++) {
+                            let currmsg = sentmsg[i]
+                            console.log(`#${i} -> ${currmsg.channel.name} : ${currmsg.content}`)
+                        }
+                        logconsole("Query for sent messages completed", "DEBUG")
+                        break
+                    case "status":
+                        console.log("Showing all activities available")
+                        let a_index = 0
+                        for (let activity of activity_list) {
+                            console.log(`#${a_index} ${activity.type} ${activity.name}`)
+                            a_index++
+                        }
+                        logconsole("Query for status completed", "DEBUG")
+                        break
+                    default:
+                        logconsole(`Unknown Query "${command[1]}"`, "DEBUG-ERROR")
                 }
-                if (stderr) {
-                    logconsole(`stderr on calling rmtemp : ${stderr}`, "ERROR")
-                    return
+                break
+            case "dc":
+                currVC.leave()
+                currVC = undefined
+                logconsole("Left Current Voice Channel", "DEBUG")
+                break
+            case "cls":
+                console.log("To clear screen, do Ctrl + L")
+                break
+            case "rmtemp":
+                exec(`./rmtemp temp`, (error, stdout, stderr) => {
+                    if (error) {
+                        logconsole(`Error on calling rmtemp : ${error.message}`, "ERROR")
+                        return
+                    }
+                    if (stderr) {
+                        logconsole(`stderr on calling rmtemp : ${stderr}`, "ERROR")
+                        return
+                    }
+                    console.log(stdout.replace(/\n$/, ""));
+                })
+                break
+            case "unsend":
+                let unsendloc = 0
+                if (command.length >= 2)
+                    unsendloc = parseInt(command[1])
+                sentmsg[unsendloc].delete()
+                sentmsg[unsendloc].content = "[DELETED]"
+                logconsole(`Deleted Quote ID #${unsendloc}`, "DEBUG")
+                break
+            case "setstatus":
+                let tstatus = -1
+                if (commandstr.length > 10) {
+                    tstatus = parseInt(command[1])
                 }
-                console.log(stdout.replace(/\n$/, ""));
-            })
-            break
-        case "unsend":
-            let unsendloc = 0
-            if (command.length >= 2)
-                unsendloc = parseInt(command[1])
-            sentmsg[unsendloc].delete()
-            sentmsg[unsendloc].content = "[DELETED]"
-            logconsole(`Deleted Quote ID #${unsendloc}`, "DEBUG")
-            break
-        case "setstatus":
-            let tstatus = -1
-            if (commandstr.length > 10) {
-                tstatus = parseInt(command[1])
-            }
-            setStatus(tstatus, true)
-            break
-        case "logout":
-            client.destroy()
-            logconsole("Successfully safely logged out", "LOGOUT")
-            process.exit(0)
-        case "help":
-            console.log(`This might help: https://github.com/Leomotors/Salim-Bot/blob/main/docs/debug.md`)
-            break
-        default:
-            logconsole(`Unknown Command "${command[0]}"`, "DEBUG-ERROR")
+                setStatus(tstatus, true)
+                break
+            case "logout":
+                client.destroy()
+                logconsole("Successfully safely logged out", "LOGOUT")
+                process.exit(0)
+            case "help":
+                console.log(`This might help: https://github.com/Leomotors/Salim-Bot/blob/main/docs/debug.md`)
+                break
+            default:
+                logconsole(`Unknown Command "${command[0]}"`, "DEBUG-ERROR")
+        }
+    }
+    catch (error) {
+        logconsole(`Catched error: ${error}`, "DEBUG EXCEPTION RAISED")
     }
 }
 
