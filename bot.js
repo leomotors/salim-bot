@@ -10,6 +10,7 @@
 // * Import data from other file
 const auth = require("./auth.json")
 const salimDict = require("./assets/json/keywords.json")
+const bot_settings = require("./bot_settings.json")
 
 let moreWord
 try {
@@ -24,7 +25,6 @@ catch {
          quotes, create morequotes.json in assets/json/ with only one properties 'วาทกรรมสลิ่ม' its value is array of your custom words`)
 }
 
-const bot_settings = require("./bot_settings.json")
 const songs = require("./assets/music/songs.json")
 const chalk = require("chalk")
 const activity_list = require("./assets/json/activity.json").activities
