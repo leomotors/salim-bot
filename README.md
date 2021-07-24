@@ -80,6 +80,8 @@ To Implement this bot, here are dependencies.
 
 **Note**: These commands are for linux, for Windows please use appropriate installation method.
 
+**Notice**: If the bot have hard time playing song from YouTube. That is pytube's issues and I can't do anything with it.
+
 ## 🤖 How to train น้อน
 
 The only Method available is Manual Training a.k.a hard code (Idk what to do 😅)
