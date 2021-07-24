@@ -8,18 +8,22 @@ import json
 quotes = []
 train_quotes = []
 
-with open("./assets/json/morequotes.json", "r") as quote_file:
+try:
+    quote_file = open("./assets/json/morequotes.json", "r")
+except:
+    quotes = {"วาทกรรมสลิ่ม":[]}
+else:
     quotes = json.load(quote_file)
 
-    with open("./utils/train.txt") as train_data:
-        train_quotes = train_data.readlines()
-        for q in train_quotes:
-            q = q[:-1]
-            print(q)
-            choice = input("APPROVE? [Y for Yes, otherwise any key] => ")
-            if (choice[0] == 'Y'):
-                quotes["วาทกรรมสลิ่ม"].append(q)
-            print()
+with open("./utils/train.txt") as train_data:
+    train_quotes = train_data.readlines()
+    for q in train_quotes:
+        q = q[:-1]
+        print(q)
+        choice = input("APPROVE? [Y for Yes, otherwise any key] => ")
+        if (choice[0] == 'Y'):
+            quotes["วาทกรรมสลิ่ม"].append(q)
+        print()
 
 if len(train_quotes) <= 0:
     print("Nothing to train here! Come back later!")
@@ -34,7 +38,7 @@ with open("./assets/json/morequotes.json", "w") as outfile:
     final_str = final_str.replace("', '", '", "')
     outfile.write(final_str)
 
-print("Review Completed, Please use auto format in VSCode to format the json")
+print("Review Completed")
 print("Known Issue: \\u200b might appear in quotes, it should not affect much.")
 
 choice = input(
