@@ -214,13 +214,11 @@ function eval(msg) {
     }
     // * Regular Detection
     if (isชังชาติ(msg)) {
-        let tosentmsg = randomQuote()
-        msg.channel.send(`${tosentmsg}`)
-        logconsole(`Sent message : ${tosentmsg}`)
+        let tosendmsg = sendRandomQuote(msg.channel)
         // * If in VC and the ชังชาติ person is in the same one, SPEAK!
         try {
             if (currVC && msg.member.voice.channel == currVC) {
-                speak(tosentmsg)
+                speak(tosendmsg)
             }
         }
         catch (err) {
@@ -229,6 +227,12 @@ function eval(msg) {
     }
 }
 
+function sendRandomQuote(channel) {
+    let tosentmsg = randomQuote()
+    channel.send(`${tosentmsg}`)
+    logconsole(`Sent message : ${tosentmsg}`)
+    return tosentmsg
+}
 
 // * All other support function
 function isชังชาติ(msg) {
@@ -347,6 +351,12 @@ function debug(commandstr) {
             case "speakquote":
                 speak(quoteArray[command[1]])
                 logconsole(`speakquote : Spoke quote #${command[1]}`, "DEBUG")
+                break
+            case "salim":
+                let tosendmsg = sendRandomQuote(lastchannel)
+                if (currVC)
+                    speak(tosendmsg)
+                logconsole(`salim : Burst its emotion`, "DEBUG")
                 break
             case "song":
                 let playsongid = parseInt(commandstr.slice(5))
