@@ -64,7 +64,7 @@ To Implement this bot, here are dependencies.
 
 **@discordjs/opus** : ```npm i @discordjs/opus``` or ```npm i discordjs/opus```
 
-**request**: ```npm i request``` (Deprecated but I'm lazy to find modern Solution)
+**node-fetch**: ```npm i node-fetch```
 
 **chalk**: ```npm i chalk```
 

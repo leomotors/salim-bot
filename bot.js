@@ -29,7 +29,7 @@ const chalk = require("chalk")
 const activity_list = require("./assets/json/activity.json").activities
 
 // * Import required module & function
-const request = require("request")
+const fetch = require("node-fetch")
 const { exec } = require("child_process")
 const logconsole = require("./utils/logconsole")
 const introduceMyself = require("./utils/introduce.js")
@@ -68,25 +68,21 @@ if (bot_settings.local_quote) {
 }
 
 // * Import วาทกรรมสลิ่ม from narze's repo & add to quoteArray w/ duplicate check
-if (bot_settings.remote_quote)
-    request({
-        url: "https://raw.githubusercontent.com/narze/awesome-salim-quotes/main/README.md",
-        json: false
-    }, (err, response, body) => {
-        plaintxt = body
-        let txtarray = plaintxt.split(/\r?\n/)
-        for (const index in txtarray) {
-            line = txtarray[index]
-            if (line.startsWith("-")) {
-                let oword = line.slice(2)
-                if (quoteArray.includes(oword))
-                    console.log(chalk.yellow(`[IMPORT ONLINE WARNING] Duplicate Quote : ${oword}`))
-                else
-                    quoteArray.push(oword)
-            }
+fetch('https://watasalim.vercel.app/api/quotes', {
+    method: "GET",
+    headers: { "Content-type": "application/json;charset=UTF-8" }
+}).then(response => response.json())
+    .then(json => {
+        for (let quote of json.quotes) {
+            let toAdd = quote.body
+            if (quoteArray.includes(toAdd))
+                console.log(chalk.yellow(`[IMPORT ONLINE WARNING] Duplicate Quote : ${toAdd}`))
+            else
+                quoteArray.push(toAdd)
         }
         console.log("[QUOTE FETCHED] Successfully pulled quote data from narze's repository")
     })
+    .catch(err => console.log(err))
 
 
 // * Discord Zone: Define on_setup() and Login
