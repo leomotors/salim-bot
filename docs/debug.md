@@ -119,6 +119,12 @@ Args: None
 
 Show all status available to use
 
+### findquote
+
+Args: Keyword
+
+Find all quote with that keyword
+
 ### dc
 
 Leave current voice chat

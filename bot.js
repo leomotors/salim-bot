@@ -413,6 +413,15 @@ function debug(commandstr) {
                         logconsole(`Unknown Query "${command[1]}"`, "DEBUG-ERROR")
                 }
                 break
+            case "findquote":
+                let toFind = command[1]
+                console.log(`Showing quote containing ${toFind}`)
+                for (let i = 0; i < quoteArray.length; i++) {
+                    if (quoteArray[i].includes(toFind))
+                        console.log(`Quote #${i} : ${quoteArray[i]}`)
+                }
+                logconsole(`Query for quote containing ${toFind} completed`, "DEBUG")
+                break
             case "dc":
                 currVC.leave()
                 currVC = undefined
