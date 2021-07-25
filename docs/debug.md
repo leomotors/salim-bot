@@ -52,6 +52,14 @@ Speak Quote with that ID to current voice channel
 Spoke to current voice channel: เด็กสมัยนี้รู้จักแต่สิทธิไม่รู้จักหน้าที่
 ```
 
+### salim
+
+Args: None
+
+Send Random Quote to Last Channel and also speak it to Voice Channel it is in
+
+Doing this let bot burst its emotion and cool it down
+
 ### song
 
 Args: Song ID
