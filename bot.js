@@ -192,7 +192,7 @@ function eval(msg) {
 
     if (msg.content.startsWith("!train")) {
         if (bot_settings.limited_training &&
-            !bot_settings.trainer.includes(msg.author.username)) {
+            !bot_settings.salim_insiders.includes(msg.author.username)) {
             logconsole(`${msg.author.tag} tried to train me without permission!`, "DECLINE")
             msg.channel.send("I'm not allowed to be trained by strangers like you!")
         }
@@ -208,6 +208,7 @@ function eval(msg) {
         }
 
     }
+
     // * Regular Detection
     if (isชังชาติ(msg)) {
         let tosendmsg = sendRandomQuote(msg.channel)
@@ -221,8 +222,33 @@ function eval(msg) {
             logconsole(`Exception Catched : ${err}`, "EXCEPTION HANDLED")
         }
     }
-}
 
+    // * Question
+    if (msg.mentions.has(client.user)) {
+        if (msg.content.includes("คำพูด")) {
+            if (!bot_settings.limited_questioning || bot_settings.salim_insiders.includes(msg.author.tag)) {
+                msg.channel.send(`ตอนนี้ผมมีวาทกรรมที่พร้อมจะด่าพวกสามกีบอย่างคุณ ${quoteArray.length} ประโยค`)
+                logconsole(`Answer ${msg.author.tag} Question about Quote Count`, "QUESTION ANSWERED")
+            }
+            else {
+                msg.channel.send(`สามกีบอย่างคุณมีสิทธิ์ถามคำถามกับผมด้วยหรอ?`)
+                logconsole(`Reject ${msg.author.tag}'s Question`, "QUESTION REJECTED")
+            }
+            return
+        }
+        if (msg.content.includes("ไม่ชอบ")) {
+            if (!bot_settings.limited_questioning || bot_settings.salim_insiders.includes(msg.author.tag)) {
+                msg.channel.send(`ก็มีอยู่ประมาณ ${salimDict.ชังชาติ.length} คำที่พวกสามกีบชอบพูดแล้วทำให้ผมไม่สบายใจ`)
+                logconsole(`Answer ${msg.author.tag} Question about Keywords Count`, "QUESTION ANSWERED")
+            }
+            else {
+                msg.channel.send(`สามกีบอย่างคุณมีสิทธิ์ถามคำถามกับผมด้วยหรอ?`)
+                logconsole(`Reject ${msg.author.tag}'s Question`, "QUESTION REJECTED")
+            }
+            return
+        }
+    }
+}
 function sendRandomQuote(channel) {
     let tosentmsg = randomQuote()
     channel.send(`${tosentmsg}`)

@@ -18,15 +18,15 @@ Save bot log to file
 
 Number of last sent messages that bot will keep
 
-## Limited Training (Default: false)
+## limited_training (Default: false)
 
 Limit training to only some person.
 
 If not enabled, everyone can train this bot
 
-## trainer (Default: None)
+## salim_insiders (Default: None)
 
-If Limited Training is enabled, only these people in this list can train bot.
+If Limited Training or Limited Questioning is enabled, only these people in this list can do that action.
 
 Add User's Username for Example "HelloWorld#1234"
 
@@ -37,3 +37,7 @@ Pull quality salim quotes from <a href="https://github.com/narze/awesome-salim-q
 ## local_quote (Default: true)
 
 Use quotes from morequotes.json
+
+## limited_questioning (Default: false)
+
+If turned on, only insiders will have rights to question this bot
