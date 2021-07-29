@@ -259,7 +259,7 @@ function sendRandomQuote(channel) {
 // * All other support function
 function isชังชาติ(msg) {
     for (let word of salimDict.ชังชาติ) {
-        if (msg.content.includes(word)) {
+        if (msg.content.replace(/\s/g, '').toLowerCase().includes(word)) {
             logconsole(`isชังชาติ : Detected "${word}"`)
             return true
         }
