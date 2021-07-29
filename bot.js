@@ -155,6 +155,7 @@ function eval(msg) {
         }).catch(err => {
             logconsole(`${err}`, "ERROR")
         })
+        return
     }
 
     if (msg.content.startsWith("!dc") || msg.content.startsWith("!leave")) {

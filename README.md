@@ -90,10 +90,18 @@ The only Method available is Manual Training a.k.a hard code (Idk what to do �
 
 * activity.json : Status bot can use
 
-* keywords.json : Keywords to trigger น้อน  
+* keywords.json : Keywords to trigger น้อน
 
-* morequotes.json : Aggressive stuff for น้อน to say on top of already quality quotes in <a href="https://github.com/narze/awesome-salim-quotes">narze/awesome-salim-quotes</a>.
+* morequotes.json : Aggressive stuff for น้อน to say on top of already quality quotes in [narze/awesome-salim-quotes]("https://github.com/narze/awesome-salim-quotes").
    To use this feature, create this file with only one properties 'วาทกรรมสลิ่ม' set its value to array of your custom quotes.
+
+### Keywords adding guideline
+
+Keywords must be all lowercase (if english alphabet exists) and no space in it.
+
+น้อน operate the sentences by ignoring spaces and turning all english alphabet into lowercase, for example
+
+`sinovac, sInOvAc, S I N O V A C` will all trigger the "sinovac" keywords
 
 ### Trained by People
 
