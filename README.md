@@ -26,11 +26,7 @@ In case you want to (not recommend)
 
 * Clone or Download Repo
 
-* Initialize node package by ```npm init```
-
-* Install node_modules by this command
-
-  ```npm install discord.js --save```
+* ```npm install```
 
 * Then, create auth.json with "token"
 
@@ -38,7 +34,7 @@ In case you want to (not recommend)
   
 * Run bot.js and done!
 
-**Note**: If your system doesn't use python for Python 3, don't forget to set its prefix in `bot_settings.json`
+**Note**: If your system doesn't use `python` for Python 3, don't forget to set its prefix in `bot_settings.json`
 
 ## 📚 Document
 
@@ -58,17 +54,9 @@ To Implement this bot, here are dependencies.
 
 **FFmpeg** : ```sudo apt install ffmpeg```
 
-### Required npm Packages
+### Used npm Packages
 
-**Discord** (Of course you need this) : ```npm i discord.js```
-
-**@discordjs/opus** : ```npm i @discordjs/opus``` or ```npm i discordjs/opus```
-
-**node-fetch**: ```npm i node-fetch```
-
-**chalk**: ```npm i chalk```
-
-**Note**: If installation is failed, try again with elevation.
+Discord, @discordjs/opus, node-fetch, chalk
 
 ### Required Python Package
 
