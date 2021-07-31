@@ -1,0 +1,23 @@
+{
+  "name": "salim-bot",
+  "description": "This bot is Salim. Whenever you trigger it, It become mad.",
+  "version": "1.12",
+  "main": "bot.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Leomotors/Salim-Bot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Leomotors/Salim-Bot/issues"
+  },
+  "homepage": "https://github.com/Leomotors/Salim-Bot#readme",
+  "dependencies": {
+    "@discordjs/opus": "^0.5.0",
+    "chalk": "^4.1.1",
+    "discord.js": "^12.5.3",
+    "node-fetch": "^2.6.1"
+  }
+}
