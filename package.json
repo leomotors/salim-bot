@@ -1,7 +1,7 @@
 {
   "name": "salim-bot",
   "description": "This bot is Salim. Whenever you trigger it, It become mad.",
-  "version": "1.12",
+  "version": "1.13",
   "main": "bot.js",
   "repository": {
     "type": "git",
