@@ -21,7 +21,7 @@ with open("./utils/train.txt") as train_data:
         q = q[:-1]
         print(q)
         choice = input("APPROVE? [Y for Yes, otherwise any key] => ")
-        if (choice[0] == 'Y'):
+        if (choice[0] == 'Y' or choice[0] == 'y'):
             quotes["วาทกรรมสลิ่ม"].append(q)
         print()
 
@@ -43,6 +43,6 @@ print("Known Issue: \\u200b might appear in quotes, it should not affect much.")
 
 choice = input(
     "Do you want to delete train files? [Y for Yes, otherwise any key] => ")
-if(choice[0] == 'Y'):
+if(choice[0] == 'Y' or choice[0] == 'y'):
     with open("./utils/train.txt", "w") as todel:
         pass
