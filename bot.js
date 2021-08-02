@@ -11,6 +11,18 @@
 const auth = require("./auth.json")
 const salimDict = require("./assets/json/keywords.json")
 const bot_settings = require("./bot_settings.json")
+let facebook
+try {
+    facebook = require("./assets/json/salim.json").SalimFacebook
+}
+catch {
+    facebook = []
+}
+
+
+// TODO add Settings template
+
+// TODO add Mention Keyword: Facebook => Send Random Salim's Facebook ex. หมอยวรงค์ หมอยเหรียญทอง
 
 let moreWord
 try {
@@ -210,20 +222,6 @@ function eval(msg) {
 
     }
 
-    // * Regular Detection
-    if (isชังชาติ(msg)) {
-        let tosendmsg = sendRandomQuote(msg.channel)
-        // * If in VC and the ชังชาติ person is in the same one, SPEAK!
-        try {
-            if (currVC && msg.member.voice.channel == currVC) {
-                speak(tosendmsg)
-            }
-        }
-        catch (err) {
-            logconsole(`Exception Catched : ${err}`, "EXCEPTION HANDLED")
-        }
-    }
-
     // * Question
     if (msg.mentions.has(client.user)) {
         if (msg.content.includes("คำพูด")) {
@@ -248,8 +246,35 @@ function eval(msg) {
             }
             return
         }
+        if (msg.content.includes("เฟส") || msg.content.includes("เฟซ") || msg.content.toLowerCase().includes("fb") || msg.content.toLowerCase().includes("facebook")) {
+            if (facebook.length <= 0) {
+                msg.channel.send(`ไม่รู้ ไม่รู้ ไม่รู้ ผมจะไปรู้มั้ยล่ะ`)
+                logconsole(`${msg.author.tag} wants to be ตาสว่าง but I have no facebook data`, "FACEBOOK-WARNING")
+                return
+            }
+            let selFb = facebook[Math.floor(Math.random() * facebook.length)]
+            msg.channel.send(`ผมแนะนำให้คุณไปติดตาม ${selFb.name} เผื่อคุณจะได้ตาสว่างซะบ้าง ${selFb.url}`)
+            logconsole(`Recommended ${selFb.name} to ${msg.author.tag}`, "FACEBOOK")
+            return
+        }
+    }
+
+    // * Regular Detection
+    if (isชังชาติ(msg)) {
+        let tosendmsg = sendRandomQuote(msg.channel)
+        // * If in VC and the ชังชาติ person is in the same one, SPEAK!
+        try {
+            if (currVC && msg.member.voice.channel == currVC) {
+                speak(tosendmsg)
+            }
+        }
+        catch (err) {
+            logconsole(`Exception Catched : ${err}`, "EXCEPTION HANDLED")
+        }
+        return
     }
 }
+
 function sendRandomQuote(channel) {
     let tosentmsg = randomQuote()
     channel.send(`${tosentmsg}`)
