@@ -15,7 +15,7 @@ except:
 else:
     quotes = json.load(quote_file)
 
-mode = int(input("Approve Mode [1 for One by One or 0 for Approve All]"))
+mode = int(input("Approve Mode [1 for One by One or 0 for Approve All] => "))
 
 with open("./utils/train.txt") as train_data:
     train_quotes = train_data.readlines()
