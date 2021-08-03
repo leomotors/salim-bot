@@ -18,20 +18,7 @@ import { SalimFacebook } from "../assets/json/salim.json"
 
 // TODO add Mention Keyword: Facebook => Send Random Salim's Facebook ex. หมอยวรงค์ หมอยเหรียญทอง
 
-let moreWord: {
-    วาทกรรมสลิ่ม: string[]
-}
-
-try {
-    moreWord = require("./assets/json/morequotes.json")
-}
-catch {
-    moreWord = {
-        "วาทกรรมสลิ่ม": []
-    }
-    if (bot_settings.local_quote)
-        console.log(`[LOCAL QUOTE WARNING] Can't open morequotes.json, you can close this warning by disable local_quote in settings.json, or if you want to have custom 'local' quotes, create morequotes.json in assets/json/ with only one properties 'วาทกรรมสลิ่ม' its value is array of your custom words`)
-}
+import {วาทกรรมสลิ่ม} from "../assets/json/morequotes.json"
 
 import songs from "../assets/music/songs.json"
 import chalk from "chalk"
@@ -67,7 +54,7 @@ if (duplist.length > 0) {
 if (bot_settings.local_quote) {
     // * No one can evade Rick Roll
     quoteArray.push("Easter egg คับ https://www.youtube.com/watch?v=dQw4w9WgXcQ")
-    for (let word of moreWord.วาทกรรมสลิ่ม) {
+    for (let word of วาทกรรมสลิ่ม) {
         if (quoteArray.includes(word))
             console.log(chalk.yellow(`[IMPORT WARNING] Duplicate Quote : ${word}`))
         else
@@ -211,7 +198,7 @@ function evaluateMessage(msg: Discord.Message) {
         }
         else {
             let trainstr = msg.content.slice(0).replace("\n", " ")
-            fs.appendFile(`./utils/train.txt`, trainstr.slice(7) + "\n", (err) => {
+            fs.appendFile(`../python/train.txt`, trainstr.slice(7) + "\n", (err) => {
                 if (err)
                     console.log(chalk.red(`[TRAIN ERROR] Error on writing log file: ${err}`))
             })

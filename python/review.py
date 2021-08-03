@@ -1,7 +1,8 @@
 
 # * Review Train Word From Users
 
-# * To avoid directory error, run this from Repo Directory
+# * Please run this from Repository's root directory
+# * Your command should look like: python python/review.py
 
 import json
 
