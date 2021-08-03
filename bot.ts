@@ -8,10 +8,16 @@
  */
 
 // * Import data from other file
-const auth = require("./auth.json")
-const salimDict = require("./assets/json/keywords.json")
-const bot_settings = require("./bot_settings.json")
-let facebook
+import * as auth from "./auth.json"
+import * as salimDict from "./assets/json/keywords.json"
+import * as bot_settings from "./bot_settings.json"
+
+type Facebook = {
+    url: string,
+    name: string
+}
+
+let facebook: Facebook[]
 try {
     facebook = require("./assets/json/salim.json").SalimFacebook
 }
@@ -24,7 +30,10 @@ catch {
 
 // TODO add Mention Keyword: Facebook => Send Random Salim's Facebook ex. หมอยวรงค์ หมอยเหรียญทอง
 
-let moreWord
+let moreWord: {
+    วาทกรรมสลิ่ม: string[]
+}
+
 try {
     moreWord = require("./assets/json/morequotes.json")
 }
@@ -36,27 +45,26 @@ catch {
         console.log(`[LOCAL QUOTE WARNING] Can't open morequotes.json, you can close this warning by disable local_quote in settings.json, or if you want to have custom 'local' quotes, create morequotes.json in assets/json/ with only one properties 'วาทกรรมสลิ่ม' its value is array of your custom words`)
 }
 
-const songs = require("./assets/music/songs.json")
-const chalk = require("chalk")
+import songs from "./assets/music/songs.json"
+import chalk from "chalk"
 const activity_list = require("./assets/json/activity.json").activities
 
 // * Import required module & function
-const fetch = require("node-fetch")
-const { exec } = require("child_process")
-const logconsole = require("./utils/logconsole")
-const introduceMyself = require("./utils/introduce.js")
-const fs = require("fs")
+import fetch from "node-fetch"
+import { exec } from "child_process"
+import logconsole from "./utils/logconsole"
+import introduceMyself from "./utils/introduce.js"
+import fs from "fs"
 
 // * Init Variable
-let plaintxt = ""
-let quoteArray = []
-let lastchannel = undefined
-let currVC = undefined
-let VCconnection = undefined
-let sentmsg = []
+let quoteArray: string[] = []
+let lastchannel: Channels
+let currVC: Discord.VoiceChannel
+let VCconnection: Discord.VoiceConnection
+let sentmsg: Discord.Message[] = []
 
 // * Check for duplicate keyword
-let duplist = []
+let duplist: string[] = []
 for (let word_to_check of salimDict.ชังชาติ) {
     let appearance = salimDict.ชังชาติ.filter(word => word == word_to_check).length
     if (appearance > 1 && !duplist.includes(word_to_check))
@@ -98,8 +106,11 @@ fetch('https://watasalim.vercel.app/api/quotes', {
 
 
 // * Discord Zone: Define on_setup() and Login
-const Discord = require("discord.js")
-const client = new Discord.Client()
+import Discord, { DMChannel } from "discord.js"
+
+type Channels = Discord.TextChannel | Discord.DMChannel | Discord.NewsChannel
+
+const client: Discord.Client = new Discord.Client()
 client.on("ready", () => {
     console.log(`[LOGIN SUCCESS] Successfully logged in as ${client.user.tag}.`)
     setStatus(-1, false, true)
@@ -127,7 +138,8 @@ client.login(auth.token)
 
 // * MAIN EVENT: Upon recieving message, process it
 client.on("message", eval)
-function eval(msg) {
+
+function eval(msg: Discord.Message) {
     lastchannel = msg.channel
     if (msg.author.id == client.user.id) {
         // * It's your own message!
@@ -147,7 +159,7 @@ function eval(msg) {
             return
         }
 
-        let vc = msg.member.voice.channel
+        let vc = msg.member?.voice.channel
         // * Check for possible error
         if (!vc) {
             logconsole(`${msg.author.tag} trying to pull me to the world of undefined!`, "DECLINE")
@@ -275,7 +287,7 @@ function eval(msg) {
     }
 }
 
-function sendRandomQuote(channel) {
+function sendRandomQuote(channel: Channels) {
     let tosentmsg = randomQuote()
     channel.send(`${tosentmsg}`)
     logconsole(`Sent message : ${tosentmsg}`)
@@ -283,7 +295,7 @@ function sendRandomQuote(channel) {
 }
 
 // * All other support function
-function isชังชาติ(msg) {
+function isชังชาติ(msg: Discord.Message) {
     for (let word of salimDict.ชังชาติ) {
         if (msg.content.replace(/\s/g, '').toLowerCase().includes(word)) {
             logconsole(`isชังชาติ : Detected "${word}"`)
@@ -298,7 +310,7 @@ function randomQuote() {
     return quoteArray[randIndex]
 }
 
-function randomSong(channel, index = -1) {
+function randomSong(channel:Channels, index = -1) {
     // * Only two categories: easter_egg and รักชาติ
     let easterlength = songs.easter_egg.length
     let รักชาติlength = songs.รักชาติ.length
@@ -331,7 +343,7 @@ function randomSong(channel, index = -1) {
 
 
 // * Support Function: Audio playing
-function speak(phrase, isDebug = false) {
+function speak(phrase: string, isDebug = false) {
     let debugstr = isDebug ? "DEBUG" : "Normal"
     exec(`echo "${phrase}" | ${bot_settings.python_prefix} "./python/tts.py"`, (error, stdout, stderr) => {
         if (error) {
@@ -347,7 +359,7 @@ function speak(phrase, isDebug = false) {
     })
 }
 
-function playYoutube(url, isDebug = false) {
+function playYoutube(url:string, isDebug = false) {
     let debugstr = isDebug ? "DEBUG" : "Normal"
     exec(`echo "${url}" | ${bot_settings.python_prefix} "./python/ytdownload.py"`, (error, stdout, stderr) => {
         if (error) {
@@ -368,7 +380,7 @@ function playYoutube(url, isDebug = false) {
 // * Debug น้อน Zone
 // ! Error Check not present here, proceed with caution
 
-const readline = require("readline") // * Module for debug only
+import readline from "readline" // * Module for debug only
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -379,13 +391,13 @@ rl.on('line', (input) => {
     debug(input)
 })
 
-function debug(commandstr) {
-    let command = commandstr.split(" ")
+function debug(commandstr:string) {
+    let command:string[] = commandstr.split(" ")
     try {
         switch (command[0]) {
             case "quote":
-                lastchannel.send(quoteArray[command[1]])
-                logconsole(`quote : Sent quote #${command[1]}`, "DEBUG")
+                lastchannel.send(quoteArray[parseInt(command[1])])
+                logconsole(`quote : Sent quote #${parseInt(command[1])}`, "DEBUG")
                 break
             case "say":
                 let sayarr = commandstr.slice(4)
@@ -397,8 +409,8 @@ function debug(commandstr) {
                 speak(speakarr, true)
                 break
             case "speakquote":
-                speak(quoteArray[command[1]])
-                logconsole(`speakquote : Spoke quote #${command[1]}`, "DEBUG")
+                speak(quoteArray[parseInt(command[1])])
+                logconsole(`speakquote : Spoke quote #${parseInt(command[1])}`, "DEBUG")
                 break
             case "salim":
                 let tosendmsg = sendRandomQuote(lastchannel)
@@ -448,7 +460,17 @@ function debug(commandstr) {
                         console.log(`Showing last ${sentmsg.length} sent messages`)
                         for (let i = 0; i < sentmsg.length; i++) {
                             let currmsg = sentmsg[i]
-                            console.log(`#${i} -> ${currmsg.channel.name} : ${currmsg.content}`)
+
+                            if (typeof currmsg.channel != typeof Discord.DMChannel)
+                            {
+                                let currchannel:Discord.TextChannel | Discord.NewsChannel = <Discord.TextChannel | Discord.NewsChannel>currmsg.channel
+                                console.log(`#${i} -> ${currchannel.name} : ${currmsg.content}`)
+                            }
+                            else
+                            {
+                                console.log(`#${i} -> DM Channel : ${currmsg.content}`)
+                            }
+                                
                         }
                         logconsole("Query for sent messages completed", "DEBUG")
                         break
