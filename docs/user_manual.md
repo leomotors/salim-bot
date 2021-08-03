@@ -35,6 +35,14 @@ Mention น้อน with keyword `เพลง`. น้อน will open song fo
 
 **Note**: Owner can disable training by strangers
 
+## Ask Question
+
+You can ask for Keywords Count or Quotes Count by mentioning the bot and ask a question that has the keyword "ไม่ชอบ" for Keywords Count or "คำพูด" for Quotes Count
+
+## Facebook Recommendation
+
+Mention the bot and have the keyword "Facebook" It can be both in Thai and English. The bot will send some facebook links for you to go follow!
+
 ## Easter Egg
 
 It's there, and available to everyone.
