@@ -1,7 +1,7 @@
 {
   "name": "salim-bot",
   "description": "This bot is Salim. Whenever you trigger it, It become mad.",
-  "version": "1.13",
+  "version": "1.14",
   "main": "bot.js",
   "repository": {
     "type": "git",
@@ -21,6 +21,7 @@
     "node-fetch": "^2.6.1"
   },
   "devDependencies": {
-    "@types/node-fetch": "^2.5.12"
+    "@types/node-fetch": "^2.5.12",
+    "typescript": "^4.3.5"
   }
 }
