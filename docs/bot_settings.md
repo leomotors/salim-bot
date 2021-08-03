@@ -1,6 +1,6 @@
 # Bot Settings Detail
 
-Bot Settings is in .settings/bot_settings.json
+Bot Settings is in ./settings/bot_settings.json
 
 ## allow_vc (Default: true)
 
