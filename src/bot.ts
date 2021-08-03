@@ -1,38 +1,46 @@
 /**
- * * bot.js
- * * This is Main Program for bot, run this with nodejs
+ * * bot.ts
+ * * This is Main Program for Bot
  * * Made by @Leomotors
  * * https://github.com/Leomotors/Salim-Bot
  * * You are free to use this but don't forget to read instruction!
  * ! WARNING: Proceed at your own risk!
  */
 
-// * Import data from other file
+
+// * Import Data from all files
 import { token } from "../auth.json"
+
+import { activities } from "../assets/json/activity.json"
+
 import { ชังชาติ } from "../assets/json/keywords.json"
+import { วาทกรรมสลิ่ม } from "../assets/json/morequotes.json"
+import { SalimFacebook } from "../assets/json/salim.json"
+
+import songs from "../assets/music/songs.json"
+
 import bot_settings from "../settings/bot_settings.json"
 
 
-import { SalimFacebook } from "../assets/json/salim.json"
-import { วาทกรรมสลิ่ม } from "../assets/json/morequotes.json"
-
-import songs from "../assets/music/songs.json"
-import chalk from "chalk"
-import { activities } from "../assets/json/activity.json"
-
-// * Import required module & function
-import fetch from "node-fetch"
-import { exec } from "child_process"
+// * Import Utility
 import { logconsole } from "./utils/logconsole"
 import { introduceMyself } from "./utils/introduce"
+
+
+// * Import Required System Modules
+import fetch from "node-fetch"
+import chalk from "chalk"
+import { exec } from "child_process"
 import fs from "fs"
 
-// * Init Variable
+
+// * Init Variable that will be used
 let quoteArray: string[] = []
 let lastchannel: Channels
 let currVC: Discord.VoiceChannel
 let VCconnection: Discord.VoiceConnection
 let sentmsg: Discord.Message[] = []
+
 
 // * Check for duplicate keyword
 let duplist: string[] = []
@@ -87,7 +95,7 @@ client.on("ready", () => {
     setStatus(-1, false, true)
 })
 
-function setStatus(id = -1, isDebug = false, startup = false) {
+function setStatus(id: number = -1, isDebug: boolean = false, startup: boolean = false) {
     if (id == -1)
         id = Math.floor(Math.random() * activities.length)
     client.user.setActivity(`${activities[id].name}`, { type: <Discord.ActivityType>activities[id].type })
@@ -112,6 +120,8 @@ client.on("message", evaluateMessage)
 
 function evaluateMessage(msg: Discord.Message) {
     lastchannel = msg.channel
+
+    // * Action 1: Ignore own's message
     if (msg.author.id == client.user.id) {
         // * It's your own message!
         sentmsg = [msg].concat(sentmsg)
@@ -122,7 +132,10 @@ function evaluateMessage(msg: Discord.Message) {
 
     logconsole(`Recieve message from ${msg.author.tag} : ${msg.content}`)
 
+
     // * Voice Channel Zone
+
+    // * Action 2: Enter Voice Channel & Disconnect
     if (msg.content.startsWith("!salim")) {
         if (!bot_settings.allow_vc) {
             logconsole(`${msg.author.tag} trying to pull this bot to VC`, "DECLINE")
@@ -130,7 +143,7 @@ function evaluateMessage(msg: Discord.Message) {
             return
         }
 
-        let vc = msg.member?.voice.channel
+        let vc = msg.member.voice.channel
         // * Check for possible error
         if (!vc) {
             logconsole(`${msg.author.tag} trying to pull me to the world of undefined!`, "DECLINE")
@@ -166,7 +179,7 @@ function evaluateMessage(msg: Discord.Message) {
 
     }
 
-    // * Mentioning Bot
+    // * Action 3: Introduce & DJ
     if (msg.mentions.has(client.user)) {
         if (msg.content.includes("แนะนำตัว") || msg.content.includes("github")) {
             logconsole("Introduced myself")
@@ -186,6 +199,7 @@ function evaluateMessage(msg: Discord.Message) {
         }
     }
 
+    // * Action 4: Train
     if (msg.content.startsWith("!train")) {
         if (bot_settings.limited_training &&
             !bot_settings.salim_insiders.includes(msg.author.username)) {
@@ -205,26 +219,26 @@ function evaluateMessage(msg: Discord.Message) {
 
     }
 
-    // * Question
+    // * Action 5: Questioning
     if (msg.mentions.has(client.user)) {
         if (msg.content.includes("คำพูด")) {
             if (!bot_settings.limited_questioning || bot_settings.salim_insiders.includes(msg.author.tag)) {
-                msg.channel.send(`ตอนนี้ผมมีวาทกรรมที่พร้อมจะด่าพวกสามกีบอย่างคุณ ${quoteArray.length} ประโยค`)
+                sendAndSpeak(msg, `ตอนนี้ผมมีวาทกรรมที่พร้อมจะด่าพวกสามกีบอย่างคุณ ${quoteArray.length} ประโยค`)
                 logconsole(`Answer ${msg.author.tag} Question about Quote Count`, "QUESTION ANSWERED")
             }
             else {
-                msg.channel.send(`สามกีบอย่างคุณมีสิทธิ์ถามคำถามกับผมด้วยหรอ?`)
+                sendAndSpeak(msg, `สามกีบอย่างคุณมีสิทธิ์ถามคำถามกับผมด้วยหรอ?`)
                 logconsole(`Reject ${msg.author.tag}'s Question`, "QUESTION REJECTED")
             }
             return
         }
         if (msg.content.includes("ไม่ชอบ")) {
             if (!bot_settings.limited_questioning || bot_settings.salim_insiders.includes(msg.author.tag)) {
-                msg.channel.send(`ก็มีอยู่ประมาณ ${ชังชาติ.length} คำที่พวกสามกีบชอบพูดแล้วทำให้ผมไม่สบายใจ`)
+                sendAndSpeak(msg,`ก็มีอยู่ประมาณ ${ชังชาติ.length} คำที่พวกสามกีบชอบพูดแล้วทำให้ผมไม่สบายใจ`)
                 logconsole(`Answer ${msg.author.tag} Question about Keywords Count`, "QUESTION ANSWERED")
             }
             else {
-                msg.channel.send(`สามกีบอย่างคุณมีสิทธิ์ถามคำถามกับผมด้วยหรอ?`)
+                sendAndSpeak(msg, `สามกีบอย่างคุณมีสิทธิ์ถามคำถามกับผมด้วยหรอ?`)
                 logconsole(`Reject ${msg.author.tag}'s Question`, "QUESTION REJECTED")
             }
             return
@@ -242,7 +256,7 @@ function evaluateMessage(msg: Discord.Message) {
         }
     }
 
-    // * Regular Detection
+    // * Base Action: Regular Detection
     if (isชังชาติ(msg)) {
         let tosendmsg = sendRandomQuote(msg.channel)
         // * If in VC and the ชังชาติ person is in the same one, SPEAK!
@@ -256,6 +270,19 @@ function evaluateMessage(msg: Discord.Message) {
         }
         return
     }
+}
+
+function sendAndSpeak(refmsg: Discord.Message, msg: string) {
+    refmsg.channel.send(msg)
+    try {
+        if (currVC && refmsg.member.voice.channel == currVC) {
+            speak(msg)
+        }
+    }
+    catch (err) {
+        logconsole(`Exception Catched : ${err}`, "EXCEPTION HANDLED")
+    }
+    return
 }
 
 function sendRandomQuote(channel: Channels) {
@@ -276,7 +303,7 @@ function isชังชาติ(msg: Discord.Message) {
     return false
 }
 
-function randomQuote() {
+function randomQuote(): string {
     let randIndex = Math.floor(Math.random() * quoteArray.length)
     return quoteArray[randIndex]
 }
