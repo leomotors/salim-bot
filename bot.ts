@@ -52,8 +52,8 @@ const activity_list = require("./assets/json/activity.json").activities
 // * Import required module & function
 import fetch from "node-fetch"
 import { exec } from "child_process"
-import logconsole from "./utils/logconsole"
-import introduceMyself from "./utils/introduce.js"
+import { logconsole } from "./utils/logconsole"
+import { introduceMyself } from "./utils/introduce"
 import fs from "fs"
 
 // * Init Variable
@@ -310,7 +310,7 @@ function randomQuote() {
     return quoteArray[randIndex]
 }
 
-function randomSong(channel:Channels, index = -1) {
+function randomSong(channel: Channels, index = -1) {
     // * Only two categories: easter_egg and รักชาติ
     let easterlength = songs.easter_egg.length
     let รักชาติlength = songs.รักชาติ.length
@@ -359,7 +359,7 @@ function speak(phrase: string, isDebug = false) {
     })
 }
 
-function playYoutube(url:string, isDebug = false) {
+function playYoutube(url: string, isDebug = false) {
     let debugstr = isDebug ? "DEBUG" : "Normal"
     exec(`echo "${url}" | ${bot_settings.python_prefix} "./python/ytdownload.py"`, (error, stdout, stderr) => {
         if (error) {
@@ -391,8 +391,8 @@ rl.on('line', (input) => {
     debug(input)
 })
 
-function debug(commandstr:string) {
-    let command:string[] = commandstr.split(" ")
+function debug(commandstr: string) {
+    let command: string[] = commandstr.split(" ")
     try {
         switch (command[0]) {
             case "quote":
@@ -461,16 +461,14 @@ function debug(commandstr:string) {
                         for (let i = 0; i < sentmsg.length; i++) {
                             let currmsg = sentmsg[i]
 
-                            if (typeof currmsg.channel != typeof Discord.DMChannel)
-                            {
-                                let currchannel:Discord.TextChannel | Discord.NewsChannel = <Discord.TextChannel | Discord.NewsChannel>currmsg.channel
+                            if (typeof currmsg.channel != typeof Discord.DMChannel) {
+                                let currchannel: Discord.TextChannel | Discord.NewsChannel = <Discord.TextChannel | Discord.NewsChannel>currmsg.channel
                                 console.log(`#${i} -> ${currchannel.name} : ${currmsg.content}`)
                             }
-                            else
-                            {
+                            else {
                                 console.log(`#${i} -> DM Channel : ${currmsg.content}`)
                             }
-                                
+
                         }
                         logconsole("Query for sent messages completed", "DEBUG")
                         break
