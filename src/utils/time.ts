@@ -1,6 +1,6 @@
 // * Function for getting formatted time
 
-export function getFormattedTime(simple = false) {
+export function getFormattedTime(simple = false): string {
     function addZero(num: number) {
         if (num < 10) {
             return `0${num}`
