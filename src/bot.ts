@@ -139,7 +139,7 @@ function evaluateMessage(msg: Discord.Message) {
     if (msg.content.startsWith("!salim")) {
         if (!bot_settings.allow_vc) {
             logconsole(`${msg.author.tag} trying to pull this bot to VC`, "DECLINE")
-            msg.channel.send("My Owner don't allow me to join VC :(")
+            sendAndSpeak(msg, "เจ้าของฉันไม่อนุญาตให้ฉันเข้าไปคุยกับพวกคนชังชาติ :(")
             return
         }
 
@@ -147,12 +147,12 @@ function evaluateMessage(msg: Discord.Message) {
         // * Check for possible error
         if (!vc) {
             logconsole(`${msg.author.tag} trying to pull me to the world of undefined!`, "DECLINE")
-            msg.channel.send("Can't enter \"undefined\" channel. You must be in the vc first!")
+            sendAndSpeak(msg, "จะให้เข้าไปห้องไหนอ่ะ ผมจะไม่รู้มั้ยเนี่ย")
             return
         }
         else if (currVC == vc) {
             logconsole(`Trying to enter the VC that already in. Aborted. Commanded by ${msg.author.tag}`, "DECLINE")
-            msg.channel.send("I'm already in that voice channel!")
+            sendAndSpeak(msg, "นี่ไง ฉันก็อยู่ในห้องนี้แล้ว ยังจะเอาอะไรอีก!!!")
             return
         }
 
@@ -160,6 +160,7 @@ function evaluateMessage(msg: Discord.Message) {
             logconsole(`Successfully joined voice channel ${vc.name} by desire of ${msg.author.tag}`)
             VCconnection = connection
             currVC = vc
+            speak("บอทสลิ่ม มาแล้วนะจ๊ะ!!!")
         }).catch(err => {
             logconsole(`${err}`, "ERROR")
         })
@@ -174,7 +175,7 @@ function evaluateMessage(msg: Discord.Message) {
         }
         else {
             logconsole(`${msg.author.tag} want me to leave, but I'm not in VC`, "DECLINE")
-            msg.channel.send("Can't leave, I'm not in any Voice Chat")
+            sendAndSpeak(msg, "จะออกได้ไงวะ ไม่ได้อยู่ในนั้นแต่แรก หัดคิดบ้างนะ")
         }
 
     }
@@ -183,7 +184,7 @@ function evaluateMessage(msg: Discord.Message) {
     if (msg.mentions.has(client.user)) {
         if (msg.content.includes("แนะนำตัว") || msg.content.includes("github")) {
             logconsole("Introduced myself")
-            msg.channel.send(introduceMyself())
+            sendAndSpeak(msg, introduceMyself())
             return
         }
         if (msg.content.includes("เพลง")) {
@@ -194,7 +195,7 @@ function evaluateMessage(msg: Discord.Message) {
             }
             else {
                 logconsole(`${msg.author.tag} requested song but not in the same voice chat`, "DECLINE")
-                msg.channel.send("I must be in the same channel to play song")
+                msg.channel.send(`where ${msg.author.tag}`)
             }
         }
     }
@@ -204,7 +205,7 @@ function evaluateMessage(msg: Discord.Message) {
         if (bot_settings.limited_training &&
             !bot_settings.salim_insiders.includes(msg.author.username)) {
             logconsole(`${msg.author.tag} tried to train me without permission!`, "DECLINE")
-            msg.channel.send("I'm not allowed to be trained by strangers like you!")
+            sendAndSpeak(msg, "ฉันไม่ได้รับการอนุญาตให้ถูก train โดยพวกชังชาติอย่างคุณ")
         }
         else {
             let trainstr = msg.content.slice(0).replace("\n", " ")
@@ -212,7 +213,7 @@ function evaluateMessage(msg: Discord.Message) {
                 if (err)
                     console.log(chalk.red(`[TRAIN ERROR] Error on writing log file: ${err}`))
             })
-            msg.channel.send("กระผม นศท. น้อนสลิ่ม จะจดจำแล้วนำไปใช้ ครับ!")
+            sendAndSpeak(msg, "กระผม นศท. น้อนสลิ่ม จะจดจำแล้วนำไปใช้ ครับ!")
             logconsole(`Trained by ${msg.author.tag}`, "TRAINED")
             return
         }
@@ -234,7 +235,7 @@ function evaluateMessage(msg: Discord.Message) {
         }
         if (msg.content.includes("ไม่ชอบ")) {
             if (!bot_settings.limited_questioning || bot_settings.salim_insiders.includes(msg.author.tag)) {
-                sendAndSpeak(msg,`ก็มีอยู่ประมาณ ${ชังชาติ.length} คำที่พวกสามกีบชอบพูดแล้วทำให้ผมไม่สบายใจ`)
+                sendAndSpeak(msg, `ก็มีอยู่ประมาณ ${ชังชาติ.length} คำที่พวกสามกีบชอบพูดแล้วทำให้ผมไม่สบายใจ`)
                 logconsole(`Answer ${msg.author.tag} Question about Keywords Count`, "QUESTION ANSWERED")
             }
             else {
@@ -245,12 +246,12 @@ function evaluateMessage(msg: Discord.Message) {
         }
         if (msg.content.includes("เฟส") || msg.content.includes("เฟซ") || msg.content.toLowerCase().includes("fb") || msg.content.toLowerCase().includes("facebook")) {
             if (SalimFacebook.length <= 0) {
-                msg.channel.send(`ไม่รู้ ไม่รู้ ไม่รู้ ผมจะไปรู้มั้ยล่ะ`)
+                sendAndSpeak(msg, `ไม่รู้ ไม่รู้ ไม่รู้ ผมจะไปรู้มั้ยล่ะ`)
                 logconsole(`${msg.author.tag} wants to be ตาสว่าง but I have no facebook data`, "FACEBOOK-WARNING")
                 return
             }
             let selFb = SalimFacebook[Math.floor(Math.random() * SalimFacebook.length)]
-            msg.channel.send(`ผมแนะนำให้คุณไปติดตาม ${selFb.name} เผื่อคุณจะได้ตาสว่างซะบ้าง ${selFb.url}`)
+            sendAndSpeak(msg, `ดิฉันแนะนำให้คุณไปติดตาม ${selFb.name} เผื่อคุณจะได้ตาสว่างซะบ้าง ${selFb.url}`)
             logconsole(`Recommended ${selFb.name} to ${msg.author.tag}`, "FACEBOOK")
             return
         }
@@ -285,7 +286,7 @@ function sendAndSpeak(refmsg: Discord.Message, msg: string) {
     return
 }
 
-function sendRandomQuote(channel: Channels) {
+function sendRandomQuote(channel: Channels): string {
     let tosentmsg = randomQuote()
     channel.send(`${tosentmsg}`)
     logconsole(`Sent message : ${tosentmsg}`)
@@ -293,7 +294,7 @@ function sendRandomQuote(channel: Channels) {
 }
 
 // * All other support function
-function isชังชาติ(msg: Discord.Message) {
+function isชังชาติ(msg: Discord.Message): boolean {
     for (let word of ชังชาติ) {
         if (msg.content.replace(/\s/g, '').toLowerCase().includes(word)) {
             logconsole(`isชังชาติ : Detected "${word}"`)
@@ -336,7 +337,6 @@ function randomSong(channel: Channels, index = -1) {
         if (channel)
             channel.send(`Easter Egg จ้า! Have fun with ${targetsong["name"]} 😁`)
     }
-    // ? Logconsole inside playYoutube function
 }
 
 
@@ -376,7 +376,6 @@ function playYoutube(url: string, isDebug = false) {
 
 
 // * Debug น้อน Zone
-// ! Error Check not present here, proceed with caution
 
 import readline from "readline" // * Module for debug only
 
