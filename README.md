@@ -97,8 +97,7 @@ The only Method available is Manual Training a.k.a hard code (Idk what to do �
 
 * keywords.json : Keywords to trigger น้อน
 
-* morequotes.json : Aggressive stuff for น้อน to say on top of already quality quotes in [narze/awesome-salim-quotes]("https://github.com/narze/awesome-salim-quotes").
-   To use this feature, create this file with only one properties 'วาทกรรมสลิ่ม' set its value to array of your custom quotes.
+* morequotes.json : Aggressive stuff for น้อน to say on top of already quality quotes in [narze/awesome-salim-quotes]("https://github.com/narze/awesome-salim-quotes")
 
 * salim.json : น้อน can send link to person's facebook, simply append a dictionary consists of 'url' and 'name' to the array!
 
@@ -138,6 +137,6 @@ url : Youtube URL to music
 
 <img src="./assets/images/long-live-hm-queen.jpg" alt="#ทรงพระเจริญ">
 
-<img src="./assets/images/SAFETY_FIRST.jpg" alt="ปลอดภัยไว้ก่อน">
+<img src="./assets/images/SAFETY_FIRST.jpg" alt="ปลอดภัยไว้ก่อน" height=250px>
 
 (ทรงพระเจริญ ยิ่งยืนนาน ยิ่งเมื่อย ข อ บ คุ ณ ค รั บ)
