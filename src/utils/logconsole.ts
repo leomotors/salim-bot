@@ -1,22 +1,22 @@
 // * Function for logging console neatly
 
-let getFormattedTime = require("./time.js")
-const fs = require("fs")
-const chalk = require("chalk")
-const bot_settings_log = require("../bot_settings.json").do_log
+import { getFormattedTime } from "./time"
+import fs from "fs"
+import chalk from "chalk"
+import { do_log } from "../../settings/bot_settings.json"
 
 let initstr = `Created at ${getFormattedTime()}\n\n`
 let initfname = `${getFormattedTime(true)}.txt`
 
-if (bot_settings_log) {
-    fs.writeFile(`./log/${initfname}`, initstr, (err) => {
+if (do_log) {
+    fs.writeFile(`./log/${initfname}`, initstr, (err: Error) => {
         if (err)
             console.log(chalk.red(`[LOG ERROR] Error on initing file: ${err}`))
         console.log("[FILE SUCCESS] Log File Inited")
     })
 }
 
-function logconsole(logmsg, status = "Normal") {
+export function logconsole(logmsg: string, status = "Normal") {
     let logstr = `[${getFormattedTime()}][${status}] ${logmsg}`
 
     // * Color Source: https://stackoverflow.com/questions/9781218/how-to-change-node-jss-console-font-color
@@ -27,11 +27,9 @@ function logconsole(logmsg, status = "Normal") {
     else
         console.log(logstr)
 
-    if (bot_settings_log)
-        fs.appendFile(`./log/${initfname}`, logstr + "\n", (err) => {
+    if (do_log)
+        fs.appendFile(`./log/${initfname}`, logstr + "\n", (err: Error) => {
             if (err)
-                console.log(`[LOG ERROR] Error on writing log file: ${err}`)
+                console.log(chalk.red(`[LOG ERROR] Error on writing log file: ${err}`))
         })
 }
-
-module.exports = logconsole

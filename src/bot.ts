@@ -1,64 +1,51 @@
 /**
- * * bot.js
- * * This is Main Program for bot, run this with nodejs
+ * * bot.ts
+ * * This is Main Program for Bot
  * * Made by @Leomotors
  * * https://github.com/Leomotors/Salim-Bot
  * * You are free to use this but don't forget to read instruction!
  * ! WARNING: Proceed at your own risk!
  */
 
-// * Import data from other file
-const auth = require("./auth.json")
-const salimDict = require("./assets/json/keywords.json")
-const bot_settings = require("./bot_settings.json")
-let facebook
-try {
-    facebook = require("./assets/json/salim.json").SalimFacebook
-}
-catch {
-    facebook = []
-}
+
+// * Import Data from all files
+import { token } from "../auth.json"
+
+import { activities } from "../assets/json/activity.json"
+
+import { ชังชาติ } from "../assets/json/keywords.json"
+import { วาทกรรมสลิ่ม } from "../assets/json/morequotes.json"
+import { SalimFacebook } from "../assets/json/salim.json"
+
+import songs from "../assets/music/songs.json"
+
+import bot_settings from "../settings/bot_settings.json"
 
 
-// TODO add Settings template
+// * Import Utility
+import { logconsole } from "./utils/logconsole"
+import { introduceMyself } from "./utils/introduce"
 
-// TODO add Mention Keyword: Facebook => Send Random Salim's Facebook ex. หมอยวรงค์ หมอยเหรียญทอง
 
-let moreWord
-try {
-    moreWord = require("./assets/json/morequotes.json")
-}
-catch {
-    moreWord = {
-        "วาทกรรมสลิ่ม": []
-    }
-    if (bot_settings.local_quote)
-        console.log(`[LOCAL QUOTE WARNING] Can't open morequotes.json, you can close this warning by disable local_quote in settings.json, or if you want to have custom 'local' quotes, create morequotes.json in assets/json/ with only one properties 'วาทกรรมสลิ่ม' its value is array of your custom words`)
-}
+// * Import Required System Modules
+import fetch from "node-fetch"
+import chalk from "chalk"
+import { exec } from "child_process"
+import fs from "fs"
 
-const songs = require("./assets/music/songs.json")
-const chalk = require("chalk")
-const activity_list = require("./assets/json/activity.json").activities
 
-// * Import required module & function
-const fetch = require("node-fetch")
-const { exec } = require("child_process")
-const logconsole = require("./utils/logconsole")
-const introduceMyself = require("./utils/introduce.js")
-const fs = require("fs")
+// * Init Variable that will be used
+let quoteArray: string[] = []
+let lastchannel: Channels
+let currVC: Discord.VoiceChannel
+let VCconnection: Discord.VoiceConnection
+let sentmsg: Discord.Message[] = []
 
-// * Init Variable
-let plaintxt = ""
-let quoteArray = []
-let lastchannel = undefined
-let currVC = undefined
-let VCconnection = undefined
-let sentmsg = []
 
 // * Check for duplicate keyword
-let duplist = []
-for (let word_to_check of salimDict.ชังชาติ) {
-    let appearance = salimDict.ชังชาติ.filter(word => word == word_to_check).length
+let duplist: string[] = []
+for (let word_to_check of ชังชาติ) {
+    let appearance = ชังชาติ.filter(word => word == word_to_check).length
     if (appearance > 1 && !duplist.includes(word_to_check))
         duplist.push(word_to_check)
 }
@@ -71,7 +58,7 @@ if (duplist.length > 0) {
 if (bot_settings.local_quote) {
     // * No one can evade Rick Roll
     quoteArray.push("Easter egg คับ https://www.youtube.com/watch?v=dQw4w9WgXcQ")
-    for (let word of moreWord.วาทกรรมสลิ่ม) {
+    for (let word of วาทกรรมสลิ่ม) {
         if (quoteArray.includes(word))
             console.log(chalk.yellow(`[IMPORT WARNING] Duplicate Quote : ${word}`))
         else
@@ -98,17 +85,20 @@ fetch('https://watasalim.vercel.app/api/quotes', {
 
 
 // * Discord Zone: Define on_setup() and Login
-const Discord = require("discord.js")
-const client = new Discord.Client()
+import Discord from "discord.js"
+
+type Channels = Discord.TextChannel | Discord.DMChannel | Discord.NewsChannel
+
+const client: Discord.Client = new Discord.Client()
 client.on("ready", () => {
     console.log(`[LOGIN SUCCESS] Successfully logged in as ${client.user.tag}.`)
     setStatus(-1, false, true)
 })
 
-function setStatus(id = -1, isDebug = false, startup = false) {
+function setStatus(id: number = -1, isDebug: boolean = false, startup: boolean = false) {
     if (id == -1)
-        id = Math.floor(Math.random() * activity_list.length)
-    client.user.setActivity(`${activity_list[id].name}`, { type: activity_list[id].type })
+        id = Math.floor(Math.random() * activities.length)
+    client.user.setActivity(`${activities[id].name}`, { type: <Discord.ActivityType>activities[id].type })
         .then(presence => {
             if (isDebug)
                 logconsole(`Activity changed to ${presence.activities[0].type} ${presence.activities[0].name}`, "DEBUG")
@@ -122,13 +112,16 @@ function setStatus(id = -1, isDebug = false, startup = false) {
         .catch(console.error)
 }
 
-client.login(auth.token)
+client.login(token)
 
 
 // * MAIN EVENT: Upon recieving message, process it
-client.on("message", eval)
-function eval(msg) {
+client.on("message", evaluateMessage)
+
+function evaluateMessage(msg: Discord.Message) {
     lastchannel = msg.channel
+
+    // * Action 1: Ignore own's message
     if (msg.author.id == client.user.id) {
         // * It's your own message!
         sentmsg = [msg].concat(sentmsg)
@@ -139,11 +132,14 @@ function eval(msg) {
 
     logconsole(`Recieve message from ${msg.author.tag} : ${msg.content}`)
 
+
     // * Voice Channel Zone
+
+    // * Action 2: Enter Voice Channel & Disconnect
     if (msg.content.startsWith("!salim")) {
         if (!bot_settings.allow_vc) {
             logconsole(`${msg.author.tag} trying to pull this bot to VC`, "DECLINE")
-            msg.channel.send("My Owner don't allow me to join VC :(")
+            sendAndSpeak(msg, "เจ้าของฉันไม่อนุญาตให้ฉันเข้าไปคุยกับพวกคนชังชาติ :(")
             return
         }
 
@@ -151,12 +147,12 @@ function eval(msg) {
         // * Check for possible error
         if (!vc) {
             logconsole(`${msg.author.tag} trying to pull me to the world of undefined!`, "DECLINE")
-            msg.channel.send("Can't enter \"undefined\" channel. You must be in the vc first!")
+            sendAndSpeak(msg, "จะให้เข้าไปห้องไหนอ่ะ ผมจะไม่รู้มั้ยเนี่ย")
             return
         }
         else if (currVC == vc) {
             logconsole(`Trying to enter the VC that already in. Aborted. Commanded by ${msg.author.tag}`, "DECLINE")
-            msg.channel.send("I'm already in that voice channel!")
+            sendAndSpeak(msg, "นี่ไง ฉันก็อยู่ในห้องนี้แล้ว ยังจะเอาอะไรอีก!!!")
             return
         }
 
@@ -164,6 +160,7 @@ function eval(msg) {
             logconsole(`Successfully joined voice channel ${vc.name} by desire of ${msg.author.tag}`)
             VCconnection = connection
             currVC = vc
+            speak("บอทสลิ่ม มาแล้วนะจ๊ะ!!!")
         }).catch(err => {
             logconsole(`${err}`, "ERROR")
         })
@@ -178,16 +175,16 @@ function eval(msg) {
         }
         else {
             logconsole(`${msg.author.tag} want me to leave, but I'm not in VC`, "DECLINE")
-            msg.channel.send("Can't leave, I'm not in any Voice Chat")
+            sendAndSpeak(msg, "จะออกได้ไงวะ ไม่ได้อยู่ในนั้นแต่แรก หัดคิดบ้างนะ")
         }
 
     }
 
-    // * Mentioning Bot
+    // * Action 3: Introduce & DJ
     if (msg.mentions.has(client.user)) {
         if (msg.content.includes("แนะนำตัว") || msg.content.includes("github")) {
             logconsole("Introduced myself")
-            msg.channel.send(introduceMyself())
+            sendAndSpeak(msg, introduceMyself())
             return
         }
         if (msg.content.includes("เพลง")) {
@@ -198,68 +195,69 @@ function eval(msg) {
             }
             else {
                 logconsole(`${msg.author.tag} requested song but not in the same voice chat`, "DECLINE")
-                msg.channel.send("I must be in the same channel to play song")
+                msg.channel.send(`where ${msg.author.tag}`)
             }
         }
     }
 
+    // * Action 4: Train
     if (msg.content.startsWith("!train")) {
         if (bot_settings.limited_training &&
             !bot_settings.salim_insiders.includes(msg.author.username)) {
             logconsole(`${msg.author.tag} tried to train me without permission!`, "DECLINE")
-            msg.channel.send("I'm not allowed to be trained by strangers like you!")
+            sendAndSpeak(msg, "ฉันไม่ได้รับการอนุญาตให้ถูก train โดยพวกชังชาติอย่างคุณ")
         }
         else {
             let trainstr = msg.content.slice(0).replace("\n", " ")
-            fs.appendFile(`./utils/train.txt`, trainstr.slice(7) + "\n", (err) => {
+            fs.appendFile(`../python/train.txt`, trainstr.slice(7) + "\n", (err) => {
                 if (err)
                     console.log(chalk.red(`[TRAIN ERROR] Error on writing log file: ${err}`))
             })
-            msg.channel.send("กระผม นศท. น้อนสลิ่ม จะจดจำแล้วนำไปใช้ ครับ!")
+            sendAndSpeak(msg, "กระผม นศท. น้อนสลิ่ม จะจดจำแล้วนำไปใช้ ครับ!")
             logconsole(`Trained by ${msg.author.tag}`, "TRAINED")
             return
         }
 
     }
 
-    // * Question
+    // * Action 5: Questioning
     if (msg.mentions.has(client.user)) {
         if (msg.content.includes("คำพูด")) {
             if (!bot_settings.limited_questioning || bot_settings.salim_insiders.includes(msg.author.tag)) {
-                msg.channel.send(`ตอนนี้ผมมีวาทกรรมที่พร้อมจะด่าพวกสามกีบอย่างคุณ ${quoteArray.length} ประโยค`)
+                sendAndSpeak(msg, `ตอนนี้ผมมีวาทกรรมที่พร้อมจะด่าพวกสามกีบอย่างคุณ ${quoteArray.length} ประโยค`)
                 logconsole(`Answer ${msg.author.tag} Question about Quote Count`, "QUESTION ANSWERED")
             }
             else {
-                msg.channel.send(`สามกีบอย่างคุณมีสิทธิ์ถามคำถามกับผมด้วยหรอ?`)
+                sendAndSpeak(msg, `สามกีบอย่างคุณมีสิทธิ์ถามคำถามกับผมด้วยหรอ?`)
                 logconsole(`Reject ${msg.author.tag}'s Question`, "QUESTION REJECTED")
             }
             return
         }
         if (msg.content.includes("ไม่ชอบ")) {
             if (!bot_settings.limited_questioning || bot_settings.salim_insiders.includes(msg.author.tag)) {
-                msg.channel.send(`ก็มีอยู่ประมาณ ${salimDict.ชังชาติ.length} คำที่พวกสามกีบชอบพูดแล้วทำให้ผมไม่สบายใจ`)
+                sendAndSpeak(msg, `ก็มีอยู่ประมาณ ${ชังชาติ.length} คำที่พวกสามกีบชอบพูดแล้วทำให้ผมไม่สบายใจ`)
                 logconsole(`Answer ${msg.author.tag} Question about Keywords Count`, "QUESTION ANSWERED")
             }
             else {
-                msg.channel.send(`สามกีบอย่างคุณมีสิทธิ์ถามคำถามกับผมด้วยหรอ?`)
+                sendAndSpeak(msg, `สามกีบอย่างคุณมีสิทธิ์ถามคำถามกับผมด้วยหรอ?`)
                 logconsole(`Reject ${msg.author.tag}'s Question`, "QUESTION REJECTED")
             }
             return
         }
         if (msg.content.includes("เฟส") || msg.content.includes("เฟซ") || msg.content.toLowerCase().includes("fb") || msg.content.toLowerCase().includes("facebook")) {
-            if (facebook.length <= 0) {
-                msg.channel.send(`ไม่รู้ ไม่รู้ ไม่รู้ ผมจะไปรู้มั้ยล่ะ`)
+            if (SalimFacebook.length <= 0) {
+                sendAndSpeak(msg, `ไม่รู้ ไม่รู้ ไม่รู้ ผมจะไปรู้มั้ยล่ะ`)
                 logconsole(`${msg.author.tag} wants to be ตาสว่าง but I have no facebook data`, "FACEBOOK-WARNING")
                 return
             }
-            let selFb = facebook[Math.floor(Math.random() * facebook.length)]
-            msg.channel.send(`ผมแนะนำให้คุณไปติดตาม ${selFb.name} เผื่อคุณจะได้ตาสว่างซะบ้าง ${selFb.url}`)
+            let selFb = SalimFacebook[Math.floor(Math.random() * SalimFacebook.length)]
+            sendAndSpeak(msg, `ดิฉันแนะนำให้คุณไปติดตาม ${selFb.name} เผื่อคุณจะได้ตาสว่างซะบ้าง ${selFb.url}`)
             logconsole(`Recommended ${selFb.name} to ${msg.author.tag}`, "FACEBOOK")
             return
         }
     }
 
-    // * Regular Detection
+    // * Base Action: Regular Detection
     if (isชังชาติ(msg)) {
         let tosendmsg = sendRandomQuote(msg.channel)
         // * If in VC and the ชังชาติ person is in the same one, SPEAK!
@@ -275,7 +273,20 @@ function eval(msg) {
     }
 }
 
-function sendRandomQuote(channel) {
+function sendAndSpeak(refmsg: Discord.Message, msg: string) {
+    refmsg.channel.send(msg)
+    try {
+        if (currVC && refmsg.member.voice.channel == currVC) {
+            speak(msg)
+        }
+    }
+    catch (err) {
+        logconsole(`Exception Catched : ${err}`, "EXCEPTION HANDLED")
+    }
+    return
+}
+
+function sendRandomQuote(channel: Channels): string {
     let tosentmsg = randomQuote()
     channel.send(`${tosentmsg}`)
     logconsole(`Sent message : ${tosentmsg}`)
@@ -283,8 +294,8 @@ function sendRandomQuote(channel) {
 }
 
 // * All other support function
-function isชังชาติ(msg) {
-    for (let word of salimDict.ชังชาติ) {
+function isชังชาติ(msg: Discord.Message): boolean {
+    for (let word of ชังชาติ) {
         if (msg.content.replace(/\s/g, '').toLowerCase().includes(word)) {
             logconsole(`isชังชาติ : Detected "${word}"`)
             return true
@@ -293,12 +304,12 @@ function isชังชาติ(msg) {
     return false
 }
 
-function randomQuote() {
+function randomQuote(): string {
     let randIndex = Math.floor(Math.random() * quoteArray.length)
     return quoteArray[randIndex]
 }
 
-function randomSong(channel, index = -1) {
+function randomSong(channel: Channels, index = -1) {
     // * Only two categories: easter_egg and รักชาติ
     let easterlength = songs.easter_egg.length
     let รักชาติlength = songs.รักชาติ.length
@@ -326,12 +337,11 @@ function randomSong(channel, index = -1) {
         if (channel)
             channel.send(`Easter Egg จ้า! Have fun with ${targetsong["name"]} 😁`)
     }
-    // ? Logconsole inside playYoutube function
 }
 
 
 // * Support Function: Audio playing
-function speak(phrase, isDebug = false) {
+function speak(phrase: string, isDebug = false) {
     let debugstr = isDebug ? "DEBUG" : "Normal"
     exec(`echo "${phrase}" | ${bot_settings.python_prefix} "./python/tts.py"`, (error, stdout, stderr) => {
         if (error) {
@@ -347,7 +357,7 @@ function speak(phrase, isDebug = false) {
     })
 }
 
-function playYoutube(url, isDebug = false) {
+function playYoutube(url: string, isDebug = false) {
     let debugstr = isDebug ? "DEBUG" : "Normal"
     exec(`echo "${url}" | ${bot_settings.python_prefix} "./python/ytdownload.py"`, (error, stdout, stderr) => {
         if (error) {
@@ -366,9 +376,8 @@ function playYoutube(url, isDebug = false) {
 
 
 // * Debug น้อน Zone
-// ! Error Check not present here, proceed with caution
 
-const readline = require("readline") // * Module for debug only
+import readline from "readline" // * Module for debug only
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -379,13 +388,13 @@ rl.on('line', (input) => {
     debug(input)
 })
 
-function debug(commandstr) {
-    let command = commandstr.split(" ")
+function debug(commandstr: string) {
+    let command: string[] = commandstr.split(" ")
     try {
         switch (command[0]) {
             case "quote":
-                lastchannel.send(quoteArray[command[1]])
-                logconsole(`quote : Sent quote #${command[1]}`, "DEBUG")
+                lastchannel.send(quoteArray[parseInt(command[1])])
+                logconsole(`quote : Sent quote #${parseInt(command[1])}`, "DEBUG")
                 break
             case "say":
                 let sayarr = commandstr.slice(4)
@@ -397,8 +406,8 @@ function debug(commandstr) {
                 speak(speakarr, true)
                 break
             case "speakquote":
-                speak(quoteArray[command[1]])
-                logconsole(`speakquote : Spoke quote #${command[1]}`, "DEBUG")
+                speak(quoteArray[parseInt(command[1])])
+                logconsole(`speakquote : Spoke quote #${parseInt(command[1])}`, "DEBUG")
                 break
             case "salim":
                 let tosendmsg = sendRandomQuote(lastchannel)
@@ -448,14 +457,22 @@ function debug(commandstr) {
                         console.log(`Showing last ${sentmsg.length} sent messages`)
                         for (let i = 0; i < sentmsg.length; i++) {
                             let currmsg = sentmsg[i]
-                            console.log(`#${i} -> ${currmsg.channel.name} : ${currmsg.content}`)
+
+                            if (typeof currmsg.channel != typeof Discord.DMChannel) {
+                                let currchannel: Discord.TextChannel | Discord.NewsChannel = <Discord.TextChannel | Discord.NewsChannel>currmsg.channel
+                                console.log(`#${i} -> ${currchannel.name} : ${currmsg.content}`)
+                            }
+                            else {
+                                console.log(`#${i} -> DM Channel : ${currmsg.content}`)
+                            }
+
                         }
                         logconsole("Query for sent messages completed", "DEBUG")
                         break
                     case "status":
                         console.log("Showing all activities available")
                         let a_index = 0
-                        for (let activity of activity_list) {
+                        for (let activity of activities) {
                             console.log(`#${a_index} ${activity.type} ${activity.name}`)
                             a_index++
                         }

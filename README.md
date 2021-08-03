@@ -4,7 +4,7 @@ This bot is Salim. Whenever you trigger it, It become mad.
 
 **April Fools!!!** Wait, it passed? nvm, idc.
 
-This repo is made to use for my own server. However, source code is free for anyone to implement it.
+This discord bot is created to use for my own server. However, source code is free for anyone to implement it.
 
 Spread headache to your friend!
 
@@ -14,7 +14,7 @@ Spread headache to your friend!
 
 ## 🤝 Quality Quote & 💡 Inspiration
 
-Thank you for **Quality** Salim Quote from <a href="https://github.com/narze/awesome-salim-quotes">narze/awesome-salim-quotes</a>
+Thank you for **Quality** Salim Quote from [narze/awesome-salim-quotes](https://github.com/narze/awesome-salim-quotes)
 
 **Note**: This Bot on default will pull quotes from that repository everytime it starts.
 
@@ -28,13 +28,20 @@ In case you want to (not recommend)
 
 * ```npm install```
 
-* Then, create auth.json with "token"
+* ```./fileinit.sh``` to create files that is necessary for program
+
+* Then, at generated auth.json, add your token there
 
   **Note**: You will have to create your own bot in Discord Developer
-  
-* Run bot.js and done!
 
-**Note**: If your system doesn't use `python` for Python 3, don't forget to set its prefix in `bot_settings.json`
+* Compile the code with typescript, ```tsc --build```
+
+  **Note**: There maybe compilation error on some devices like raspberry pi,
+   my solution is to compile it in linux and transfer compiled one to run
+
+* Run the bot with nodejs: ```node dist/src/bot.js```
+
+**Note**: If your system doesn't use `python3` for Python 3, don't forget to set its prefix in `bot_settings.json`
 
 ## 📚 Document
 
@@ -44,11 +51,21 @@ Bot Settings <a href="https://github.com/Leomotors/Salim-Bot/blob/main/docs/bot_
 
 Debug Manual <a href="https://github.com/Leomotors/Salim-Bot/blob/main/docs/debug.md">Here</a>
 
+## 📈 Compatibility Test Result
+
+**Ubuntu 20.04.2 on Windows 10 Linux Subsystem / Kernel: 5.10.43.3**: Able to Compile Typescript and Run
+
+**Raspbian 10 on Raspberry Pi 3 Model A+ Rev 1.0 / Kernel: 5.10.17-v7+** : Unable to Compile Typescript but can Run normally (by using compiled code from above)
+
 ## ⚙️ Dependencies
 
 To Implement this bot, here are dependencies.
 
 ### Required Packages
+
+**nodejs** : ```sudo apt install nodejs```
+
+**npm** : ```sudo apt install npm```
 
 **Python** : ```sudo apt install python3```
 
@@ -56,7 +73,7 @@ To Implement this bot, here are dependencies.
 
 ### Used npm Packages
 
-Discord, @discordjs/opus, node-fetch, chalk
+Discord, @discordjs/opus, node-fetch, chalk, typescript
 
 ### Required Python Package
 
@@ -82,6 +99,8 @@ The only Method available is Manual Training a.k.a hard code (Idk what to do �
 
 * morequotes.json : Aggressive stuff for น้อน to say on top of already quality quotes in [narze/awesome-salim-quotes]("https://github.com/narze/awesome-salim-quotes").
    To use this feature, create this file with only one properties 'วาทกรรมสลิ่ม' set its value to array of your custom quotes.
+
+* salim.json : น้อน can send link to person's facebook, simply append a dictionary consists of 'url' and 'name' to the array!
 
 ### Keywords adding guideline
 
