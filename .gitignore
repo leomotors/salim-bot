@@ -120,3 +120,6 @@ assets/json/salim.json
 
 # Backup
 backup
+
+# My own automation
+copy.sh
