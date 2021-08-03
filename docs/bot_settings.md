@@ -6,7 +6,7 @@ Bot Settings is in ./bot_settings.json
 
 Allow Bot to enter Voice Chat
 
-## Python Prefix (Default: python)
+## Python Prefix (Default: python3)
 
 Python 3's Prefix of that environment (either python or python3)
 

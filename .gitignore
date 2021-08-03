@@ -103,20 +103,20 @@ dist
 # TernJS port file
 .tern-port
 
-# It is private!!!
+# Key
 auth.json
-topsecret.txt
-
-# Temp
-todo.txt
 
 # package
 package-lock.json
 
-
-# Other
+# Misc Temp
+topsecret.txt
+todo.txt
 train.txt
 
 # Local Quotes
 assets/json/morequotes.json
 assets/json/salim.json
+
+# Backup
+backup
