@@ -3,7 +3,7 @@
 import { getFormattedTime } from "./time"
 import fs from "fs"
 import chalk from "chalk"
-import { do_log } from "../../bot_settings.json"
+import { do_log } from "../../settings/bot_settings.json"
 
 let initstr = `Created at ${getFormattedTime()}\n\n`
 let initfname = `${getFormattedTime(true)}.txt`
