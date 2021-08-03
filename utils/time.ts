@@ -1,7 +1,7 @@
 // * Function for getting formatted time
 
-function getFormattedTime(simple = false) {
-    function addZero(num) {
+export function getFormattedTime(simple = false) {
+    function addZero(num: number) {
         if (num < 10) {
             return `0${num}`
         }
@@ -23,5 +23,3 @@ function getFormattedTime(simple = false) {
         formattedDate = `${year}-${month}-${day} ${hour}:${min}:${sec}`
     return formattedDate
 }
-
-module.exports = getFormattedTime
