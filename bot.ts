@@ -137,9 +137,9 @@ client.login(auth.token)
 
 
 // * MAIN EVENT: Upon recieving message, process it
-client.on("message", eval)
+client.on("message", evaluateMessage)
 
-function eval(msg: Discord.Message) {
+function evaluateMessage(msg: Discord.Message) {
     lastchannel = msg.channel
     if (msg.author.id == client.user.id) {
         // * It's your own message!
