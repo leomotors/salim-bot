@@ -8,17 +8,13 @@
  */
 
 // * Import data from other file
-import * as auth from "../auth.json"
-import * as salimDict from "../assets/json/keywords.json"
-import * as bot_settings from "../bot_settings.json"
+import { token } from "../auth.json"
+import { ชังชาติ } from "../assets/json/keywords.json"
+import bot_settings from "../settings/bot_settings.json"
+
 
 import { SalimFacebook } from "../assets/json/salim.json"
-
-// TODO add Settings template
-
-// TODO add Mention Keyword: Facebook => Send Random Salim's Facebook ex. หมอยวรงค์ หมอยเหรียญทอง
-
-import {วาทกรรมสลิ่ม} from "../assets/json/morequotes.json"
+import { วาทกรรมสลิ่ม } from "../assets/json/morequotes.json"
 
 import songs from "../assets/music/songs.json"
 import chalk from "chalk"
@@ -40,8 +36,8 @@ let sentmsg: Discord.Message[] = []
 
 // * Check for duplicate keyword
 let duplist: string[] = []
-for (let word_to_check of salimDict.ชังชาติ) {
-    let appearance = salimDict.ชังชาติ.filter(word => word == word_to_check).length
+for (let word_to_check of ชังชาติ) {
+    let appearance = ชังชาติ.filter(word => word == word_to_check).length
     if (appearance > 1 && !duplist.includes(word_to_check))
         duplist.push(word_to_check)
 }
@@ -108,7 +104,7 @@ function setStatus(id = -1, isDebug = false, startup = false) {
         .catch(console.error)
 }
 
-client.login(auth.token)
+client.login(token)
 
 
 // * MAIN EVENT: Upon recieving message, process it
@@ -224,7 +220,7 @@ function evaluateMessage(msg: Discord.Message) {
         }
         if (msg.content.includes("ไม่ชอบ")) {
             if (!bot_settings.limited_questioning || bot_settings.salim_insiders.includes(msg.author.tag)) {
-                msg.channel.send(`ก็มีอยู่ประมาณ ${salimDict.ชังชาติ.length} คำที่พวกสามกีบชอบพูดแล้วทำให้ผมไม่สบายใจ`)
+                msg.channel.send(`ก็มีอยู่ประมาณ ${ชังชาติ.length} คำที่พวกสามกีบชอบพูดแล้วทำให้ผมไม่สบายใจ`)
                 logconsole(`Answer ${msg.author.tag} Question about Keywords Count`, "QUESTION ANSWERED")
             }
             else {
@@ -271,7 +267,7 @@ function sendRandomQuote(channel: Channels) {
 
 // * All other support function
 function isชังชาติ(msg: Discord.Message) {
-    for (let word of salimDict.ชังชาติ) {
+    for (let word of ชังชาติ) {
         if (msg.content.replace(/\s/g, '').toLowerCase().includes(word)) {
             logconsole(`isชังชาติ : Detected "${word}"`)
             return true

@@ -1,0 +1,14 @@
+{
+    "bot_settings": {
+        "allow_vc": true,
+        "python_prefix": "python3",
+        "do_log": true,
+        "message_cache": 10,
+        "allow_training": true,
+        "limited_training": false,
+        "salim_insiders": [],
+        "remote_quote": true,
+        "local_quote": true,
+        "limited_questioning": false
+    }
+}
