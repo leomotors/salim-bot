@@ -1,9 +1,9 @@
 // * Function for logging console neatly
 
-import { getFormattedTime } from "./time.js"
+import { getFormattedTime } from "./time"
 import { writeFile, appendFile } from "fs"
 import { yellow, red } from "chalk"
-import { do_log } from "../bot_settings.json"
+import { do_log } from "../../bot_settings.json"
 
 let initstr = `Created at ${getFormattedTime()}\n\n`
 let initfname = `${getFormattedTime(true)}.txt`
@@ -30,6 +30,6 @@ export function logconsole(logmsg: string, status = "Normal") {
     if (do_log)
         appendFile(`./log/${initfname}`, logstr + "\n", (err: Error) => {
             if (err)
-                console.log(`[LOG ERROR] Error on writing log file: ${err}`)
+                console.log(red(`[LOG ERROR] Error on writing log file: ${err}`))
         })
 }

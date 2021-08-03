@@ -8,11 +8,11 @@
  */
 
 // * Import data from other file
-import * as auth from "./auth.json"
-import * as salimDict from "./assets/json/keywords.json"
-import * as bot_settings from "./bot_settings.json"
+import * as auth from "../auth.json"
+import * as salimDict from "../assets/json/keywords.json"
+import * as bot_settings from "../bot_settings.json"
 
-import { SalimFacebook } from "./assets/json/salim.json"
+import { SalimFacebook } from "../assets/json/salim.json"
 
 // TODO add Settings template
 
@@ -33,9 +33,9 @@ catch {
         console.log(`[LOCAL QUOTE WARNING] Can't open morequotes.json, you can close this warning by disable local_quote in settings.json, or if you want to have custom 'local' quotes, create morequotes.json in assets/json/ with only one properties 'วาทกรรมสลิ่ม' its value is array of your custom words`)
 }
 
-import songs from "./assets/music/songs.json"
+import songs from "../assets/music/songs.json"
 import chalk from "chalk"
-import { activities } from "./assets/json/activity.json"
+import { activities } from "../assets/json/activity.json"
 
 // * Import required module & function
 import fetch from "node-fetch"
