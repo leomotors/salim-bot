@@ -36,9 +36,12 @@ In case you want to (not recommend)
 
 * Compile the code with typescript, ```tsc --build```
 
+  **Note**: There maybe compilation error on some devices like raspberry pi,
+   my solution is to compile it in linux and transfer compiled one to run
+
 * Run the bot with nodejs: ```node dist/src/bot.js```
 
-**Note**: If your system doesn't use `python` for Python 3, don't forget to set its prefix in `bot_settings.json`
+**Note**: If your system doesn't use `python3` for Python 3, don't forget to set its prefix in `bot_settings.json`
 
 ## 📚 Document
 
@@ -47,6 +50,12 @@ In case you want to (not recommend)
 Bot Settings <a href="https://github.com/Leomotors/Salim-Bot/blob/main/docs/bot_settings.md">Here</a>
 
 Debug Manual <a href="https://github.com/Leomotors/Salim-Bot/blob/main/docs/debug.md">Here</a>
+
+## 📈 Compatibility Test Result
+
+**Ubuntu 20.04.2 on Windows 10 Linux Subsystem / Kernel: 5.10.43.3**: Able to Compile Typescript and Run
+
+**Raspbian 10 on Raspberry Pi 3 Model A+ Rev 1.0 / Kernel: 5.10.17-v7+** : Unable to Compile Typescript but can Run normally (by using compiled code from above)
 
 ## ⚙️ Dependencies
 
