@@ -12,19 +12,7 @@ import * as auth from "./auth.json"
 import * as salimDict from "./assets/json/keywords.json"
 import * as bot_settings from "./bot_settings.json"
 
-type Facebook = {
-    url: string,
-    name: string
-}
-
-let facebook: Facebook[]
-try {
-    facebook = require("./assets/json/salim.json").SalimFacebook
-}
-catch {
-    facebook = []
-}
-
+import { SalimFacebook } from "./assets/json/salim.json"
 
 // TODO add Settings template
 
@@ -47,7 +35,7 @@ catch {
 
 import songs from "./assets/music/songs.json"
 import chalk from "chalk"
-const activity_list = require("./assets/json/activity.json").activities
+import { activities } from "./assets/json/activity.json"
 
 // * Import required module & function
 import fetch from "node-fetch"
@@ -106,7 +94,7 @@ fetch('https://watasalim.vercel.app/api/quotes', {
 
 
 // * Discord Zone: Define on_setup() and Login
-import Discord, { DMChannel } from "discord.js"
+import Discord from "discord.js"
 
 type Channels = Discord.TextChannel | Discord.DMChannel | Discord.NewsChannel
 
@@ -118,8 +106,8 @@ client.on("ready", () => {
 
 function setStatus(id = -1, isDebug = false, startup = false) {
     if (id == -1)
-        id = Math.floor(Math.random() * activity_list.length)
-    client.user.setActivity(`${activity_list[id].name}`, { type: activity_list[id].type })
+        id = Math.floor(Math.random() * activities.length)
+    client.user.setActivity(`${activities[id].name}`, { type: <Discord.ActivityType>activities[id].type })
         .then(presence => {
             if (isDebug)
                 logconsole(`Activity changed to ${presence.activities[0].type} ${presence.activities[0].name}`, "DEBUG")
@@ -259,12 +247,12 @@ function evaluateMessage(msg: Discord.Message) {
             return
         }
         if (msg.content.includes("เฟส") || msg.content.includes("เฟซ") || msg.content.toLowerCase().includes("fb") || msg.content.toLowerCase().includes("facebook")) {
-            if (facebook.length <= 0) {
+            if (SalimFacebook.length <= 0) {
                 msg.channel.send(`ไม่รู้ ไม่รู้ ไม่รู้ ผมจะไปรู้มั้ยล่ะ`)
                 logconsole(`${msg.author.tag} wants to be ตาสว่าง but I have no facebook data`, "FACEBOOK-WARNING")
                 return
             }
-            let selFb = facebook[Math.floor(Math.random() * facebook.length)]
+            let selFb = SalimFacebook[Math.floor(Math.random() * SalimFacebook.length)]
             msg.channel.send(`ผมแนะนำให้คุณไปติดตาม ${selFb.name} เผื่อคุณจะได้ตาสว่างซะบ้าง ${selFb.url}`)
             logconsole(`Recommended ${selFb.name} to ${msg.author.tag}`, "FACEBOOK")
             return
@@ -475,7 +463,7 @@ function debug(commandstr: string) {
                     case "status":
                         console.log("Showing all activities available")
                         let a_index = 0
-                        for (let activity of activity_list) {
+                        for (let activity of activities) {
                             console.log(`#${a_index} ${activity.type} ${activity.name}`)
                             a_index++
                         }
