@@ -35,7 +35,8 @@ import fs from "fs"
 
 
 // * Init Variable that will be used
-let quoteArray: string[] = []
+let localQuoteArray: string[] = []
+let onlineQuoteArray: string[] = []
 let lastchannel: Channels
 let currVC: Discord.VoiceChannel
 let VCconnection: Discord.VoiceConnection
@@ -57,12 +58,12 @@ if (duplist.length > 0) {
 // * Add วาทกรรมสลิ่ม from morequotes.json w/ duplicate check
 if (bot_settings.local_quote) {
     // * No one can evade Rick Roll
-    quoteArray.push("Easter egg คับ https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+    localQuoteArray.push("Easter egg คับ https://www.youtube.com/watch?v=dQw4w9WgXcQ")
     for (let word of วาทกรรมสลิ่ม) {
-        if (quoteArray.includes(word))
+        if (localQuoteArray.includes(word))
             console.log(chalk.yellow(`[IMPORT WARNING] Duplicate Quote : ${word}`))
         else
-            quoteArray.push(word)
+            localQuoteArray.push(word)
     }
 }
 
@@ -74,10 +75,12 @@ fetch('https://watasalim.vercel.app/api/quotes', {
     .then(json => {
         for (let quote of json.quotes) {
             let toAdd = quote.body
-            if (quoteArray.includes(toAdd))
+            if (onlineQuoteArray.includes(toAdd))
                 console.log(chalk.yellow(`[IMPORT ONLINE WARNING] Duplicate Quote : ${toAdd}`))
+            else if (localQuoteArray.includes(toAdd))
+                console.log(chalk.yellow(`[IMPORT ONLINE WARNING] Duplicate Quote with Local: ${toAdd}`))
             else
-                quoteArray.push(toAdd)
+                onlineQuoteArray.push(toAdd)
         }
         console.log("[QUOTE FETCHED] Successfully pulled quote data from narze's repository")
     })
@@ -224,7 +227,7 @@ function evaluateMessage(msg: Discord.Message) {
     if (msg.mentions.has(client.user)) {
         if (msg.content.includes("คำพูด")) {
             if (!bot_settings.limited_questioning || bot_settings.salim_insiders.includes(msg.author.tag)) {
-                sendAndSpeak(msg, `ตอนนี้ผมมีวาทกรรมที่พร้อมจะด่าพวกสามกีบอย่างคุณ ${quoteArray.length} ประโยค`)
+                sendAndSpeak(msg, `ตอนนี้ผมมีวาทกรรมที่พร้อมจะด่าพวกสามกีบอย่างคุณ ${localQuoteArray.length + onlineQuoteArray.length} ประโยค`)
                 logconsole(`Answer ${msg.author.tag} Question about Quote Count`, "QUESTION ANSWERED")
             }
             else {
@@ -259,11 +262,10 @@ function evaluateMessage(msg: Discord.Message) {
 
     // * Base Action: Regular Detection
     if (isชังชาติ(msg)) {
-        let tosendmsg = sendRandomQuote(msg.channel)
-        // * If in VC and the ชังชาติ person is in the same one, SPEAK!
+        let sent = sendRandomQuote(msg.channel)
         try {
             if (currVC && msg.member.voice.channel == currVC) {
-                speak(tosendmsg)
+                speak(sent)
             }
         }
         catch (err) {
@@ -287,10 +289,34 @@ function sendAndSpeak(refmsg: Discord.Message, msg: string) {
 }
 
 function sendRandomQuote(channel: Channels): string {
-    let tosentmsg = randomQuote()
-    channel.send(`${tosentmsg}`)
-    logconsole(`Sent message : ${tosentmsg}`)
-    return tosentmsg
+    let tObj = getRandomQuote()
+    let toSent = tObj[0]
+    let inExpr = tObj[1]
+    channel.send(toSent)
+    logconsole(`Sent ${inExpr} : ${toSent}`)
+    return toSent
+}
+
+function getRandomQuote(): [string, string] {
+    let totalQuoteLength = localQuoteArray.length + onlineQuoteArray.length
+    let randIndex = Math.floor(Math.random() * totalQuoteLength)
+
+    return getQuoteAtIndex(randIndex)
+}
+
+function getQuoteAtIndex(index: number): [string, string] {
+    let tosentmsg: string
+    let indexExpr: string
+    if (index < localQuoteArray.length) {
+        tosentmsg = localQuoteArray[index]
+        indexExpr = `Local Quote #${index}`
+    }
+    else {
+        let tIndex = index - localQuoteArray.length
+        tosentmsg = onlineQuoteArray[tIndex]
+        indexExpr = `Online Quote #${tIndex}`
+    }
+    return [tosentmsg, indexExpr]
 }
 
 // * All other support function
@@ -302,11 +328,6 @@ function isชังชาติ(msg: Discord.Message): boolean {
         }
     }
     return false
-}
-
-function randomQuote(): string {
-    let randIndex = Math.floor(Math.random() * quoteArray.length)
-    return quoteArray[randIndex]
 }
 
 function randomSong(channel: Channels, index = -1) {
@@ -393,8 +414,11 @@ function debug(commandstr: string) {
     try {
         switch (command[0]) {
             case "quote":
-                lastchannel.send(quoteArray[parseInt(command[1])])
-                logconsole(`quote : Sent quote #${parseInt(command[1])}`, "DEBUG")
+                let tObjQ = getQuoteAtIndex(parseInt(command[1]))
+                let toSentQ = tObjQ[0]
+                let inExprQ = tObjQ[1]
+                lastchannel.send(toSentQ)
+                logconsole(`quote : Sent ${inExprQ}`, "DEBUG")
                 break
             case "say":
                 let sayarr = commandstr.slice(4)
@@ -406,8 +430,11 @@ function debug(commandstr: string) {
                 speak(speakarr, true)
                 break
             case "speakquote":
-                speak(quoteArray[parseInt(command[1])])
-                logconsole(`speakquote : Spoke quote #${parseInt(command[1])}`, "DEBUG")
+                let tObjS = getQuoteAtIndex(parseInt(command[1]))
+                let toSentS = tObjS[0]
+                let inExprS = tObjS[1]
+                speak(toSentS)
+                logconsole(`speakquote : Spoke ${inExprS}`, "DEBUG")
                 break
             case "salim":
                 let tosendmsg = sendRandomQuote(lastchannel)
@@ -445,12 +472,15 @@ function debug(commandstr: string) {
                         let queryCount = parseInt(command[3])
                         console.log(`QUERY: Quotes #${startIndex}-${startIndex + queryCount - 1}`)
                         for (let i = startIndex; i < startIndex + queryCount; i++) {
-                            console.log(`Quote #${i} : ${quoteArray[i]}`)
+                            let aqObj = getQuoteAtIndex(i)
+                            let toSent = aqObj[0]
+                            let inExpr = aqObj[1]
+                            console.log(`${inExpr} : ${toSent}`)
                         }
                         logconsole("Query for Quotes Completed", "DEBUG")
                         break
                     case "quotecount":
-                        console.log(`There are ${quoteArray.length} quotes`)
+                        console.log(`There are ${localQuoteArray.length + onlineQuoteArray.length} quotes`)
                         logconsole("Query for Quotes Count Completed", "DEBUG")
                         break
                     case "sentmsg":
@@ -485,9 +515,13 @@ function debug(commandstr: string) {
             case "findquote":
                 let toFind = command[1]
                 console.log(`Showing quote containing ${toFind}`)
-                for (let i = 0; i < quoteArray.length; i++) {
-                    if (quoteArray[i].includes(toFind))
-                        console.log(`Quote #${i} : ${quoteArray[i]}`)
+                let totalQuoteLength = localQuoteArray.length + onlineQuoteArray.length
+                for (let i = 0; i < totalQuoteLength; i++) {
+                    let aqObj = getQuoteAtIndex(i)
+                    let toSent = aqObj[0]
+                    let inExpr = aqObj[1]
+                    if (toSent.includes(toFind))
+                        console.log(`${inExpr} : ${toSent}`)
                 }
                 logconsole(`Query for quote containing ${toFind} completed`, "DEBUG")
                 break
