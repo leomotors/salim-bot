@@ -418,7 +418,7 @@ function debug(commandstr: string) {
                 let toSentQ = tObjQ[0]
                 let inExprQ = tObjQ[1]
                 lastchannel.send(toSentQ)
-                logconsole(`quote : Sent ${inExprQ}`, "DEBUG")
+                logconsole(`quote : Sent ${inExprQ} (${toSentQ})`, "DEBUG")
                 break
             case "say":
                 let sayarr = commandstr.slice(4)
