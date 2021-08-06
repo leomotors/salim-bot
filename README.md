@@ -75,17 +75,19 @@ To Implement this bot, here are dependencies.
 
 Discord, @discordjs/opus, node-fetch, chalk, typescript
 
+```
+npm install
+```
+
 ### Required Python Package
 
-**gTTS** : ```pip3 install gTTS```
+gTTS, pytube, pydub
 
-**pytube** : ```pip3 install pytube```
+```
+pip3 install -r requirements.txt
+```
 
-**pydub** : ```pip3 install pydub```
-
-**Note**: These commands are for linux, for Windows please use appropriate installation method.
-
-**Notice**: If the bot have hard time playing song from YouTube. That is pytube's issues and I can't do anything with it.
+**Notice**: If the bot fails on playing music, pytube may be broken and we'll need to wait for their bug fixes.
 
 ## 🤖 How to train น้อน
 
