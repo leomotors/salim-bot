@@ -390,7 +390,7 @@ function playYoutube(url: string, isDebug = false) {
             return
         }
         let ytname = stdout
-        VCconnection.play('./temp/tempmusic.mp4')
+        VCconnection.play('./temp/tempmusic')
         logconsole(`Start playing ${ytname} (YouTube) on current channel`, debugstr)
     })
 }
