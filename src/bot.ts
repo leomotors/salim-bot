@@ -212,7 +212,7 @@ function evaluateMessage(msg: Discord.Message) {
         }
         else {
             let trainstr = msg.content.slice(0).replace("\n", " ")
-            fs.appendFile(`../python/train.txt`, trainstr.slice(7) + "\n", (err) => {
+            fs.appendFile(`./python/train.txt`, trainstr.slice(7) + "\n", (err) => {
                 if (err)
                     console.log(chalk.red(`[TRAIN ERROR] Error on writing log file: ${err}`))
             })
