@@ -7,6 +7,9 @@
     "type": "git",
     "url": "git+https://github.com/Leomotors/Salim-Bot.git"
   },
+  "scripts": {
+    "start": "node dist/src/bot.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

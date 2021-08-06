@@ -39,7 +39,7 @@ In case you want to (not recommend)
   **Note**: There maybe compilation error on some devices like raspberry pi,
    my solution is to compile it in linux and transfer compiled one to run
 
-* Run the bot with nodejs: ```node dist/src/bot.js```
+* Run the bot with nodejs: ```npm start```
 
 **Note**: If your system doesn't use `python3` for Python 3, don't forget to set its prefix in `bot_settings.json`
 
