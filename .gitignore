@@ -122,4 +122,6 @@ assets/json/salim.json
 backup
 
 # My own automation
-copy.sh
+*.sh
+!fileinit.sh
+!rmtemp.sh
