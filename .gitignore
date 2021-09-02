@@ -114,9 +114,9 @@ topsecret.txt
 todo.txt
 train.txt
 
-# Local Quotes
-assets/json/morequotes.json
-assets/json/salim.json
+# Local Data, gitignored for safety reason
+data/morequotes.json
+data/salim.json
 
 # Backup
 backup
