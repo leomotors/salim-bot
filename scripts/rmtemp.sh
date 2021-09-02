@@ -1,5 +1,6 @@
+#!/bin/bash
 
-# * rmtemp.sh
+# * rmtemp.sh: This script should be run from project root directory
 # * To Remove ONLY Temp Files: Do ./rmtemp.sh or ./rmtemp.sh temp
 # * To Remove ONLY Log Files: Do ./rmtemp.sh log
 # * To Remove BOTH Temp and Log Files: Do ./rmtemp.sh all

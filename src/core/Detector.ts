@@ -13,7 +13,7 @@ export class Detector {
                 Logger.log(`Detector @ constructor: ${err}`);
             }
 
-            const kwff: string[] = JSON.parse(data.toString()).ชังชาติ;
+            const kwff: string[] = JSON.parse(data).ชังชาติ;
 
             for (const kw of kwff) {
                 if (this.keywords.includes(kw)) {

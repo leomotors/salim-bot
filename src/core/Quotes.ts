@@ -11,7 +11,7 @@ interface QuoteOptions {
     useLocal?: boolean
 }
 
-// * Traceback of GetRandomQuote
+// * Return Type of GetRandomQuote
 interface QuoteID {
     type: "ASQ" | "Local",
     id: number

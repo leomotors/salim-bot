@@ -22,13 +22,15 @@ client.on("ready", () => {
 });
 
 try {
-    const authjs: Buffer = fs.readFileSync("./auth.json");
+    const authjs: Buffer = fs.readFileSync("./config/auth.json");
     const token: string = JSON.parse(authjs.toString()).token;
     client.login(token);
     Logger.log("Successfully grabbed token and have attempt login", "NORMAL", false);
 }
 catch (err) {
-    Logger.log(`Error Occured: ${err}`, "ERROR", false);
+    Logger.log(`Error Occured at Login Process: ${err}`, "ERROR", false);
+    client.destroy();
+    process.exit(1);
 }
 
 client.on("messageCreate", onMessage);

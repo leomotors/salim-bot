@@ -8,7 +8,8 @@
     "doc": "docs"
   },
   "scripts": {
-    "start": "node  --es-module-specifier-resolution=node dist/bot.js"
+    "start": "node  --es-module-specifier-resolution=node dist/bot.js",
+    "clean": "./scripts/rmtemp.sh all"
   },
   "repository": {
     "type": "git",
