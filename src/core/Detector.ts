@@ -1,8 +1,7 @@
-// * Detector.ts
-
-// * Take care of Detecting ชังชาติ
+// * Detector.ts : Take care of Detecting ชังชาติ
 
 import * as fs from "fs";
+import { Logger } from "../utils/Logger";
 
 export class Detector {
     keywords: string[] = [];
@@ -11,14 +10,14 @@ export class Detector {
     constructor() {
         fs.readFile("./data/keywords.json", "utf-8", (err, data) => {
             if (err) {
-                console.log(`Detector @ constructor: ${err}`);
+                Logger.log(`Detector @ constructor: ${err}`);
             }
 
             const kwff: string[] = JSON.parse(data.toString()).ชังชาติ;
 
             for (const kw of kwff) {
                 if (this.keywords.includes(kw)) {
-                    console.log(`[IMPORT WARNING] Duplicate Quote: ${kw}`);
+                    Logger.log(`[IMPORT WARNING] Duplicate Keywords: ${kw}`, "WARNING", false);
                 }
                 else {
                     this.keywords.push(kw);

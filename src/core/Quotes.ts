@@ -2,6 +2,7 @@
 
 import * as fs from "fs";
 import fetch from "node-fetch";
+import { Logger } from "../utils/Logger";
 
 const SalimAPI = "https://watasalim.vercel.app/api/quotes";
 
@@ -33,7 +34,7 @@ export class Quotes {
             this.importQuotes(useASQ, useLocal);
         }
         else {
-            console.log("WARNING: This Bot lost the ability to Assault because Quotes are both disabled");
+            Logger.log("WARNING: This Bot lost the ability to Assault because Quotes are both disabled", "WARNING", false);
         }
     }
 
@@ -55,16 +56,16 @@ export class Quotes {
                 for (const elem of quotes.quotes) {
                     const quote = elem.body;
                     if (this.asq_quotes.includes(quote)) {
-                        console.log(`[IMPORT ONLINE WARNING] Duplicate Quote: ${quote}`);
+                        Logger.log(`[IMPORT ONLINE WARNING] Duplicate Quote: ${quote}`, "WARNING", false);
                     }
                     else {
                         this.asq_quotes.push(quote);
                     }
                 }
-                console.log("[FETCH COMPLETE] Retrieved Awesome Salim Quotes");
+                Logger.log("[FETCH COMPLETE] Retrieved Awesome Salim Quotes", "SUCCESS", false);
             }
             catch (err) {
-                console.log(`Quotes @ importQuotes: ${err}`);
+                Logger.log(`Quotes @ importQuotes: ${err}`, "ERROR", false);
             }
         }
 
@@ -75,19 +76,19 @@ export class Quotes {
 
                 for (const quote of data) {
                     if (this.asq_quotes.includes(quote)) {
-                        console.log(`[IMPORT LOCAL WARNING] Duplicate with ASQ: ${quote}`);
+                        Logger.log(`[IMPORT LOCAL WARNING] Duplicate with ASQ: ${quote}`, "WARNING", false);
                     }
                     else if (this.local_quotes.includes(quote)) {
-                        console.log(`[IMPORT LOCAL WARNING] Duplicate Quote: ${quote}`);
+                        Logger.log(`[IMPORT LOCAL WARNING] Duplicate Quote: ${quote}`, "WARNING", false);
                     }
                     else {
                         this.local_quotes.push(quote);
                     }
                 }
 
-                console.log("[FETCH COMPLETE] Retrieved Local Quotes");
+                Logger.log("[FETCH COMPLETE] Retrieved Local Quotes");
             } catch (err) {
-                console.log(`Quotes @ importQuotes: ${err}`);
+                Logger.log(`Quotes @ importQuotes: ${err}`, "SUCCESS", false);
             }
         }
 
@@ -112,7 +113,7 @@ export class Quotes {
             };
         }
         else {
-            console.log(`[WTF HOW? TYPESCRIPT! EXPLAIN ME!] Unexpected ID Type of ${id.type}`);
+            Logger.log(`[WTF HOW? TYPESCRIPT! EXPLAIN ME!] Unexpected ID Type of ${id.type}`, "ERROR", false);
             return {
                 "quote": "I'm Broken, Blame Microsoft",
                 "id": id

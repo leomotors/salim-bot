@@ -6,26 +6,29 @@ import { Client, Message } from "discord.js";
 
 import { Detector } from "./core/Detector";
 import { Quotes } from "./core/Quotes";
+import { Logger } from "./utils/Logger";
 
 import * as fs from "fs";
 
 const detector = new Detector();
 const quotes = new Quotes({});
 
+Logger.construct();
+
 const client: Client = new Client({ intents: ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES"] });
 
 client.on("ready", () => {
-    console.log(`Successfully logged in as ${client.user?.tag}`);
+    Logger.log(`Successfully logged in as ${client.user?.tag}`, "SUCCESS", false);
 });
 
 try {
     const authjs: Buffer = fs.readFileSync("./auth.json");
     const token: string = JSON.parse(authjs.toString()).token;
     client.login(token);
-    console.log("Successfully grabbed token and have attempt login");
+    Logger.log("Successfully grabbed token and have attempt login", "NORMAL", false);
 }
 catch (err) {
-    console.log(`Error Occured: ${err}`);
+    Logger.log(`Error Occured: ${err}`, "ERROR", false);
 }
 
 client.on("messageCreate", onMessage);
@@ -36,14 +39,14 @@ function onMessage(msg: Message) {
         return;
     }
 
-    console.log(`Incoming Message from ${msg.author.tag} : ${msg.content}`);
+    Logger.log(`Incoming Message from ${msg.author.tag} : ${msg.content}`);
 
     if (detector.isชังชาติ(msg.content)) {
-        console.log(`ชังชาติ detector detected ${detector.last_detected}`);
+        Logger.log(`ชังชาติ detector detected ${detector.last_detected}`);
         const quote = quotes.getQuote();
         msg.channel.send(`${quote.quote} (${quote.id.type} #${quote.id.id})`);
         return;
     }
 }
 
-console.log("[SETUP COMPLETE] bot.ts control flow ended.");
+Logger.log("[SETUP COMPLETE] bot.ts control flow ended.", "SUCCESS", false);
