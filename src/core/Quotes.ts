@@ -78,7 +78,7 @@ export class Quotes {
                     this.local_quotes.push(quote);
                 }
 
-                Logger.log("[FETCH COMPLETE] Retrieved Local Quotes");
+                Logger.log("[FETCH COMPLETE] Retrieved Local Quotes", "SUCCESS", false);
             } catch (err) {
                 Logger.log(`Quotes @ importQuotes: ${err}`, "ERROR", false);
                 Logger.log("Local Quotes not found: You can read instructions for how to add Local Quotes or disable this Warning by disable Local Quotes at Settings", "WARNING", false);

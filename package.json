@@ -1,6 +1,6 @@
 {
   "name": "salim-bot",
-  "version": "2.0.290",
+  "version": "2.0.300",
   "description": "This bot is Salim. Whenever you trigger it, It become mad.",
   "type": "module",
   "main": "dist/bot.js",
@@ -31,7 +31,6 @@
   },
   "dependencies": {
     "@discordjs/voice": "^0.6.0",
-    "@google-cloud/text-to-speech": "^3.3.0",
     "chalk": "^4.1.2",
     "discord.js": "^13.1.0",
     "node-fetch": "^3.0.0"

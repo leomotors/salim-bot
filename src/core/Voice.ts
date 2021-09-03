@@ -2,20 +2,27 @@
 
 import { GuildMember, VoiceState, VoiceChannel } from "discord.js";
 import { Logger } from "../utils/Logger";
-import { joinVoiceChannel, VoiceConnection } from "@discordjs/voice";
+import {
+    AudioPlayer,
+    AudioResource,
+    createAudioPlayer,
+    createAudioResource,
+    joinVoiceChannel,
+    //StreamType,
+    VoiceConnection
+} from "@discordjs/voice";
 import { createDiscordJSAdapter } from "../lib/Adapter";
-import { TextToSpeechClient } from "@google-cloud/text-to-speech";
+import { exec } from "child_process";
 
 export class Voice {
     static connection: VoiceConnection;
-    static ttsClient: TextToSpeechClient;
+    static player: AudioPlayer = createAudioPlayer();
 
-    static construct(): void {
-        const ttsClient = new TextToSpeechClient();
-        Voice.ttsClient = ttsClient;
-    }
+    // static construct(): void {
 
-    static joinTo(member: GuildMember): boolean {
+    // }
+
+    static async joinTo(member: GuildMember): Promise<boolean> {
         const voicestate: VoiceState = member.voice;
         const channel = voicestate.channel;
 
@@ -31,7 +38,9 @@ export class Voice {
                 adapterCreator: createDiscordJSAdapter(<VoiceChannel>channel)
             });
 
+            Logger.log(`Entered Voice Channel ${channel.name}`, "SUCCESS");
             Voice.connection = connection;
+            Voice.connection.subscribe(Voice.player);
             return true;
         }
         else {
@@ -39,11 +48,26 @@ export class Voice {
         }
     }
 
-    static async tts(message: string): Promise<void> {
-        const request = {
-            input: { text: message },
-            voice: { languageCode: "th-TH", ssmlGender: "NEUTRAL" },
-            audioConfig: { audioEncoding: "MP3" }
-        };
+    static tts(message: string): void {
+        exec(`echo ${message} | python3 ./scripts/tts.py`, (error, stdout, stderr) => {
+            if (error || stderr) {
+                Logger.log(`Error Executing Python Script (tts): ${error?.message}${stderr ?? ""}`, "ERROR");
+                return;
+            }
+
+            const resource = createAudioResource("./temp/tts.mp3");
+            Voice.playAudio(resource);
+        });
+    }
+
+    static playAudio(data: AudioResource<null>): boolean {
+        try {
+            Voice.player.play(data);
+            return true;
+        }
+        catch (error) {
+            Logger.log(`Error playing Audio: ${error}`, "ERROR");
+            return false;
+        }
     }
 }

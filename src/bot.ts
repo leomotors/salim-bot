@@ -2,13 +2,14 @@
  * * bot.ts -> Main of Bot (Run this with npm start)
  */
 
-import { Client, Message } from "discord.js";
+import { Message } from "discord.js";
 import { BotClient } from "./core/Client";
 
 import { Detector } from "./core/Detector";
 import { Quotes } from "./core/Quotes";
 import { Logger } from "./utils/Logger";
 import { PackageInfo } from "./constants/PackageInfo";
+import { Voice } from "./core/Voice";
 
 import * as fs from "fs";
 
@@ -18,7 +19,7 @@ const quotes = new Quotes({});
 Logger.construct();
 PackageInfo.construct();
 
-const client: Client = new BotClient({ intents: ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES"] });
+const client: BotClient = new BotClient({ intents: ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES"] });
 
 try {
     const authjs: Buffer = fs.readFileSync("./config/auth.json");
@@ -43,10 +44,17 @@ function onMessage(msg: Message) {
 
     Logger.log(`Incoming Message from ${msg.author.tag} : ${msg.content}`);
 
+    if (msg.content.startsWith("!salim")) {
+        if (msg.member)
+            Voice.joinTo(msg.member);
+        return;
+    }
+
     if (detector.isชังชาติ(msg.content)) {
         Logger.log(`ชังชาติ detector detected ${detector.last_detected}`);
         const quote = quotes.getQuote();
         msg.channel.send(`${quote.quote} (${quote.id.type} #${quote.id.id})`);
+        Voice.tts(quote.quote);
         return;
     }
 }
