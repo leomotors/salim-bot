@@ -18,8 +18,9 @@ const quotes = new Quotes({});
 
 Logger.construct();
 PackageInfo.construct();
+//Voice.construct();
 
-const client: BotClient = new BotClient({ intents: ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES"] });
+const client: BotClient = new BotClient();
 
 try {
     const authjs: Buffer = fs.readFileSync("./config/auth.json");
@@ -34,7 +35,7 @@ catch (err) {
     process.exit(1);
 }
 
-client.on("messageCreate", onMessage);
+client.on("message", onMessage);
 
 function onMessage(msg: Message) {
     if (msg.author == client.user) {
@@ -44,11 +45,11 @@ function onMessage(msg: Message) {
 
     Logger.log(`Incoming Message from ${msg.author.tag} : ${msg.content}`);
 
-    if (msg.content.startsWith("!salim")) {
-        if (msg.member)
-            Voice.joinTo(msg.member);
-        return;
-    }
+    // if (msg.content.startsWith("!salim")) {
+    //     if (msg.member)
+    //         Voice.joinTo(msg.member);
+    //     return;
+    // }
 
     if (detector.isชังชาติ(msg.content)) {
         Logger.log(`ชังชาติ detector detected ${detector.last_detected}`);

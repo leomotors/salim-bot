@@ -1,6 +1,6 @@
 {
   "name": "salim-bot",
-  "version": "2.0.300",
+  "version": "2.0.320",
   "description": "This bot is Salim. Whenever you trigger it, It become mad.",
   "type": "module",
   "main": "dist/bot.js",
@@ -10,7 +10,7 @@
   "scripts": {
     "build": "tsc --build",
     "start": "node  --es-module-specifier-resolution=node dist/bot.js",
-    "clean": "./scripts/rmtemp.sh all"
+    "clean": "./scripts/rmtemp.sh all && rm -r dist"
   },
   "repository": {
     "type": "git",
@@ -23,16 +23,22 @@
   },
   "homepage": "https://github.com/Leomotors/Salim-Bot",
   "devDependencies": {
-    "@types/node-fetch": "^2.5.12",
+    "@types/node": "^16.7.10",
     "@typescript-eslint/eslint-plugin": "^4.30.0",
     "@typescript-eslint/parser": "^4.30.0",
     "eslint": "^7.32.0",
     "typescript": "^4.4.2"
   },
   "dependencies": {
-    "@discordjs/voice": "^0.6.0",
+    "@discordjs/opus": "^0.5.3",
+    "bufferutil": "^4.0.3",
     "chalk": "^4.1.2",
-    "discord.js": "^13.1.0",
-    "node-fetch": "^3.0.0"
+    "discord.js": "^12.5.3",
+    "libsodium-wrappers": "^0.7.9",
+    "node-fetch": "^3.0.0",
+    "opusscript": "^0.0.8",
+    "tweetnacl": "^1.0.3",
+    "utf-8-validate": "^5.0.5",
+    "zlib-sync": "^0.1.7"
   }
 }
