@@ -125,3 +125,5 @@ backup
 *.sh
 !fileinit.sh
 !rmtemp.sh
+
+.vscode

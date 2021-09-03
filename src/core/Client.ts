@@ -15,5 +15,6 @@ export class BotClient extends Client {
                 "type": "PLAYING"
             });
         });
+        this.on("error", console.warn);
     }
 }
