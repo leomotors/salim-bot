@@ -3,10 +3,12 @@
  */
 
 import { Client, Message } from "discord.js";
+import { BotClient } from "./core/Client";
 
 import { Detector } from "./core/Detector";
 import { Quotes } from "./core/Quotes";
 import { Logger } from "./utils/Logger";
+import { PackageInfo } from "./constants/PackageInfo";
 
 import * as fs from "fs";
 
@@ -14,12 +16,9 @@ const detector = new Detector();
 const quotes = new Quotes({});
 
 Logger.construct();
+PackageInfo.construct();
 
-const client: Client = new Client({ intents: ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES"] });
-
-client.on("ready", () => {
-    Logger.log(`Successfully logged in as ${client.user?.tag}`, "SUCCESS", false);
-});
+const client: Client = new BotClient({ intents: ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES"] });
 
 try {
     const authjs: Buffer = fs.readFileSync("./config/auth.json");
@@ -29,6 +28,7 @@ try {
 }
 catch (err) {
     Logger.log(`Error Occured at Login Process: ${err}`, "ERROR", false);
+    Logger.log("Have you put your token in ./config/auth.json? Read instructions for more info", "WARNING", false);
     client.destroy();
     process.exit(1);
 }

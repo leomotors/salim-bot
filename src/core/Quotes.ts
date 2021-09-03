@@ -75,20 +75,13 @@ export class Quotes {
                 const data: string[] = JSON.parse(buffer.toString()).วาทกรรมสลิ่ม;
 
                 for (const quote of data) {
-                    if (this.asq_quotes.includes(quote)) {
-                        Logger.log(`[IMPORT LOCAL WARNING] Duplicate with ASQ: ${quote}`, "WARNING", false);
-                    }
-                    else if (this.local_quotes.includes(quote)) {
-                        Logger.log(`[IMPORT LOCAL WARNING] Duplicate Quote: ${quote}`, "WARNING", false);
-                    }
-                    else {
-                        this.local_quotes.push(quote);
-                    }
+                    this.local_quotes.push(quote);
                 }
 
                 Logger.log("[FETCH COMPLETE] Retrieved Local Quotes");
             } catch (err) {
-                Logger.log(`Quotes @ importQuotes: ${err}`, "SUCCESS", false);
+                Logger.log(`Quotes @ importQuotes: ${err}`, "ERROR", false);
+                Logger.log("Local Quotes not found: You can read instructions for how to add Local Quotes or disable this Warning by disable Local Quotes at Settings", "WARNING", false);
             }
         }
 
