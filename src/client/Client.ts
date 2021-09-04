@@ -1,9 +1,11 @@
 // * Client.ts : Heart of the Bot
 
-import { Client } from "discord.js";
+import { Client, Message } from "discord.js";
+import * as fs from "fs";
 
 import { Logger } from "../utils/Logger";
 import { PackageInfo } from "../constants/PackageInfo";
+import { MessageHandler } from "../responses/MessageHandler";
 
 export class BotClient extends Client {
     constructor() {
@@ -17,5 +19,31 @@ export class BotClient extends Client {
             });
         });
         this.on("error", console.warn);
+    }
+
+    async attemptLogin(filepath: string): Promise<void> {
+        try {
+            const authjs: Buffer = fs.readFileSync(filepath);
+            const token: string = JSON.parse(authjs.toString()).token;
+            this.login(token);
+            Logger.log("Successfully grabbed token and have attempt login", "NORMAL", false);
+        }
+        catch (err) {
+            Logger.log(`Error Occured at Login Process: ${err}`, "ERROR", false);
+            Logger.log("Have you put your token in ./config/auth.json? Read instructions for more info", "WARNING", false);
+            this.destroy();
+            process.exit(1);
+        }
+    }
+
+    implementsMessageHandler(handler: MessageHandler): void {
+        this.on("message", (msg: Message) => {
+            if (msg.author == this.user) {
+                // * Own Message: Ignore it
+                return;
+            }
+
+            handler.getFunction()(msg);
+        });
     }
 }

@@ -23,10 +23,15 @@ export class Voice {
             }
 
             try {
+                const oldChannelName = Voice.connection?.channel.name;
+
                 Voice.connection = await voiceChannel.join();
-                Logger.log(`Successfully join ${Voice.connection.channel.name}`, "SUCCESS");
+                if (oldChannelName)
+                    Logger.log(`Successfully moved from ${oldChannelName} to ${Voice.connection.channel.name}`, "SUCCESS");
+                else
+                    Logger.log(`Successfully join ${Voice.connection.channel.name}`, "SUCCESS");
                 Voice.tts(JoiningMessage);
-                return true;
+                return Voice.resolveConnection();
             }
             catch (error) {
                 Logger.log(`Cannot pursue ${member.user.tag} because ${voiceChannel.name} is not joinable : ${error}`, "ERROR");
@@ -34,12 +39,23 @@ export class Voice {
             }
         }
         else {
-            Logger.log(`Cannot pursue ${member.user.tag} because user is not in voice channel`, "ERROR");
+            Logger.log(`Cannot pursue ${member.user.tag} because user is not in Voice Channel of ${member.guild.name}`, "ERROR");
             return false;
         }
     }
 
-    // * Run Text to Speech and play it in current voice channel
+    // * Run Text to Speech and play it in current voice channel if it exists
+    static sayTo(member: GuildMember | null, message: string): void {
+        const targetChannel = member?.voice?.channel;
+        if (targetChannel == null) {
+            return;
+        }
+
+        if (targetChannel == Voice.connection?.channel) {
+            Voice.tts(message);
+        }
+    }
+
     static tts(message: string): void {
         if (!Voice.resolveConnection()) return;
 
