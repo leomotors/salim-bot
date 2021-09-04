@@ -1,6 +1,6 @@
 {
   "name": "salim-bot",
-  "version": "2.0.333",
+  "version": "2.0.335",
   "description": "This bot is Salim. Whenever you trigger it, It become mad.",
   "type": "module",
   "main": "dist/bot.js",
@@ -36,8 +36,10 @@
     "bufferutil": "^4.0.3",
     "chalk": "^4.1.2",
     "discord.js": "^12.5.3",
+    "ffmpeg-static": "^4.4.0",
     "libsodium-wrappers": "^0.7.9",
     "node-fetch": "^3.0.0",
+    "node-opus": "^0.3.3",
     "opusscript": "^0.0.8",
     "tweetnacl": "^1.0.3",
     "utf-8-validate": "^5.0.5",

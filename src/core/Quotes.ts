@@ -101,13 +101,13 @@ export class Quotes {
 
         if (id.type == "ASQ") {
             return {
-                "quote": this.asq_quotes[id.id],
+                "quote": this.asq_quotes[id.id - 1],
                 "id": id
             };
         }
         else if (id.type == "Local") {
             return {
-                "quote": this.local_quotes[id.id],
+                "quote": this.local_quotes[id.id - 1],
                 "id": id
             };
         }
@@ -128,14 +128,14 @@ export class Quotes {
             // * Sending ASQ Quotes
             return {
                 "type": "ASQ",
-                "id": randIndex
+                "id": randIndex + 1
             };
         }
         else {
             // * Sending Local Quotes
             return {
                 "type": "Local",
-                "id": randIndex - this.asq_quotes.length
+                "id": randIndex - this.asq_quotes.length + 1
             };
         }
     }

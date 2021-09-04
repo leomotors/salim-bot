@@ -41,6 +41,20 @@ In case you want to (not recommend)
 
 - blah blah blah
 
+## 🌳 My Environment
+
+### Developing Environment
+
+- Ubuntu 20.04.3 LTS on Windows 11 (AMD64) Build 22000 (WSL2 Kernel: 5.10.43.3)
+
+- node 16.8.0, npm 7.22.0, tsc 4.4.2
+
+### Bot Running environment
+
+- Raspbian 10 on Raspberry Pi 3 A+ (Kernel: 5.10.52-v7+)
+
+- node 16.8.0, npm 7.22.0, tsc 4.4.2
+
 ## 🙏 Spread the hype!
 
 <img src="./assets/images/long-live-hm-queen.jpg" alt="#ทรงพระเจริญ">
