@@ -41,6 +41,7 @@ export class Quotes {
     async importQuotes(useASQ: boolean, useLocal: boolean): Promise<void> {
         if (useASQ) {
             try {
+                let dupl = 0;
                 const response = await fetch(SalimAPI, {
                     method: "GET",
                     headers: { "Content-type": "application/json;charset=UTF-8" }
@@ -56,13 +57,14 @@ export class Quotes {
                 for (const elem of quotes.quotes) {
                     const quote = elem.body;
                     if (this.asq_quotes.includes(quote)) {
-                        Logger.log(`[IMPORT ONLINE WARNING] Duplicate Quote: ${quote}`, "WARNING", false);
+                        dupl++;
                     }
-                    else {
-                        this.asq_quotes.push(quote);
-                    }
+                    this.asq_quotes.push(quote);
                 }
-                Logger.log("[FETCH COMPLETE] Retrieved Awesome Salim Quotes", "SUCCESS", false);
+                if (dupl > 0) {
+                    Logger.log(`[IMPORT ONLINE NOTICE] Detected ${dupl} duplicate quotes`, "WARNING", false);
+                }
+                Logger.log(`[FETCH COMPLETE] Retrieved ${this.asq_quotes.length} quotes from Awesome Salim Quotes`, "SUCCESS", false);
             }
             catch (err) {
                 Logger.log(`Quotes @ importQuotes: ${err}`, "ERROR", false);
@@ -75,10 +77,14 @@ export class Quotes {
                 const data: string[] = JSON.parse(buffer.toString()).วาทกรรมสลิ่ม;
 
                 for (const quote of data) {
-                    this.local_quotes.push(quote);
+                    if (this.local_quotes.includes(quote)) {
+                        Logger.log(`[IMPORT WARNING] Duplicate Quote: ${quote}`, "WARNING", false);
+                    }
+                    else
+                        this.local_quotes.push(quote);
                 }
 
-                Logger.log("[FETCH COMPLETE] Retrieved Local Quotes", "SUCCESS", false);
+                Logger.log(`[FETCH COMPLETE] Retrieved ${this.local_quotes.length} quotes from Local Quotes`, "SUCCESS", false);
             } catch (err) {
                 Logger.log(`Quotes @ importQuotes: ${err}`, "ERROR", false);
                 Logger.log("Local Quotes not found: You can read instructions for how to add Local Quotes or disable this Warning by disable Local Quotes at Settings", "WARNING", false);
@@ -114,7 +120,7 @@ export class Quotes {
         }
     }
 
-    _randomEvenly(): QuoteID {
+    private _randomEvenly(): QuoteID {
         const totalLength: number = this.asq_quotes.length + this.local_quotes.length;
         const randIndex = Math.floor(Math.random() * totalLength);
 

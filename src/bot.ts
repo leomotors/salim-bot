@@ -3,8 +3,9 @@
  */
 
 import { Message } from "discord.js";
-import { BotClient } from "./core/Client";
 
+import { BotClient } from "./client/Client";
+import { Console } from "./console/Console";
 import { Detector } from "./core/Detector";
 import { Quotes } from "./core/Quotes";
 import { Logger } from "./utils/Logger";
@@ -13,15 +14,20 @@ import { Voice } from "./core/Voice";
 
 import * as fs from "fs";
 
+// * Construct Begin
 const detector = new Detector();
 const quotes = new Quotes({});
 
 Logger.construct();
 PackageInfo.construct();
 //Voice.construct();
+// * Construct End
 
 const client: BotClient = new BotClient();
 
+Console.construct(client);
+
+// * Login Begin
 try {
     const authjs: Buffer = fs.readFileSync("./config/auth.json");
     const token: string = JSON.parse(authjs.toString()).token;
@@ -34,6 +40,7 @@ catch (err) {
     client.destroy();
     process.exit(1);
 }
+// * Login End
 
 client.on("message", onMessage);
 
@@ -45,11 +52,11 @@ function onMessage(msg: Message) {
 
     Logger.log(`Incoming Message from ${msg.author.tag} : ${msg.content}`);
 
-    // if (msg.content.startsWith("!salim")) {
-    //     if (msg.member)
-    //         Voice.joinTo(msg.member);
-    //     return;
-    // }
+    if (msg.content.startsWith("!salim")) {
+        if (msg.member)
+            Voice.joinTo(msg.member);
+        return;
+    }
 
     if (detector.isชังชาติ(msg.content)) {
         Logger.log(`ชังชาติ detector detected ${detector.last_detected}`);

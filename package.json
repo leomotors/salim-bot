@@ -1,6 +1,6 @@
 {
   "name": "salim-bot",
-  "version": "2.0.320",
+  "version": "2.0.333",
   "description": "This bot is Salim. Whenever you trigger it, It become mad.",
   "type": "module",
   "main": "dist/bot.js",
@@ -8,9 +8,11 @@
     "doc": "docs"
   },
   "scripts": {
+    "install": "pip3 install -r \"requirements.txt\"",
     "build": "tsc --build",
+    "clean": "./scripts/rmtemp.sh all && rm -r dist",
     "start": "node  --es-module-specifier-resolution=node dist/bot.js",
-    "clean": "./scripts/rmtemp.sh all && rm -r dist"
+    "test": "node incrementVersion.js && npm i && npm run build && npm start"
   },
   "repository": {
     "type": "git",
