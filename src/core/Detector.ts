@@ -1,6 +1,7 @@
 // * Detector.ts : Take care of Detecting ชังชาติ
 
 import * as fs from "fs";
+
 import { Logger } from "../utils/Logger";
 
 export class Detector {

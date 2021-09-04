@@ -1,6 +1,7 @@
 // * Settings.ts : Take care of settings
 
 import * as fs from "fs";
+
 import { Logger } from "../utils/Logger";
 
 const defaultSettings = {

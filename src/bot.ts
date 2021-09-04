@@ -3,6 +3,7 @@
  */
 
 import { Message } from "discord.js";
+import * as fs from "fs";
 
 import { BotClient } from "./client/Client";
 import { Console } from "./console/Console";
@@ -11,8 +12,6 @@ import { Quotes } from "./core/Quotes";
 import { Logger } from "./utils/Logger";
 import { PackageInfo } from "./constants/PackageInfo";
 import { Voice } from "./core/Voice";
-
-import * as fs from "fs";
 
 // * Construct Begin
 const detector = new Detector();
@@ -53,8 +52,13 @@ function onMessage(msg: Message) {
     Logger.log(`Incoming Message from ${msg.author.tag} : ${msg.content}`);
 
     if (msg.content.startsWith("!salim")) {
-        if (msg.member)
+        if (msg.member) {
+            // * This is always true but in case some error did happen
             Voice.joinTo(msg.member);
+        }
+        else {
+            Logger.log("message.member is null or undefined", "WARNING");
+        }
         return;
     }
 

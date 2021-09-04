@@ -1,11 +1,9 @@
 // * Voice.ts : Voice Control
 
 import { GuildMember, VoiceConnection } from "discord.js";
+import { exec } from "child_process";
 
 import { Logger } from "../utils/Logger";
-
-import { exec } from "child_process";
-//import path from "path";
 
 const JoiningMessage = "บอทสลิ่มมาแล้ว นะจ๊ะ";
 

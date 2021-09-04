@@ -1,9 +1,9 @@
 // * Logger.ts : Take care of Logging on both console and file
 
-import { getFormattedTime } from "./Time";
-
 import chalk from "chalk";
 import * as fs from "fs";
+
+import { getFormattedTime } from "./Time";
 
 type LogStatus = "NORMAL" | "WARNING" | "ERROR" | "SUCCESS";
 
