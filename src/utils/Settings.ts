@@ -2,7 +2,7 @@
 
 import * as fs from "fs";
 
-import { Logger } from "../utils/Logger";
+import Logger from "../utils/Logger";
 
 const defaultSettings = {
     "allow_vc": true,
@@ -17,7 +17,7 @@ const defaultSettings = {
     "limited_questioning": false
 };
 
-export class Settings {
+export default class Settings {
     static settings: typeof defaultSettings;
 
     static construct(): void {

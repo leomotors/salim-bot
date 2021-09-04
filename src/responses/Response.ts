@@ -2,17 +2,17 @@
 
 import { Message } from "discord.js";
 
-import { BotClient } from "../client/Client";
-import { Detector } from "../core/Detector";
-import { Voice } from "../core/Voice";
-import { Logger } from "../utils/Logger";
-import { Quotes } from "../core/Quotes";
+import BotClient from "../client/Client";
+import Detector from "../core/Detector";
+import Voice from "../core/Voice";
+import Logger from "../utils/Logger";
+import Quotes from "../core/Quotes";
 
-import { MentionQuery } from "./MentionQuery";
-import { QuoteQuery } from "./QuoteQuery";
-import { StaticQuery } from "./StaticQuery";
+import MentionQuery from "./MentionQuery";
+import QuoteQuery from "./QuoteQuery";
+import StaticQuery from "./StaticQuery";
 
-export class Response {
+export default class Response {
     queries: MentionQuery[];
 
     constructor() {

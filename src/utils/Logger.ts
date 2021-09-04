@@ -7,7 +7,7 @@ import { getFormattedTime } from "./Time";
 
 type LogStatus = "NORMAL" | "WARNING" | "ERROR" | "SUCCESS";
 
-export class Logger {
+export default class Logger {
     static file_path: string;
     static file_status = false;
 

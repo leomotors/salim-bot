@@ -3,11 +3,11 @@
 import { GuildMember, VoiceConnection } from "discord.js";
 import { exec } from "child_process";
 
-import { Logger } from "../utils/Logger";
+import Logger from "../utils/Logger";
 
 const JoiningMessage = "บอทสลิ่มมาแล้ว นะจ๊ะ";
 
-export class Voice {
+export default class Voice {
     static connection?: VoiceConnection;
 
     static async joinTo(member: GuildMember): Promise<boolean> {

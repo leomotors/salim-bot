@@ -2,7 +2,7 @@
 
 import * as fs from "fs";
 import fetch from "node-fetch";
-import { Logger } from "../utils/Logger";
+import Logger from "../utils/Logger";
 
 const SalimAPI = "https://watasalim.vercel.app/api/quotes";
 
@@ -22,7 +22,7 @@ interface Quote {
     id: QuoteID
 }
 
-export class Quotes {
+export default class Quotes {
     static asq_quotes: string[] = [];
     static local_quotes: string[] = [];
 

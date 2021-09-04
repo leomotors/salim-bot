@@ -3,11 +3,11 @@
 import { Client, Message } from "discord.js";
 import * as fs from "fs";
 
-import { Logger } from "../utils/Logger";
-import { PackageInfo } from "../constants/PackageInfo";
-import { Response } from "../responses/Response";
+import Logger from "../utils/Logger";
+import PackageInfo from "../constants/PackageInfo";
+import Response from "../responses/Response";
 
-export class BotClient extends Client {
+export default class BotClient extends Client {
     constructor() {
         super();
         this.on("ready", () => {

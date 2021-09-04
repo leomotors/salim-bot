@@ -2,10 +2,10 @@
 
 import readline from "readline";
 
-import { BotClient } from "../client/Client";
-import { Logger } from "../utils/Logger";
+import BotClient from "../client/Client";
+import Logger from "../utils/Logger";
 
-export class Console {
+export default class Console {
     static interface: readline.Interface;
     static client: BotClient;
 

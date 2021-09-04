@@ -2,10 +2,10 @@
 
 import * as fs from "fs";
 
-import { Logger } from "../utils/Logger";
+import Logger from "../utils/Logger";
 import { trim } from "../utils/String";
 
-export class Detector {
+export default class Detector {
     static keywords: string[] = [];
     static last_detected = "";
 

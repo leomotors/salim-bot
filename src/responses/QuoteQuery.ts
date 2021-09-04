@@ -2,13 +2,13 @@
 
 import { Message } from "discord.js";
 
-import { Detector } from "../core/Detector";
-import { Logger } from "../utils/Logger";
-import { MentionQuery } from "./MentionQuery";
-import { Voice } from "../core/Voice";
-import { Quotes } from "../core/Quotes";
+import Detector from "../core/Detector";
+import Logger from "../utils/Logger";
+import MentionQuery from "./MentionQuery";
+import Voice from "../core/Voice";
+import Quotes from "../core/Quotes";
 
-export class QuoteQuery extends MentionQuery {
+export default class QuoteQuery extends MentionQuery {
     constructor() {
         super([
             {

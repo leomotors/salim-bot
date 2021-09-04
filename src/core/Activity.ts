@@ -2,7 +2,7 @@
 
 import * as fs from "fs";
 
-export class Activity {
+export default class Activity {
     static activities = {};
 
     static async construct(): Promise<void> {

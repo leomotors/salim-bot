@@ -9,7 +9,7 @@ interface Query {
     response: (msg: Message) => void;
 }
 
-export class MentionQuery {
+export default class MentionQuery {
     queries: Query[];
     dontSkip: boolean;
 
