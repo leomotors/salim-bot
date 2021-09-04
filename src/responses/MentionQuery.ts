@@ -4,22 +4,33 @@ import { Message } from "discord.js";
 
 import { trim } from "../utils/String";
 
-export class MentionQuery {
-    keywords: string[];
+interface Query {
+    keywords: string[],
     response: (msg: Message) => void;
+}
 
-    constructor(keywords: string[], response: (msg: Message) => void) {
-        this.keywords = keywords;
-        this.response = response;
+export class MentionQuery {
+    queries: Query[];
+    dontSkip: boolean;
+
+    constructor(queries: Query[], dontSkip = false) {
+        this.queries = queries;
+        this.dontSkip = dontSkip;
     }
 
     check(msg: Message): boolean {
-        for (const kw of this.keywords) {
-            if (trim(msg.content).includes(kw)) {
-                this.response(msg);
-                return true;
+        let action_taken = false;
+        for (const query of this.queries) {
+            for (const kw of query.keywords) {
+                if (trim(msg.content).includes(kw)) {
+                    query.response(msg);
+                    if (!this.dontSkip)
+                        return true;
+                    else
+                        action_taken = true;
+                }
             }
         }
-        return false;
+        return action_taken;
     }
 }

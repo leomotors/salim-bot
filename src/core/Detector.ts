@@ -40,4 +40,8 @@ export class Detector {
 
         return false;
     }
+
+    static get keywordsCount(): number {
+        return Detector.keywords.length;
+    }
 }

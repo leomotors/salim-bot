@@ -140,4 +140,8 @@ export class Quotes {
             };
         }
     }
+
+    static get quotesCount(): number {
+        return Quotes.asq_quotes.length + Quotes.local_quotes.length;
+    }
 }
