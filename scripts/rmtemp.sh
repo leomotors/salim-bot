@@ -1,9 +1,8 @@
 #!/bin/bash
 
-# * rmtemp.sh: This script should be run from project root directory
-# * To Remove ONLY Temp Files: Do ./rmtemp.sh or ./rmtemp.sh temp
-# * To Remove ONLY Log Files: Do ./rmtemp.sh log
-# * To Remove BOTH Temp and Log Files: Do ./rmtemp.sh all
+# * rmtemp.sh: This script should be run from npm
+# * npm run clean will clean temp files (and dist)
+# * npm run clearlog will clean log files
 # ! Only for Shell
 
 if [ $# -gt 0 ]
@@ -15,15 +14,10 @@ then if [ $1 = "temp" ]
     then
         rm -f ./log/*
         echo "[rmtemp] Successfully delete all log files."
-    elif [ $1 = "all" ]
-    then
-        rm -f ./temp/*
-        rm -f ./log/*
-        echo "[rmtemp] Successfully delete all temp and log files."
     else
-        echo "[rmtemp] Unknown Arguments"
+        echo "[rmtemp] Unknown Arguments. Also, please run this from npm"
     fi
 else
     rm -f ./temp/*
-        echo "[rmtemp] Successfully delete all temp files."
+        echo "[rmtemp] Successfully delete all temp files. Also, please run this from npm"
 fi
