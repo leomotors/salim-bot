@@ -3,6 +3,7 @@
 import * as fs from "fs";
 
 import { Logger } from "../utils/Logger";
+import { trim } from "../utils/String";
 
 export class Detector {
     static keywords: string[] = [];
@@ -28,7 +29,7 @@ export class Detector {
     }
 
     static isชังชาติ(message: string): boolean {
-        message = message.replace(/^\s+/, "").toLowerCase();
+        message = trim(message);
 
         for (const kw of Detector.keywords) {
             if (message.includes(kw)) {

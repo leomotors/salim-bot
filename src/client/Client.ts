@@ -5,7 +5,7 @@ import * as fs from "fs";
 
 import { Logger } from "../utils/Logger";
 import { PackageInfo } from "../constants/PackageInfo";
-import { MessageHandler } from "../responses/MessageHandler";
+import { Response } from "../responses/Response";
 
 export class BotClient extends Client {
     constructor() {
@@ -36,14 +36,9 @@ export class BotClient extends Client {
         }
     }
 
-    implementsMessageHandler(handler: MessageHandler): void {
+    implementsResponse(handler: Response): void {
         this.on("message", (msg: Message) => {
-            if (msg.author == this.user) {
-                // * Own Message: Ignore it
-                return;
-            }
-
-            handler.getFunction()(msg);
+            handler.getFunction(this)(msg);
         });
     }
 }

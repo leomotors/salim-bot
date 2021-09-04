@@ -8,7 +8,7 @@ import { Detector } from "./core/Detector";
 import { Quotes } from "./core/Quotes";
 import { Logger } from "./utils/Logger";
 import { PackageInfo } from "./constants/PackageInfo";
-import { MessageHandler } from "./responses/MessageHandler";
+import { Response } from "./responses/Response";
 
 // * Initialize Begin
 Detector.construct();
@@ -18,12 +18,12 @@ Logger.construct();
 PackageInfo.construct();
 
 const client: BotClient = new BotClient();
-const msgHandler = new MessageHandler();
+const msgHandler = new Response();
 
 Console.construct(client);
 // * Initialize End
 
 client.attemptLogin("./config/auth.json");
-client.implementsMessageHandler(msgHandler);
+client.implementsResponse(msgHandler);
 
-Logger.log("[SETUP COMPLETE] bot.ts control flow ended.", "SUCCESS", false);
+Logger.log("[SETUP COMPLETE] bot.ts control reach the end of file", "SUCCESS", false);
