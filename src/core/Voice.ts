@@ -69,11 +69,11 @@ export default class Voice {
         Logger.log(`[SHELL] Executing ${sh}`);
         exec(sh, (error, stdout, stderr) => {
             if (error || stderr) {
-                Logger.log(`Error Executing Python Script (tts): ${error?.message}${stderr ?? ""}`, "ERROR");
+                Logger.log(`Error Executing Python Script (tts): ${error?.message}`, "ERROR");
                 return;
             }
 
-            Voice.connection?.play("./temp/tts.mp3", { volume: 1 });
+            Voice.connection?.play("./temp/tts.mp3", { volume: 1.5 });
             Logger.log(`tts: Speaking "${message}" on ${Voice.connection?.channel.name}`);
         });
     }

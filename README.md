@@ -37,13 +37,13 @@ In case you want to (not recommend)
 
   ```git clone https://github.com/Leomotors/Salim-Bot/```
 
-- Install Packages with ```npm install```
+- Run ```npm run salim``` and you get your bot running!
 
-- Build Bot with ```npm run build```
-
-- Run Bot with ```npm start```
+- For next time, you can simply ```npm start``` to run bot. The previous command is for install and build process
 
 ## 🌿 Prerequisites
+
+- Linux (Sorry Windows User)
 
 - nodejs (16 recommended) with npm (7 recommended)
 

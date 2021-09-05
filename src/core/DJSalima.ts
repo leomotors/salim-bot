@@ -48,13 +48,13 @@ export default class DJSalima {
     }
 
     // * This function should only be call when confirmed connection
-    static async play(music: Music, musicIndex: number, msg: Message): Promise<void> {
+    static async play(music: Music, musicIndex: number, msg?: Message): Promise<void> {
         const sh = `rm -f ./temp/music.mp3 && youtube-dl --output ./temp/music.mp3 --extract-audio --audio-format mp3 ${music.url}`;
         Logger.log(`[SHELL] Executing ${sh}`);
         exec(sh, (err, stdout, stderr) => {
             if (err || stderr) {
-                Logger.log(`Error downloading music (${music.name}): ${err ?? ""}${stderr ?? ""}`);
-                msg.reply("ขออภัย เกิดข้อผิดพลาดไม่ทราบสาเหตุขึ้น");
+                Logger.log(`Error downloading music (${music.name}): ${err ?? ""}`);
+                msg?.reply("ขออภัย เกิดข้อผิดพลาดไม่ทราบสาเหตุขึ้น");
                 return;
             }
 

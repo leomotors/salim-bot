@@ -3,6 +3,9 @@
 import readline from "readline";
 
 import BotClient from "../client/Client";
+import ConsoleQuery from "./ConsoleQuery";
+import DJSalima from "../core/DJSalima";
+import Voice from "../core/Voice";
 import Logger from "../utils/Logger";
 
 export default class Console {
@@ -22,14 +25,34 @@ export default class Console {
     static onCommand(command: string): void {
         const commands = command.split(" ");
 
-        switch (commands[0]) {
+        switch (commands[0].toLowerCase()) {
+            case "music":
+                {
+                    if (!Voice.resolveConnection()) {
+                        Logger.log("[CONSOLE WARNING] No Voice Connection to play music!", "WARNING");
+                        return;
+                    }
+
+                    const index = parseInt(commands[1]) - 1;
+                    if (isNaN(index)) {
+                        Logger.log(`[CONSOLE WARNING] Music Index of ${commands[1]} is NaN`, "WARNING");
+                        return;
+                    }
+
+                    DJSalima.play(DJSalima.Musics[index], index);
+                    Logger.log(`[CONSOLE] Attempt to play music #${index + 1}`);
+                    break;
+                }
+            case "query":
+                ConsoleQuery.Query(commands.slice(1));
+                break;
             case "logout":
                 Console.client.destroy();
                 Logger.log("Successfully logged out", "SUCCESS");
                 process.exit(0);
-                break;
+                break; // * Break because eslint complain me even it is unreachable
             default:
-                Logger.log(`Unknown Command: ${commands[0]}`, "ERROR");
+                Logger.log(`[CONSOLE WARNING] No such command "${commands[0]}"`, "WARNING");
         }
         return;
     }
