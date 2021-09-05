@@ -109,14 +109,12 @@ auth.json
 # package
 package-lock.json
 
-# Misc Temp
-topsecret.txt
-todo.txt
-train.txt
-
 # Local Data, gitignored for safety reason
 data/morequotes.json
 data/salim.json
+
+# Temp Local
+train.json
 
 # Backup
 backup

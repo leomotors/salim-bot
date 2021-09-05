@@ -6,6 +6,7 @@ import { exec } from "child_process";
 import Logger from "../utils/Logger";
 
 const JoiningMessage = "บอทสลิ่มมาแล้ว นะจ๊ะ";
+const RejoiningMessage = "ขออภัยเนื่องจากบ้านฉันอยู่อย่างพอเพียง เลยเน็ตหลุดบ้าง แต่กลับมาแล้ว นะจ๊ะ";
 
 export default class Voice {
     static connection?: VoiceConnection;
@@ -13,12 +14,17 @@ export default class Voice {
     static async joinTo(member: GuildMember): Promise<boolean> {
         const voiceChannel = member.voice.channel;
 
+        let rejoin = false;
+
         if (voiceChannel != null) {
             if (Voice.connection != null && Voice.connection.channel.id == voiceChannel.id) {
                 // * Same channel, do nothing unless disconnected
                 if (Voice.resolveConnection()) {
                     Logger.log(`Already in ${voiceChannel.name}: Joining Aborted`);
                     return true;
+                }
+                else {
+                    rejoin = true;
                 }
             }
 
@@ -30,7 +36,7 @@ export default class Voice {
                     Logger.log(`Successfully moved from ${oldChannelName} to ${Voice.connection.channel.name}`, "SUCCESS");
                 else
                     Logger.log(`Successfully join ${Voice.connection.channel.name}`, "SUCCESS");
-                Voice.tts(JoiningMessage);
+                Voice.tts(rejoin ? RejoiningMessage : JoiningMessage);
                 return Voice.resolveConnection();
             }
             catch (error) {

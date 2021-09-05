@@ -39,7 +39,15 @@ In case you want to (not recommend)
 
 - Install Packages with ```npm install```
 
-- blah blah blah
+- Build Bot with ```npm run build```
+
+- Run Bot with ```npm start```
+
+## 🌿 Prerequisites
+
+- nodejs (16 recommended) with npm (7 recommended)
+
+- Python (3.7+ recommended)
 
 ## 🌳 My Environment
 
@@ -51,7 +59,7 @@ In case you want to (not recommend)
 
 ### Bot Running environment
 
-- Raspbian 10 on Raspberry Pi 3 A+ (Kernel: 5.10.52-v7+)
+- Raspbian 10 on Raspberry Pi 3 A+ (Kernel: 5.10.60-v7+)
 
 - node 16.8.0, npm 7.22.0, Python 3.7.3
 

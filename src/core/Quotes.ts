@@ -5,6 +5,7 @@ import fetch from "node-fetch";
 import Logger from "../utils/Logger";
 
 const SalimAPI = "https://watasalim.vercel.app/api/quotes";
+const localQuotesLoc = "./data/morequotes.json";
 
 interface QuoteOptions {
     useASQ?: boolean,
@@ -75,7 +76,7 @@ export default class Quotes {
 
         if (useLocal) {
             try {
-                const buffer: Buffer = fs.readFileSync("./data/morequotes.json");
+                const buffer: Buffer = fs.readFileSync(localQuotesLoc);
                 const data: string[] = JSON.parse(buffer.toString()).วาทกรรมสลิ่ม;
 
                 for (const quote of data) {

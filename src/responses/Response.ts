@@ -7,6 +7,7 @@ import Detector from "../core/Detector";
 import Voice from "../core/Voice";
 import Logger from "../utils/Logger";
 import Quotes from "../core/Quotes";
+import Train from "../core/Train";
 
 import MentionQuery from "./MentionQuery";
 import QuoteQuery from "./QuoteQuery";
@@ -31,6 +32,7 @@ export default class Response {
 
             Logger.log(`Incoming Message from ${msg.author.tag} : ${msg.content}`);
 
+            // * VC Function
             if (msg.content.startsWith("!salim")) {
                 if (msg.member) {
                     // * This is always true but in case some error did happen
@@ -39,6 +41,12 @@ export default class Response {
                 else {
                     Logger.log("UNEXPECTED: message.member is null or undefined", "WARNING");
                 }
+                return;
+            }
+
+            // * Train
+            if (msg.content.startsWith("!train")) {
+                Train.train(msg);
                 return;
             }
 
@@ -55,6 +63,7 @@ export default class Response {
                 Logger.log(`ชังชาติ detector detected ${Detector.last_detected}`);
                 const quote = Quotes.getQuote();
                 msg.channel.send(`${quote.quote}`);
+                msg.react("😡");
                 Logger.log(`Replied to พวกชังชาติ with ${quote.quote} (${quote.id.type} #${quote.id.id})`);
                 Voice.sayTo(msg.member, quote.quote);
                 return;
