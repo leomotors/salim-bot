@@ -5,6 +5,7 @@ import readline from "readline";
 import BotClient from "../client/Client";
 import ConsoleQuery from "./ConsoleQuery";
 import DJSalima from "../core/DJSalima";
+import Import from "../import/Import";
 import Voice from "../core/Voice";
 import Logger from "../utils/Logger";
 
@@ -14,7 +15,7 @@ export default class Console {
 
     static construct(client: BotClient): void {
         Console.client = client;
-        this.interface = readline.createInterface({
+        Console.interface = readline.createInterface({
             input: process.stdin,
             output: process.stdout
         });
@@ -26,6 +27,12 @@ export default class Console {
         const commands = command.split(" ");
 
         switch (commands[0].toLowerCase()) {
+            case "activity":
+                {
+                    const index = parseInt(commands[1]);
+                    Console.client.setBotActivity(index);
+                    break;
+                }
             case "music":
                 {
                     if (!Voice.resolveConnection()) {
@@ -34,8 +41,8 @@ export default class Console {
                     }
 
                     const index = parseInt(commands[1]) - 1;
-                    if (isNaN(index)) {
-                        Logger.log(`[CONSOLE WARNING] Music Index of ${commands[1]} is NaN`, "WARNING");
+                    if (isNaN(index) || index < 0 || index >= DJSalima.Musics.length) {
+                        Logger.log(`[CONSOLE WARNING] Music Index of ${commands[1]} is invalid`, "WARNING");
                         return;
                     }
 
@@ -43,6 +50,10 @@ export default class Console {
                     Logger.log(`[CONSOLE] Attempt to play music #${index + 1}`);
                     break;
                 }
+            case "reload":
+                Import(true);
+                Logger.log("[CONSOLE] Reload completed");
+                break;
             case "query":
                 ConsoleQuery.Query(commands.slice(1));
                 break;

@@ -27,7 +27,7 @@ export default class Quotes {
     static asq_quotes: string[] = [];
     static local_quotes: string[] = [];
 
-    static construct(option?: QuoteOptions): void {
+    static async construct(option?: QuoteOptions, isReload = false): Promise<void> {
         if (option == null)
             option = {};
         const useASQ = option.useASQ ?? true;
@@ -37,7 +37,7 @@ export default class Quotes {
             Quotes.importQuotes(useASQ, useLocal);
         }
         else {
-            Logger.log("WARNING: This Bot lost the ability to Assault because Quotes are both disabled", "WARNING", false);
+            Logger.log("WARNING: This Bot lost the ability to Assault because Quotes are both disabled", "WARNING", isReload);
         }
     }
 

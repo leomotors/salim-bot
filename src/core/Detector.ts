@@ -9,7 +9,9 @@ export default class Detector {
     static keywords: string[] = [];
     static last_detected = "";
 
-    static construct(): void {
+    static construct(isReload = false): void {
+        Detector.keywords = [];
+
         fs.readFile("./data/keywords.json", "utf-8", (err, data) => {
             if (err) {
                 Logger.log(`Detector @ constructor: ${err}`);
@@ -26,7 +28,7 @@ export default class Detector {
                 }
             }
 
-            Logger.log(`[FETCH COMPLETE] Retrieved ${Detector.keywords.length} keywords from File`, "SUCCESS", false);
+            Logger.log(`[FETCH COMPLETE] Retrieved ${Detector.keywords.length} keywords from File`, "SUCCESS", isReload);
         });
     }
 

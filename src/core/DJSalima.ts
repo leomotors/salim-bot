@@ -19,11 +19,7 @@ interface Music {
 export default class DJSalima {
     static Musics: Music[];
 
-    static construct(): void {
-        DJSalima.importData();
-    }
-
-    static async importData(): Promise<void> {
+    static async construct(isReload = false): Promise<void> {
         DJSalima.Musics = [];
 
         try {
@@ -40,7 +36,7 @@ export default class DJSalima {
                 }
             }
 
-            Logger.log(`[FETCH COMPLETE] Retrieved ${DJSalima.Musics.length} Musics from File`, "SUCCESS", false);
+            Logger.log(`[FETCH COMPLETE] Retrieved ${DJSalima.Musics.length} Musics from File`, "SUCCESS", isReload);
         }
         catch (err) {
             Logger.log(`Error Importing Music: ${err}`, "ERROR");

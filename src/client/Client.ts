@@ -3,8 +3,8 @@
 import { Client, Message } from "discord.js";
 import * as fs from "fs";
 
+import Activity from "./Activity";
 import Logger from "../utils/Logger";
-import PackageInfo from "../constants/PackageInfo";
 import Response from "../responses/Response";
 
 export default class BotClient extends Client {
@@ -12,13 +12,26 @@ export default class BotClient extends Client {
         super();
         this.on("ready", () => {
             Logger.log(`=====> Successfully logged in as ${this.user?.tag} <=====`, "SUCCESS", false);
-            this.user?.setActivity({
-                "name": `Salim Bot ${PackageInfo.pkg_version}`,
-                "type": "PLAYING",
-                "url": "https://github.com/Leomotors/Salim-Bot"
-            });
+            this.setBotActivity(1);
         });
         this.on("error", console.warn);
+    }
+
+    async setBotActivity(activityID?: number): Promise<void> {
+        if (Activity.activities.length <= 0)
+            await Activity.construct();
+
+        if (!activityID || activityID < 1 || activityID > Activity.activities.length) {
+            Logger.log("ID not valid or specified, randoming new one");
+            activityID = Math.floor(Math.random() * Activity.activities.length);
+        }
+        else {
+            activityID--;
+        }
+
+        const activity = Activity.activities[activityID];
+        this.user?.setActivity(activity);
+        Logger.log(`Set Activity to ${activity.type} ${activity.name} (#${activityID + 1})`);
     }
 
     async attemptLogin(filepath: string): Promise<void> {

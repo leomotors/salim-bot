@@ -4,16 +4,12 @@
 
 import BotClient from "./client/Client";
 import Console from "./console/Console";
-import Detector from "./core/Detector";
-import DJSalima from "./core/DJSalima";
-import Quotes from "./core/Quotes";
+import Import from "./import/Import";
 import Logger from "./utils/Logger";
 import Response from "./responses/Response";
 
 // * Initialize Begin
-Detector.construct();
-DJSalima.construct();
-Quotes.construct();
+Import();
 
 Logger.construct();
 
