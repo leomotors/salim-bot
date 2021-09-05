@@ -65,7 +65,9 @@ export default class Voice {
     static tts(message: string): void {
         if (!Voice.resolveConnection()) return;
 
-        exec(`echo ${message} | python3 ./scripts/tts.py`, (error, stdout, stderr) => {
+        const sh = `echo ${message} | python3 ./scripts/tts.py`;
+        Logger.log(`[SHELL] Executing ${sh}`);
+        exec(sh, (error, stdout, stderr) => {
             if (error || stderr) {
                 Logger.log(`Error Executing Python Script (tts): ${error?.message}${stderr ?? ""}`, "ERROR");
                 return;
@@ -77,7 +79,7 @@ export default class Voice {
     }
 
     // * Return true if connection is fine, false otherwise or no connection
-    private static resolveConnection(): boolean {
+    static resolveConnection(): boolean {
         if (Voice.connection == null) return false;
         // * 4 = DISCONNECTED
         if (Voice.connection.status == 4) {

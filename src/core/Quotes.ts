@@ -42,6 +42,9 @@ export default class Quotes {
     }
 
     static async importQuotes(useASQ: boolean, useLocal: boolean): Promise<void> {
+        Quotes.asq_quotes = [];
+        Quotes.local_quotes = [];
+
         if (useASQ) {
             try {
                 let dupl = 0;

@@ -25,6 +25,8 @@ export default class Detector {
                     Detector.keywords.push(kw);
                 }
             }
+
+            Logger.log(`[FETCH COMPLETE] Retrieved ${Detector.keywords.length} keywords from File`, "SUCCESS", false);
         });
     }
 
