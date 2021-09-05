@@ -7,6 +7,7 @@ import ConsoleQuery from "./ConsoleQuery";
 import DJSalima from "../core/DJSalima";
 import Import from "../import/Import";
 import Voice from "../core/Voice";
+import Quotes from "../core/Quotes";
 import Logger from "../utils/Logger";
 
 export default class Console {
@@ -31,6 +32,33 @@ export default class Console {
                 {
                     const index = parseInt(commands[1]);
                     Console.client.setBotActivity(index);
+                    break;
+                }
+            case "findquote":
+                {
+                    let kw = commands[1];
+                    if (!kw) {
+                        Logger.log("[CONSOLE WARNING] Empty Search Keyword", "WARNING");
+                        return;
+                    }
+
+                    kw = kw.toLowerCase();
+
+                    let id = 1;
+                    for (const quote of Quotes.asq_quotes) {
+                        if (quote.toLowerCase().includes(kw)) {
+                            console.log(`ASQ #${id} => ${quote}`);
+                        }
+                        id++;
+                    }
+                    id = 1;
+                    for (const quote of Quotes.local_quotes) {
+                        if (quote.toLowerCase().includes(kw)) {
+                            console.log(`Local #${id} => ${quote}`);
+                        }
+                        id++;
+                    }
+                    Logger.log(`[CONSOLE] Find Quote "${kw}" completed`);
                     break;
                 }
             case "music":

@@ -1,6 +1,6 @@
 {
   "name": "salim-bot",
-  "version": "2.0.383",
+  "version": "2.0.385",
   "description": "This bot is Salim. Whenever you trigger it, It become mad.",
   "type": "module",
   "main": "dist/bot.js",
@@ -47,6 +47,7 @@
     "opusscript": "^0.0.8",
     "tweetnacl": "^1.0.3",
     "utf-8-validate": "^5.0.5",
+    "ytdl-core": "^4.9.1",
     "zlib-sync": "^0.1.7"
   }
 }

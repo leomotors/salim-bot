@@ -2,7 +2,7 @@
 
 import { Message } from "discord.js";
 
-import { exec } from "child_process";
+import ytdl from "ytdl-core";
 import * as fs from "fs";
 
 import Logger from "../utils/Logger";
@@ -45,18 +45,16 @@ export default class DJSalima {
 
     // * This function should only be call when confirmed connection
     static async play(music: Music, musicIndex: number, msg?: Message): Promise<void> {
-        const sh = `rm -f ./temp/music.mp3 && youtube-dl --output ./temp/music.mp3 --extract-audio --audio-format mp3 ${music.url}`;
-        Logger.log(`[SHELL] Executing ${sh}`);
-        exec(sh, (err, stdout, stderr) => {
-            if (err || stderr) {
-                Logger.log(`Error downloading music (${music.name}): ${err ?? ""}`);
-                msg?.reply("ขออภัย เกิดข้อผิดพลาดไม่ทราบสาเหตุขึ้น");
-                return;
-            }
-
+        try {
+            const musicdata = ytdl(music.url, { quality: "highestaudio" });
+            Voice.connection?.play(musicdata, { volume: 1 });
             Logger.log(`Playing ${music.name} (#${musicIndex + 1}) to ${Voice.connection?.channel.name}`);
-            Voice.connection?.play("./temp/music.mp3", { volume: 1 });
-        });
+
+        }
+        catch (err) {
+            msg?.reply("ขออภัย เกิดข้อผิดพลาดไม่ทราบสาเหตุขึ้น");
+            Logger.log(`Error while playing music from YouTube ${err}`);
+        }
     }
 
     static playRandomSong(msg: Message): void {
