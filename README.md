@@ -73,13 +73,27 @@ User Manual [Here](./docs/user_manual.md)
 
 To add more quotes on top of ASQ, create a file "morequotes.json" in data folder
 
-```json
+```
 {
-  "วาทกรรมสลิ่ม": [/*Array of Your Custom Local Quotes*/]
+  "วาทกรรมสลิ่ม": [ Array of Your Custom Local Quotes Here ]
 }
 ```
 
 You can also add more keywords, songs or Facebooks to JSON files in data folder!
+
+### Keywords adding guideline
+
+Keywords must be all lowercase (if english alphabet exists) and no space in it.
+
+The reason is the bot process sentences by ignoring spaces and turning all english alphabet into lowercase, for example
+
+`Sinovac, sInOvAc, S I N O V A C` will all equivalent to "sinovac"
+
+### Trained by People
+
+People in Discord can also train the bot by typing `!train <Quote>`
+
+Run ```npm run review``` to review pending words and add to file! and you can type `reload` in debug console to reload it without restarting bot!
 
 ## 🙏 Spread the hype!
 
