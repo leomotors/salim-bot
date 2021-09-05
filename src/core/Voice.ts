@@ -1,17 +1,18 @@
 // * Voice.ts : Voice Control
 
-import { GuildMember, VoiceConnection } from "discord.js";
+import { GuildMember, Message, VoiceConnection } from "discord.js";
 import { exec } from "child_process";
 
 import Logger from "../utils/Logger";
 
 const JoiningMessage = "บอทสลิ่มมาแล้ว นะจ๊ะ";
 const RejoiningMessage = "ขออภัยเนื่องจากบ้านฉันอยู่อย่างพอเพียง เลยเน็ตหลุดบ้าง แต่กลับมาแล้ว นะจ๊ะ";
+const alreadyHereMessage = "ฉันอยู่นี่แล้วไง ยังจะเอาอะไรอีก";
 
 export default class Voice {
     static connection?: VoiceConnection;
 
-    static async joinTo(member: GuildMember): Promise<boolean> {
+    static async joinTo(member: GuildMember, msg: Message): Promise<boolean> {
         const voiceChannel = member.voice.channel;
 
         let rejoin = false;
@@ -21,6 +22,8 @@ export default class Voice {
                 // * Same channel, do nothing unless disconnected
                 if (Voice.resolveConnection()) {
                     Logger.log(`Already in ${voiceChannel.name}: Joining Aborted`);
+                    msg.reply(alreadyHereMessage);
+                    Voice.tts(alreadyHereMessage);
                     return true;
                 }
                 else {
@@ -65,7 +68,7 @@ export default class Voice {
     static tts(message: string): void {
         if (!Voice.resolveConnection()) return;
 
-        const sh = `echo ${message} | python3 ./scripts/tts.py`;
+        const sh = `echo "${message}" | python3 ./scripts/tts.py`;
         Logger.log(`[SHELL] Executing ${sh}`);
         exec(sh, (error, stdout, stderr) => {
             if (error || stderr) {

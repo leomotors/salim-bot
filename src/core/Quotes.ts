@@ -34,69 +34,77 @@ export default class Quotes {
         const useLocal = option.useLocal ?? true;
 
         if (useASQ || useLocal) {
-            Quotes.importQuotes(useASQ, useLocal);
+            if (useASQ) {
+                Quotes.importASQ();
+            }
+
+            if (useLocal) {
+                Quotes.importLocal();
+            }
         }
         else {
             Logger.log("WARNING: This Bot lost the ability to Assault because Quotes are both disabled", "WARNING", isReload);
         }
     }
 
-    static async importQuotes(useASQ: boolean, useLocal: boolean): Promise<void> {
-        Quotes.asq_quotes = [];
-        Quotes.local_quotes = [];
+    private static async importASQ(): Promise<void> {
+        try {
+            const newQuotes: string[] = [];
 
-        if (useASQ) {
-            try {
-                let dupl = 0;
-                const response = await fetch(SalimAPI, {
-                    method: "GET",
-                    headers: { "Content-type": "application/json;charset=UTF-8" }
-                });
+            let dupl = 0;
+            const response = await fetch(SalimAPI, {
+                method: "GET",
+                headers: { "Content-type": "application/json;charset=UTF-8" }
+            });
 
-                if (response.status >= 400) {
-                    throw new Error("Bad response from server");
-                }
-
-                const restext = await response.text();
-                const quotes = JSON.parse(restext);
-
-                for (const elem of quotes.quotes) {
-                    const quote = elem.body;
-                    if (Quotes.asq_quotes.includes(quote)) {
-                        dupl++;
-                    }
-                    Quotes.asq_quotes.push(quote);
-                }
-                if (dupl > 0) {
-                    Logger.log(`[IMPORT ONLINE NOTICE] Detected ${dupl} duplicate quotes`, "WARNING", false);
-                }
-                Logger.log(`[FETCH COMPLETE] Retrieved ${Quotes.asq_quotes.length} quotes from Awesome Salim Quotes`, "SUCCESS", false);
+            if (response.status >= 400) {
+                throw new Error("Bad response from server");
             }
-            catch (err) {
-                Logger.log(`[Quotes @ importQuotes] Import Online Quotes Failed: ${err}`, "ERROR", false);
+
+            const restext = await response.text();
+            const quotes = JSON.parse(restext);
+
+            for (const elem of quotes.quotes) {
+                const quote = elem.body;
+                if (newQuotes.includes(quote)) {
+                    dupl++;
+                }
+                newQuotes.push(quote);
             }
+            if (dupl > 0) {
+                Logger.log(`[IMPORT ONLINE NOTICE] Detected ${dupl} duplicate quotes`, "WARNING", false);
+            }
+            Logger.log(`[FETCH COMPLETE] Retrieved ${newQuotes.length} quotes from Awesome Salim Quotes`, "SUCCESS", false);
+
+            Quotes.asq_quotes = newQuotes;
         }
-
-        if (useLocal) {
-            try {
-                const buffer: Buffer = fs.readFileSync(localQuotesLoc);
-                const data: string[] = JSON.parse(buffer.toString()).วาทกรรมสลิ่ม;
-
-                for (const quote of data) {
-                    if (Quotes.local_quotes.includes(quote)) {
-                        Logger.log(`[IMPORT WARNING] Duplicate Quote: ${quote}`, "WARNING", false);
-                    }
-                    else
-                        Quotes.local_quotes.push(quote);
-                }
-
-                Logger.log(`[FETCH COMPLETE] Retrieved ${Quotes.local_quotes.length} quotes from Local Quotes`, "SUCCESS", false);
-            } catch (err) {
-                Logger.log("Local Quotes not found: You can read instructions for how to add Local Quotes or disable this Warning by disable Local Quotes at Settings", "WARNING", false);
-            }
+        catch (err) {
+            Logger.log(`[Quotes @ importASQ] Import Online Quotes Failed: ${err}`, "ERROR", false);
         }
+    }
 
-        return;
+    private static async importLocal(): Promise<void> {
+        try {
+            const newQuotes: string[] = [];
+
+            const buffer: Buffer = fs.readFileSync(localQuotesLoc);
+            const data: string[] = JSON.parse(buffer.toString()).วาทกรรมสลิ่ม;
+
+            for (const quote of data) {
+                if (newQuotes.includes(quote)) {
+                    Logger.log(`[IMPORT WARNING] Duplicate Quote: ${quote}`, "WARNING", false);
+                }
+                else
+                    newQuotes.push(quote);
+            }
+
+            Logger.log(`[FETCH COMPLETE] Retrieved ${newQuotes.length} quotes from Local Quotes`, "SUCCESS", false);
+
+            Quotes.local_quotes = newQuotes;
+        }
+        catch (err) {
+            Logger.log("Local Quotes not found: You can read instructions for how to add Local Quotes or disable this Warning by disable Local Quotes at Settings", "WARNING", false);
+        }
     }
 
     static getQuote(id?: QuoteID): Quote {

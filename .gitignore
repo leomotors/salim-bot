@@ -111,7 +111,6 @@ package-lock.json
 
 # Local Data, gitignored for safety reason
 data/morequotes.json
-data/salim.json
 
 # Temp Local
 train.json

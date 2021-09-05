@@ -11,6 +11,7 @@ import Quotes from "../core/Quotes";
 import Train from "../core/Train";
 
 import MentionQuery from "./MentionQuery";
+import Facebook from "./Facebook";
 import QuoteQuery from "./QuoteQuery";
 import StaticQuery from "./StaticQuery";
 
@@ -18,7 +19,7 @@ export default class Response {
     queries: MentionQuery[];
 
     constructor() {
-        this.queries = [new StaticQuery(), new QuoteQuery()];
+        this.queries = [new StaticQuery(), new QuoteQuery(), new Facebook()];
     }
 
     getFunction(client: BotClient): (msg: Message) => void {
@@ -37,7 +38,7 @@ export default class Response {
             if (msg.content.toLowerCase().startsWith("!salim")) {
                 if (msg.member) {
                     // * This is always true but in case some error did happen
-                    Voice.joinTo(msg.member);
+                    Voice.joinTo(msg.member, msg);
                 }
                 else {
                     Logger.log("UNEXPECTED: message.member is null or undefined", "WARNING");
@@ -47,7 +48,10 @@ export default class Response {
 
             // * DJSalima
             if (msg.content.toLowerCase().startsWith("!djsalima")) {
-                DJSalima.playRandomSong(msg);
+                if (msg.content.toLowerCase().split(" ").length > 1)
+                    DJSalima.playSearch(msg);
+                else
+                    DJSalima.playRandomSong(msg);
                 return;
             }
 

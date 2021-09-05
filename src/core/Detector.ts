@@ -9,7 +9,7 @@ export default class Detector {
     static keywords: string[] = [];
     static last_detected = "";
 
-    static construct(isReload = false): void {
+    static async construct(isReload = false): Promise<void> {
         Detector.keywords = [];
 
         fs.readFile("./data/keywords.json", "utf-8", (err, data) => {
