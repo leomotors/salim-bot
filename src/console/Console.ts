@@ -61,6 +61,19 @@ export default class Console {
                     Logger.log(`[CONSOLE] Find Quote "${kw}" completed`);
                     break;
                 }
+            case "leave":
+                {
+                    if (!Voice.resolveConnection()) {
+                        Logger.log("[CONSOLE WARNING] Bot is not in any channel", "WARNING");
+                        return;
+                    }
+
+                    const channelName = Voice.connection?.channel.name;
+                    Voice.connection?.disconnect();
+                    Voice.connection = undefined;
+                    Logger.log(`[CONSOLE] Successfully ejected from ${channelName}`);
+                    break;
+                }
             case "music":
                 {
                     if (!Voice.resolveConnection()) {

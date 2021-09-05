@@ -53,6 +53,26 @@ export default class Voice {
         }
     }
 
+    static async leaveChannel(msg: Message): Promise<void> {
+        if (!Voice.resolveConnection()) {
+            msg.reply("จะให้ฉันออกจากอะไร");
+            Logger.log(`${msg.author.tag} try to make me leave from 'undefined'???`);
+            return;
+        }
+
+        const userChannel = msg.member?.voice.channel;
+        if (userChannel != null && userChannel == Voice.connection?.channel) {
+            const channelName = Voice.connection.channel.name;
+            Voice.connection.disconnect();
+            Voice.connection = undefined;
+            Logger.log(`Successfully leave ${channelName} by desire of ${msg.author.tag}`);
+        }
+        else {
+            msg.channel.send("ผมไม่ออก (คุณต้องอยู่ในช่องเดียวกับผมถึงจะไล่ผมออกได้)");
+            Logger.log(`Rejected ${msg.author.tag} to leave because not in the same voice channel`);
+        }
+    }
+
     // * Run Text to Speech and play it in current voice channel if it exists
     static sayTo(member: GuildMember | null, message: string): void {
         const targetChannel = member?.voice?.channel;

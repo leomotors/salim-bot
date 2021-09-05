@@ -18,7 +18,7 @@ export default class StaticQuery extends MentionQuery {
     constructor() {
         super([
             {
-                keywords: ["introduce", "แนะนำตัว", "しょうかい", "紹介"],
+                keywords: ["introduce", "แนะนำตัว", "しょうかい", "紹介", "hub"],
                 response: (msg: Message) => {
                     msg.channel.send(introduceMessage);
                     Voice.sayTo(msg.member, introduceMessage);

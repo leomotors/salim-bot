@@ -57,13 +57,29 @@ In case you want to (not recommend)
 
 - node 16.8.0, npm 7.22.0, Python 3.8.10
 
-### Bot Running environment
+### Bot Running Environment
 
 - Raspbian 10 on Raspberry Pi 3 A+ (Kernel: 5.10.60-v7+)
 
 - node 16.8.0, npm 7.22.0, Python 3.7.3
 
 **Compatibility Test Result**: Both environment can compile and run! ✅
+
+## 📚 Documents
+
+User Manual [Here](./docs/user_manual.md)
+
+## 💬 Local Quotes
+
+To add more quotes on top of ASQ, create a file "morequotes.json" in data folder
+
+```json
+{
+  "วาทกรรมสลิ่ม": [/*Array of Your Custom Local Quotes*/]
+}
+```
+
+You can also add more keywords, songs or Facebooks to JSON files in data folder!
 
 ## 🙏 Spread the hype!
 

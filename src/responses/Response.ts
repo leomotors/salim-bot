@@ -46,6 +46,11 @@ export default class Response {
                 return;
             }
 
+            if (msg.content.toLowerCase().startsWith("!dc") || msg.content.toLowerCase().startsWith("!leave")) {
+                Voice.leaveChannel(msg);
+                return;
+            }
+
             // * DJSalima
             if (msg.content.toLowerCase().startsWith("!djsalima")) {
                 if (msg.content.toLowerCase().split(" ").length > 1)
