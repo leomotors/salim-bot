@@ -36,6 +36,14 @@ In case you want to (not recommend)
 - Clone or Download Repo
 
   ```git clone https://github.com/Leomotors/Salim-Bot/```
+  
+- Add your token at config/auth.json
+
+```
+{
+  "token": "YOUR TOKEN HERE" 
+}
+```
 
 - Run ```npm run salim``` and you get your bot running!
 
