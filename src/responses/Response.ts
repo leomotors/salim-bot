@@ -81,7 +81,7 @@ export default class Response {
                 msg.channel.send(`${quote.quote}`);
                 msg.react("😡");
                 Logger.log(`Replied to พวกชังชาติ with ${quote.quote} (${quote.id.type} #${quote.id.id})`);
-                Voice.sayTo(msg.member, quote.quote);
+                Voice.sayTo(msg.member, quote.quote, msg);
                 return;
             }
         };

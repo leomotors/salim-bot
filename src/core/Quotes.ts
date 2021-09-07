@@ -35,11 +35,11 @@ export default class Quotes {
 
         if (useASQ || useLocal) {
             if (useASQ) {
-                Quotes.importASQ();
+                Quotes.importASQ(isReload);
             }
 
             if (useLocal) {
-                Quotes.importLocal();
+                Quotes.importLocal(isReload);
             }
         }
         else {
@@ -47,7 +47,7 @@ export default class Quotes {
         }
     }
 
-    private static async importASQ(): Promise<void> {
+    private static async importASQ(isReload = false): Promise<void> {
         try {
             const newQuotes: string[] = [];
 
@@ -74,7 +74,7 @@ export default class Quotes {
             if (dupl > 0) {
                 Logger.log(`[IMPORT ONLINE NOTICE] Detected ${dupl} duplicate quotes`, "WARNING", false);
             }
-            Logger.log(`[FETCH COMPLETE] Retrieved ${newQuotes.length} quotes from Awesome Salim Quotes`, "SUCCESS", false);
+            Logger.log(`[FETCH COMPLETE] Retrieved ${newQuotes.length} quotes from Awesome Salim Quotes`, "SUCCESS", isReload);
 
             Quotes.asq_quotes = newQuotes;
         }
@@ -83,7 +83,7 @@ export default class Quotes {
         }
     }
 
-    private static async importLocal(): Promise<void> {
+    private static async importLocal(isReload = false): Promise<void> {
         try {
             const newQuotes: string[] = [];
 
@@ -98,7 +98,7 @@ export default class Quotes {
                     newQuotes.push(quote);
             }
 
-            Logger.log(`[FETCH COMPLETE] Retrieved ${newQuotes.length} quotes from Local Quotes`, "SUCCESS", false);
+            Logger.log(`[FETCH COMPLETE] Retrieved ${newQuotes.length} quotes from Local Quotes`, "SUCCESS", isReload);
 
             Quotes.local_quotes = newQuotes;
         }

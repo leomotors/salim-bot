@@ -20,6 +20,7 @@ interface Music {
 }
 
 export default class DJSalima {
+    static isPlaying = false;
     static Musics: Music[];
 
     static async construct(isReload = false): Promise<void> {
@@ -49,10 +50,22 @@ export default class DJSalima {
     // * This function should only be call when confirmed connection
     static async play(music: Music, musicIndex: number, msg?: Message): Promise<void> {
         try {
-            const musicdata = ytdl(music.url, { quality: "highestaudio" });
-            Voice.connection?.play(musicdata, { volume: 1 });
-            Logger.log(`Playing ${music.name} (#${musicIndex + 1}) to ${Voice.connection?.channel.name}`);
+            // https://stackoverflow.com/questions/63199238/discord-js-ytdl-error-input-stream-status-code-416
+            const musicdata = ytdl(music.url, { quality: "highestaudio", highWaterMark: 1 << 25 });
 
+            const dispatch = Voice.connection?.play(musicdata, { volume: 1 });
+            Logger.log(`Playing ${music.name} (#${musicIndex + 1}) to ${Voice.connection?.channel.name}`);
+            if (dispatch) {
+                DJSalima.isPlaying = true;
+            }
+            dispatch?.on("error", err => {
+                Logger.log(`Error while playing ${music.name} : ${err}`, "ERROR");
+                DJSalima.isPlaying = false;
+            });
+            dispatch?.on("finish", () => {
+                Logger.log(`Finished playing ${music.name}`, "SUCCESS");
+                DJSalima.isPlaying = false;
+            });
         }
         catch (err) {
             msg?.reply("ขออภัย เกิดข้อผิดพลาดไม่ทราบสาเหตุขึ้น");

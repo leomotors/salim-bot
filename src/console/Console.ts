@@ -88,7 +88,7 @@ export default class Console {
                     }
 
                     DJSalima.play(DJSalima.Musics[index], index);
-                    Logger.log(`[CONSOLE] Attempt to play music #${index + 1}`);
+                    Logger.log(`[CONSOLE] Attempted to play music #${index + 1}`);
                     break;
                 }
             case "reload":

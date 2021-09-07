@@ -51,7 +51,12 @@ export default class BotClient extends Client {
 
     implementsResponse(handler: Response): void {
         this.on("message", (msg: Message) => {
-            handler.getFunction(this)(msg);
+            try {
+                handler.getFunction(this)(msg);
+            }
+            catch (err) {
+                Logger.log(`ERROR On Processing Message: ${err}`, "ERROR");
+            }
         });
     }
 }

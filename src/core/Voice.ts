@@ -3,6 +3,7 @@
 import { GuildMember, Message, VoiceConnection } from "discord.js";
 import { exec } from "child_process";
 
+import DJSalima from "./DJSalima";
 import Logger from "../utils/Logger";
 
 const JoiningMessage = "บอทสลิ่มมาแล้ว นะจ๊ะ";
@@ -74,14 +75,22 @@ export default class Voice {
     }
 
     // * Run Text to Speech and play it in current voice channel if it exists
-    static sayTo(member: GuildMember | null, message: string): void {
+    static sayTo(member: GuildMember | null, message: string, refmsg?: Message): void {
         const targetChannel = member?.voice?.channel;
+
         if (targetChannel == null) {
             return;
         }
 
         if (targetChannel == Voice.connection?.channel) {
-            Voice.tts(message);
+            if (DJSalima.isPlaying) {
+                refmsg?.reply("ฉันอยากจะด่าคุณมาก แต่ติดที่ว่าฉันกำลังเปิดเพลงอยู่ ฝากไว้ก่อนเถอะ");
+                Logger.log("tts canceled because some music is being played");
+            }
+            else {
+                Voice.tts(message);
+            }
+
         }
     }
 
@@ -109,6 +118,7 @@ export default class Voice {
             Logger.log(`High Congress detected that connection to ${Voice.connection.channel.name} have been destroyed!`, "WARNING");
             Voice.connection.disconnect();
             Voice.connection = undefined;
+            DJSalima.isPlaying = false;
             return false;
         }
         return true;
