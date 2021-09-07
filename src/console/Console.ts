@@ -71,6 +71,7 @@ export default class Console {
                     const channelName = Voice.connection?.channel.name;
                     Voice.connection?.disconnect();
                     Voice.connection = undefined;
+                    DJSalima.isPlaying = false;
                     Logger.log(`[CONSOLE] Successfully ejected from ${channelName}`);
                     break;
                 }

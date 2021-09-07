@@ -66,6 +66,7 @@ export default class Voice {
             const channelName = Voice.connection.channel.name;
             Voice.connection.disconnect();
             Voice.connection = undefined;
+            DJSalima.isPlaying = false;
             Logger.log(`Successfully leave ${channelName} by desire of ${msg.author.tag}`);
         }
         else {
@@ -94,7 +95,7 @@ export default class Voice {
         }
     }
 
-    static tts(message: string): void {
+    private static tts(message: string): void {
         if (!Voice.resolveConnection()) return;
 
         const sh = `echo "${message}" | python3 ./scripts/tts.py`;
