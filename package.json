@@ -13,10 +13,10 @@
     "buildinc": "node ./scripts/incrementVersion.js && npm i && npm run build",
     "clean": "./scripts/rmtemp.sh temp && rm -r dist",
     "clearlog": "./scripts/rmtemp.sh log",
+    "dev": "npm run buildinc && npm start",
     "review": "node ./scripts/reviewTrain.js",
     "start": "node --es-module-specifier-resolution=node dist/bot.js",
-    "salim": "npm install && npm run build && npm start",
-    "test": "npm run buildinc && npm start"
+    "salim": "npm install && npm run build && npm start"
   },
   "repository": {
     "type": "git",
