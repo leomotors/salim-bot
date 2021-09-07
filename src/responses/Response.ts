@@ -9,6 +9,7 @@ import Voice from "../core/Voice";
 import Logger from "../utils/Logger";
 import Quotes from "../core/Quotes";
 import Train from "../core/Train";
+import SalimShell, { shellPrefix } from "../salimshell/SalimShell";
 
 import MentionQuery from "./MentionQuery";
 import Facebook from "./Facebook";
@@ -24,11 +25,17 @@ export default class Response {
 
     getFunction(client: BotClient): (msg: Message) => void {
         return (msg: Message) => {
-            if (client == null) {
-                console.log("this.client is null", "ERROR");
-            }
             if (msg.author == client.user) {
                 // * Own Message: Ignore it
+                return;
+            }
+
+            if(msg.content.toLowerCase().startsWith(shellPrefix)) {
+                SalimShell.execute(msg);
+                return;
+            }
+
+            if(SalimShell.shellConfig.config.disabled.includes(msg.channel.id)) {
                 return;
             }
 

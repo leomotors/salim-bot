@@ -5,6 +5,7 @@ import Detector from "../core/Detector";
 import DJSalima from "../core/DJSalima";
 import Facebook from "../responses/Facebook";
 import Quotes from "../core/Quotes";
+import ShellConfig from "../salimshell/SalimShell";
 
 export default async function Import(isReload = false): Promise<void> {
     Activity.construct(isReload);
@@ -12,4 +13,5 @@ export default async function Import(isReload = false): Promise<void> {
     DJSalima.construct(isReload);
     Facebook.construct(isReload);
     Quotes.construct({}, isReload);
+    isReload || ShellConfig.loadConfig();
 }
