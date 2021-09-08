@@ -6,6 +6,7 @@ import BotClient from "../client/Client";
 import ConsoleQuery from "./ConsoleQuery";
 import DJSalima from "../core/DJSalima";
 import Import from "../import/Import";
+import Train from "../core/Train";
 import Voice from "../core/Voice";
 import Quotes from "../core/Quotes";
 import Logger from "../utils/Logger";
@@ -101,6 +102,8 @@ export default class Console {
                 break;
             case "logout":
                 Console.client.destroy();
+                if (Train.trainedCount)
+                    Logger.log(`Your bot has been trained ${Train.trainedCount} quote in this session. And is pending for review, to Review do npm run review`, "SUCCESS", false);
                 Logger.log("Successfully logged out", "SUCCESS");
                 process.exit(0);
                 break; // * Break because eslint complain me even it is unreachable

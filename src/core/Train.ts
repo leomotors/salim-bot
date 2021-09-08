@@ -16,6 +16,8 @@ interface trainQuote {
 const trainSaveLoc = "./scripts/train.json";
 
 export default class Train {
+    static trainedCount = 0;
+
     static async train(msg: Message): Promise<void> {
         let trainQuotes: { data: trainQuote[] };
 
@@ -38,6 +40,7 @@ export default class Train {
             return;
         }
 
+        Train.trainedCount += 1;
         msg.reply("กระผม นศท. น้อนสลิ่ม จะจดจำ และนำไปใช้ ครับ!");
         msg.react("🇹🇭");
         Logger.log(`[TRAIN] น้อน นศท ได้รับการฝึกมาจาก ${msg.author.tag} บัดนี้กำลังรอท่านผู้บังคับบัญชาอนุมัติ`);

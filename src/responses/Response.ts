@@ -30,12 +30,12 @@ export default class Response {
                 return;
             }
 
-            if(msg.content.toLowerCase().startsWith(shellPrefix)) {
+            if (msg.content.toLowerCase().startsWith(shellPrefix)) {
                 SalimShell.execute(msg);
                 return;
             }
 
-            if(SalimShell.shellConfig.config.disabled.includes(msg.channel.id)) {
+            if (SalimShell.shellConfig.config.disabled.includes(msg.channel.id)) {
                 return;
             }
 
@@ -86,7 +86,12 @@ export default class Response {
                 Logger.log(`ชังชาติ detector detected ${Detector.last_detected}`);
                 const quote = Quotes.getQuote();
                 msg.channel.send(`${quote.quote}`);
-                msg.react("😡");
+                try {
+                    msg.react("😡");
+                }
+                catch (err) {
+                    Logger.log(`Error Reacting: ${err}`, "ERROR");
+                }
                 Logger.log(`Replied to พวกชังชาติ with ${quote.quote} (${quote.id.type} #${quote.id.id})`);
                 Voice.sayTo(msg.member, quote.quote, msg);
                 return;
