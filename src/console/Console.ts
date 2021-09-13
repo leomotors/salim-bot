@@ -27,7 +27,7 @@ export default class Console {
 
     private static executeConsole(command: string) {
         const result = Console.execute(command);
-        console.log(result ?? "No Result");
+        if (result) console.log(result);
     }
 
     static execute(command: string): string | null | undefined {
@@ -104,8 +104,7 @@ export default class Console {
                 Logger.log("[CONSOLE] Reload completed");
                 break;
             case "query":
-                ConsoleQuery.Query(commands.slice(1));
-                break;
+                return ConsoleQuery.Query(commands.slice(1));
             case "logout":
                 Console.client.destroy();
                 if (Train.trainedCount)

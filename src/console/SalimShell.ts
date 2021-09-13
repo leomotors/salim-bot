@@ -4,6 +4,7 @@ import { DMChannel, NewsChannel, TextChannel, Message, VoiceChannel } from "disc
 
 import * as fs from "fs/promises";
 
+import BotSettings from "../config/BotSettings";
 import Console from "./Console";
 import { ShellConfigTemplate, ShellConfig } from "../template/ShellConfig.template";
 import Logger from "../utils/Logger";
@@ -79,14 +80,35 @@ export default class SalimShell {
                 }
             case "sudo":
                 {
+                    if (!BotSettings.settings.owner.includes(msg.author.id)) {
+                        msg.reply("Permission Denied");
+                        break;
+                    }
                     if (commands.length < 3) {
                         msg.reply("No Command");
-
                     }
+
                     const toExec = commands.slice(2).join(" ");
                     Logger.log(`[REMOTE EXECUTION] Executing from ${msg.author.tag} : ${toExec} in Main Console`);
                     const result = Console.execute(toExec);
-                    msg.channel.send(result ?? "No Result");
+                    if (result) {
+                        if (result.length >= 2000) {
+                            const lines = result.split("\n");
+                            lines.reverse();
+                            let currmsg = "";
+                            while (lines.length) {
+                                currmsg += lines.pop() + "\n";
+                                if (currmsg.length > 1000) {
+                                    msg.channel.send(currmsg);
+                                    currmsg = "";
+                                }
+                            }
+                            if (currmsg.length)
+                                msg.channel.send(currmsg);
+                        }
+                        else
+                            msg.channel.send(result);
+                    }
                     break;
                 }
             default:

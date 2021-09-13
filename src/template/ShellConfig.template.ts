@@ -1,4 +1,4 @@
-// * Template for ShellConfig.json (Internal)
+// * Template for ShellConfig.json (Internal Only)
 
 export interface ShellConfig {
     config: {
