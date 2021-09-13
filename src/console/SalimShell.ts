@@ -1,8 +1,10 @@
 // * SalimShell.ts : Shell But Salim
 
-import { DMChannel, NewsChannel, TextChannel, Message } from "discord.js";
+import { DMChannel, NewsChannel, TextChannel, Message, VoiceChannel } from "discord.js";
 
 import * as fs from "fs/promises";
+
+import Console from "./Console";
 import { ShellConfigTemplate, ShellConfig } from "../template/ShellConfig.template";
 import Logger from "../utils/Logger";
 
@@ -45,7 +47,7 @@ export default class SalimShell {
                         msg.reply(traceback);
                     else
                         msg.react("💛");
-                    return;
+                    break;
                 }
             case "enable":
                 {
@@ -56,9 +58,36 @@ export default class SalimShell {
                     const traceback = await SalimShell.toggleChannel(msg.channel, true);
                     if (traceback)
                         msg.reply(traceback);
-                    else
+                    else {
                         msg.react("💛");
-                    return;
+                        msg.channel.send("ฉันกลับมาแล้ว!");
+                    }
+                    break;
+                }
+            case "tievoice":
+                {
+                    if (!msg.member?.voice.channel) {
+                        msg.reply("จะให้ฉันไปคุยกับผีหรอ");
+                        return;
+                    }
+
+                    const traceback = await SalimShell.tieVoiceChannel(msg.member.voice.channel);
+                    if (traceback) {
+                        msg.reply(traceback);
+                    }
+                    break;
+                }
+            case "sudo":
+                {
+                    if (commands.length < 3) {
+                        msg.reply("No Command");
+
+                    }
+                    const toExec = commands.slice(2).join(" ");
+                    Logger.log(`[REMOTE EXECUTION] Executing from ${msg.author.tag} : ${toExec} in Main Console`);
+                    const result = Console.execute(toExec);
+                    msg.channel.send(result ?? "No Result");
+                    break;
                 }
             default:
                 msg.reply("Unknown Command");
@@ -88,6 +117,18 @@ export default class SalimShell {
                 return "";
             }
         }
+    }
+
+    private static async tieVoiceChannel(channel: VoiceChannel): Promise<string> {
+        if (SalimShell.shellConfig.config.tiedVoice == channel.id) {
+
+            return "Already Tied to this Channel";
+        }
+
+        SalimShell.shellConfig.config.tiedVoice = channel.id;
+        SalimShell.saveConfig();
+        Logger.log(`[Salim Shell] Tied to ${channel.name}`);
+        return "";
     }
 
     private static async saveConfig(): Promise<void> {

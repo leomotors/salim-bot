@@ -43,6 +43,8 @@ catch (err) {
     Quotes = { วาทกรรมสลิ่ม: [] };
 }
 
+console.log(`There are ${trainQuotes.data.length} Quotes to be reviewed`);
+
 for (const train of trainQuotes.data) {
     const trainRequest = `From ${train.trainer} at ${train.time}:\n${train.quote}\nApprove? [y for yes, otherwise no] : `;
 

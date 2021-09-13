@@ -22,10 +22,15 @@ export default class Console {
             output: process.stdout
         });
 
-        Console.interface.on("line", Console.onCommand);
+        Console.interface.on("line", Console.executeConsole);
     }
 
-    static onCommand(command: string): void {
+    private static executeConsole(command: string) {
+        const result = Console.execute(command);
+        console.log(result ?? "No Result");
+    }
+
+    static execute(command: string): string | null | undefined {
         const commands = command.split(" ");
 
         switch (commands[0].toLowerCase()) {
@@ -40,33 +45,34 @@ export default class Console {
                     let kw = commands[1];
                     if (!kw) {
                         Logger.log("[CONSOLE WARNING] Empty Search Keyword", "WARNING");
-                        return;
+                        break;
                     }
 
                     kw = kw.toLowerCase();
 
                     let id = 1;
+                    let outstr = "";
                     for (const quote of Quotes.asq_quotes) {
                         if (quote.toLowerCase().includes(kw)) {
-                            console.log(`ASQ #${id} => ${quote}`);
+                            outstr += `ASQ #${id} => ${quote}\n`;
                         }
                         id++;
                     }
                     id = 1;
                     for (const quote of Quotes.local_quotes) {
                         if (quote.toLowerCase().includes(kw)) {
-                            console.log(`Local #${id} => ${quote}`);
+                            outstr += `Local #${id} => ${quote}\n`;
                         }
                         id++;
                     }
                     Logger.log(`[CONSOLE] Find Quote "${kw}" completed`);
-                    break;
+                    return outstr;
                 }
             case "leave":
                 {
                     if (!Voice.resolveConnection()) {
                         Logger.log("[CONSOLE WARNING] Bot is not in any channel", "WARNING");
-                        return;
+                        break;
                     }
 
                     const channelName = Voice.connection?.channel.name;
@@ -80,13 +86,13 @@ export default class Console {
                 {
                     if (!Voice.resolveConnection()) {
                         Logger.log("[CONSOLE WARNING] No Voice Connection to play music!", "WARNING");
-                        return;
+                        break;
                     }
 
                     const index = parseInt(commands[1]) - 1;
                     if (isNaN(index) || index < 0 || index >= DJSalima.Musics.length) {
                         Logger.log(`[CONSOLE WARNING] Music Index of ${commands[1]} is invalid`, "WARNING");
-                        return;
+                        break;
                     }
 
                     DJSalima.play(DJSalima.Musics[index], index);
@@ -110,6 +116,5 @@ export default class Console {
             default:
                 Logger.log(`[CONSOLE WARNING] No such command "${commands[0]}"`, "WARNING");
         }
-        return;
     }
 }

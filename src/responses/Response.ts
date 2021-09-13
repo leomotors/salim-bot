@@ -1,6 +1,6 @@
 // * Response.ts : Take care of incoming Message
 
-import { Message } from "discord.js";
+import { DMChannel, Message } from "discord.js";
 
 import BotClient from "../client/Client";
 import Detector from "../core/Detector";
@@ -9,7 +9,7 @@ import Voice from "../core/Voice";
 import Logger from "../utils/Logger";
 import Quotes from "../core/Quotes";
 import Train from "../core/Train";
-import SalimShell, { shellPrefix } from "../salimshell/SalimShell";
+import SalimShell, { shellPrefix } from "../console/SalimShell";
 
 import MentionQuery from "./MentionQuery";
 import Facebook from "./Facebook";
@@ -39,7 +39,7 @@ export default class Response {
                 return;
             }
 
-            Logger.log(`Incoming Message from ${msg.author.tag} : ${msg.content}`);
+            Logger.log(`Incoming Message from ${msg.author.tag} in ${msg.channel instanceof DMChannel ? "DM Channel" : msg.channel.name} : ${msg.content}`);
 
             // * VC Function
             if (msg.content.toLowerCase().startsWith("!salim")) {
@@ -90,7 +90,7 @@ export default class Response {
                     msg.react("😡");
                 }
                 catch (err) {
-                    Logger.log(`Error Reacting: ${err}`, "ERROR");
+                    Logger.log(`Error Reacting [Auto Detection] : ${err}`, "ERROR");
                 }
                 Logger.log(`Replied to พวกชังชาติ with ${quote.quote} (${quote.id.type} #${quote.id.id})`);
                 Voice.sayTo(msg.member, quote.quote, msg);
