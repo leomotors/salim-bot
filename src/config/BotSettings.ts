@@ -11,8 +11,12 @@ export default class BotSettings {
     static async import(isReload = false): Promise<void> {
         try {
             const buffer = await fs.readFile("./config/bot_settings.json");
-            BotSettings.settings = JSON.parse(buffer.toString());
-            Logger.log("Successfully imported Bot Settings", "SUCCESS", isReload);
+            const obj = JSON.parse(buffer.toString());
+            for (const prop in BotSettingsTemplate) {
+                // @ts-ignore
+                BotSettings.settings[prop] = obj[prop] ?? BotSettingsTemplate[prop];
+            }
+            Logger.log("[FETCH COMPLETE] Successfully imported Bot Settings", "SUCCESS", isReload);
         }
         catch (err) {
             Logger.log("Bot Settings not found or error importing, using default one");

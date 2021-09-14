@@ -1,4 +1,8 @@
 {
+    "allow_salimshell": true,
+    "salimshell_insiders": [],
+    "reject_samkeeb": false,
+    "salim_insiders": [],
     "owner": [
         "YOUR-ID-HERE"
     ]

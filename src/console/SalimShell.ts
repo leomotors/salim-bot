@@ -30,6 +30,11 @@ export default class SalimShell {
     }
 
     static async execute(msg: Message): Promise<void> {
+        if (!BotSettings.settings.allow_salimshell && !BotSettings.settings.salimshell_insiders.includes(msg.author.id)) {
+            msg.reply("Permission denied");
+            return;
+        }
+
         const commands = msg.content.split(" ");
         if (commands.length <= 1) {
             msg.reply("No Commands");
@@ -94,6 +99,7 @@ export default class SalimShell {
                     if (result) {
                         if (result.length >= 2000) {
                             const lines = result.split("\n");
+                            lines.pop();
                             lines.reverse();
                             let currmsg = "";
                             while (lines.length) {

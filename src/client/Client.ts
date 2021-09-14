@@ -39,7 +39,7 @@ export default class BotClient extends Client {
             const authjs: Buffer = fs.readFileSync(filepath);
             const token: string = JSON.parse(authjs.toString()).token;
             this.login(token);
-            Logger.log("Successfully grabbed token and have attempt login", "NORMAL", false);
+            Logger.log("[FETCH COMPLETE] Successfully grabbed token and have attempt login", "SUCCESS", false);
         }
         catch (err) {
             Logger.log(`Error Occured at Login Process: ${err}`, "ERROR", false);

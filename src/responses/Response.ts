@@ -15,6 +15,7 @@ import MentionQuery from "./MentionQuery";
 import Facebook from "./Facebook";
 import QuoteQuery from "./QuoteQuery";
 import StaticQuery from "./StaticQuery";
+import BotSettings from "../config/BotSettings";
 
 export default class Response {
     queries: MentionQuery[];
@@ -30,11 +31,13 @@ export default class Response {
                 return;
             }
 
+            // * Salim Shell
             if (msg.content.toLowerCase().startsWith(shellPrefix)) {
                 SalimShell.execute(msg);
                 return;
             }
 
+            // * Salim Shell : Disabled Channel
             if (SalimShell.shellConfig.config.disabled.includes(msg.channel.id)) {
                 return;
             }
@@ -52,7 +55,6 @@ export default class Response {
                 }
                 return;
             }
-
             if (msg.content.toLowerCase().startsWith("!dc") || msg.content.toLowerCase().startsWith("!leave")) {
                 Voice.leaveChannel(msg);
                 return;
@@ -69,7 +71,8 @@ export default class Response {
 
             // * Train
             if (msg.content.startsWith("!train")) {
-                Train.train(msg);
+                if (BotSettings.settings.reject_samkeeb || !BotSettings.settings.salim_insiders.includes(msg.author.tag))
+                    Train.train(msg);
                 return;
             }
 
@@ -86,12 +89,7 @@ export default class Response {
                 Logger.log(`ชังชาติ detector detected ${Detector.last_detected}`);
                 const quote = Quotes.getQuote();
                 msg.channel.send(`${quote.quote}`);
-                try {
-                    msg.react("😡");
-                }
-                catch (err) {
-                    Logger.log(`Error Reacting [Auto Detection] : ${err}`, "ERROR");
-                }
+                msg.react("😡");
                 Logger.log(`Replied to พวกชังชาติ with ${quote.quote} (${quote.id.type} #${quote.id.id})`);
                 Voice.sayTo(msg.member, quote.quote, msg);
                 return;

@@ -27,7 +27,12 @@ export default class Console {
 
     private static executeConsole(command: string) {
         const result = Console.execute(command);
-        if (result) console.log(result);
+
+        if (result) {
+            console.log("Result Start =====>");
+            console.log(result.slice(0, result.length - 1));
+            console.log("<===== Result End");
+        }
     }
 
     static execute(command: string): string | null | undefined {
