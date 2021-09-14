@@ -1,6 +1,6 @@
 // * SalimShell.ts : Shell But Salim
 
-import { DMChannel, NewsChannel, TextChannel, Message, VoiceChannel } from "discord.js";
+import { DMChannel, NewsChannel, TextChannel, Message } from "discord.js";
 
 import * as fs from "fs/promises";
 
@@ -70,19 +70,6 @@ export default class SalimShell {
                     }
                     break;
                 }
-            case "tievoice":
-                {
-                    if (!msg.member?.voice.channel) {
-                        msg.reply("จะให้ฉันไปคุยกับผีหรอ");
-                        return;
-                    }
-
-                    const traceback = await SalimShell.tieVoiceChannel(msg.member.voice.channel);
-                    if (traceback) {
-                        msg.reply(traceback);
-                    }
-                    break;
-                }
             case "sudo":
                 {
                     if (!BotSettings.settings.owner.includes(msg.author.id)) {
@@ -145,18 +132,6 @@ export default class SalimShell {
                 return "";
             }
         }
-    }
-
-    private static async tieVoiceChannel(channel: VoiceChannel): Promise<string> {
-        if (SalimShell.shellConfig.config.tiedVoice == channel.id) {
-
-            return "Already Tied to this Channel";
-        }
-
-        SalimShell.shellConfig.config.tiedVoice = channel.id;
-        SalimShell.saveConfig();
-        Logger.log(`[Salim Shell] Tied to ${channel.name}`);
-        return "";
     }
 
     private static async saveConfig(): Promise<void> {

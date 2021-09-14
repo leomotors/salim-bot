@@ -49,6 +49,8 @@ In case you want to (not recommend)
 
 - For next time, you can simply ```npm start``` to run bot. The previous command is for install and build process
 
+- To Stop Bot and Logout *properly*, Type `logout` in the Bot Console
+
 ## 🌿 Prerequisites
 
 - Linux (Sorry Windows User)
@@ -77,25 +79,7 @@ In case you want to (not recommend)
 
 User Manual [Here](./docs/user_manual.md)
 
-## 💬 Local Quotes
-
-To add more quotes on top of ASQ, create a file "morequotes.json" in data folder
-
-```
-{
-  "วาทกรรมสลิ่ม": [ Array of Your Custom Local Quotes Here ]
-}
-```
-
-You can also add more keywords, songs or Facebooks to JSON files in data folder!
-
-### Keywords adding guideline
-
-Keywords must be all lowercase (if english alphabet exists) and no space in it.
-
-The reason is the bot process sentences by ignoring spaces and turning all english alphabet into lowercase, for example
-
-`Sinovac, sInOvAc, S I N O V A C` will all equivalent to "sinovac"
+Advanced Usage (for Owner) [Here](./docs/advanced.md)
 
 ### Trained by People
 
