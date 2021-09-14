@@ -104,21 +104,35 @@ export default class Console {
                     Logger.log(`[CONSOLE] Attempted to play music #${index + 1}`);
                     break;
                 }
+            case "query":
+                return ConsoleQuery.Query(commands.slice(1));
             case "reload":
                 Import(true);
                 Logger.log("[CONSOLE] Reload completed");
                 break;
-            case "query":
-                return ConsoleQuery.Query(commands.slice(1));
+            case "salim":
+                {
+                    if (!Console.client.last_message) {
+                        Logger.log("[CONSOLE] Can't burst emotion because no reference message is found", "WARNING");
+                        return "";
+                    }
+
+                    const quote = Quotes.getQuote();
+                    Console.client.last_message.channel.send(`${quote.quote}`);
+                    Voice.tts(quote.quote);
+                    Logger.log(`[CONSOLE] Burst Emotion with ${quote.quote} (${quote.id.type} #${quote.id.id})`);
+                    break;
+                }
             case "logout":
                 Console.client.destroy();
                 if (Train.trainedCount)
                     Logger.log(`Your bot has been trained ${Train.trainedCount} quote in this session. And is pending for review, to Review do npm run review`, "SUCCESS", false);
                 Logger.log("Successfully logged out", "SUCCESS");
                 process.exit(0);
-                break; // * Break because eslint complain me even it is unreachable
+            /* eslint-disable no-fallthrough */
             default:
                 Logger.log(`[CONSOLE WARNING] No such command "${commands[0]}"`, "WARNING");
+            /* eslint-enable */
         }
     }
 }

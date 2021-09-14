@@ -52,7 +52,7 @@ export default class SalimShell {
                     if (traceback)
                         msg.reply(traceback);
                     else
-                        msg.react("💛");
+                        msg.react("👋");
                     break;
                 }
             case "enable":

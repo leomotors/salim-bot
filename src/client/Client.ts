@@ -8,6 +8,8 @@ import Logger from "../utils/Logger";
 import Response from "../responses/Response";
 
 export default class BotClient extends Client {
+    last_message?: Message;
+
     constructor() {
         super();
         this.on("ready", () => {
@@ -51,6 +53,7 @@ export default class BotClient extends Client {
 
     implementsResponse(handler: Response): void {
         this.on("message", (msg: Message) => {
+            this.last_message = msg;
             try {
                 handler.getFunction(this)(msg);
             }
