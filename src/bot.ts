@@ -22,4 +22,4 @@ Console.construct(client);
 client.attemptLogin("./config/auth.json");
 client.implementsResponse(msgHandler);
 
-Logger.log("[SETUP COMPLETE] bot.ts control reach the end of file", "SUCCESS", false);
+Logger.log("[SYNC SETUP COMPLETE] bot.ts control reach the end of file", "SUCCESS", false);

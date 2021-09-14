@@ -95,7 +95,8 @@ export default class Voice {
         }
     }
 
-    private static tts(message: string): void {
+    // * tts with Voice Connection Detection
+    static tts(message: string): void {
         if (!Voice.resolveConnection()) return;
 
         const sh = `echo "${message}" | python3 ./scripts/tts.py`;

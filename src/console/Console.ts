@@ -6,6 +6,7 @@ import BotClient from "../client/Client";
 import ConsoleQuery from "./ConsoleQuery";
 import DJSalima from "../core/DJSalima";
 import Import from "../import/Import";
+import Train from "../core/Train";
 import Voice from "../core/Voice";
 import Quotes from "../core/Quotes";
 import Logger from "../utils/Logger";
@@ -21,10 +22,20 @@ export default class Console {
             output: process.stdout
         });
 
-        Console.interface.on("line", Console.onCommand);
+        Console.interface.on("line", Console.executeConsole);
     }
 
-    static onCommand(command: string): void {
+    private static executeConsole(command: string) {
+        const result = Console.execute(command);
+
+        if (result) {
+            console.log("Result Start =====>");
+            console.log(result.slice(0, result.length - 1));
+            console.log("<===== Result End");
+        }
+    }
+
+    static execute(command: string): string | null | undefined {
         const commands = command.split(" ");
 
         switch (commands[0].toLowerCase()) {
@@ -39,33 +50,34 @@ export default class Console {
                     let kw = commands[1];
                     if (!kw) {
                         Logger.log("[CONSOLE WARNING] Empty Search Keyword", "WARNING");
-                        return;
+                        break;
                     }
 
                     kw = kw.toLowerCase();
 
                     let id = 1;
+                    let outstr = "";
                     for (const quote of Quotes.asq_quotes) {
                         if (quote.toLowerCase().includes(kw)) {
-                            console.log(`ASQ #${id} => ${quote}`);
+                            outstr += `ASQ #${id} => ${quote}\n`;
                         }
                         id++;
                     }
                     id = 1;
                     for (const quote of Quotes.local_quotes) {
                         if (quote.toLowerCase().includes(kw)) {
-                            console.log(`Local #${id} => ${quote}`);
+                            outstr += `Local #${id} => ${quote}\n`;
                         }
                         id++;
                     }
                     Logger.log(`[CONSOLE] Find Quote "${kw}" completed`);
-                    break;
+                    return outstr;
                 }
             case "leave":
                 {
                     if (!Voice.resolveConnection()) {
                         Logger.log("[CONSOLE WARNING] Bot is not in any channel", "WARNING");
-                        return;
+                        break;
                     }
 
                     const channelName = Voice.connection?.channel.name;
@@ -79,34 +91,48 @@ export default class Console {
                 {
                     if (!Voice.resolveConnection()) {
                         Logger.log("[CONSOLE WARNING] No Voice Connection to play music!", "WARNING");
-                        return;
+                        break;
                     }
 
                     const index = parseInt(commands[1]) - 1;
                     if (isNaN(index) || index < 0 || index >= DJSalima.Musics.length) {
                         Logger.log(`[CONSOLE WARNING] Music Index of ${commands[1]} is invalid`, "WARNING");
-                        return;
+                        break;
                     }
 
                     DJSalima.play(DJSalima.Musics[index], index);
                     Logger.log(`[CONSOLE] Attempted to play music #${index + 1}`);
                     break;
                 }
+            case "query":
+                return ConsoleQuery.Query(commands.slice(1));
             case "reload":
                 Import(true);
                 Logger.log("[CONSOLE] Reload completed");
                 break;
-            case "query":
-                ConsoleQuery.Query(commands.slice(1));
-                break;
+            case "salim":
+                {
+                    if (!Console.client.last_message) {
+                        Logger.log("[CONSOLE] Can't burst emotion because no reference message is found", "WARNING");
+                        return "";
+                    }
+
+                    const quote = Quotes.getQuote();
+                    Console.client.last_message.channel.send(`${quote.quote}`);
+                    Voice.tts(quote.quote);
+                    Logger.log(`[CONSOLE] Burst Emotion with ${quote.quote} (${quote.id.type} #${quote.id.id})`);
+                    break;
+                }
             case "logout":
                 Console.client.destroy();
+                if (Train.trainedCount)
+                    Logger.log(`Your bot has been trained ${Train.trainedCount} quote in this session. And is pending for review, to Review do npm run review`, "SUCCESS", false);
                 Logger.log("Successfully logged out", "SUCCESS");
                 process.exit(0);
-                break; // * Break because eslint complain me even it is unreachable
+            /* eslint-disable no-fallthrough */
             default:
                 Logger.log(`[CONSOLE WARNING] No such command "${commands[0]}"`, "WARNING");
+            /* eslint-enable */
         }
-        return;
     }
 }

@@ -5,7 +5,7 @@ import DJSalima from "../core/DJSalima";
 import Logger from "../utils/Logger";
 
 export default class ConsoleQuery {
-    static Query(query: string[]): void {
+    static Query(query: string[]): string | null | undefined {
         if (!query[0]) {
             Logger.log("[CONSOLE QUERY WARNING] Where query?", "WARNING");
             return;
@@ -13,25 +13,25 @@ export default class ConsoleQuery {
         switch ((query[0]).toLowerCase()) {
             case "activity":
                 {
-                    console.log(`There is ${Activity.activities.length} Activities`);
+                    let outstr = `There is ${Activity.activities.length} Activities\n`;
                     let id = 1;
                     for (const activity of Activity.activities) {
-                        console.log(`#${id} => ${activity.type} ${activity.name}`);
+                        outstr += `#${id} => ${activity.type} ${activity.name}\n`;
                         id++;
                     }
                     Logger.log("[CONSOLE QUERY] Query for Activity completed");
-                    break;
+                    return outstr;
                 }
             case "music":
                 {
-                    console.log(`There is ${DJSalima.Musics.length} Musics`);
+                    let outstr = `There is ${DJSalima.Musics.length} Musics\n`;
                     let id = 1;
                     for (const music of DJSalima.Musics) {
-                        console.log(`#${id} [${music.category}] => ${music.name}`);
+                        outstr += `#${id} [${music.category}] => ${music.name}\n`;
                         id++;
                     }
                     Logger.log("[CONSOLE QUERY] Query for Music completed");
-                    break;
+                    return outstr;
                 }
             default:
                 Logger.log(`[CONSOLE QUERY WARNING] No such query "${query[0].toLowerCase()}"`, "WARNING");

@@ -1,6 +1,6 @@
 // * Response.ts : Take care of incoming Message
 
-import { Message } from "discord.js";
+import { DMChannel, Message } from "discord.js";
 
 import BotClient from "../client/Client";
 import Detector from "../core/Detector";
@@ -9,11 +9,13 @@ import Voice from "../core/Voice";
 import Logger from "../utils/Logger";
 import Quotes from "../core/Quotes";
 import Train from "../core/Train";
+import SalimShell, { shellPrefix } from "../console/SalimShell";
 
 import MentionQuery from "./MentionQuery";
 import Facebook from "./Facebook";
 import QuoteQuery from "./QuoteQuery";
 import StaticQuery from "./StaticQuery";
+import BotSettings from "../config/BotSettings";
 
 export default class Response {
     queries: MentionQuery[];
@@ -24,15 +26,23 @@ export default class Response {
 
     getFunction(client: BotClient): (msg: Message) => void {
         return (msg: Message) => {
-            if (client == null) {
-                console.log("this.client is null", "ERROR");
-            }
             if (msg.author == client.user) {
                 // * Own Message: Ignore it
                 return;
             }
 
-            Logger.log(`Incoming Message from ${msg.author.tag} : ${msg.content}`);
+            // * Salim Shell
+            if (msg.content.toLowerCase().startsWith(shellPrefix)) {
+                SalimShell.execute(msg);
+                return;
+            }
+
+            // * Salim Shell : Disabled Channel
+            if (SalimShell.shellConfig.config.disabled.includes(msg.channel.id)) {
+                return;
+            }
+
+            Logger.log(`Incoming Message from ${msg.author.tag} in ${msg.channel instanceof DMChannel ? "DM Channel" : msg.channel.name} : ${msg.content}`);
 
             // * VC Function
             if (msg.content.toLowerCase().startsWith("!salim")) {
@@ -45,7 +55,6 @@ export default class Response {
                 }
                 return;
             }
-
             if (msg.content.toLowerCase().startsWith("!dc") || msg.content.toLowerCase().startsWith("!leave")) {
                 Voice.leaveChannel(msg);
                 return;
@@ -62,7 +71,8 @@ export default class Response {
 
             // * Train
             if (msg.content.startsWith("!train")) {
-                Train.train(msg);
+                if (BotSettings.settings.reject_samkeeb || !BotSettings.settings.salim_insiders.includes(msg.author.tag))
+                    Train.train(msg);
                 return;
             }
 

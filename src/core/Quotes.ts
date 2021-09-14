@@ -74,7 +74,7 @@ export default class Quotes {
             if (dupl > 0) {
                 Logger.log(`[IMPORT ONLINE NOTICE] Detected ${dupl} duplicate quotes`, "WARNING", false);
             }
-            Logger.log(`[FETCH COMPLETE] Retrieved ${newQuotes.length} quotes from Awesome Salim Quotes`, "SUCCESS", isReload);
+            Logger.log(`[FETCH ONLINE COMPLETE] Retrieved ${newQuotes.length} quotes from Awesome Salim Quotes`, "SUCCESS", isReload);
 
             Quotes.asq_quotes = newQuotes;
         }
