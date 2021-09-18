@@ -9,6 +9,12 @@ import PackageInfo from "../constants/PackageInfo";
 
 const ActivityLoc = "./data/activity.json";
 
+const defaultActivity: ActivityOptions = {
+    "name": `Salim Bot ${PackageInfo.pkg_version}`,
+    "type": "PLAYING",
+    "url": PackageInfo.github
+};
+
 export default class Activity {
     static activities: ActivityOptions[] = [];
 
@@ -18,11 +24,7 @@ export default class Activity {
         try {
             const buffer = fs.readFileSync(ActivityLoc);
             const activities = JSON.parse(buffer.toString()).activities;
-            Activity.activities.push({
-                "name": `Salim Bot ${PackageInfo.pkg_version}`,
-                "type": "PLAYING",
-                "url": PackageInfo.github
-            });
+            Activity.activities.push(defaultActivity);
 
             for (const activity of activities) {
                 Activity.activities.push({

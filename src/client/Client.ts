@@ -9,6 +9,11 @@ import Response from "../responses/Response";
 
 export default class BotClient extends Client {
     last_message?: Message;
+    private _current_activity = 1;
+
+    get current_activity(): number {
+        return this._current_activity;
+    }
 
     constructor() {
         super();
@@ -17,10 +22,14 @@ export default class BotClient extends Client {
             this.setBotActivity(1);
         });
         this.on("error", console.warn);
+
+        this.setInterval(() => {
+            this.setBotActivity(this.current_activity);
+        }, 30 * 1000);
     }
 
     async setBotActivity(activityID?: number): Promise<void> {
-        if (Activity.activities.length <= 0)
+        if (Activity.activities.length <= 1)
             await Activity.construct();
 
         if (!activityID || activityID < 1 || activityID > Activity.activities.length) {
@@ -34,6 +43,8 @@ export default class BotClient extends Client {
         const activity = Activity.activities[activityID];
         this.user?.setActivity(activity);
         Logger.log(`Set Activity to ${activity.type} ${activity.name} (#${activityID + 1})`);
+
+        this._current_activity = activityID + 1;
     }
 
     async attemptLogin(filepath: string): Promise<void> {
