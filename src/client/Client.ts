@@ -24,11 +24,11 @@ export default class BotClient extends Client {
         this.on("error", console.warn);
 
         this.setInterval(() => {
-            this.setBotActivity(this.current_activity);
+            this.setBotActivity(this.current_activity, false);
         }, 30 * 1000);
     }
 
-    async setBotActivity(activityID?: number): Promise<void> {
+    async setBotActivity(activityID?: number, dolog = true): Promise<void> {
         if (Activity.activities.length <= 1)
             await Activity.construct();
 
@@ -42,7 +42,7 @@ export default class BotClient extends Client {
 
         const activity = Activity.activities[activityID];
         this.user?.setActivity(activity);
-        Logger.log(`Set Activity to ${activity.type} ${activity.name} (#${activityID + 1})`);
+        dolog && Logger.log(`Set Activity to ${activity.type} ${activity.name} (#${activityID + 1})`);
 
         this._current_activity = activityID + 1;
     }
