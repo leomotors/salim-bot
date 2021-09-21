@@ -15,13 +15,14 @@ import MentionQuery from "./MentionQuery";
 import Facebook from "./Facebook";
 import QuoteQuery from "./QuoteQuery";
 import StaticQuery from "./StaticQuery";
+import WhyImWrong from "./WhyImWrong";
 import BotSettings from "../config/BotSettings";
 
 export default class Response {
     queries: MentionQuery[];
 
     constructor() {
-        this.queries = [new StaticQuery(), new QuoteQuery(), new Facebook()];
+        this.queries = [new StaticQuery(), new QuoteQuery(), new Facebook(), new WhyImWrong()];
     }
 
     getFunction(client: BotClient): (msg: Message) => void {
