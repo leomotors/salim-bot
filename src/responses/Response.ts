@@ -32,6 +32,11 @@ export default class Response {
                 return;
             }
 
+            if (!BotSettings.settings.aggressive_on_bot && msg.author.bot) {
+                // * If Set to ignore Bot Messages
+                return;
+            }
+
             // * Salim Shell
             if (msg.content.toLowerCase().startsWith(shellPrefix)) {
                 SalimShell.execute(msg);
