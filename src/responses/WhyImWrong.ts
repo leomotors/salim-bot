@@ -13,7 +13,7 @@ export default class WhyImWrong extends MentionQuery {
             {
                 keywords: ["ผิด", "wrong"],
                 response: (msg: Message) => {
-                    const replymsg = `พวกคุณผิดที่พูดคำว่า ${Detector.last_detected} ถือเป็นการคุบคามสถาบันอย่างร้ายแรง ไม่สมควรได้รับการให้อภัย`;
+                    const replymsg = `พวกคุณผิดที่พูดคำว่า ${Detector.last_detected} ถือเป็นการคุกคามสถาบันอย่างร้ายแรง ไม่สมควรได้รับการให้อภัย`;
                     msg.reply(replymsg);
                     Voice.sayTo(msg.member, replymsg);
                     Logger.log(`Told ${msg.author.tag} why they are ภัยคุกคามต่อสถาบัน`);
