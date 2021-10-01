@@ -1,7 +1,6 @@
 // * Client.ts : Heart of the Bot
 
 import { Client, Message } from "discord.js";
-import * as fs from "fs";
 
 import Activity from "./Activity";
 import Logger from "../utils/Logger";
@@ -47,16 +46,13 @@ export default class BotClient extends Client {
         this._current_activity = activityID + 1;
     }
 
-    async attemptLogin(filepath: string): Promise<void> {
-        try {
-            const authjs: Buffer = fs.readFileSync(filepath);
-            const token: string = JSON.parse(authjs.toString()).token;
-            this.login(token);
-            Logger.log("[FETCH COMPLETE] Successfully grabbed token and have attempt login", "SUCCESS", false);
+    async attemptLogin(): Promise<void> {
+        if (process.env.DISCORD_TOKEN) {
+            this.login(process.env.DISCORD_TOKEN);
+            Logger.log("Attempting Login...", "NORMAL", false);
         }
-        catch (err) {
-            Logger.log(`Error Occured at Login Process: ${err}`, "ERROR", false);
-            Logger.log("Have you put your token in ./config/auth.json? Read instructions for more info", "WARNING", false);
+        else {
+            Logger.log("No DISCORD_TOKEN Found! Please put it in .env", "ERROR", false);
             this.destroy();
             process.exit(1);
         }

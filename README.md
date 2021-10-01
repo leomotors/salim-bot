@@ -37,7 +37,7 @@ In case you want to (not recommend)
 
   ```git clone https://github.com/Leomotors/Salim-Bot/```
   
-- Add your token at config/auth.json
+- Add your token in DISCORD_TOKEN of .env
 
 ```
 {
