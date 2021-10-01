@@ -73,8 +73,8 @@ export default class DJSalima {
         }
     }
 
-    static playSearch(msg: Message): void {
-        if (!DJSalima.checkuser(msg))
+    static async playSearch(msg: Message): Promise<void> {
+        if (!await DJSalima.checkuser(msg))
             return;
 
         const toSearch = msg.content.toLowerCase().split(" ")[1];
@@ -110,8 +110,8 @@ export default class DJSalima {
         Voice.sayTo(msg.member, すみませんnotรักชาติ);
     }
 
-    static playRandomSong(msg: Message): void {
-        if (!DJSalima.checkuser(msg))
+    static async playRandomSong(msg: Message): Promise<void> {
+        if (!await DJSalima.checkuser(msg))
             return;
 
         const randIndex: number = Math.floor(Math.random() * DJSalima.Musics.length);
@@ -126,8 +126,12 @@ export default class DJSalima {
         DJSalima.play(toPlay, randIndex, msg);
     }
 
-    private static checkuser(msg: Message): boolean {
+    private static async checkuser(msg: Message): Promise<boolean> {
         if (!Voice.resolveConnection()) {
+            if (msg.member) {
+                await Voice.joinTo(msg.member, msg, false);
+                return true;
+            }
             msg.reply("นี่คุณจะให้ฉันเล่นเพลงให้ผีฟังหรอ");
             return false;
         }

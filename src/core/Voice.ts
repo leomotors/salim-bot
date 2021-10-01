@@ -13,7 +13,7 @@ const alreadyHereMessage = "ฉันอยู่นี่แล้วไง ย
 export default class Voice {
     static connection?: VoiceConnection;
 
-    static async joinTo(member: GuildMember, msg: Message): Promise<boolean> {
+    static async joinTo(member: GuildMember, msg: Message, welcome = true): Promise<boolean> {
         const voiceChannel = member.voice.channel;
 
         let rejoin = false;
@@ -40,7 +40,8 @@ export default class Voice {
                     Logger.log(`Successfully moved from ${oldChannelName} to ${Voice.connection.channel.name}`, "SUCCESS");
                 else
                     Logger.log(`Successfully join ${Voice.connection.channel.name}`, "SUCCESS");
-                Voice.tts(rejoin ? RejoiningMessage : JoiningMessage);
+                if (welcome)
+                    Voice.tts(rejoin ? RejoiningMessage : JoiningMessage);
                 return Voice.resolveConnection();
             }
             catch (error) {
