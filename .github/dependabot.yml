@@ -11,8 +11,10 @@ updates:
       interval: "daily"
     ignore:
       - dependency-name: "discord.js"
+    target-branch: "beta"
       
   - package-ecosystem: "pip" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
+    target-branch: "beta"
