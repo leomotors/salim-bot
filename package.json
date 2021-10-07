@@ -1,6 +1,6 @@
 {
   "name": "salim-bot",
-  "version": "2.2.431",
+  "version": "2.2.432",
   "description": "This bot is Salim. Whenever you trigger it, It become mad.",
   "type": "module",
   "main": "dist/bot.js",
@@ -10,13 +10,14 @@
   "scripts": {
     "install": "pip3 install -r \"requirements.txt\"",
     "build": "tsc --build",
-    "buildinc": "node ./scripts/incrementVersion.js && npm run build",
+    "buildinc": "yarn inc && yarn build",
     "clean": "./scripts/rmtemp.sh temp && rm -r dist",
     "clearlog": "./scripts/rmtemp.sh log",
-    "dev": "npm run buildinc && npm start",
+    "dev": "yarn buildinc && yarn start",
+    "inc": "node node_modules/leomotors-automation/incrementVersion.js",
     "review": "node ./scripts/reviewTrain.js",
     "start": "node --es-module-specifier-resolution=node dist/bot.js",
-    "salim": "npm install && npm run build && npm start"
+    "salim": "yarn install && yarn build && yarn start"
   },
   "repository": {
     "type": "git",
@@ -29,15 +30,16 @@
   },
   "homepage": "https://github.com/Leomotors/Salim-Bot",
   "devDependencies": {
-    "@types/node": "^16.7.10",
-    "@typescript-eslint/eslint-plugin": "^4.30.0",
-    "@typescript-eslint/parser": "^4.30.0",
+    "@types/node": "^16.10.3",
+    "@typescript-eslint/eslint-plugin": "^4.33.0",
+    "@typescript-eslint/parser": "^4.33.0",
     "eslint": "^7.32.0",
-    "typescript": "^4.4.2"
+    "leomotors-automation": "^1.0.1",
+    "typescript": "^4.4.3"
   },
   "dependencies": {
     "@discordjs/opus": "^0.6.0",
-    "bufferutil": "^4.0.3",
+    "bufferutil": "^4.0.4",
     "chalk": "^4.1.2",
     "discord.js": "^12.5.3",
     "dotenv": "^10.0.0",
@@ -47,7 +49,7 @@
     "node-opus": "^0.3.3",
     "opusscript": "^0.0.8",
     "tweetnacl": "^1.0.3",
-    "utf-8-validate": "^5.0.5",
+    "utf-8-validate": "^5.0.6",
     "ytdl-core": "^4.9.1",
     "zlib-sync": "^0.1.7"
   }

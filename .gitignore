@@ -103,12 +103,6 @@ dist
 # TernJS port file
 .tern-port
 
-# Key
-auth.json
-
-# package
-package-lock.json
-
 # Local Data, gitignored for safety reason
 data/morequotes.json
 
@@ -120,7 +114,6 @@ backup
 
 # My own automation
 *.sh
-!fileinit.sh
 !rmtemp.sh
 
 .vscode
