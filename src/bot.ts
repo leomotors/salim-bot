@@ -1,15 +1,23 @@
 import dotenv from "dotenv";
 dotenv.config();
 
+import chalk from "chalk";
+console.log(
+    chalk.cyan("Starting Salim Bot ") +
+        chalk.magenta(process.env.npm_package_version) +
+        "✨✨"
+);
+
 import {
+    AboutFramework,
     Console,
     ComputedLoader,
     DataLoader,
     MultiLoader,
     OnlineLoader,
     SBotClient,
-    StaticLoader,
     Response,
+    sLogger,
 } from "s-bot-framework";
 
 const client = new SBotClient({ token: process.env.DISCORD_TOKEN });
@@ -30,11 +38,33 @@ const combinedQuotes = new MultiLoader([
     },
 ]);
 
+const facebook = new DataLoader(
+    "data/facebook.json",
+    "คนรักสถาบัน",
+    (t: any) =>
+        `ดิฉันแนะนำให้คุณไปติดตาม ${t.name} นะ เพื่อคุณจะได้ตาสว่าง ${t.url}`
+);
+
 client.useResponse(
     new Response({
         trigger: { mention: true, keywords: ["แนะนำตัว"] },
         response: {
-            loader: new StaticLoader(["I'm gay"]),
+            loader: new ComputedLoader(
+                () =>
+                    `ส วั ส ดี ค รั บ ท่านสมาชิกชมรมคนชอบกะสัสทุกท่าน กระผมสลิ่มบอท เวอร์ชั่น ${
+                        process.env.npm_package_version
+                    }\nรันอยู่บน ${AboutFramework()}`
+            ),
+            reply: true,
+        },
+    })
+);
+
+client.useResponse(
+    new Response({
+        trigger: { mention: true, keywords: ["fb", "เฟส", "facebook"] },
+        response: {
+            loader: facebook,
             reply: true,
         },
     })
@@ -68,8 +98,8 @@ client.useActivity({
     name: `Salim Bot ${process.env.npm_package_version}`,
 });
 
-const console = new Console(client);
+const ctrlConsole = new Console(client);
 
-client.useConsole(console);
+client.useConsole(ctrlConsole);
 
-client.log("async setup done!");
+sLogger.log("async setup done!");

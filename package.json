@@ -1,6 +1,6 @@
 {
   "name": "salim-bot",
-  "version": "3.0.537",
+  "version": "3.0.549",
   "description": "This bot is Salim. Whenever you trigger it, It become mad.",
   "type": "module",
   "main": "dist/bot.js",
@@ -8,11 +8,8 @@
     "doc": "docs"
   },
   "scripts": {
-    "install": "pip3 install -r \"requirements.txt\"",
     "build": "tsc --build",
     "buildinc": "yarn inc && yarn build",
-    "clean": "./scripts/rmtemp.sh temp && rm -r dist",
-    "clearlog": "./scripts/rmtemp.sh log",
     "dev": "yarn buildinc && yarn start",
     "inc": "node node_modules/leomotors-automation/incrementVersion.js",
     "review": "node ./scripts/reviewTrain.js",
@@ -40,6 +37,7 @@
     "prettier": "^2.4.1"
   },
   "dependencies": {
+    "chalk": "^4.1.2",
     "dotenv": "^10.0.0"
   }
 }
