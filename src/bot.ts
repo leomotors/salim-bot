@@ -1,29 +1,63 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-import { Console, DataLoader, SBotClient, Response } from "s-bot-framework";
+import {
+    Console,
+    ComputedLoader,
+    DataLoader,
+    MultiLoader,
+    OnlineLoader,
+    SBotClient,
+    StaticLoader,
+    Response,
+} from "s-bot-framework";
 
 const client = new SBotClient({ token: process.env.DISCORD_TOKEN });
 
 const keywords = new DataLoader("data/keywords.json", "ชังชาติ");
+const localquotes = new DataLoader("data/morequotes.json", "วาทกรรมสลิ่ม");
+const awesome_salim_quotes = new OnlineLoader(
+    "https://watasalim.vercel.app/api/quotes",
+    "quotes",
+    (t: any) => t.body
+);
+
+const combinedQuotes = new MultiLoader([
+    { loader: localquotes, label: "Local Quote" },
+    {
+        loader: awesome_salim_quotes,
+        label: "Awesome Salim Quotes",
+    },
+]);
 
 client.useResponse(
     new Response({
         trigger: { mention: true, keywords: ["แนะนำตัว"] },
-        response: () => "สวัสดีครับท่านสมาชิกชมรม",
+        response: {
+            loader: new StaticLoader(["I'm gay"]),
+            reply: true,
+        },
     })
 );
 
 const ชังชาติ = new Response({
     trigger: { keywords },
-    response: () => "ชังชาติ",
+    response: {
+        loader: combinedQuotes,
+        react: "😡",
+    },
 });
 
 client.useResponse(
     new Response({
         trigger: { mention: true, keywords: ["ผิด"] },
-        response: () =>
-            `คุณผิดที่พูดคำว่า ${ชังชาติ.triggered} ถือเป็นการคุกคามสถาบันอย่างยิ่ง`,
+        response: {
+            loader: new ComputedLoader(
+                () =>
+                    `พวกคุณผิดที่พูดคำว่า ${ชังชาติ.triggered} ถือเป็นการคุกคามสถาบันอย่างยิ่ง`
+            ),
+            reply: true,
+        },
     })
 );
 
@@ -37,3 +71,5 @@ client.useActivity({
 const console = new Console(client);
 
 client.useConsole(console);
+
+client.log("async setup done!");
