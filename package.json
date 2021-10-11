@@ -1,6 +1,6 @@
 {
   "name": "salim-bot",
-  "version": "3.0.549",
+  "version": "3.0.569",
   "description": "This bot is Salim. Whenever you trigger it, It become mad.",
   "type": "module",
   "main": "dist/bot.js",
@@ -30,7 +30,7 @@
     "@types/node": "^16.10.3",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
-    "eslint": "^7.32.0",
+    "eslint": "^8.0.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "leomotors-automation": "^1.0.1",

@@ -1,6 +1,3 @@
-import dotenv from "dotenv";
-dotenv.config();
-
 import chalk from "chalk";
 console.log(
     chalk.cyan("Starting Salim Bot ") +
@@ -20,7 +17,7 @@ import {
     sLogger,
 } from "s-bot-framework";
 
-const client = new SBotClient({ token: process.env.DISCORD_TOKEN });
+const client = new SBotClient();
 
 const keywords = new DataLoader("data/keywords.json", "ชังชาติ");
 const localquotes = new DataLoader("data/morequotes.json", "วาทกรรมสลิ่ม");
@@ -100,6 +97,13 @@ client.useActivity({
 
 const ctrlConsole = new Console(client);
 
+ctrlConsole.addLoader(keywords, localquotes, awesome_salim_quotes, facebook);
+
 client.useConsole(ctrlConsole);
+
+client.useTTS({
+    prefix: "!salim",
+    onJoin: "บอทสลิ่มมาแล้วนะจ๊ะ",
+});
 
 sLogger.log("async setup done!");
