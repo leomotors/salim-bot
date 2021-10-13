@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/Leomotors/Salim-Bot",
   "devDependencies": {
-    "@types/node": "^16.10.3",
+    "@types/node": "^16.10.4",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
     "eslint": "^7.32.0",
