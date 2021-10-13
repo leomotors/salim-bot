@@ -1,28 +1,112 @@
-/**
- * * bot.ts -> Main of Bot (Run this with npm start)
- */
+import chalk from "chalk";
+console.log(
+    chalk.cyan("Starting Salim Bot ") +
+        chalk.magenta(process.env.npm_package_version) +
+        "✨✨"
+);
 
-import BotClient from "./client/Client";
-import Console from "./console/Console";
-import Import from "./import/Import";
-import Logger from "./utils/Logger";
-import Response from "./responses/Response";
+import {
+    AboutFramework,
+    Console,
+    ComputedLoader,
+    DataLoader,
+    MultiLoader,
+    OnlineLoader,
+    SBotClient,
+    Response,
+    sLogger,
+} from "s-bot-framework";
 
-import dotenv from "dotenv";
-dotenv.config();
+const client = new SBotClient();
 
-// * Initialize Begin
-Import();
+const keywords = new DataLoader("data/keywords.json", "ชังชาติ");
+const localquotes = new DataLoader("data/morequotes.json", "วาทกรรมสลิ่ม");
+const awesome_salim_quotes = new OnlineLoader(
+    "https://watasalim.vercel.app/api/quotes",
+    "quotes",
+    (t: any) => t.body
+);
 
-Logger.construct();
+const combinedQuotes = new MultiLoader([
+    { loader: localquotes, label: "Local Quote" },
+    {
+        loader: awesome_salim_quotes,
+        label: "Awesome Salim Quotes",
+    },
+]);
 
-const client: BotClient = new BotClient();
-const msgHandler = new Response();
+const facebook = new DataLoader(
+    "data/facebook.json",
+    "คนรักสถาบัน",
+    (t: any) =>
+        `ดิฉันแนะนำให้คุณไปติดตาม ${t.name} นะ เพื่อคุณจะได้ตาสว่าง ${t.url}`
+);
 
-Console.construct(client);
-// * Initialize End
+client.useResponse(
+    new Response({
+        trigger: { mention: true, keywords: ["แนะนำตัว"] },
+        response: {
+            loader: new ComputedLoader(
+                () =>
+                    `ส วั ส ดี ค รั บ ท่านสมาชิกชมรมคนชอบกะสัสทุกท่าน กระผมสลิ่มบอท เวอร์ชั่น ${
+                        process.env.npm_package_version
+                    }\nรันอยู่บน ${AboutFramework()}`
+            ),
+            reply: true,
+            audio: true,
+        },
+    })
+);
 
-client.attemptLogin();
-client.implementsResponse(msgHandler);
+client.useResponse(
+    new Response({
+        trigger: { mention: true, keywords: ["fb", "เฟส", "facebook"] },
+        response: {
+            loader: facebook,
+            reply: true,
+            audio: true,
+        },
+    })
+);
 
-Logger.log("[SYNC SETUP COMPLETE] bot.ts control reach the end of file", "SUCCESS", false);
+const ชังชาติ = new Response({
+    trigger: { keywords },
+    response: {
+        loader: combinedQuotes,
+        react: "😡",
+        audio: true,
+    },
+});
+
+client.useResponse(
+    new Response({
+        trigger: { mention: true, keywords: ["ผิด"] },
+        response: {
+            loader: new ComputedLoader(
+                () =>
+                    `พวกคุณผิดที่พูดคำว่า ${ชังชาติ.triggered} ถือเป็นการคุกคามสถาบันอย่างยิ่ง`
+            ),
+            reply: true,
+            audio: true,
+        },
+    })
+);
+
+client.useResponse(ชังชาติ);
+
+client.useActivity({
+    type: "PLAYING",
+    name: `Salim Bot ${process.env.npm_package_version}`,
+});
+
+const ctrlConsole = new Console(client);
+
+ctrlConsole.addLoader(keywords, localquotes, awesome_salim_quotes, facebook);
+
+client.useConsole(ctrlConsole);
+
+client.useVoice({
+    jutsu: "CorgiSwift",
+});
+
+sLogger.log("async setup done!");
