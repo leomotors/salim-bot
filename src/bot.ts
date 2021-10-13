@@ -53,6 +53,7 @@ client.useResponse(
                     }\nรันอยู่บน ${AboutFramework()}`
             ),
             reply: true,
+            audio: true,
         },
     })
 );
@@ -63,6 +64,7 @@ client.useResponse(
         response: {
             loader: facebook,
             reply: true,
+            audio: true,
         },
     })
 );
@@ -72,6 +74,7 @@ const ชังชาติ = new Response({
     response: {
         loader: combinedQuotes,
         react: "😡",
+        audio: true,
     },
 });
 
@@ -84,6 +87,7 @@ client.useResponse(
                     `พวกคุณผิดที่พูดคำว่า ${ชังชาติ.triggered} ถือเป็นการคุกคามสถาบันอย่างยิ่ง`
             ),
             reply: true,
+            audio: true,
         },
     })
 );
@@ -101,9 +105,8 @@ ctrlConsole.addLoader(keywords, localquotes, awesome_salim_quotes, facebook);
 
 client.useConsole(ctrlConsole);
 
-client.useTTS({
-    prefix: "!salim",
-    onJoin: "บอทสลิ่มมาแล้วนะจ๊ะ",
+client.useVoice({
+    jutsu: "CorgiSwift",
 });
 
 sLogger.log("async setup done!");
