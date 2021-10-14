@@ -39,6 +39,6 @@
   },
   "dependencies": {
     "chalk": "^4.1.2",
-    "s-bot-framework": "^1.0.0-pre.7"
+    "s-bot-framework": "^1.0.0-pre.8"
   }
 }

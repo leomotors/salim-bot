@@ -1191,10 +1191,10 @@ run-parallel@^1.1.9:
   dependencies:
     queue-microtask "^1.2.2"
 
-s-bot-framework@^1.0.0-pre.7:
-  version "1.0.0-pre.7"
-  resolved "https://registry.yarnpkg.com/s-bot-framework/-/s-bot-framework-1.0.0-pre.7.tgz#3980c663fdec66175a38e83794e46701cedb66d1"
-  integrity sha512-KUt5Neqic3xEmDpnBtuKmNz41Wu2aQXNPFmSbeW8W9kzl8ncUcq4b26fGm9Pm93GtkgAHZu/3S6YdQ6dAfQNFQ==
+s-bot-framework@^1.0.0-pre.8:
+  version "1.0.0-pre.8"
+  resolved "https://registry.yarnpkg.com/s-bot-framework/-/s-bot-framework-1.0.0-pre.8.tgz#cdb3d7880f9d44bdb92d38c11005ef96b15c468d"
+  integrity sha512-feKkEpDLOxSlCStfs7TK2CZOjxJWQuz9W0v8PCoNOEboEFj2X+n8JoilP7SHmfgxMsyqMrQC1Vq7Uok+4kWYhw==
   dependencies:
     "@discordjs/opus" "^0.6.0"
     "@discordjs/voice" "0.6.0"
