@@ -267,6 +267,11 @@ ansi-regex@^5.0.1:
   resolved "https://registry.npmjs.org/ansi-regex/-/ansi-regex-5.0.1.tgz"
   integrity sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==
 
+ansi-regex@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-6.0.1.tgz#3183e38fae9a65d7cb5e53945cd5897d0260a06a"
+  integrity sha512-n5M855fKb2SsfMIiFFoVrABHJC8QtHwVx+mHWP3QcEqBHYienj5dHSgjbxtC0WEZXYt4wcD6zrQElDPhFuZgfA==
+
 ansi-styles@^4.1.0:
   version "4.3.0"
   resolved "https://registry.npmjs.org/ansi-styles/-/ansi-styles-4.3.0.tgz"
@@ -1196,10 +1201,10 @@ run-parallel@^1.1.9:
   dependencies:
     queue-microtask "^1.2.2"
 
-s-bot-framework@^1.0.0-pre.8:
-  version "1.0.0-pre.8"
-  resolved "https://registry.yarnpkg.com/s-bot-framework/-/s-bot-framework-1.0.0-pre.8.tgz#cdb3d7880f9d44bdb92d38c11005ef96b15c468d"
-  integrity sha512-feKkEpDLOxSlCStfs7TK2CZOjxJWQuz9W0v8PCoNOEboEFj2X+n8JoilP7SHmfgxMsyqMrQC1Vq7Uok+4kWYhw==
+s-bot-framework@^1.0.0-pre.12:
+  version "1.0.0-pre.12"
+  resolved "https://registry.yarnpkg.com/s-bot-framework/-/s-bot-framework-1.0.0-pre.12.tgz#a50c41befec7da5e715a03f97031bdbdda854645"
+  integrity sha512-wnJc4p4rF19rLd9MLOMc26gq3l8aDvnvFchqtbk+eujH91hQ+bRqyQOJWDg21ihhexgP/iW5DSaAGzw19ZtXmg==
   dependencies:
     "@discordjs/opus" "^0.6.0"
     "@discordjs/voice" "0.6.0"
@@ -1209,6 +1214,7 @@ s-bot-framework@^1.0.0-pre.8:
     google-tts-api "^2.0.2"
     libsodium-wrappers "^0.7.9"
     node-fetch "^3.0.0"
+    strip-ansi "^7.0.1"
     ytdl-core "^4.9.1"
 
 safe-buffer@~5.2.0:
@@ -1293,6 +1299,13 @@ strip-ansi@^6.0.0:
   integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
   dependencies:
     ansi-regex "^5.0.1"
+
+strip-ansi@^7.0.1:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-7.0.1.tgz#61740a08ce36b61e50e65653f07060d000975fb2"
+  integrity sha512-cXNxvT8dFNRVfhVME3JAe98mkXDYN2O1l7jmcwMnOslDeESg1rF/OZMtK0nRAhiari1unG5cD4jG3rapUAkLbw==
+  dependencies:
+    ansi-regex "^6.0.1"
 
 strip-json-comments@^3.1.0, strip-json-comments@^3.1.1:
   version "3.1.1"
