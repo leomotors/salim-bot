@@ -12,13 +12,15 @@ V1 and V2 didn't gone because it's riskyness. Just that I rewritten it to improv
 - 1.15.248 [Last of V1](https://github.com/Leomotors/Salim-Bot/releases/tag/1.15.248) (Before rewritten in Version 2)
 - 1.13.213 [Before TS ~~(ThakSin)~~](https://github.com/Leomotors/Salim-Bot/releases/tag/1.13.213) (JavaScript Version)
 
+*which each major version have some feature dropped, lmao*
+
 ## Current Salim Bot: Running Salim Bot Framework
 
 V3 of Salim Bot is now implemented by newly written Salim Bot Framework, Available as *s-bot-framework* on [npm](https://www.npmjs.com/package/s-bot-framework)
 
 Feel free to implement your own Version of Salim Bot with this package!
 
-*you also make bots other than salim if your bot behaviour is similar*
+*you may also make bots other than salim if your bot's behaviour is similar*
 
 ## ❓ What is this Bot?
 
@@ -26,7 +28,7 @@ This bot is Salim. Whenever you trigger it, It become mad.
 
 **April Fools!!!** Wait, it passed? nvm, idc.
 
-This discord bot is created to use for my own server. However, source code is free for anyone to implement it.
+This discord bot is created to use for my own server. However, source code is free for anyone to implement it!
 
 Spread headache to your friend!
 
@@ -57,6 +59,10 @@ In case you want to (not recommended)
 - To start bot, do `npm start` or `yarn start`
 
 - To Stop Bot and Logout _properly_, Type `logout` in the Bot Console
+
+## 👨‍🔬 Advanced Implementation
+
+Feel free to edit this Bot into way you like! See [s-bot-framework](https://github.com/Leomotors/s-bot-framework) for more information
 
 ## 🌿 Prerequisites
 
