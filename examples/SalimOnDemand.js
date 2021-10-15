@@ -1,5 +1,10 @@
 // * Example of Salim on Demand (SOD)
 
+// * SOD is Voice Strategy that is used in Salim Bot V1 and V2:
+// * Simply joined and sit there, when someone insults, it speaks
+// * It is now replaced by Corgi Swift 術
+// * This feature is still available in V3 but I don't use it on my Salim Bot anymore
+
 /* eslint-disable */
 client.useVoice({
     jutsu: "SOnDemand",

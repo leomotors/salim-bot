@@ -1,4 +1,4 @@
-// * Salim Bot
+// * Salim Bot: Bot that is running in my group's server 24/7
 // * Great Example for S-Bot Framework
 
 // * Some Nice Welcome Text
