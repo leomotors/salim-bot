@@ -1,11 +1,24 @@
-# Salim Discord Bot V2
+# Salim Discord Bot V3
 
-V1 does not go anywhere, it just too suck that when I reset my Linux Environment, I can no longer compile it.
+*Note: Salim Bot V3 is currently under progress, some features in V1 or V2 may be dropped*
 
-## Legacy Salim Bot (V1)
+**Fun Fact**: This is my *most active* project on GitHub
 
-- 1.15.248 [Last of V1](https://github.com/Leomotors/Salim-Bot/releases/tag/1.15.248)
-- 1.13.213 [Before TS ~~(ThakSin)~~](https://github.com/Leomotors/Salim-Bot/releases/tag/1.13.213)
+V1 and V2 didn't gone because it's riskyness. Just that I rewritten it to improve overall maintainability.
+
+## Legacy Salim Bot
+
+- 2.2.431 [Last of V2](https://github.com/Leomotors/Salim-Bot/tree/52ec1163deec606aaeed0a6cd6968815edd3f94c) (Before implementing newly written [s-bot-framework](https://github.com/Leomotors/s-bot-framework))
+- 1.15.248 [Last of V1](https://github.com/Leomotors/Salim-Bot/releases/tag/1.15.248) (Before rewritten in Version 2)
+- 1.13.213 [Before TS ~~(ThakSin)~~](https://github.com/Leomotors/Salim-Bot/releases/tag/1.13.213) (JavaScript Version)
+
+## Current Salim Bot: Running Salim Bot Framework
+
+V3 of Salim Bot is now implemented by newly written Salim Bot Framework, Available as *s-bot-framework* on [npm](https://www.npmjs.com/package/s-bot-framework)
+
+Feel free to implement your own Version of Salim Bot with this package!
+
+*you also make bots other than salim if your bot behaviour is similar*
 
 ## ❓ What is this Bot?
 
@@ -31,66 +44,54 @@ This is what inspire me to create this annoying 'ปั่น' Bot.
 
 ## 👨‍💻 To Implement
 
-In case you want to (not recommend)
+In case you want to (not recommended)
 
 - Clone or Download Repo
 
-  ```git clone https://github.com/Leomotors/Salim-Bot/```
-  
-- Add your token at config/auth.json
+    `git clone https://github.com/Leomotors/Salim-Bot/`
 
-```
-{
-  "token": "YOUR TOKEN HERE" 
-}
-```
+- Add your token in DISCORD_TOKEN of .env
 
-- Run ```npm run salim``` and you get your bot running!
+- For the first time, do `npm install` or `yarn install` to install dependencies
 
-- For next time, you can simply ```npm start``` to run bot. The previous command is for install and build process
+- To start bot, do `npm start` or `yarn start`
 
-- To Stop Bot and Logout *properly*, Type `logout` in the Bot Console
+- To Stop Bot and Logout _properly_, Type `logout` in the Bot Console
 
 ## 🌿 Prerequisites
 
-- Linux (Sorry Windows User)
-
-- nodejs (16 recommended) with npm (7 recommended)
-
-- Python (3.7+ recommended)
+- nodejs (16.6.0+ for discordjs 13) with preferred package manager
 
 ## 🌳 My Environment
 
 ### Developing Environment
 
-- Ubuntu 20.04.3 LTS on Windows 11 (AMD64) Build 22000 (WSL2 Kernel: 5.10.43.3)
+- Ubuntu 20.04.3 LTS on Windows 11 (AMD64) Build 22000 (WSL2 Kernel: 5.10.60.1)
 
-- node 16.8.0, npm 7.22.0, Python 3.8.10
+- node 16 latest version
 
 ### Bot Running Environment
 
 - Raspbian 10 on Raspberry Pi 3 A+ (Kernel: 5.10.60-v7+)
 
-- node 16.8.0, npm 7.22.0, Python 3.7.3
+- node 16 latest version
 
 **Compatibility Test Result**: Both environment can compile and run! ✅
 
 ## 📚 Documents
 
-User Manual [Here](./docs/user_manual.md)
+As This Bot is powered by [s-bot-framework](https://github.com/Leomotors/s-bot-framework)
 
-Advanced Usage (for Owner) [Here](./docs/advanced.md)
+Document of this bot is mostly explained in that framework's document
 
-### Trained by People
+## ✨✨ Features
 
-People in Discord can also train the bot by typing `!train <Quote>`
-
-Run ```npm run review``` to review pending words and add to file! and you can type `reload` in debug console to reload it without restarting bot!
+See [s-bot-framework](https://github.com/Leomotors/s-bot-framework) which is base of this code
 
 ## 🙏 Spread the hype!
 
-<img src="./docs/long-live-hm-queen.jpg" alt="#ทรงพระเจริญ">
+<img src="./images/long-live-hm-queen.jpg" alt="#ทรงพระเจริญ">
 
-<img src="./docs/SAFETY_FIRST.jpg" alt="ปลอดภัยไว้ก่อน" height=250px>
+<img src="./images/SAFETY_FIRST.jpg" alt="ปลอดภัยไว้ก่อน" height=250px>
 
 (ทรงพระเจริญ ยิ่งยืนนาน ยิ่งเมื่อย ข อ บ คุ ณ ค รั บ)
