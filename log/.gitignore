@@ -1,0 +1,4 @@
+# Log Directory is to keep log files, this is on by default
+
+*
+!.gitignore

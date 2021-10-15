@@ -979,10 +979,10 @@ rimraf@^3.0.2:
   dependencies:
     glob "^7.1.3"
 
-s-bot-framework@^1.0.0-pre.12:
-  version "1.0.0-pre.12"
-  resolved "https://registry.yarnpkg.com/s-bot-framework/-/s-bot-framework-1.0.0-pre.12.tgz#a50c41befec7da5e715a03f97031bdbdda854645"
-  integrity sha512-wnJc4p4rF19rLd9MLOMc26gq3l8aDvnvFchqtbk+eujH91hQ+bRqyQOJWDg21ihhexgP/iW5DSaAGzw19ZtXmg==
+s-bot-framework@^1.0.0-pre.22:
+  version "1.0.0-pre.22"
+  resolved "https://registry.yarnpkg.com/s-bot-framework/-/s-bot-framework-1.0.0-pre.22.tgz#2e4740e93aef6c75e928a2364436520f39f766f0"
+  integrity sha512-7t6eIGgDGFCPG0eNc+XgiqBgxBYwuodCn8XdOS6wFs1I3VbSsXuWHEwS1iHL472Q4C7R3YLLeVBYy4pN3bcsPA==
   dependencies:
     "@discordjs/opus" "^0.6.0"
     "@discordjs/voice" "0.6.0"
@@ -1145,6 +1145,11 @@ type-fest@^1.2.1:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-1.4.0.tgz#e9fb813fe3bf1744ec359d55d1affefa76f14be1"
   integrity sha512-yGSza74xk0UG8k+pLh5oeoYirvIiWo5t0/o3zHHAO2tRDiZcxWP7fywNlXhqb6/r6sWvwi+RsyQMWhVLe4BVuA==
+
+typescript@^4.4.4:
+  version "4.4.4"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.4.4.tgz#2cd01a1a1f160704d3101fd5a58ff0f9fcb8030c"
+  integrity sha512-DqGhF5IKoBl8WNf8C1gu8q0xZSInh9j1kJJMqT3a94w1JzVaBU4EXOSMrz9yDqMT0xt3selp83fuFMQ0uzv6qA==
 
 uri-js@^4.2.2:
   version "4.4.1"
