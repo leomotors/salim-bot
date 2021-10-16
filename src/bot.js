@@ -127,8 +127,21 @@ client.useActivities(activityLoader);
 // * Use Voice in Corgi Swift Jutsu Mode
 client.useVoice({
     jutsu: "CorgiSwift",
+    fallback: {
+        no_channel: "นี่คุณจะให้ฉันไปเปิดเพลงให้ผีฟังหรอ",
+        stage_channel: "ฉันไม่เข้าคลับเฮาส์ นั่นมันที่ของคนชังชาติ",
+        not_joinable: "คุณอย่าทำตัวสามกีบ ที่เอาแต่แบนคนอื่นได้ไหม",
+        internal:
+            "ขออภัยแต่เกิดปัญหาภายในขึ้น ดิฉันคิดว่าน่าจะเป็นฝีมือของทักษิณ",
+        reply: true,
+    },
+    skip: {
+        prefixes: ["!skip"],
+        fallback: "จะให้ฉันไปข้ามอะไร ฉันไม่ได้พูดอะไรอยู่เลย!!!",
+        react: "⏩",
+    },
 });
-// ? NOTE: For SOD (Legacy) Mode, please look at examples/SalimOnDemand.js
+// ! NOTE: For SOD (Legacy) Mode, it is removed
 
 // * DJSalima 参上!!!
 const easterEggSong = new SongLoader("data/songs.json", "easter_egg");
@@ -151,6 +164,10 @@ client.useDJ(
     {
         prefixes: ["!djsalima"],
         reply: true,
+        onQueued: {
+            tts: "แต่รอแป๊ปนะจ๊ะ พอดีกำลังด่าพวกชังชาติอยู่ ด่าเสร็จจะรีบเปิดเพลงให้ทันที",
+            song: "แต่รอแป๊ปนะจ๊ะ พอดีกำลังเปิดเพลงอยู่ ถึงคิวแล้วจะเปิดให้",
+        },
     }
 );
 
