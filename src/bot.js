@@ -197,6 +197,8 @@ client.useDJ(
             direct_youtube: {
                 admin_only: true,
                 prefixes: ["-yt", "--youtube"],
+                reply: true,
+                message: "รับทราบค่ะ",
             },
         },
     }

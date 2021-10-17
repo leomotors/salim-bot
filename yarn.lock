@@ -979,10 +979,10 @@ rimraf@^3.0.2:
   dependencies:
     glob "^7.1.3"
 
-s-bot-framework@^1.0.95-pre:
-  version "1.0.95-pre"
-  resolved "https://registry.yarnpkg.com/s-bot-framework/-/s-bot-framework-1.0.95-pre.tgz#c12aaa59b975b91c32b6b8a35ca7d8151be68337"
-  integrity sha512-X0kLWzlQk77zjt2eAkzl+u0WHxr8VQpedUnkswWimuaWoTSe6vQOwXS5Mq6Yf2mWIRdQX54Tv6VBmI4KWAnsgg==
+s-bot-framework@^1.0.98-pre:
+  version "1.0.98-pre"
+  resolved "https://registry.yarnpkg.com/s-bot-framework/-/s-bot-framework-1.0.98-pre.tgz#46591a136fb4bbb9b94cbec3f4c79d57ac909ca6"
+  integrity sha512-8UVyQ9VEKZzyRtXEVaifLtxARAo2Ig8U6XAp0+1rolnfIjJvR2YHVgJe4U8HZlLMgFoip0mwXvFDD32iVYe3eg==
   dependencies:
     "@discordjs/opus" "^0.6.0"
     "@discordjs/voice" "0.6.0"
