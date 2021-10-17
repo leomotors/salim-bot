@@ -1,6 +1,6 @@
 {
   "name": "salim-bot",
-  "version": "3.0.717",
+  "version": "3.0.762",
   "description": "This bot is Salim. Whenever you trigger it, It become mad.",
   "type": "module",
   "main": "src/bot.js",
@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/Leomotors/Salim-Bot",
   "devDependencies": {
-    "@types/node": "^16.11.0",
+    "@types/node": "^16.11.1",
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
@@ -31,6 +31,6 @@
   },
   "dependencies": {
     "chalk": "^4.1.2",
-    "s-bot-framework": "^1.0.0-pre.32"
+    "s-bot-framework": "^1.0.95-pre"
   }
 }
