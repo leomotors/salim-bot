@@ -22,7 +22,7 @@
   "homepage": "https://github.com/Leomotors/Salim-Bot",
   "devDependencies": {
     "@types/node": "^16.11.1",
-    "eslint": "^8.0.1",
+    "eslint": "^8.2.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "leomotors-automation": "^1.0.1",
