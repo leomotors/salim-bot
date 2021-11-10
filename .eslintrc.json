@@ -25,6 +25,7 @@
         "semi": [
             "warn",
             "always"
-        ]
+        ],
+        "eol-last": "warn"
     }
 }
