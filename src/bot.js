@@ -42,6 +42,8 @@ const awesome_salim_quotes = new OnlineLoader(
     "quotes",
     (t) => t.body
 );
+awesome_salim_quotes.setAutoRefresh(24 * 60);
+
 const facebook = new DataLoader(
     "data/facebook.json",
     "คนรักสถาบัน",
