@@ -32,7 +32,7 @@ import {
 
 // * Create Client, token is automatically grabbed from process.env.DISCORD_TOKEN
 // * Make sure you added your token in .env
-const client = new SBotClient();
+const client = new SBotClient({ logLocation: null });
 
 // * Load Stuff from Files & Online Source
 const keywords = new DataLoader("data/keywords.json", "ชังชาติ");
