@@ -1,13 +1,12 @@
 {
   "name": "salim-bot",
-  "version": "3.0.805",
+  "version": "3.0.904",
   "description": "This bot is Salim. Whenever you trigger it, It become mad.",
   "type": "module",
   "main": "src/bot.js",
   "private": true,
   "scripts": {
-    "dev": "npm run inc && npm run start",
-    "inc": "node node_modules/leomotors-automation/incrementVersion.js",
+    "dev": "yarn lm-inc && yarn start",
     "start": "node --es-module-specifier-resolution=node src/bot.js"
   },
   "repository": {
@@ -21,16 +20,16 @@
   },
   "homepage": "https://github.com/Leomotors/Salim-Bot",
   "devDependencies": {
-    "@types/node": "^17.0.8",
-    "eslint": "^8.6.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "leomotors-automation": "^1.0.1",
+    "@types/node": "^17.0.21",
+    "eslint": "^8.9.0",
+    "leomotors-automation": "^3.0.1",
     "prettier": "^2.5.1",
-    "typescript": "^4.5.4"
+    "typescript": "^4.5.5"
   },
   "dependencies": {
+    "@discordjs/opus": "^0.7.0",
     "chalk": "^5.0.0",
-    "s-bot-framework": "^1.0.302"
+    "libsodium-wrappers": "^0.7.9",
+    "s-bot-framework": "^1.0.400"
   }
 }

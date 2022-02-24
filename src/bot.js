@@ -32,7 +32,7 @@ import {
 
 // * Create Client, token is automatically grabbed from process.env.DISCORD_TOKEN
 // * Make sure you added your token in .env
-const client = new SBotClient({ logLocation: null });
+const client = new SBotClient();
 
 // * Load Stuff from Files & Online Source
 const keywords = new DataLoader("data/keywords.json", "ชังชาติ");
@@ -130,7 +130,6 @@ client.useActivities(activityLoader);
 
 // * Use Voice in Corgi Swift Jutsu Mode
 client.useVoice({
-    jutsu: "CorgiSwift",
     fallback: {
         no_channel: "นี่คุณจะให้ฉันไปเปิดเพลงให้ผีฟังหรอ",
         stage_channel: "ฉันไม่เข้าคลับเฮาส์ นั่นมันที่ของคนชังชาติ",

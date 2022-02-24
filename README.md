@@ -1,7 +1,5 @@
 # Salim Discord Bot V3
 
-*Note: Salim Bot V3 is currently under progress, some features in V1 or V2 may be dropped*
-
 **Fun Fact**: This is my *most active* project on GitHub
 
 V1 and V2 didn't gone because it's riskyness. Just that I rewritten it to improve overall maintainability.
@@ -20,7 +18,11 @@ V3 of Salim Bot is now implemented by newly written Salim Bot Framework, Availab
 
 Feel free to implement your own Version of Salim Bot with this package!
 
-*you may also make bots other than salim if your bot's behaviour is similar*
+### Not sponsored by
+
+`s-bot-framework` is specific for Salim Bot, but if you would want to create
+normal Discord Bot, this is a good library =>
+[Cocoa Discord Utils](https://github.com/Leomotors/cocoa-discord-utils)
 
 ## ❓ What is this Bot?
 
@@ -92,12 +94,20 @@ Document of this bot is mostly explained in that framework's document
 
 ## ✨✨ Features
 
-See [s-bot-framework](https://github.com/Leomotors/s-bot-framework) which is base of this code
+See [s-bot-framework](https://github.com/Leomotors/s-bot-framework) which is complete framework of this bot
 
 ## 🙏 Spread the hype!
 
-<img src="./images/long-live-hm-queen.jpg" alt="#ทรงพระเจริญ">
+<img src="./images/long-live-hm-queen.jpg" alt="#ทรงพระเจริญ" width=400px>
 
-<img src="./images/SAFETY_FIRST.jpg" alt="ปลอดภัยไว้ก่อน" height=250px>
+<img src="./images/SAFETY_FIRST.jpg" alt="ปลอดภัยไว้ก่อน" width=400px>
 
-(ทรงพระเจริญ ยิ่งยืนนาน ยิ่งเมื่อย ข อ บ คุ ณ ค รั บ)
+~~ทรงพระเจริญ ยิ่งยืนนาน ยิ่งเมื่อย ข อ บ คุ ณ ค รั บ~~
+
+## 🖼️ Salim Gallery
+
+<img src="./images/salim-bot-0.png" width=600px>
+<img src="./images/salim-bot-1.png" width=600px>
+<img src="./images/salim-bot-2.png" width=600px>
+
+ระบบตอบกลับอัตโนมัติ แบบ คุ ณ ภ า พ ไม่ปล่อยให้พวกสามกีบมาเดินเพ่นพ่านในเซิร์ฟของคุณ
