@@ -2,14 +2,14 @@
 
 **Fun Fact**: This is my *most active* project on GitHub
 
-## Current Salim Bot: Running Salim Bot Framework
+## Current Salim Bot
 
-~~V3 of Salim Bot is now implemented by newly written Salim Bot Framework, Available as *s-bot-framework* on [npm](https://www.npmjs.com/package/s-bot-framework)
+V3 of Salim Bot is now implemented by newly written Salim Bot Framework, Available as *s-bot-framework* on [npm](https://www.npmjs.com/package/s-bot-framework)
 
-Feel free to implement your own Version of Salim Bot with this package!~~
-
-Update: V4 is now here, this update does not fix any legacy code (because they
+*Update*: V4 is now here, this update does not fix any legacy code (because they
 are pain to do so) but add Slash Command powered by [Cocoa Discord Utils](https://github.com/Leomotors/cocoa-discord-utils)!!!
+
+Feel free to implement your own Version of Salim Bot with this package!
 
 ## Previous Version: Legacy Salim Bot
 
