@@ -1,19 +1,7 @@
-// * Salim Bot: Bot that is running in my group's server 24/7
-// * Great Example for S-Bot Framework
+import { SlashCenter } from "cocoa-discord-utils/slash";
 
-// * Turn on syntax/type check
-// @ts-check
-
-const setupStart = performance.now();
-
-// * Some Nice Welcome Text
+// * For beautiful text ✨✨
 import chalk from "chalk";
-console.log(
-    chalk.cyan("Starting Salim Bot ") +
-        chalk.magenta(process.env.npm_package_version) +
-        "✨✨"
-);
-
 // * Import used Stuff
 import {
     AboutFramework,
@@ -30,9 +18,44 @@ import {
     SongAppearance,
 } from "s-bot-framework";
 
+import QuizCog from "./commands/quiz";
+import Salim from "./commands/salim";
+import { style } from "./commands/styles";
+
+// * NOTE: Legacy Part
+
+// * Salim Bot: Bot that is running in my group's server 24/7
+// * Great Example for S-Bot Framework
+
+const setupStart = performance.now();
+
+console.log(
+    chalk.cyan("Starting Salim Bot ") +
+        chalk.magenta(process.env.npm_package_version) +
+        "✨✨"
+);
+
 // * Create Client, token is automatically grabbed from process.env.DISCORD_TOKEN
 // * Make sure you added your token in .env
 const client = new SBotClient();
+
+// * Using Slash Commands with Cocoa Discord Utils 🍫
+const salimCenter = new SlashCenter(
+    client.client,
+    process.env.GUILD_IDS?.split(",")
+);
+salimCenter.addCogs(new Salim(), new QuizCog(client.client));
+salimCenter.useHelpCommand(style);
+salimCenter.on("error", async (name, err, ctx) => {
+    await ctx.channel?.send(
+        `ที่คำสี่งของฉันผิดพลาดต้องเป็นฝีมือของทักษิณแน่เลย ${err}`
+    );
+});
+salimCenter.validateCommands();
+
+client.client.on("ready", () => {
+    salimCenter.syncCommands();
+});
 
 // * Load Stuff from Files & Online Source
 const keywords = new DataLoader("data/keywords.json", "ชังชาติ");

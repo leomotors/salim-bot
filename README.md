@@ -1,22 +1,23 @@
-# Salim Discord Bot V3
+# Salim Discord Bot V4
 
 **Fun Fact**: This is my *most active* project on GitHub
 
-V1 and V2 didn't gone because it's riskyness. Just that I rewritten it to improve overall maintainability.
+## Current Salim Bot: Running Salim Bot Framework
 
-## Legacy Salim Bot
+~~V3 of Salim Bot is now implemented by newly written Salim Bot Framework, Available as *s-bot-framework* on [npm](https://www.npmjs.com/package/s-bot-framework)
+
+Feel free to implement your own Version of Salim Bot with this package!~~
+
+Update: V4 is now here, this update does not fix any legacy code (because they
+are pain to do so) but add Slash Command powered by [Cocoa Discord Utils](https://github.com/Leomotors/cocoa-discord-utils)!!!
+
+## Previous Version: Legacy Salim Bot
 
 - 2.2.431 [Last of V2](https://github.com/Leomotors/Salim-Bot/tree/52ec1163deec606aaeed0a6cd6968815edd3f94c) (Before implementing newly written [s-bot-framework](https://github.com/Leomotors/s-bot-framework))
 - 1.15.248 [Last of V1](https://github.com/Leomotors/Salim-Bot/releases/tag/1.15.248) (Before rewritten in Version 2)
 - 1.13.213 [Before TS ~~(ThakSin)~~](https://github.com/Leomotors/Salim-Bot/releases/tag/1.13.213) (JavaScript Version)
 
 *which each major version have some feature dropped, lmao*
-
-## Current Salim Bot: Running Salim Bot Framework
-
-V3 of Salim Bot is now implemented by newly written Salim Bot Framework, Available as *s-bot-framework* on [npm](https://www.npmjs.com/package/s-bot-framework)
-
-Feel free to implement your own Version of Salim Bot with this package!
 
 ### Not sponsored by
 
@@ -52,11 +53,12 @@ In case you want to (not recommended)
 
 - Clone or Download Repo
 
-    `git clone https://github.com/Leomotors/Salim-Bot/`
+    `git clone https://github.com/Leomotors/Salim-Bot`
 
 - Add your token in DISCORD_TOKEN of .env
 
 - For the first time, do `npm install` or `yarn install` to install dependencies
+and `npm run build` or `yarn build` to build the bot.
 
 - To start bot, do `npm start` or `yarn start`
 
