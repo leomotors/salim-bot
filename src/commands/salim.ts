@@ -28,8 +28,8 @@ export default class Salim extends CogSlashClass {
             .use(ctx)
             .setTitle("สถานะของบอทสลิ่ม")
             .setDescription(
-                `บอทสลิ่มเวอร์ชั่น: ${process.env.npm_package_version}
-สลิ่มบอทเฟรมเวิร์คเวอร์ชั่น ${FrameWorkVersion}
+                `บอทสลิ่มเวอร์ชั่น ${process.env.npm_package_version}
+สลิ่มบอทเฟรมเวิร์กเวอร์ชั่น ${FrameWorkVersion}
 โกโก้ดิสคอร์ดยูทิลลิตี้เวอร์ชั่น ${CocoaVersion}`
             )
             .addFields(...(await getStatusFields(ctx)));

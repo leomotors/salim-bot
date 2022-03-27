@@ -2,6 +2,10 @@
 
 Notable Changes for Salim Bot will be noted here!
 
+## [4.0.1112-revision.112] - 2022-03-27
+
+- Now randomize questions in quiz and support multiple guilds
+
 ## [4.0.1112] - 2022-03-27
 
 ### Salim Bot Version 4!

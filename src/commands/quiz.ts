@@ -14,7 +14,7 @@ import {
 import * as fs from "node:fs";
 import { v4 as uuid } from "uuid";
 
-import { style } from "./styles";
+import { quiz_style } from "./styles";
 
 interface Question {
     question: string;
@@ -81,7 +81,7 @@ class QuizManager {
         const row = new MessageActionRow().addComponents(select);
 
         return [
-            style
+            quiz_style
                 .use(this.originalContext)
                 .setTitle(this.quiz.name)
                 .setDescription(desc),
@@ -125,7 +125,7 @@ class QuizManager {
     summaryEmbed() {
         const sr = this.score / this.quiz.questions.length;
 
-        const emb = style
+        const emb = quiz_style
             .use(this.originalContext)
             .setTitle("สรุปผลการทำแบบทดสอบ")
             .setThumbnail(this.originalContext.user.avatarURL({ size: 4096 }))
@@ -148,7 +148,7 @@ class QuizManager {
                         sr >= 0.8
                             ? "บุคคลผู้ได้รับรองว่ามีความรักชาติ"
                             : sr >= 0.6
-                            ? "บุคคลทั่วไปที่ผ่านการทดสอบเบื้องต้น"
+                            ? "บุคคลที่ผ่านการทดสอบ"
                             : sr >= 0.3
                             ? "พวกสามกีบชังชาติ"
                             : "สามกีบที่ชังชาติร้ายแรง ต้องถูกกำจัด",
@@ -160,6 +160,7 @@ class QuizManager {
 
     constructor(ctx: CommandInteraction, index: number) {
         this.quiz = quizes.data[index];
+        this.quiz.questions.sort((_, __) => Math.random() - 0.5);
         this.originalContext = ctx;
     }
 }
@@ -173,7 +174,7 @@ function getChoices(): [string, string][] {
 }
 
 export default class QuizCog extends CogSlashClass {
-    private quizManager?: QuizManager;
+    private quizManager: { [guildIds: string]: QuizManager } = {};
     private client: Client;
 
     constructor(client: Client) {
@@ -187,7 +188,7 @@ export default class QuizCog extends CogSlashClass {
         this.client.on("interactionCreate", (interaction) => {
             if (!interaction.isSelectMenu()) return;
 
-            this.quizManager
+            this.quizManager[interaction.guildId!]
                 ?.handleInteraction(interaction)
                 .catch(console.error);
         });
@@ -210,14 +211,14 @@ export default class QuizCog extends CogSlashClass {
 
         await quizes.initialPromise;
 
-        if (this.quizManager?.ongoing && !force) {
+        if (this.quizManager[ctx.guildId!]?.ongoing && !force) {
             await ctx.reply("คุณต้องกลับไปทำแบบทดสอบก่อนหน้าให้เสร็จก่อน");
             return;
         }
 
-        this.quizManager = new QuizManager(ctx, quiz_id);
+        this.quizManager[ctx.guildId!] = new QuizManager(ctx, quiz_id);
 
-        const [emb, row] = this.quizManager.makeEmbed(0);
+        const [emb, row] = this.quizManager[ctx.guildId!]!.makeEmbed(0);
 
         await ctx.reply({ embeds: [emb], components: [row] });
     }
