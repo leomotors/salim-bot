@@ -638,10 +638,10 @@ chownr@^2.0.0:
   resolved "https://registry.yarnpkg.com/chownr/-/chownr-2.0.0.tgz#15bfbe53d2eab4cf70f18a8cd68ebe5b3cb1dece"
   integrity sha512-bIomtDF5KGpdogkLd9VspvFzk9KfpyyGlS8YFVZl7TGPBHL5snIOnxeshwVgPteQ9b4Eydl+pVbIyE1DcvCWgQ==
 
-cocoa-discord-utils@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/cocoa-discord-utils/-/cocoa-discord-utils-1.4.0.tgz#1dd2faa2d25450fa7290d65c370b7044f9a977fc"
-  integrity sha512-bNwl5hCkC6A/G99Y29FPWQc784FJoYMKYxbvbHl7PL8jAAJPHv5X+GdF+Pnkl7D/50kQtNUaw64icqQd4OQuMQ==
+cocoa-discord-utils@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/cocoa-discord-utils/-/cocoa-discord-utils-1.4.1.tgz#d6b12b6b31408de0ad1a4d905cae838445ad67fc"
+  integrity sha512-WI281G5FGCWoeDRy+QtS56Eb4H3obb7PTHw/mQ063j00UwTeVy5VhXCyw0jJxVLkA/dv38I/tR+qE6fHt4xQZw==
   dependencies:
     "@discordjs/builders" "^0.12.0"
     chalk "4.1.2"

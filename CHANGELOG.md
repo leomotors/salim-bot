@@ -2,6 +2,10 @@
 
 Notable Changes for Salim Bot will be noted here!
 
+## [4.0.1112-revision.116] - 2022-03-28
+
+- Bump Cocoa Discord Utils to 1.4.1 which fixes fatal issues
+
 ## [4.0.1112-revision.112] - 2022-03-27
 
 - Now randomize questions in quiz and support multiple guilds

@@ -2,16 +2,43 @@
 
 **Fun Fact**: This is my *most active* project on GitHub
 
-## Current Salim Bot
+Salim Bot that is currently running of my friends server and is most active bot because it is auto triggered by พวกชังชาติ
 
-V3 of Salim Bot is now implemented by newly written Salim Bot Framework, Available as *s-bot-framework* on [npm](https://www.npmjs.com/package/s-bot-framework)
+## ✨ คุณสมบัติของบอทสลิ่ม
 
-*Update*: V4 is now here, this update does not fix any legacy code (because they
+- ปราบปรามพวกชังชาติโดยอัตโนมัติด้วยระบบตอบกลับ~~อัจฉริยะ~~
+
+<img src="./images/salim-bot-0.png" height=150px />
+<img src="./images/salim-bot-2.png" height=150px />
+
+*ขอขอบคุณ[คลังข้อมูล](https://github.com/narze/awesome-salim-quotes)สำหรับคำพูดที่ใช้ในการต่อกรกับพวกชังชาติโดยคุณ narze*
+
+*และนอกจากจะเป็นฐานข้อมูลแล้ว repository ดังกล่าวก็เป็นแรงบันดาลใจให้ผู้สร้าง สร้างบอทตัวนี้ เพื่อร่วมลุกขึ้นต่อกรกับพวกสามกีบชังชาติ*
+
+- สามารถแนะนำสื่อที่มีคุณภาพ เป็นกลาง ให้กับผู้คนในเซิร์ฟเวอร์ได้ 💯
+
+<img src="./images/fb.png" width=600px />
+
+- เปิดเพลงเพื่อเสริมความรักชาติ ศาสน์ กษัตริย์ แก่ทุกคนที่อยู่ในเซิร์ฟเวอร์
+
+<img src="./images/djsalima.png" width=600px />
+
+- [Slash Command✨] แบบทดสอบเพื่อทดสอบความรักชาติ และเพิ่มความตระหนักรู้
+
+<img src="./images/quiz.png" width=600px />
+
+- และฟีเจอร์อีกหลากหลายในเวอร์ชั่นก่อนๆ แต่ถูกตัดทิ้งเพราะคนทำ~~ชังชาติ~~ (จริงๆคือ refactor แล้วขี้เกียจเขียนใหม่)
+
+## ⚙️ Under the Hood
+
+Version 3 and later of Salim Bot is implemented by Salim Bot Framework, Available as *s-bot-framework* on [npm](https://www.npmjs.com/package/s-bot-framework)
+
+Version 4 is released without fixing any legacy code (because they
 are pain to do so) but add Slash Command powered by [Cocoa Discord Utils](https://github.com/Leomotors/cocoa-discord-utils)!!!
 
-Feel free to implement your own Version of Salim Bot with this package!
+## 🛣️ Previous Version: Legacy Salim Bot
 
-## Previous Version: Legacy Salim Bot
+*warning*: Legacy Code
 
 - 2.2.431 [Last of V2](https://github.com/Leomotors/Salim-Bot/tree/52ec1163deec606aaeed0a6cd6968815edd3f94c) (Before implementing newly written [s-bot-framework](https://github.com/Leomotors/s-bot-framework))
 - 1.15.248 [Last of V1](https://github.com/Leomotors/Salim-Bot/releases/tag/1.15.248) (Before rewritten in Version 2)
@@ -24,28 +51,6 @@ Feel free to implement your own Version of Salim Bot with this package!
 `s-bot-framework` is specific for Salim Bot, but if you would want to create
 normal Discord Bot, this is a good library =>
 [Cocoa Discord Utils](https://github.com/Leomotors/cocoa-discord-utils)
-
-## ❓ What is this Bot?
-
-This bot is Salim. Whenever you trigger it, It become mad.
-
-**April Fools!!!** Wait, it passed? nvm, idc.
-
-This discord bot is created to use for my own server. However, source code is free for anyone to implement it!
-
-Spread headache to your friend!
-
-## ⚠️ Caution
-
-**Proceed at your own risk** Good Luck!
-
-## 🤝 Awesome Salim Quote!
-
-Thank you **Awesome Q U A L I T Y** Salim Quote from [narze/awesome-salim-quotes](https://github.com/narze/awesome-salim-quotes)
-
-**Note**: This Bot on default will fetch quotes from this amazing API.
-
-This is what inspire me to create this annoying 'ปั่น' Bot.
 
 ## 👨‍💻 To Implement
 
@@ -64,52 +69,24 @@ and `npm run build` or `yarn build` to build the bot.
 
 - To Stop Bot and Logout _properly_, Type `logout` in the Bot Console
 
-## 👨‍🔬 Advanced Implementation
+### ⚠️ Caution
 
-Feel free to edit this Bot into way you like! See [s-bot-framework](https://github.com/Leomotors/s-bot-framework) for more information
+**Proceed at your own risk** Good Luck!
 
-## 🌿 Prerequisites
+### 🌿 Prerequisites
 
-- nodejs (16.6.0+ for discordjs 13) with preferred package manager
-
-## 🌳 My Environment
-
-### Developing Environment
-
-- Ubuntu 20.04.3 LTS on Windows 11 (AMD64) Build 22000 (WSL2 Kernel: 5.10.60.1)
-
-- node 16 latest version
-
-### Bot Running Environment
-
-- Raspbian 10 on Raspberry Pi 3 A+ (Kernel: 5.10.60-v7+)
-
-- node 16 latest version
-
-**Compatibility Test Result**: Both environment can compile and run! ✅
+- Latest nodejs 16+ (discord.js requirements)
 
 ## 📚 Documents
 
 As This Bot is powered by [s-bot-framework](https://github.com/Leomotors/s-bot-framework)
 
-Document of this bot is mostly explained in that framework's document
+*again, warning*: Legacy Code
 
-## ✨✨ Features
-
-See [s-bot-framework](https://github.com/Leomotors/s-bot-framework) which is complete framework of this bot
+Documentation of this bot and full feature list of this bot is mostly explained in that framework's documentation, (if you can understand it)
 
 ## 🙏 Spread the hype!
 
 <img src="./images/long-live-hm-queen.jpg" alt="#ทรงพระเจริญ" width=400px>
 
 <img src="./images/SAFETY_FIRST.jpg" alt="ปลอดภัยไว้ก่อน" width=400px>
-
-~~ทรงพระเจริญ ยิ่งยืนนาน ยิ่งเมื่อย ข อ บ คุ ณ ค รั บ~~
-
-## 🖼️ Salim Gallery
-
-<img src="./images/salim-bot-0.png" width=600px>
-<img src="./images/salim-bot-1.png" width=600px>
-<img src="./images/salim-bot-2.png" width=600px>
-
-ระบบตอบกลับอัตโนมัติ แบบ คุ ณ ภ า พ ไม่ปล่อยให้พวกสามกีบมาเดินเพ่นพ่านในเซิร์ฟของคุณ
