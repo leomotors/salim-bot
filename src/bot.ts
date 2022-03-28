@@ -1,14 +1,15 @@
+import { CocoaVersion } from "cocoa-discord-utils/meta";
 import { SlashCenter } from "cocoa-discord-utils/slash";
 
 // * For beautiful text ✨✨
 import chalk from "chalk";
 // * Import used Stuff
 import {
-    AboutFramework,
     ActivityLoader,
     Console,
     ComputedLoader,
     DataLoader,
+    FrameWorkVersion,
     MultiLoader,
     OnlineLoader,
     SBotClient,
@@ -94,9 +95,7 @@ client.useResponse(
         response: {
             loader: new ComputedLoader(
                 () =>
-                    `ส วั ส ดี ค รั บ ท่านสมาชิกชมรมคนชอบกะสัสทุกท่าน กระผมสลิ่มบอท เวอร์ชั่น ${
-                        process.env.npm_package_version
-                    }\nรันอยู่บน ${AboutFramework()}`
+                    `ส วั ส ดี ค รั บ ท่านสมาชิกชมรมคนรักสถาบันทุกท่าน กระผมสลิ่มบอทเวอร์ชั่น ${process.env.npm_package_version}\nขับเคลื่อนโดยสลิ่มบอทเฟรมเวิร์คเวอร์ชั่น ${FrameWorkVersion} และโกโก้ดิสคอร์ดยูทิลิตี้เวอร์ชั่น ${CocoaVersion}\nท่านสามารถช่วยร่วมแรงร่วมใจในการพัฒนาผมได้ที่ https://github.com/Leomotors/Salim-Bot`
             ),
             reply: true,
             audio: true,
