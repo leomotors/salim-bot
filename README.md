@@ -31,10 +31,14 @@ Salim Bot that is currently running of my friends server and is most active bot 
 
 ## ⚙️ Under the Hood
 
-Version 3 and later of Salim Bot is implemented by Salim Bot Framework, Available as *s-bot-framework* on [npm](https://www.npmjs.com/package/s-bot-framework)
+The Salim Bot *since April 2021* has long history, of course it has big technical debt.
 
-Version 4 is released without fixing any legacy code (because they
-are pain to do so) but add Slash Command powered by [Cocoa Discord Utils](https://github.com/Leomotors/cocoa-discord-utils)!!!
+Each major version (except 3->4) is a rewrite
+
+Currently, since version 3 Salim Bot is implemented by Salim Bot Framework, Available as *s-bot-framework* on [npm](https://www.npmjs.com/package/s-bot-framework)
+
+Version 4 includes Cocoa Discord Utils which take care of all Slash Commands
+working with *legacy code* underneath, Just like what Windows 11 is.
 
 ## 🛣️ Previous Version: Legacy Salim Bot
 

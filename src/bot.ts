@@ -23,7 +23,7 @@ import QuizCog from "./commands/quiz";
 import Salim from "./commands/salim";
 import { style } from "./commands/styles";
 
-// * NOTE: Legacy Part
+// ! WARNING: LEGACY CODE
 
 // * Salim Bot: Bot that is running in my group's server 24/7
 // * Great Example for S-Bot Framework
