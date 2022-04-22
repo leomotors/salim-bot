@@ -2,6 +2,12 @@
 
 Notable Changes for Salim Bot will be noted here!
 
+## [4.0.1150] - 2022-04-22
+
+- Added Slash Commands: getquote and searchquote
+
+- Added Legacy Command: Asking for quotes count
+
 ## [4.0.1120] - 2022-04-20
 
 - Add Slash Command: train

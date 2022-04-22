@@ -10,7 +10,8 @@
         "moduleResolution": "node",
         "experimentalDecorators": true,
         "incremental": true,
-        "strictNullChecks": true
+        "strictNullChecks": true,
+        "noUncheckedIndexedAccess": true
     },
     "include": ["./src/**/*"]
 }

@@ -40,7 +40,7 @@ const quizes = Loader.fromFile<Quiz>("Quiz Loader", "./data/quiz.json");
 
 class QuizManager {
     private quiz: Quiz;
-    private readonly quizId = uuid().split("-")[0];
+    private readonly quizId = uuid().split("-")[0]!;
     private originalContext: CommandInteraction;
     private currentChoiceOrder: string[] = [];
     private currentIndex = 0;
@@ -51,7 +51,7 @@ class QuizManager {
     makeEmbed(index: number): [CocoaEmbed, MessageActionRow] {
         this.currentIndex = index;
         const questions = this.quiz.questions;
-        const question = questions[index];
+        const question = questions[index]!;
 
         const choices = [question.correct, ...question.wrong].sort(
             (_, __) => Math.random() - 0.5
@@ -100,11 +100,11 @@ class QuizManager {
             return;
         }
 
-        const userchoice = ctx.values[0];
+        const userchoice = ctx.values[0]!;
 
         if (
             this.currentChoiceOrder[+userchoice] ==
-            this.quiz.questions[this.currentIndex].correct
+            this.quiz.questions[this.currentIndex]!.correct
         ) {
             this.score++;
         }
@@ -159,7 +159,7 @@ class QuizManager {
     }
 
     constructor(ctx: CommandInteraction, index: number) {
-        this.quiz = quizes.data[index];
+        this.quiz = quizes.data[index]!;
         this.quiz.questions.sort((_, __) => Math.random() - 0.5);
         this.originalContext = ctx;
     }

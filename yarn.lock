@@ -266,17 +266,17 @@
     "@discordjs/node-pre-gyp" "^0.4.2"
     node-addon-api "^4.2.0"
 
-"@discordjs/voice@0.8.0":
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/@discordjs/voice/-/voice-0.8.0.tgz#5d790fc25b883698f6eb7762efe1af00b6440947"
-  integrity sha512-o0JfVLMs3eLjUzPf6oxMydEeum40I7xzfUc66SLN+RrKpSAsTbngf5qnCF53nm+KDNSvrwg1AZqNm4LEAdxJIA==
+"@discordjs/voice@0.9.0":
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/@discordjs/voice/-/voice-0.9.0.tgz#f9c2dbc3c5e98a0f66278e23b29fdaee51c5e9d9"
+  integrity sha512-fSAYtPCEfIyG56hC2cRJuyfvQGr+aawSssLCqYg70vZ51dKO4spEKOB8V6vNMP5HnEplbhmxkB3YbshFKtnCQQ==
   dependencies:
-    "@types/ws" "^8.2.0"
-    discord-api-types "^0.26.1"
+    "@types/ws" "^8.5.3"
+    discord-api-types "^0.29.0"
     prism-media "^1.3.2"
     tiny-typed-emitter "^2.1.0"
     tslib "^2.3.1"
-    ws "^8.4.2"
+    ws "^8.5.0"
 
 "@eslint/eslintrc@^1.2.1":
   version "1.2.1"
@@ -379,7 +379,7 @@
   resolved "https://registry.yarnpkg.com/@types/uuid/-/uuid-8.3.4.tgz#bd86a43617df0594787d38b735f55c805becf1bc"
   integrity sha512-c/I8ZRb51j+pYGAu5CrFMRxqZ2ke4y2grEBO5AUjgSkSk+qT2Ea+OdWElz/OiMf5MNpn2b17kuVBwZLQJXzihw==
 
-"@types/ws@^8.2.0", "@types/ws@^8.2.2":
+"@types/ws@^8.2.2", "@types/ws@^8.5.3":
   version "8.5.3"
   resolved "https://registry.yarnpkg.com/@types/ws/-/ws-8.5.3.tgz#7d25a1ffbecd3c4f2d35068d0b283c037003274d"
   integrity sha512-6YOoWjruKj1uLf3INHH7D3qTXwFfEsg1kf3c0uDdSBJwfa/llkwIjrAGV7j7mVgGNbzTQ3HiHKKDXl6bJPD97w==
@@ -625,14 +625,14 @@ chownr@^2.0.0:
   resolved "https://registry.yarnpkg.com/chownr/-/chownr-2.0.0.tgz#15bfbe53d2eab4cf70f18a8cd68ebe5b3cb1dece"
   integrity sha512-bIomtDF5KGpdogkLd9VspvFzk9KfpyyGlS8YFVZl7TGPBHL5snIOnxeshwVgPteQ9b4Eydl+pVbIyE1DcvCWgQ==
 
-cocoa-discord-utils@^1.4.2:
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/cocoa-discord-utils/-/cocoa-discord-utils-1.4.2.tgz#e62ec93d65fc6519b453298b1f5cc77529566fb1"
-  integrity sha512-14cLDmVAX24h06+HC21O3wtNHFA9uiDTqCPulXmz/yd6RK4RTVMUTxhZL02yaLeQ/0g+9lNeYRmnIcCeZ02obg==
+cocoa-discord-utils@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/cocoa-discord-utils/-/cocoa-discord-utils-1.6.0.tgz#9f9741d5e0e26bb1ee9a3e0016473f014d83092d"
+  integrity sha512-9sHRVmBcUu6MLM28JTDPII+BhAHr/W3ou4ALzuHnFyLgnLaSUoHOx4zC8j7uuSnnpksi4x3iwmwghKUxQRO4Pw==
   dependencies:
     "@discordjs/builders" "^0.12.0"
     chalk "4.1.2"
-    commander "^9.1.0"
+    commander "^9.2.0"
     discord.js "^13.6.0"
 
 color-convert@^1.9.0:
@@ -671,7 +671,7 @@ combined-stream@^1.0.8:
   dependencies:
     delayed-stream "~1.0.0"
 
-commander@^9.1.0:
+commander@^9.2.0:
   version "9.2.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-9.2.0.tgz#6e21014b2ed90d8b7c9647230d8b7a94a4a419a9"
   integrity sha512-e2i4wANQiSXgnrBlIatyHtP1odfUp0BbV5Y5nEGbxtIrStkEOAAzCUirvLBNXHLr7kwLvJl6V+4V3XV9x7Wd9w==
@@ -746,6 +746,11 @@ discord-api-types@^0.26.0, discord-api-types@^0.26.1:
   resolved "https://registry.yarnpkg.com/discord-api-types/-/discord-api-types-0.26.1.tgz#726f766ddc37d60da95740991d22cb6ef2ed787b"
   integrity sha512-T5PdMQ+Y1MEECYMV5wmyi9VEYPagEDEi4S0amgsszpWY0VB9JJ/hEvM6BgLhbdnKky4gfmZEXtEEtojN8ZKJQQ==
 
+discord-api-types@^0.29.0:
+  version "0.29.0"
+  resolved "https://registry.yarnpkg.com/discord-api-types/-/discord-api-types-0.29.0.tgz#8346352b623ddd8d8eed386b6eb758e2d82d6005"
+  integrity sha512-Ekq1ICNpOTVajXKZguNFrsDeTmam+ZeA38txsNLZnANdXUjU6QBPIZLUQTC6MzigFGb0Tt8vk4xLnXmzv0shNg==
+
 discord.js@^13.6.0:
   version "13.6.0"
   resolved "https://registry.yarnpkg.com/discord.js/-/discord.js-13.6.0.tgz#d8a8a591dbf25cbcf9c783d5ddf22c4694860475"
@@ -774,9 +779,9 @@ dotenv@^16.0.0:
   integrity sha512-qD9WU0MPM4SWLPJy/r2Be+2WgQj8plChsyrCNQzW/0WjvcJQiKQJ9mH3ZgB3fxbUUxgc/11ZJ0Fi5KiimWGz2Q==
 
 electron-to-chromium@^1.4.84:
-  version "1.4.114"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.114.tgz#d85ec0808dd50b0cf6e6b262480ffd385f71c873"
-  integrity sha512-gRwLpVYWHGbERPU6o8pKfR168V6enWEXzZc6zQNNXbgJ7UJna+9qzAIHY94+9KOv71D/CH+QebLA9pChD2q8zA==
+  version "1.4.118"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.118.tgz#2d917c71712dac9652cc01af46c7d0bd51552974"
+  integrity sha512-maZIKjnYDvF7Fs35nvVcyr44UcKNwybr93Oba2n3HkKDFAtk0svERkLN/HyczJDS3Fo4wU9th9fUQd09ZLtj1w==
 
 emoji-regex@^8.0.0:
   version "8.0.0"
@@ -1506,12 +1511,12 @@ run-parallel@^1.1.9:
   dependencies:
     queue-microtask "^1.2.2"
 
-s-bot-framework@^1.0.402:
-  version "1.0.402"
-  resolved "https://registry.yarnpkg.com/s-bot-framework/-/s-bot-framework-1.0.402.tgz#c5851572a2697a37aae1b40637d83204a7c3b732"
-  integrity sha512-HGXluZ/wzx4w9Z042yRXISdlskwNJlrq2nzSK49KfP9+U15xOIuIKoHClyLX2crWVrvcQGr/0ItlyXiDdg3N4w==
+s-bot-framework@^1.0.420:
+  version "1.0.420"
+  resolved "https://registry.yarnpkg.com/s-bot-framework/-/s-bot-framework-1.0.420.tgz#fb46ebfee2d51e4d873b2d51cc58bd4dc3806bcd"
+  integrity sha512-z4ME3BEKC7aeA266Rs+cFCzCNEM3ecqVfZunWcvuZzGTcDr0HuThGtFXL073i3WT+We8rXFNv8Xeyr1KkxrVJw==
   dependencies:
-    "@discordjs/voice" "0.8.0"
+    "@discordjs/voice" "0.9.0"
     chalk "5.0.1"
     discord.js "^13.6.0"
     dotenv "^16.0.0"
@@ -1678,9 +1683,9 @@ tslib@^1.8.1:
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
 tslib@^2.3.1:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.3.1.tgz#e8a335add5ceae51aa261d32a490158ef042ef01"
-  integrity sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.4.0.tgz#7cecaa7f073ce680a05847aa77be941098f36dc3"
+  integrity sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==
 
 tsutils@^3.21.0:
   version "3.21.0"
@@ -1770,7 +1775,7 @@ wrappy@1:
   resolved "https://registry.yarnpkg.com/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
   integrity sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=
 
-ws@^8.4.0, ws@^8.4.2:
+ws@^8.4.0, ws@^8.5.0:
   version "8.5.0"
   resolved "https://registry.yarnpkg.com/ws/-/ws-8.5.0.tgz#bfb4be96600757fe5382de12c670dab984a1ed4f"
   integrity sha512-BWX0SWVgLPzYwF8lTzEy1egjhS4S4OEAHfsO8o65WOVsrnSRGaSiUaa9e0ggGlkMTtBlmOpEXiie9RUcBO86qg==

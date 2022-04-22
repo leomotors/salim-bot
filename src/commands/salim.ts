@@ -14,15 +14,25 @@ import chalk from "chalk";
 import fs from "fs/promises";
 import { FrameWorkVersion } from "s-bot-framework";
 
+import { combinedQuotes, sclient } from "../legacy";
+
 import { style } from "./styles";
+
+function trim(str: string) {
+    return str.replace(/\s/g, "").toLowerCase();
+}
+
+function lim(str: string, len = 100) {
+    return str.length > len ? str.slice(0, len - 3) + "..." : str;
+}
 
 export default class Salim extends CogSlashClass {
     constructor() {
-        super("Salim Cog", "Main Slash Cog of Salim Bot");
+        super("Salim Cog", "คำสั่งหลักๆของบอทสลิ่ม");
     }
 
     @SlashCommand(
-        AutoBuilder("Get Status of Salim Bot").addBooleanOption(Ephemeral())
+        AutoBuilder("รับสถานะของบอทสลิ่ม").addBooleanOption(Ephemeral())
     )
     async status(ctx: CommandInteraction) {
         const ephemeral = getEphemeral(ctx);
@@ -41,8 +51,8 @@ export default class Salim extends CogSlashClass {
     }
 
     @SlashCommand(
-        AutoBuilder("Add quote เข้าคลัง").addStringOption(
-            CocoaOption("quote", "quote คุ ณ ภ า พ ที่ต้องการนำเข้าคลัง")
+        AutoBuilder("เพิ่มประโยค คุ ณ ภ า พ เข้าคลัง").addStringOption(
+            CocoaOption("quote", "ประโยค คุ ณ ภ า พ ที่ต้องการนำเข้าคลัง")
         )
     )
     async train(ctx: CommandInteraction) {
@@ -77,5 +87,67 @@ export default class Salim extends CogSlashClass {
         await ctx.followUp(
             "กระผมน้อนสลิ่มจะจดจำแล้วนำไปใช้ครับ ทั้งนี้กรุณาฝากเรียนไปที่เจ้าของบอทให้รีโหลดด้วย"
         );
+    }
+
+    @SlashCommand(
+        AutoBuilder("รับประโยคคุณภาพจากดัชนี").addIntegerOption(
+            CocoaOption("index", "ดัชนีของประโยคคุณภาพที่ต้องการ", true)
+        )
+    )
+    async getquote(ctx: CommandInteraction) {
+        const index = ctx.options.getInteger("index", true);
+        const quote = combinedQuotes.getData()[index];
+
+        if (!quote) {
+            const r = "มันไม่มีคำพูดที่ตำแหน่งนั้นนะ หัดหาข้อมูลบ้าง อีสามกีบ";
+            sclient.corgiSwiftJutsu(ctx, r);
+            await ctx.reply(r);
+            return;
+        }
+
+        sclient.corgiSwiftJutsu(ctx, quote);
+        await ctx.reply(`${quote} [${combinedQuotes.getRefIndex(index)}]`);
+    }
+
+    @SlashCommand(
+        AutoBuilder("ค้นหาประโยคคุณภาพ")
+            .addStringOption(CocoaOption("query", "คำที่ต้องการค้นหา", true))
+            .addBooleanOption(Ephemeral())
+    )
+    async searchquote(ctx: CommandInteraction) {
+        const ephemeral = getEphemeral(ctx);
+        const query = ctx.options.getString("query", true);
+
+        const results = Object.entries(combinedQuotes.getData()).filter((q) =>
+            trim(q[1]).includes(trim(query))
+        );
+
+        let description = "";
+        for (const [i, q] of results.slice(0, 10)) {
+            description += `💭 ${lim(q).replaceAll(
+                "*",
+                "\\*"
+            )} **[${combinedQuotes.getRefIndex(+i)}]**\n`;
+        }
+
+        if (!description) {
+            description = "ไม่พบคำที่ค้นหา";
+        }
+
+        if (results.length > 10) {
+            description += `หมายเหตุ: มีอีก ${results.length - 10} คำที่พบ`;
+        }
+
+        const emb = style
+            .use(ctx)
+            .setTitle("ผลการค้นหาคำพูดสลิ่มเจ๋งๆ")
+            .setDescription(description)
+            .addFields({
+                name: "ขอบคุณที่มาคุณภาพ",
+                value: "[วาร์ป](https://watasalim.vercel.app/)",
+                inline: true,
+            });
+
+        await ctx.reply({ embeds: [emb], ephemeral });
     }
 }

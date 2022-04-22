@@ -1,6 +1,6 @@
 {
   "name": "salim-bot",
-  "version": "4.0.1120",
+  "version": "4.0.1150",
   "description": "This bot is Salim. Whenever you trigger it, It become mad.",
   "type": "module",
   "main": "dist/bot.js",
@@ -35,10 +35,10 @@
   "dependencies": {
     "@discordjs/opus": "^0.7.0",
     "chalk": "^5.0.1",
-    "cocoa-discord-utils": "^1.4.2",
+    "cocoa-discord-utils": "^1.6.0",
     "discord.js": "^13.6.0",
     "libsodium-wrappers": "^0.7.10",
-    "s-bot-framework": "^1.0.402",
+    "s-bot-framework": "^1.0.420",
     "uuid": "^8.3.2"
   }
 }
