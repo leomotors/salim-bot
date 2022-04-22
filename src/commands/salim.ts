@@ -106,7 +106,7 @@ export default class Salim extends CogSlashClass {
         }
 
         sclient.corgiSwiftJutsu(ctx, quote);
-        await ctx.reply(`${quote} [${combinedQuotes.getRefIndex(index)}]`);
+        await ctx.reply(`${quote} [${combinedQuotes.getRefIndex(index - 1)}]`);
     }
 
     @SlashCommand(
