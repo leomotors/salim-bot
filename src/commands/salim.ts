@@ -22,7 +22,7 @@ function trim(str: string) {
     return str.replace(/\s/g, "").toLowerCase();
 }
 
-function lim(str: string, len = 100) {
+function lim(str: string, len = 256) {
     return str.length > len ? str.slice(0, len - 3) + "..." : str;
 }
 
@@ -96,7 +96,7 @@ export default class Salim extends CogSlashClass {
     )
     async getquote(ctx: CommandInteraction) {
         const index = ctx.options.getInteger("index", true);
-        const quote = combinedQuotes.getData()[index];
+        const quote = combinedQuotes.getData()[index - 1];
 
         if (!quote) {
             const r = "มันไม่มีคำพูดที่ตำแหน่งนั้นนะ หัดหาข้อมูลบ้าง อีสามกีบ";
@@ -123,19 +123,26 @@ export default class Salim extends CogSlashClass {
         );
 
         let description = "";
+
+        const limit = 700;
+        let progressed = 0;
         for (const [i, q] of results.slice(0, 10)) {
+            progressed++;
             description += `💭 ${lim(q).replaceAll(
                 "*",
                 "\\*"
             )} **[${combinedQuotes.getRefIndex(+i)}]**\n`;
+            if (description.length > limit) break;
         }
 
         if (!description) {
             description = "ไม่พบคำที่ค้นหา";
         }
 
-        if (results.length > 10) {
-            description += `หมายเหตุ: มีอีก ${results.length - 10} คำที่พบ`;
+        if (results.length > progressed) {
+            description += `หมายเหตุ: มีอีก ${
+                results.length - progressed
+            } คำที่พบ`;
         }
 
         const emb = style
