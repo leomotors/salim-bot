@@ -70,7 +70,7 @@ sclient.useResponse(
 
 sclient.useResponse(
     new Response({
-        trigger: { mention: true, keywords: ["คำ"] },
+        trigger: { mention: true, keywords: ["กี่คำ"] },
         response: {
             loader: new ComputedLoader(
                 () =>
