@@ -10,11 +10,10 @@ import {
 
 import { CommandInteraction } from "discord.js";
 
-import chalk from "chalk";
 import fs from "fs/promises";
 import { FrameWorkVersion } from "s-bot-framework";
 
-import { combinedQuotes, sclient } from "../legacy";
+import { combinedQuotes, localquotes, sclient } from "../legacy";
 
 import { style } from "./styles";
 
@@ -60,17 +59,9 @@ export default class Salim extends CogSlashClass {
 
         const quote = ctx.options.getString("quote", true);
 
-        let morequotes = {} as { วาทกรรมสลิ่ม: string[] };
-        try {
-            morequotes = JSON.parse(
-                (await fs.readFile("data/morequotes.json")).toString()
-            );
-        } catch (e) {
-            console.log(chalk.yellow("[INFO] morequotes is initialized"));
-            morequotes = { วาทกรรมสลิ่ม: [] };
-        }
+        const morequotes = { วาทกรรมสลิ่ม: localquotes.getData() };
 
-        if (morequotes.วาทกรรมสลิ่ม.includes(quote)) {
+        if (combinedQuotes.getData().includes(quote)) {
             await ctx.followUp(
                 "ซ้ำครับ หัดใช้สมองบ้างสิครับ ทำตัวเป็นสามกีบไปได้"
             );
@@ -84,9 +75,9 @@ export default class Salim extends CogSlashClass {
             JSON.stringify(morequotes, null, 4)
         );
 
-        await ctx.followUp(
-            "กระผมน้อนสลิ่มจะจดจำแล้วนำไปใช้ครับ ทั้งนี้กรุณาฝากเรียนไปที่เจ้าของบอทให้รีโหลดด้วย"
-        );
+        await ctx.followUp("กระผมน้อนสลิ่มจะจดจำแล้วนำไปใช้ครับ");
+
+        await localquotes.loadData();
     }
 
     @SlashCommand(

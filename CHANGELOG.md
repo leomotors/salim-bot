@@ -2,6 +2,12 @@
 
 Notable Changes for Salim Bot will be noted here!
 
+## [4.0.1170] - 2022-04-24
+
+- train: Now save after being trained and remove unneccessary file read
+
+- [legacy: กี่คำ] now tell quotes by each source
+
 ## [4.0.1150] - 2022-04-22
 
 - Added Slash Commands: getquote and searchquote

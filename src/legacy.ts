@@ -12,6 +12,7 @@ import {
     SongLoader,
     Response,
     SongAppearance,
+    sLogger,
 } from "s-bot-framework";
 
 // ! WARNING: LEGACY CODE
@@ -26,7 +27,10 @@ export const sclient = new SBotClient();
 
 // * Import data from files
 const keywords = new DataLoader("data/keywords.json", "ชังชาติ");
-const localquotes = new DataLoader("data/morequotes.json", "วาทกรรมสลิ่ม");
+export const localquotes = new DataLoader(
+    "data/morequotes.json",
+    "วาทกรรมสลิ่ม"
+);
 const awesome_salim_quotes = new OnlineLoader(
     "https://watasalim.vercel.app/api/quotes",
     "quotes",
@@ -72,14 +76,15 @@ sclient.useResponse(
     new Response({
         trigger: { mention: true, keywords: ["กี่คำ"] },
         response: {
-            loader: new ComputedLoader(
-                () =>
-                    `มันก็จะมีอยู่ ${
-                        keywords.getData().length
-                    } คำที่พวกสามกีบชอบพูดซึ่งทำให้ผมไม่สบายใจ ผมเองก็มีอยู่ ${
-                        combinedQuotes.getData().length
-                    } ประโยคที่ผมเตรียมนำไปใช้ด่าพวกสามกีบ`
-            ),
+            loader: new ComputedLoader(() => {
+                const locallen = localquotes.getData().length;
+                const asqlen = awesome_salim_quotes.getData().length;
+                return `มันก็จะมีอยู่ ${
+                    keywords.getData().length
+                } คำที่พวกสามกีบชอบพูดซึ่งทำให้ผมไม่สบายใจ ผมเองก็มีประโยคที่ผมเตรียมนำไปใช้ด่าพวกสามกีบ อยู่ ${
+                    locallen + asqlen
+                } โดยแบ่งเป็นประโยคจากแหล่งที่มาคุณภาพ ${asqlen} ประโยค และจากกลุ่มผู้สร้างบอทสลิ่ม ${locallen} ประโยค`;
+            }),
             reply: true,
             audio: true,
         },
@@ -227,3 +232,31 @@ ctrlConsole.addLoader(
 
 // * And Add it to Client, as Client is main Class running this Bot!
 sclient.useConsole(ctrlConsole);
+
+async function afterSetup() {
+    await new Promise((res, _) => {
+        setTimeout(() => res(null), 10000);
+    });
+
+    const asq = awesome_salim_quotes.getData();
+
+    const local = localquotes.getData();
+
+    let warned = false;
+
+    for (const q of asq) {
+        if (local.includes(q)) {
+            warned = true;
+            sLogger.log(`${q} is already in awesome salim quotes`, "WARNING");
+        }
+    }
+
+    if (!warned) {
+        sLogger.log(
+            "Good! No local quotes duplicate of awesome salim quotes!",
+            "SUCCESS"
+        );
+    }
+}
+
+afterSetup();
