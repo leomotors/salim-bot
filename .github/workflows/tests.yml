@@ -1,9 +1,11 @@
+name: Salim Tests
+
 on:
   [push, pull_request]
 
 jobs:
   bot:
-    name: Salim Bot Test
+    name: Bot Test
     runs-on: ubuntu-latest
     if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
 
@@ -20,7 +22,7 @@ jobs:
         run: yarn lint
 
   site:
-    name: Salim Site Test
+    name: Site Test
     runs-on: ubuntu-latest
     if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
     defaults:
@@ -40,5 +42,5 @@ jobs:
         run: yarn lint
       - name: Install Browsers
         run: npx playwright install
-      - name: Mocha Test
+      - name: Playwright Test
         run: yarn test
