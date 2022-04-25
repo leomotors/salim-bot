@@ -1,0 +1,44 @@
+on:
+  [push, pull_request]
+
+jobs:
+  bot:
+    name: Salim Bot Test
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
+
+    steps:
+      - name: actions/checkout
+        uses: actions/checkout@v2
+      - name: Yarn Cache
+        uses: c-hive/gha-yarn-cache@v2
+      - name: Install Dependencies (Yarn)
+        run: yarn install
+      - name: Build Test
+        run: yarn build
+      - name: ESLint & Prettier Check
+        run: yarn lint
+
+  site:
+    name: Salim Site Test
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
+    defaults:
+      run:
+        working-directory: ./site
+
+    steps:
+      - name: actions/checkout
+        uses: actions/checkout@v2
+      - name: Yarn Cache
+        uses: c-hive/gha-yarn-cache@v2
+      - name: Install Dependencies (Yarn)
+        run: yarn install
+      - name: Build Test
+        run: yarn build
+      - name: ESLint & Prettier Check
+        run: yarn lint
+      - name: Install Browsers
+        run: npx playwright install
+      - name: Mocha Test
+        run: yarn test

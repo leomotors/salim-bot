@@ -1,0 +1,39 @@
+name: Publish GitHub Pages
+
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  docs:
+    strategy:
+      matrix:
+        node: ["16"]
+
+    name: GitHub Pages Deploy
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./site
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install Node v${{ matrix.node }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Install Dependencies (Yarn)
+        run: yarn install
+
+      - name: Build Web
+        run: yarn build
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.0
+        with:
+          branch: gh-pages
+          folder: site/build
