@@ -51,7 +51,7 @@ export default class Salim extends CogSlashClass {
 
     @SlashCommand(
         AutoBuilder("เพิ่มประโยค คุ ณ ภ า พ เข้าคลัง").addStringOption(
-            CocoaOption("quote", "ประโยค คุ ณ ภ า พ ที่ต้องการนำเข้าคลัง")
+            CocoaOption("quote", "ประโยค คุ ณ ภ า พ ที่ต้องการนำเข้าคลัง", true)
         )
     )
     async train(ctx: CommandInteraction) {
