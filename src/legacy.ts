@@ -15,6 +15,8 @@ import {
     sLogger,
 } from "s-bot-framework";
 
+import { updateUserCredit } from "./prisma";
+
 // ! WARNING: LEGACY CODE
 // ! This file contains stuff related to s-bot-framework (Legacy part of Salim Bot)
 // ! PS: In case you are looking to use s-bot-framework, good luck dealing
@@ -100,6 +102,9 @@ sclient.useResponse(
             reply: true,
             audio: true,
         },
+        after: async (msg) => {
+            await updateUserCredit(msg.author.id, 10);
+        },
     })
 );
 
@@ -111,6 +116,9 @@ const ชังชาติ = new Response({
         loader: combinedQuotes,
         react: "😡",
         audio: true,
+    },
+    after: async (msg) => {
+        await updateUserCredit(msg.author.id, -50 - msg.content.length / 10);
     },
 });
 sclient.useResponse(ชังชาติ);
@@ -212,6 +220,9 @@ sclient.useDJ(
                 reply: true,
                 message: "รับทราบค่ะ",
             },
+        },
+        afterRequest: async (msg) => {
+            await updateUserCredit(msg.author.id, 20);
         },
     }
 );

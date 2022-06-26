@@ -118,4 +118,7 @@ backup
 
 .vscode
 
-bot_settings.json
+# Database
+
+db.sqlite
+db.sqlite-journal

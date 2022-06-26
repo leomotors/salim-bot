@@ -1,6 +1,7 @@
 import { CocoaVersion } from "cocoa-discord-utils/meta";
 import { CogSlashClass, SlashCommand } from "cocoa-discord-utils/slash/class";
 import {
+    Author,
     AutoBuilder,
     CocoaOption,
     Ephemeral,
@@ -14,6 +15,7 @@ import fs from "fs/promises";
 import { FrameWorkVersion } from "s-bot-framework";
 
 import { combinedQuotes, localquotes, sclient } from "../legacy";
+import { getUser } from "../prisma";
 
 import { style } from "./styles";
 
@@ -44,9 +46,9 @@ export default class Salim extends CogSlashClass {
 สลิ่มบอทเฟรมเวิร์กเวอร์ชั่น ${FrameWorkVersion}
 โกโก้ดิสคอร์ดยูทิลลิตี้เวอร์ชั่น ${CocoaVersion}`
             )
-            .addFields(...(await getStatusFields(ctx)));
+            .addFields(await getStatusFields(ctx));
 
-        await ctx.reply({ embeds: [emb], ephemeral });
+        await ctx.reply({ embeds: [emb.toJSON()], ephemeral });
     }
 
     @SlashCommand(
@@ -140,12 +142,82 @@ export default class Salim extends CogSlashClass {
             .use(ctx)
             .setTitle("ผลการค้นหาคำพูดสลิ่มเจ๋งๆ")
             .setDescription(description)
-            .addFields({
-                name: "ขอบคุณที่มาคุณภาพ",
-                value: "[วาร์ป](https://watasalim.vercel.app/)",
-                inline: true,
-            });
+            .addFields([
+                {
+                    name: "ขอบคุณที่มาคุณภาพ",
+                    value: "[วาร์ป](https://watasalim.vercel.app/)",
+                    inline: true,
+                },
+            ]);
 
-        await ctx.reply({ embeds: [emb], ephemeral });
+        await ctx.reply({ embeds: [emb.toJSON()], ephemeral });
+    }
+
+    formatTime(ms_timestamp: number) {
+        const t = Math.round(ms_timestamp / 1000);
+
+        return `<t:${t}> (<t:${t}:R>)`;
+    }
+
+    socialCredit(score: number) {
+        if (score < 0) {
+            return "กบฎทรราช";
+        } else if (score < 500) {
+            return "บุคคลชังชาติขั้นรุนแรง เป็นภัยต่อความมั่นคง";
+        } else if (score < 900) {
+            return "พวกสามกีบชังชาติ";
+        } else if (score < 1100) {
+            return "พลเมืองทั่วไป";
+        } else if (score < 1500) {
+            return "ผู้มีความศรัทธาต่อพ่อหลวงของแผ่นดิน";
+        } else if (score < 2000) {
+            return "ผู้มีความจงรักภักดีต่อพ่อหลวงของแผ่นดิน";
+        } else {
+            return "พลเมืองไทยต้นแบบ ผู้ปิดทองหลังพระ";
+        }
+    }
+
+    @SlashCommand(
+        AutoBuilder("แสดงบัตรประจำตัวประชาชนชาวไทย").addUserOption(
+            CocoaOption(
+                "user",
+                "บุคคลที่ต้องการให้แสดงข้อมูล ปล่อยว่างเพื่อแสดงของตัวคุณเอง"
+            )
+        )
+    )
+    async citizenstatus(ctx: CommandInteraction) {
+        const user = ctx.options.getUser("user") ?? ctx.user;
+
+        const gmember = ctx.guild?.members.cache.get(user.id);
+
+        const puser = await getUser(user.id);
+
+        const emb = style
+            .use(ctx)
+            .setTitle("บัตรประจำตัวประชาชนชาวไทย")
+            .setDescription("บัตรที่แสดงสถานะพลเมืองของคุณ รวมถึงความประพฤติ")
+            .setThumbnail(Author(ctx).iconURL)
+            .addInlineFields(
+                {
+                    name: "วันเกิด",
+                    value: this.formatTime(user.createdTimestamp),
+                },
+                {
+                    name: "วันเข้าร่วม",
+                    value: gmember?.joinedTimestamp
+                        ? this.formatTime(gmember.joinedTimestamp)
+                        : "ไม่ทราบวันเข้าร่วม อาจเป็นคนเถื่อน",
+                },
+                {
+                    name: "คะแนนสังคม",
+                    value: `${Math.round(puser.socialCredit)} แต้ม`,
+                },
+                {
+                    name: "สถานะประชาชน",
+                    value: this.socialCredit(puser.socialCredit),
+                }
+            );
+
+        await ctx.reply({ embeds: [emb.toJSON()] });
     }
 }

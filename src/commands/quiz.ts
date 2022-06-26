@@ -112,13 +112,13 @@ class QuizManager {
         if (this.currentIndex + 1 < this.quiz.questions.length) {
             const [emb, row] = this.makeEmbed(this.currentIndex + 1);
 
-            await ctx.update({ embeds: [emb], components: [row] });
+            await ctx.update({ embeds: [emb.toJSON()], components: [row] });
         } else {
             this.ongoing = false;
 
             const emb = this.summaryEmbed();
 
-            await ctx.update({ embeds: [emb], components: [] });
+            await ctx.update({ embeds: [emb.toJSON()], components: [] });
         }
     }
 
@@ -129,7 +129,7 @@ class QuizManager {
             .use(this.originalContext)
             .setTitle("สรุปผลการทำแบบทดสอบ")
             .setThumbnail(this.originalContext.user.avatarURL({ size: 4096 }))
-            .addFields(
+            .addFields([
                 {
                     name: "ชื่อแบบทดสอบ",
                     value: this.quiz.name,
@@ -152,8 +152,8 @@ class QuizManager {
                             : sr >= 0.3
                             ? "พวกสามกีบชังชาติ"
                             : "สามกีบที่ชังชาติร้ายแรง ต้องถูกกำจัด",
-                }
-            );
+                },
+            ]);
 
         return emb;
     }
@@ -165,12 +165,12 @@ class QuizManager {
     }
 }
 
-function getChoices(): [string, string][] {
+function getChoices() {
     const obj = JSON.parse(
         fs.readFileSync("./data/quiz.spec.json").toString()
     ) as string[];
 
-    return obj.map((o, index) => [o, `${index}`]);
+    return obj.map((o, index) => ({ name: o, value: index + "" }));
 }
 
 export default class QuizCog extends CogSlashClass {
@@ -200,7 +200,7 @@ export default class QuizCog extends CogSlashClass {
                 option
                     .setName("quiz_name")
                     .setDescription("แบบทดสอบที่คุณต้องการทำ")
-                    .addChoices(getChoices())
+                    .addChoices(...getChoices())
                     .setRequired(true)
             )
             .addBooleanOption(CocoaOption("force", "Force creating new quiz"))
@@ -220,6 +220,6 @@ export default class QuizCog extends CogSlashClass {
 
         const [emb, row] = this.quizManager[ctx.guildId!]!.makeEmbed(0);
 
-        await ctx.reply({ embeds: [emb], components: [row] });
+        await ctx.reply({ embeds: [emb.toJSON()], components: [row] });
     }
 }
