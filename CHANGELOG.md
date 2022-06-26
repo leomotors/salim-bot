@@ -4,7 +4,7 @@ Notable Changes for Salim Bot will be noted here!
 
 ## [4.1.1190] - 2022-06-26
 
-### Salim Bot 4.1
+### Salim Bot 4.1 - Social Credit Update
 
 - Introducing Social Credit (Preview), keep track of your citizen's behaviour
 
