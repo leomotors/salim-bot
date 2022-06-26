@@ -202,6 +202,10 @@ export default class Salim extends CogSlashClass {
             .setThumbnail(Author(ctx).iconURL)
             .addInlineFields(
                 {
+                    name: "ชื่อ",
+                    value: `<@${ctx.user.id}>`,
+                },
+                {
                     name: "วันเกิด",
                     value: this.formatTime(user.createdTimestamp),
                 },
