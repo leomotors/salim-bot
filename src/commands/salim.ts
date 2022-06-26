@@ -14,8 +14,9 @@ import { CommandInteraction } from "discord.js";
 import fs from "fs/promises";
 import { FrameWorkVersion } from "s-bot-framework";
 
+import { Actions } from "../actions";
 import { combinedQuotes, localquotes, sclient } from "../legacy";
-import { getUser } from "../prisma";
+import { getUser, updateUserCredit } from "../prisma";
 
 import { style } from "./styles";
 
@@ -67,6 +68,7 @@ export default class Salim extends CogSlashClass {
             await ctx.followUp(
                 "ซ้ำครับ หัดใช้สมองบ้างสิครับ ทำตัวเป็นสามกีบไปได้"
             );
+            await updateUserCredit(ctx.user.id, Actions.DuplicateTrain);
             return;
         }
 
@@ -78,6 +80,7 @@ export default class Salim extends CogSlashClass {
         );
 
         await ctx.followUp("กระผมน้อนสลิ่มจะจดจำแล้วนำไปใช้ครับ");
+        await updateUserCredit(ctx.user.id, Actions.TrainQuote);
 
         await localquotes.loadData();
     }
@@ -140,7 +143,7 @@ export default class Salim extends CogSlashClass {
 
         const emb = style
             .use(ctx)
-            .setTitle("ผลการค้นหาคำพูดสลิ่มเจ๋งๆ")
+            .setTitle(`ผลการค้นหาคำพูดสลิ่มเจ๋งๆ คำที่ค้นหา: ${query}`)
             .setDescription(description)
             .addFields([
                 {

@@ -15,6 +15,7 @@ import {
     sLogger,
 } from "s-bot-framework";
 
+import { Actions } from "./actions";
 import { updateUserCredit } from "./prisma";
 
 // ! WARNING: LEGACY CODE
@@ -103,7 +104,7 @@ sclient.useResponse(
             audio: true,
         },
         after: async (msg) => {
-            await updateUserCredit(msg.author.id, 10);
+            await updateUserCredit(msg.author.id, Actions.AskFacebook);
         },
     })
 );
@@ -118,7 +119,11 @@ const ชังชาติ = new Response({
         audio: true,
     },
     after: async (msg) => {
-        await updateUserCredit(msg.author.id, -50 - msg.content.length / 10);
+        await updateUserCredit(
+            msg.author.id,
+            Actions.SalimTriggerBase -
+                msg.content.length * Actions.SalimTriggerVar
+        );
     },
 });
 sclient.useResponse(ชังชาติ);
@@ -222,7 +227,7 @@ sclient.useDJ(
             },
         },
         afterRequest: async (msg) => {
-            await updateUserCredit(msg.author.id, 20);
+            await updateUserCredit(msg.author.id, Actions.ListenSong);
         },
     }
 );
