@@ -1,7 +1,6 @@
 import { CocoaVersion } from "cocoa-discord-utils/meta";
 import { CogSlashClass, SlashCommand } from "cocoa-discord-utils/slash/class";
 import {
-    Author,
     AutoBuilder,
     CocoaOption,
     Ephemeral,
@@ -199,11 +198,14 @@ export default class Salim extends CogSlashClass {
             .use(ctx)
             .setTitle("บัตรประจำตัวประชาชนชาวไทย")
             .setDescription("บัตรที่แสดงสถานะพลเมืองของคุณ รวมถึงความประพฤติ")
-            .setThumbnail(Author(ctx).iconURL)
+            .setThumbnail(
+                user.avatarURL() ??
+                    "https://cdn.discordapp.com/embed/avatars/1.png"
+            )
             .addInlineFields(
                 {
                     name: "ชื่อ",
-                    value: `<@${ctx.user.id}>`,
+                    value: `<@${user.id}>`,
                 },
                 {
                     name: "วันเกิด",

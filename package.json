@@ -1,6 +1,6 @@
 {
   "name": "salim-bot",
-  "version": "4.1.1190",
+  "version": "4.1.1191",
   "description": "This bot is Salim. Whenever you trigger it, It become mad.",
   "type": "module",
   "main": "dist/bot.js",
