@@ -5,5 +5,5 @@ export enum Actions {
     ListenSong = 20,
     DuplicateTrain = -10,
     TrainQuote = 15,
-    QuizVar = 11.12,
+    QuizVar = 112,
 }
