@@ -2,6 +2,14 @@
 
 Notable Changes for Salim Bot will be noted here!
 
+## [4.1.1193] - 2022-06-30
+
+- Now use PostgreSQL because PostgreSQL logo is elephant, and elephant is national animal of Thailand
+
+- Add more roles
+
+- Add social credit for completing quiz
+
 ## [4.1.1190] - 2022-06-26
 
 ### Salim Bot 4.1 - Social Credit Update

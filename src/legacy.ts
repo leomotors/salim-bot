@@ -104,7 +104,7 @@ sclient.useResponse(
             audio: true,
         },
         after: async (msg) => {
-            await updateUserCredit(msg.author.id, Actions.AskFacebook);
+            await updateUserCredit(msg.author, Actions.AskFacebook);
         },
     })
 );
@@ -120,7 +120,7 @@ const ชังชาติ = new Response({
     },
     after: async (msg) => {
         await updateUserCredit(
-            msg.author.id,
+            msg.author,
             Actions.SalimTriggerBase -
                 msg.content.length * Actions.SalimTriggerVar
         );
@@ -227,7 +227,7 @@ sclient.useDJ(
             },
         },
         afterRequest: async (msg) => {
-            await updateUserCredit(msg.author.id, Actions.ListenSong);
+            await updateUserCredit(msg.author, Actions.ListenSong);
         },
     }
 );

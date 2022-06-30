@@ -67,7 +67,7 @@ export default class Salim extends CogSlashClass {
             await ctx.followUp(
                 "ซ้ำครับ หัดใช้สมองบ้างสิครับ ทำตัวเป็นสามกีบไปได้"
             );
-            await updateUserCredit(ctx.user.id, Actions.DuplicateTrain);
+            await updateUserCredit(ctx.user, Actions.DuplicateTrain);
             return;
         }
 
@@ -79,7 +79,7 @@ export default class Salim extends CogSlashClass {
         );
 
         await ctx.followUp("กระผมน้อนสลิ่มจะจดจำแล้วนำไปใช้ครับ");
-        await updateUserCredit(ctx.user.id, Actions.TrainQuote);
+        await updateUserCredit(ctx.user, Actions.TrainQuote);
 
         await localquotes.loadData();
     }
@@ -163,19 +163,27 @@ export default class Salim extends CogSlashClass {
 
     socialCredit(score: number) {
         if (score < 0) {
-            return "กบฎทรราช";
+            return "อมนุษย์ที่ไม่ได้มีประโยชน์ใด ๆ ต่อแผ่นดินของพ่อ อยู่อย่างหนักแผ่นดิน สมควรได้รับการกำจัดทิ้ง";
         } else if (score < 500) {
-            return "บุคคลชังชาติขั้นรุนแรง เป็นภัยต่อความมั่นคง";
+            return "นักโทษที่มีพฤติกรรมกระทำความผิดในลักษณะเดิมหลายครั้ง ไม่ควรได้รับการประกันตัว";
+        } else if (score < 700) {
+            return "บุคคลชังชาติระดับร้ายแรง เป็นภัยต่อความมั่นคงภายในราชอาณาจักร";
+        } else if (score < 800) {
+            return "บุคคลที่ต้องเฝ้าระวังการสร้างสถานการณ์ความไม่สงบเรียบร้อย";
         } else if (score < 900) {
             return "พวกสามกีบชังชาติ";
         } else if (score < 1100) {
             return "พลเมืองทั่วไป";
+        } else if (score < 1200) {
+            return "คนดี";
+        } else if (score < 1300) {
+            return "คนดียิ่งกว่าคนดี";
         } else if (score < 1500) {
-            return "ผู้มีความศรัทธาต่อพ่อหลวงของแผ่นดิน";
+            return "ผู้ที่จงรักภักดีพร้อมเป็นข้ารองบาททุกชาติไปและน้อมนำคำสอนของพ่อหลวงมาปฏิบัติ";
         } else if (score < 2000) {
-            return "ผู้มีความจงรักภักดีต่อพ่อหลวงของแผ่นดิน";
+            return "ผู้สมควรได้รับพระราชทานเครื่องราชอิสริยาภรณ์";
         } else {
-            return "พลเมืองไทยต้นแบบ ผู้ปิดทองหลังพระ";
+            return "พลเมืองไทยต้นแบบ ผู้รักชาติ ศาสน์ กษัตริย์";
         }
     }
 
@@ -192,7 +200,7 @@ export default class Salim extends CogSlashClass {
 
         const gmember = ctx.guild?.members.cache.get(user.id);
 
-        const puser = await getUser(user.id);
+        const puser = await getUser(user);
 
         const emb = style
             .use(ctx)

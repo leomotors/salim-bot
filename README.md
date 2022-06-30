@@ -29,7 +29,11 @@ Salim Bot that is currently running of my friends server and is most active bot 
 
 - และฟีเจอร์อีกหลากหลายในเวอร์ชั่นก่อนๆ แต่ถูกตัดทิ้งเพราะคนทำ~~ชังชาติ~~ (จริงๆคือ refactor แล้วขี้เกียจเขียนใหม่)
 
+- [NEW! ✨] Social Credit (Preview) Feature! Note: Prisma Engine and PostgreSQL required
+
 ## ⚙️ Under the Hood
+
+**WARNING: LEGACY CODE**
 
 The Salim Bot *since April 2021* has long history, of course it has big technical debt.
 

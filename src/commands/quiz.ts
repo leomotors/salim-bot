@@ -14,6 +14,9 @@ import {
 import * as fs from "node:fs";
 import { v4 as uuid } from "uuid";
 
+import { Actions } from "../actions";
+import { updateUserCredit } from "../prisma";
+
 import { quiz_style } from "./styles";
 
 interface Question {
@@ -117,6 +120,12 @@ class QuizManager {
             this.ongoing = false;
 
             const emb = this.summaryEmbed();
+
+            await updateUserCredit(
+                this.originalContext.user,
+                (this.score / this.quiz.questions.length - 0.6) *
+                    Actions.QuizVar
+            );
 
             await ctx.update({ embeds: [emb.toJSON()], components: [] });
         }
