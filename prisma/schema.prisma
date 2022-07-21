@@ -42,7 +42,8 @@ model Cooldown {
 }
 
 model Essay {
-  userId    String   @unique
+  id        Int      @id @default(autoincrement())
+  userId    String
   user      User     @relation(fields: [userId], references: [id])
   content   String
   createdAt DateTime @default(now()) @map("created_at")
