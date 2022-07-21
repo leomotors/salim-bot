@@ -68,7 +68,7 @@ In case you want to (not recommended)
 
     `git clone https://github.com/Leomotors/Salim-Bot`
 
-- Add your token in DISCORD_TOKEN of .env
+- Add required .env parameters
 
 - For the first time, do `npm install` or `yarn install` to install dependencies
 and `npm run build` or `yarn build` to build the bot.
@@ -84,6 +84,8 @@ and `npm run build` or `yarn build` to build the bot.
 ### 🌿 Prerequisites
 
 - Latest nodejs 16+ (discord.js requirements)
+
+- PostgreSQL 12 เราเลือกใช้ Postgres เพราะมีโลโก้เป็นรูปช้าง และช้างเป็นสัตว์ประจำชาติไทย
 
 ## 📚 Documents
 

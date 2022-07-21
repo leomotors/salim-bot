@@ -23,7 +23,7 @@ const salimCenter = new SlashCenter(
     sclient.client,
     process.env.GUILD_IDS?.split(",")
 );
-salimCenter.addCogs(new Salim(), new QuizCog(sclient.client));
+salimCenter.addCogs(new Salim(sclient.client), new QuizCog(sclient.client));
 salimCenter.useHelpCommand(style);
 salimCenter.on("error", async (name, err, ctx) => {
     await ctx.channel?.send(

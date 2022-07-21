@@ -1,13 +1,15 @@
-import { CocoaEmbed, Loader } from "cocoa-discord-utils";
+import { CocoaEmbed, ArrayLoader } from "cocoa-discord-utils";
 import { NonEmptyArray } from "cocoa-discord-utils/internal/base";
-import { CogSlashClass, SlashCommand } from "cocoa-discord-utils/slash/class";
-import { AutoBuilder, CocoaOption } from "cocoa-discord-utils/template";
+import {
+    CogSlashClass,
+    Param,
+    SlashCommand,
+} from "cocoa-discord-utils/slash/class";
 
 import {
+    ActionRowBuilder,
     Client,
-    CommandInteraction,
-    MessageActionRow,
-    MessageSelectMenu,
+    SelectMenuBuilder,
     SelectMenuInteraction,
 } from "discord.js";
 
@@ -39,19 +41,21 @@ function trim(str: string, len: number) {
     return str;
 }
 
-const quizes = Loader.fromFile<Quiz>("Quiz Loader", "./data/quiz.json");
+const quizes = ArrayLoader.fromFile<Quiz>("Quiz Loader", "./data/quiz.json");
 
 class QuizManager {
     private quiz: Quiz;
     private readonly quizId = uuid().split("-")[0]!;
-    private originalContext: CommandInteraction;
+    private originalContext: SlashCommand.Context;
     private currentChoiceOrder: string[] = [];
     private currentIndex = 0;
     private score = 0;
     ongoing = true;
 
     /** Make Index for Quiz, **WARNING**: This method mutates the class */
-    makeEmbed(index: number): [CocoaEmbed, MessageActionRow] {
+    makeEmbed(
+        index: number
+    ): [CocoaEmbed, ActionRowBuilder<SelectMenuBuilder>] {
         this.currentIndex = index;
         const questions = this.quiz.questions;
         const question = questions[index]!;
@@ -66,7 +70,7 @@ class QuizManager {
             question.question
         }**\n\n${choices.map((c) => `- ${c}`).join("\n")}\n`;
 
-        const select = new MessageSelectMenu()
+        const select = new SelectMenuBuilder()
             .setCustomId(this.quizId)
             .setPlaceholder("คำตอบของคุณ")
             .setMinValues(1)
@@ -81,7 +85,9 @@ class QuizManager {
                 })
             );
 
-        const row = new MessageActionRow().addComponents(select);
+        const row = new ActionRowBuilder<SelectMenuBuilder>().addComponents(
+            select
+        );
 
         return [
             quiz_style
@@ -122,7 +128,7 @@ class QuizManager {
             const emb = this.summaryEmbed();
 
             await updateUserCredit(
-                this.originalContext.user,
+                this.originalContext,
                 (this.score / this.quiz.questions.length - 0.6) *
                     Actions.QuizVar
             );
@@ -167,7 +173,7 @@ class QuizManager {
         return emb;
     }
 
-    constructor(ctx: CommandInteraction, index: number) {
+    constructor(ctx: SlashCommand.Context, index: number) {
         this.quiz = quizes.data[index]!;
         this.quiz.questions.sort((_, __) => Math.random() - 0.5);
         this.originalContext = ctx;
@@ -203,20 +209,16 @@ export default class QuizCog extends CogSlashClass {
         });
     }
 
-    @SlashCommand(
-        AutoBuilder("Start the Quiz")
-            .addStringOption((option) =>
-                option
-                    .setName("quiz_name")
-                    .setDescription("แบบทดสอบที่คุณต้องการทำ")
-                    .addChoices(...getChoices())
-                    .setRequired(true)
-            )
-            .addBooleanOption(CocoaOption("force", "Force creating new quiz"))
-    )
-    async quiz(ctx: CommandInteraction) {
-        const force = ctx.options.getBoolean("force");
-        const quiz_id = +ctx.options.getString("quiz_name", true);
+    @SlashCommand("Start the Quiz")
+    async quiz(
+        ctx: SlashCommand.Context,
+        @Param.Choices<Param.String.Type>(getChoices())
+        @Param.String("แบบทดสอบที่คุณต้องการทำ")
+        quiz_name: Param.String.Type,
+        @Param.Boolean("Force creating new quiz", { required: false })
+        force: Param.Boolean.Nullable
+    ) {
+        const quiz_id = +quiz_name;
 
         await quizes.initialPromise;
 
@@ -229,6 +231,6 @@ export default class QuizCog extends CogSlashClass {
 
         const [emb, row] = this.quizManager[ctx.guildId!]!.makeEmbed(0);
 
-        await ctx.reply({ embeds: [emb.toJSON()], components: [row] });
+        await ctx.reply({ embeds: [emb], components: [row] });
     }
 }

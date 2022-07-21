@@ -12,9 +12,40 @@ datasource db {
 }
 
 model User {
-  id           String   @unique
-  username     String? // For DB Inspect
-  createdAt    DateTime @default(now()) @map("created_at")
-  updatedAt    DateTime @updatedAt @map("updated_at")
-  socialCredit Float    @default(1000) @map("social_credit")
+  id           String     @unique
+  profile      Profile?
+  createdAt    DateTime   @default(now()) @map("created_at")
+  updatedAt    DateTime   @updatedAt @map("updated_at")
+  socialCredit Float      @default(1000) @map("social_credit")
+  cooldown     Cooldown[]
+  essay        Essay[]
+
+  @@map("user")
+}
+
+model Profile {
+  userId            String @unique @map("user_id")
+  user              User   @relation(fields: [userId], references: [id])
+  username          String
+  registeredGuild   String @map("registered_guild")
+  lastInteractGuild String @map("last_interact_guild")
+
+  @@map("profile")
+}
+
+model Cooldown {
+  userId     String    @unique
+  user       User      @relation(fields: [userId], references: [id])
+  essayToDad DateTime? @map("essay_to_dad")
+
+  @@map("cooldown")
+}
+
+model Essay {
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id])
+  content   String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("essay")
 }

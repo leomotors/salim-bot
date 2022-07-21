@@ -1,5 +1,7 @@
 import { CocoaVersion } from "cocoa-discord-utils/meta";
 
+import { ActivityType } from "discord.js";
+
 import {
     ActivityLoader,
     Console,
@@ -104,7 +106,7 @@ sclient.useResponse(
             audio: true,
         },
         after: async (msg) => {
-            await updateUserCredit(msg.author, Actions.AskFacebook);
+            await updateUserCredit(msg, Actions.AskFacebook);
         },
     })
 );
@@ -120,7 +122,7 @@ const ชังชาติ = new Response({
     },
     after: async (msg) => {
         await updateUserCredit(
-            msg.author,
+            msg,
             Actions.SalimTriggerBase -
                 msg.content.length * Actions.SalimTriggerVar
         );
@@ -145,7 +147,7 @@ sclient.useResponse(
 
 // * Bot Activity
 sclient.useComputedActivity({
-    type: "PLAYING",
+    type: ActivityType.Playing,
     name: `Salim Bot ${process.env.npm_package_version}`,
 });
 const activityLoader = new ActivityLoader("data/activity.json", "activities");
@@ -199,7 +201,7 @@ sclient.useDJ(
             now_playing: {
                 // * Salim Embed
                 send_embed: true,
-                color: "YELLOW", // 💛💛💛
+                color: "Yellow", // 💛💛💛
                 title: "กำลังเล่น",
                 requested_by: "คนรักสถาบัน",
                 duration: "ความยาวเพลง",
@@ -227,7 +229,7 @@ sclient.useDJ(
             },
         },
         afterRequest: async (msg) => {
-            await updateUserCredit(msg.author, Actions.ListenSong);
+            await updateUserCredit(msg, Actions.ListenSong);
         },
     }
 );

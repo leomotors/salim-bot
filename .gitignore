@@ -118,7 +118,6 @@ backup
 
 .vscode
 
-# Database
-
-db.sqlite
-db.sqlite-journal
+# Yarn
+cache
+install-state.gz

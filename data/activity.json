@@ -1,23 +1,23 @@
 {
     "activities": [
         {
-            "type": "WATCHING",
+            "type": "Watching",
             "name": "TOP NEWS"
         },
         {
-            "type": "WATCHING",
+            "type": "Watching",
             "name": "ข่าวในพระราชสำนัก"
         },
         {
-            "type": "LISTENING",
+            "type": "Listening",
             "name": "เพลงสรรเสริญพระบารมี"
         },
         {
-            "type": "COMPETING",
+            "type": "Competing",
             "name": "รายการประกวดร้องเพลงพระราชนิพนธ์"
         },
         {
-            "type": "PLAYING",
+            "type": "Playing",
             "name": "Escape FishStop 3D"
         }
     ]

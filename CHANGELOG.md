@@ -2,6 +2,11 @@
 
 Notable Changes for Salim Bot will be noted here!
 
+## [4.2.1300] - 2022-07-21
+
+- Migrate to discord.js 14 with Cocoa Discord Utils v2
+- NEW! เขียนเรียงความถึงพ่อหลวงเพื่อรับคะแนนสังคม ๙ คะแนน
+
 ## [4.1.1193] - 2022-06-30
 
 - Now use PostgreSQL because PostgreSQL logo is elephant, and elephant is national animal of Thailand
