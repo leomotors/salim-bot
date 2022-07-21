@@ -206,10 +206,7 @@ export default class Salim extends CogSlashClass {
             .use(ctx)
             .setTitle("บัตรประจำตัวประชาชนชาวไทย")
             .setDescription("บัตรที่แสดงสถานะพลเมืองของคุณ รวมถึงความประพฤติ")
-            .setThumbnail(
-                user.avatarURL() ??
-                    "https://cdn.discordapp.com/embed/avatars/1.png"
-            )
+            .setThumbnail(user.avatarURL() ?? user.defaultAvatarURL)
             .addInlineFields(
                 {
                     name: "ชื่อ",
