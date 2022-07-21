@@ -2547,9 +2547,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"s-bot-framework@npm:^1.1.445":
-  version: 1.1.445
-  resolution: "s-bot-framework@npm:1.1.445"
+"s-bot-framework@npm:^1.1.446":
+  version: 1.1.446
+  resolution: "s-bot-framework@npm:1.1.446"
   dependencies:
     "@discordjs/voice": 0.11.0
     chalk: 5.0.1
@@ -2559,7 +2559,7 @@ __metadata:
     node-fetch: ^3.2.9
     strip-ansi: 7.0.1
     ytdl-core: ^4.11.0
-  checksum: a0d68c1797493a080880d3ce341c6a7d603a9f7de6a1ea525a664ccf2afd5128aa829bfe6948cd445c4fc7a51536f2808f67108f2cc49c3aa197a8c0b9a0f552
+  checksum: dd159d1d85fcf9655037f1df6bdc2741eb83cc21f3bca7715ff802e7e398dc49c6198ad6908b9fcd948fa8d9b24fbc07a9f5474698b54441d4499c65a2c23818
   languageName: node
   linkType: hard
 
@@ -2603,7 +2603,7 @@ __metadata:
     libsodium-wrappers: ^0.7.10
     prettier: ^2.7.1
     prisma: ^4.1.0
-    s-bot-framework: ^1.1.445
+    s-bot-framework: ^1.1.446
     typescript: ^4.7.4
     uuid: ^8.3.2
   languageName: unknown
