@@ -203,10 +203,13 @@ export default class Salim extends CogSlashClass {
     async citizenstatus(
         ctx: SlashCommand.Context,
         @Param.User(
-            "บุคคลที่ต้องการให้แสดงข้อมูล ปล่อยว่างเพื่อแสดงของตัวคุณเอง"
+            "บุคคลที่ต้องการให้แสดงข้อมูล ปล่อยว่างเพื่อแสดงของตัวคุณเอง",
+            { required: false }
         )
-        user: Param.User.Type
+        user: Param.User.Nullable
     ) {
+        user ??= ctx.user;
+
         const gmember = ctx.guild?.members.cache.get(user.id);
 
         const puser = await getUser3rdParty(user, ctx);
