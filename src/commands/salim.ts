@@ -325,6 +325,6 @@ export default class Salim extends CogSlashClass {
             },
         });
 
-        await ctx.channel?.send(msg);
+        await ctx.reply(msg);
     }
 }
