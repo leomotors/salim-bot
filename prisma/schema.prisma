@@ -34,7 +34,7 @@ model Profile {
 }
 
 model Cooldown {
-  userId     String    @unique
+  userId     String    @unique @map("user_id")
   user       User      @relation(fields: [userId], references: [id])
   essayToDad DateTime? @map("essay_to_dad")
 
@@ -43,7 +43,7 @@ model Cooldown {
 
 model Essay {
   id        Int      @id @default(autoincrement())
-  userId    String
+  userId    String   @map("user_id")
   user      User     @relation(fields: [userId], references: [id])
   content   String
   createdAt DateTime @default(now()) @map("created_at")
