@@ -76,13 +76,10 @@ class QuizManager {
             .setMinValues(1)
             .setMaxValues(1)
             .addOptions(
-                ...choices.map((choice, index) => {
-                    return {
-                        label: trim(choice, 100),
-                        description: "",
-                        value: `${index}`,
-                    };
-                })
+                ...choices.map((choice, index) => ({
+                    label: trim(choice, 100),
+                    value: `${index}`,
+                }))
             );
 
         const row = new ActionRowBuilder<SelectMenuBuilder>().addComponents(
@@ -182,7 +179,7 @@ class QuizManager {
 
 function getChoices() {
     const obj = JSON.parse(
-        fs.readFileSync("./data/quiz.spec.json").toString()
+        fs.readFileSync("./data/quiz.index.json").toString()
     ) as string[];
 
     return obj.map((o, index) => ({ name: o, value: index + "" }));

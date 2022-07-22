@@ -1044,16 +1044,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cocoa-discord-utils@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "cocoa-discord-utils@npm:2.0.0"
+"cocoa-discord-utils@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "cocoa-discord-utils@npm:2.1.0"
   dependencies:
     chalk: =4.1.2
     commander: ^9.4.0
-    discord.js: ^14.0.2
+    discord.js: ^14.0.3
   bin:
     cocoadu: dist/cli/index.js
-  checksum: e7a82654d5195c9053f89e7c45bdeae2670b3e9319d8cde75c24454cde0e6f192a589c006c45aaf635328aa30bebe481e22710887930f0fa85e0d67ab9deca15
+  checksum: ceb50d1a1041133844da5bfd9f7c3be69d1b79fbadb1aa0a2a56eb5d21d8c6a4c5213c72d03b84e6fa32c18286e17ea9021173fa4de3163dec4cfb803df8a795
   languageName: node
   linkType: hard
 
@@ -1202,7 +1202,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord.js@npm:^14.0.2, discord.js@npm:^14.0.3":
+"discord.js@npm:^14.0.3":
   version: 14.0.3
   resolution: "discord.js@npm:14.0.3"
   dependencies:
@@ -2597,7 +2597,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^5.30.7
     "@typescript-eslint/parser": ^5.30.7
     chalk: ^5.0.1
-    cocoa-discord-utils: ^2.0.0
+    cocoa-discord-utils: ^2.1.0
     discord.js: ^14.0.3
     eslint: ^8.20.0
     libsodium-wrappers: ^0.7.10
