@@ -26,7 +26,7 @@ export async function getUser3rdParty(user: DiscordUser, ctx: Context) {
             userId: user.id,
         },
         create: {
-            username: user.id,
+            username: user.username,
             registeredGuild: ctx.guild?.name ?? "<undefined>",
             lastInteractGuild: ctx.guild?.name ?? "<undefined>",
             user: {
@@ -36,7 +36,7 @@ export async function getUser3rdParty(user: DiscordUser, ctx: Context) {
             },
         },
         update: {
-            username: user.id,
+            username: user.username,
         },
     });
 
