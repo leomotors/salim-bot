@@ -340,6 +340,6 @@ export default class Salim extends CogSlashClass {
 
         const result = await prisma.$queryRawUnsafe(command);
 
-        await ctx.followUp(JSON.stringify(result).slice(0, 2000));
+        await ctx.followUp(JSON.stringify(result, null, 2).slice(0, 2000));
     }
 }
