@@ -2,6 +2,11 @@
 
 Notable Changes for Salim Bot will be noted here!
 
+## [4.2.1309] - 2022-08-04
+
+- เพิ่มคำสั่ง /sql: ส ม า ชิ ก ท่ า น ใ ด อ ย่ า ห า ท ำ
+- bump deps as always
+
 ## [4.2.1300] - 2022-07-21
 
 - Migrate to discord.js 14 with Cocoa Discord Utils v2
