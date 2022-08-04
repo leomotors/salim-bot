@@ -330,4 +330,16 @@ export default class Salim extends CogSlashClass {
 
         await ctx.reply(msg);
     }
+
+    @SlashCommand("ส ม า ชิ ก ท่ า น ใ ด อ ย่ า ห า ท ำ")
+    async sql(
+        ctx: SlashCommand.Context,
+        @Param.String("อะไรก็ได้ แต่อย่า DROP TABLE") command: Param.String.Type
+    ) {
+        await ctx.deferReply();
+
+        const result = await prisma.$queryRawUnsafe(command);
+
+        await ctx.followUp(JSON.stringify(result).slice(0, 2000));
+    }
 }
