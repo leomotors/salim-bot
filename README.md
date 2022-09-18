@@ -70,10 +70,10 @@ In case you want to (not recommended)
 
 - Add required .env parameters
 
-- For the first time, do `npm install` or `yarn install` to install dependencies
-and `npm run build` or `yarn build` to build the bot.
+- For the first time, do `pnpm install` to install dependencies
+and `pnpm build` to build the bot.
 
-- To start bot, do `npm start` or `yarn start`
+- To start bot, do `pnpm start`
 
 - To Stop Bot and Logout _properly_, Type `logout` in the Bot Console
 

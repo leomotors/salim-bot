@@ -37,7 +37,7 @@ salimCenter.on("interaction", (name, ctx) => {
 
 sclient.client.on("ready", async () => {
     await salimCenter.validateCommands();
-    await salimCenter.syncCommands();
+    await salimCenter.syncCommands(true);
 });
 
 // * Done! That's it required for this bot!
