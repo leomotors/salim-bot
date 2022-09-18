@@ -1,0 +1,22 @@
+module.exports = {
+    bracketSpacing: true,
+    tabWidth: 4,
+    useTabs: false,
+    singleQuote: false,
+    semi: true,
+    printWidth: 80,
+    importOrder: [
+        "^[.]/legacy",
+        "^dotenv",
+        "^cocoa-discord-utils",
+        "^discord.js",
+        "^@discordjs",
+        "^[a-zA-Z]",
+        "^[.][.]",
+        "^[.]",
+    ],
+    importOrderCaseInsensitive: true,
+    importOrderSeparation: true,
+    importOrderParserPlugins: ["typescript", "decorators-legacy"],
+    plugins: ["@trivago/prettier-plugin-sort-imports"],
+};

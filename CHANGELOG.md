@@ -2,6 +2,10 @@
 
 Notable Changes for Salim Bot will be noted here!
 
+## [4.2.1320] - 2022-09-18
+
+- Bump deps, now uses Global Command
+
 ## [4.2.1309] - 2022-08-04
 
 - เพิ่มคำสั่ง /sql: ส ม า ชิ ก ท่ า น ใ ด อ ย่ า ห า ท ำ

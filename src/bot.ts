@@ -1,3 +1,5 @@
+import { sclient } from "./legacy";
+
 import { SlashCenter } from "cocoa-discord-utils/slash";
 
 import chalk from "chalk";
@@ -6,7 +8,7 @@ import { sLogger } from "s-bot-framework";
 import QuizCog from "./commands/quiz";
 import Salim from "./commands/salim";
 import { style } from "./commands/styles";
-import { sclient } from "./legacy";
+import { GuildIds } from "./environment";
 
 // * Salim Bot: Bot that is running in my group's server 24/7
 
@@ -19,10 +21,7 @@ console.log(
 );
 
 // * Using Slash Commands with Cocoa Discord Utils 🍫
-const salimCenter = new SlashCenter(
-    sclient.client,
-    process.env.GUILD_IDS?.split(",")
-);
+const salimCenter = new SlashCenter(sclient.client, GuildIds);
 salimCenter.addCogs(new Salim(sclient.client), new QuizCog(sclient.client));
 salimCenter.useHelpCommand(style);
 salimCenter.on("error", async (name, err, ctx) => {

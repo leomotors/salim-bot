@@ -117,7 +117,3 @@ backup
 !rmtemp.sh
 
 .vscode
-
-# Yarn
-cache
-install-state.gz
