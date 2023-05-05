@@ -17,7 +17,6 @@ jobs:
       - name: Publish Release
         uses: Leomotors/auto-publish-release@main
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          RELEASE_TITLE: "Salim Bot {VERSION}"
-          VERSION_MUST_INCREASE: true
-          TAG: ${{ github.ref }}
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ github.ref }}
+          title: "Salim Bot"
