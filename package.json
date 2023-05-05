@@ -1,6 +1,6 @@
 {
   "name": "salim-bot",
-  "version": "4.2.1331.1",
+  "version": "4.2.1331.31",
   "description": "This bot is Salim. Whenever you trigger it, It become mad.",
   "type": "module",
   "main": "dist/bot.js",
@@ -42,5 +42,10 @@
     "libsodium-wrappers": "^0.7.11",
     "s-bot-framework": "^1.1.446",
     "uuid": "^9.0.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "@discordjs/voice": "^0.16.0"
+    }
   }
 }

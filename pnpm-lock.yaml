@@ -1,5 +1,8 @@
 lockfileVersion: '6.0'
 
+overrides:
+  '@discordjs/voice': ^0.16.0
+
 dependencies:
   '@discordjs/opus':
     specifier: ^0.9.0
@@ -248,12 +251,12 @@ packages:
     engines: {node: '>=16.9.0'}
     dev: false
 
-  /@discordjs/voice@0.11.0(@discordjs/opus@0.9.0):
-    resolution: {integrity: sha512-6+9cj1dxzBJm7WJ9qyG2XZZQ8rcLl6x2caW0C0OxuTtMLAaEDntpb6lqMTFiBg/rDc4Rd59g1w0gJmib33CuHw==}
+  /@discordjs/voice@0.16.0(@discordjs/opus@0.9.0):
+    resolution: {integrity: sha512-ToGCvHD1cBscuW3p+C7zOF5+L7MJmU4GjdOARfNk9mkHyFFZq4grK+Sxr3QXKbp27DtfDBc9uqD4GUOYgxngfA==}
     engines: {node: '>=16.9.0'}
     dependencies:
       '@types/ws': 8.5.4
-      discord-api-types: 0.36.3
+      discord-api-types: 0.37.41
       prism-media: 1.3.5(@discordjs/opus@0.9.0)
       tslib: 2.5.0
       ws: 8.13.0
@@ -827,10 +830,6 @@ packages:
     dependencies:
       path-type: 4.0.0
     dev: true
-
-  /discord-api-types@0.36.3:
-    resolution: {integrity: sha512-bz/NDyG0KBo/tY14vSkrwQ/n3HKPf87a0WFW/1M9+tXYK+vp5Z5EksawfCWo2zkAc6o7CClc0eff1Pjrqznlwg==}
-    dev: false
 
   /discord-api-types@0.37.41:
     resolution: {integrity: sha512-FaPGBK9hx3zqSRX1x3KQWj+OElAJKmcyyfcdCy+U4AKv+gYuIkRySM7zd1So2sE4gc1DikkghkSBgBgKh6pe4Q==}
@@ -1617,7 +1616,7 @@ packages:
   /s-bot-framework@1.1.446(@discordjs/opus@0.9.0):
     resolution: {integrity: sha512-mdy4ZSNV6ZkxevOJ5eNgQsrX+ysuJgBTRlcAoOrh50i0xOKjLwdZFuqFyJEG6v1l/w1/cRpimttL6/2lB/fnxg==}
     dependencies:
-      '@discordjs/voice': 0.11.0(@discordjs/opus@0.9.0)
+      '@discordjs/voice': 0.16.0(@discordjs/opus@0.9.0)
       chalk: 5.0.1
       discord.js: 14.10.2
       dotenv: 16.0.3
