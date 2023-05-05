@@ -2,6 +2,11 @@
 
 Notable Changes for Salim Bot will be noted here!
 
+## [4.2.1331] - 2023-05-05
+
+- feat: event response election 2023
+- chore: pnpm 8
+
 ## [4.2.1320] - 2022-09-18
 
 - Bump deps, now uses Global Command

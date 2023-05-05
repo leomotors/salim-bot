@@ -111,6 +111,22 @@ sclient.useResponse(
     })
 );
 
+// * Election 2023
+sclient.useResponse(
+    new Response({
+        trigger: { mention: true, keywords: ["เบอร์", "พรรค"] },
+        response: {
+            loader: new ComputedLoader(() => {
+                if (new Date() > new Date("2023-05-14T11:00:00.000Z")) {
+                    return "หมดเขตเลือกตั้งแล้วครับ เหตุใดคุณจึงนอนหลับทับสิทธิ์ครับ ไม่เคารพประชาธิปไตยเลย กระผมผิดหวังในตัวคุณมาก";
+                }
+
+                return "รักลุงตู่ เลือกเบอร์ 31 ครับ 💛💛💛\nhttps://cunny.skillissue.gay/j3k/prayut31.jpg";
+            }),
+        },
+    })
+);
+
 // * Create Response Variable (instead of putting directly to the function)
 // * It is to keep later for getting data of triggered words
 const ชังชาติ = new Response({
