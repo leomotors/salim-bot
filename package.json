@@ -1,6 +1,6 @@
 {
   "name": "salim-bot",
-  "version": "4.2.1331",
+  "version": "4.2.1331.1",
   "description": "This bot is Salim. Whenever you trigger it, It become mad.",
   "type": "module",
   "main": "dist/bot.js",
@@ -23,23 +23,23 @@
   "homepage": "https://github.com/Leomotors/Salim-Bot",
   "devDependencies": {
     "@leomotors/scripts": "^3.1.0",
-    "@trivago/prettier-plugin-sort-imports": "^3.3.0",
-    "@types/node": "^18.7.18",
-    "@types/uuid": "^8.3.4",
-    "@typescript-eslint/eslint-plugin": "^5.37.0",
-    "@typescript-eslint/parser": "^5.37.0",
-    "eslint": "^8.23.1",
-    "prettier": "^2.7.1",
-    "prisma": "^4.3.1",
-    "typescript": "^4.8.3"
+    "@trivago/prettier-plugin-sort-imports": "^4.1.1",
+    "@types/node": "^20.0.0",
+    "@types/uuid": "^9.0.1",
+    "@typescript-eslint/eslint-plugin": "^5.59.2",
+    "@typescript-eslint/parser": "^5.59.2",
+    "eslint": "^8.39.0",
+    "prettier": "^2.8.8",
+    "prisma": "^4.13.0",
+    "typescript": "^5.0.4"
   },
   "dependencies": {
-    "@discordjs/opus": "^0.8.0",
-    "@prisma/client": "4.3.1",
-    "chalk": "^5.0.1",
+    "@discordjs/opus": "^0.9.0",
+    "@prisma/client": "4.13.0",
+    "chalk": "^5.2.0",
     "cocoa-discord-utils": "^2.3.0",
-    "discord.js": "^14.3.0",
-    "libsodium-wrappers": "^0.7.10",
+    "discord.js": "^14.10.2",
+    "libsodium-wrappers": "^0.7.11",
     "s-bot-framework": "^1.1.446",
     "uuid": "^9.0.0"
   }

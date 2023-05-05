@@ -2,6 +2,10 @@
 
 Notable Changes for Salim Bot will be noted here!
 
+## [4.2.1331.1] - 2023-05-05
+
+- chore: bump dependencies to fix music player
+
 ## [4.2.1331] - 2023-05-05
 
 - feat: event response election 2023
