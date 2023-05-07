@@ -2,6 +2,12 @@
 
 Notable Changes for Salim Bot will be noted here!
 
+## [4.2.1400] - 2023-05-07
+
+- format: format code to new style
+- refactor: remove /sql too dangerous
+- feat: add /citizenranking
+
 ## [4.2.1331.31] - 2023-05-05
 
 - chore: bump dependencies to fix music player

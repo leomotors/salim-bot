@@ -274,6 +274,12 @@ export default class Salim extends CogSlashClass {
       take: 5,
     });
 
+    const avg = await prisma.user.aggregate({
+      _avg: {
+        socialCredit: true,
+      },
+    });
+
     const emb = style
       .use(ctx)
       .setTitle("อันดับคะแนนสังคมของประชาชน")
@@ -286,7 +292,9 @@ export default class Salim extends CogSlashClass {
           value: topUsers
             .map(
               (u, i) =>
-                `${i + 1}. <@${u.id}> (${u.socialCredit.toFixed(2)} แต้ม)`
+                `${i + 1}. ท่าน ${u.profile?.username} ${u.socialCredit.toFixed(
+                  2
+                )} แต้ม`
             )
             .join("\n"),
         },
@@ -295,9 +303,17 @@ export default class Salim extends CogSlashClass {
           value: bottomUsers
             .map(
               (u, i) =>
-                `${i + 1}. <@${u.id}> (${u.socialCredit.toFixed(2)} แต้ม)`
+                `${i + 1}. ไอ้เวร ${
+                  u.profile?.username
+                } ${u.socialCredit.toFixed(2)} แต้ม`
             )
             .join("\n"),
+        },
+        {
+          name: "คะแนนสังคมเฉลี่ย",
+          value: avg._avg.socialCredit
+            ? `${avg._avg.socialCredit.toFixed(2)} แต้ม`
+            : "เกิดข้อผิดพลาดร้ายแรง ฝีมือทักษิณแน่นอน",
         }
       );
 
