@@ -1,6 +1,6 @@
 # Salim Discord Bot V4
 
-**Fun Fact**: This is my *most active* project on GitHub
+**Fun Fact**: This is my _most active_ project on GitHub
 
 Salim Bot that is currently running of my friends server and is most active bot because it is auto triggered by พวกชังชาติ
 
@@ -11,9 +11,9 @@ Salim Bot that is currently running of my friends server and is most active bot 
 <img src="./images/salim-bot-0.png" height=150px />
 <img src="./images/salim-bot-2.png" height=150px />
 
-*ขอขอบคุณ[คลังข้อมูล](https://github.com/narze/awesome-salim-quotes)สำหรับคำพูดที่ใช้ในการต่อกรกับพวกชังชาติโดยคุณ narze*
+_ขอขอบคุณ[คลังข้อมูล](https://github.com/narze/awesome-salim-quotes)สำหรับคำพูดที่ใช้ในการต่อกรกับพวกชังชาติโดยคุณ narze_
 
-*และนอกจากจะเป็นฐานข้อมูลแล้ว repository ดังกล่าวก็เป็นแรงบันดาลใจให้ผู้สร้าง สร้างบอทตัวนี้ เพื่อร่วมลุกขึ้นต่อกรกับพวกสามกีบชังชาติ*
+_และนอกจากจะเป็นฐานข้อมูลแล้ว repository ดังกล่าวก็เป็นแรงบันดาลใจให้ผู้สร้าง สร้างบอทตัวนี้ เพื่อร่วมลุกขึ้นต่อกรกับพวกสามกีบชังชาติ_
 
 - สามารถแนะนำสื่อที่มีคุณภาพ เป็นกลาง ให้กับผู้คนในเซิร์ฟเวอร์ได้ 💯
 
@@ -35,24 +35,24 @@ Salim Bot that is currently running of my friends server and is most active bot 
 
 **WARNING: LEGACY CODE**
 
-The Salim Bot *since April 2021* has long history, of course it has big technical debt.
+The Salim Bot _since April 2021_ has long history, of course it has big technical debt.
 
 Each major version (except 3->4) is a rewrite
 
-Currently, since version 3 Salim Bot is implemented by Salim Bot Framework, Available as *s-bot-framework* on [npm](https://www.npmjs.com/package/s-bot-framework)
+Currently, since version 3 Salim Bot is implemented by Salim Bot Framework, Available as _s-bot-framework_ on [npm](https://www.npmjs.com/package/s-bot-framework)
 
 Version 4 includes Cocoa Discord Utils which take care of all Slash Commands
-working with *legacy code* underneath, Just like what Windows 11 is.
+working with _legacy code_ underneath, Just like what Windows 11 is.
 
 ## 🛣️ Previous Version: Legacy Salim Bot
 
-*warning*: Legacy Code
+_warning_: Legacy Code
 
 - 2.2.431 [Last of V2](https://github.com/Leomotors/Salim-Bot/tree/52ec1163deec606aaeed0a6cd6968815edd3f94c) (Before implementing newly written [s-bot-framework](https://github.com/Leomotors/s-bot-framework))
 - 1.15.248 [Last of V1](https://github.com/Leomotors/Salim-Bot/releases/tag/1.15.248) (Before rewritten in Version 2)
 - 1.13.213 [Before TS ~~(ThakSin)~~](https://github.com/Leomotors/Salim-Bot/releases/tag/1.13.213) (JavaScript Version)
 
-*which each major version have some feature dropped, lmao*
+_which each major version have some feature dropped, lmao_
 
 ### Not sponsored by
 
@@ -66,12 +66,12 @@ In case you want to (not recommended)
 
 - Clone or Download Repo
 
-    `git clone https://github.com/Leomotors/Salim-Bot`
+  `git clone https://github.com/Leomotors/Salim-Bot`
 
 - Add required .env parameters
 
 - For the first time, do `pnpm install` to install dependencies
-and `pnpm build` to build the bot.
+  and `pnpm build` to build the bot.
 
 - To start bot, do `pnpm start`
 
@@ -91,7 +91,7 @@ and `pnpm build` to build the bot.
 
 As This Bot is powered by [s-bot-framework](https://github.com/Leomotors/s-bot-framework)
 
-*again, warning*: Legacy Code
+_again, warning_: Legacy Code
 
 Documentation of this bot and full feature list of this bot is mostly explained in that framework's documentation, (if you can understand it)
 

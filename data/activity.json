@@ -1,24 +1,24 @@
 {
-    "activities": [
-        {
-            "type": "Watching",
-            "name": "TOP NEWS"
-        },
-        {
-            "type": "Watching",
-            "name": "ข่าวในพระราชสำนัก"
-        },
-        {
-            "type": "Listening",
-            "name": "เพลงสรรเสริญพระบารมี"
-        },
-        {
-            "type": "Competing",
-            "name": "รายการประกวดร้องเพลงพระราชนิพนธ์"
-        },
-        {
-            "type": "Playing",
-            "name": "Escape FishStop 3D"
-        }
-    ]
+  "activities": [
+    {
+      "type": "Watching",
+      "name": "TOP NEWS"
+    },
+    {
+      "type": "Watching",
+      "name": "ข่าวในพระราชสำนัก"
+    },
+    {
+      "type": "Listening",
+      "name": "เพลงสรรเสริญพระบารมี"
+    },
+    {
+      "type": "Competing",
+      "name": "รายการประกวดร้องเพลงพระราชนิพนธ์"
+    },
+    {
+      "type": "Playing",
+      "name": "Escape FishStop 3D"
+    }
+  ]
 }

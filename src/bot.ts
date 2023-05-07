@@ -15,9 +15,9 @@ import { GuildIds } from "./environment";
 const setupStart = performance.now();
 
 console.log(
-    chalk.cyan("Starting Salim Bot ") +
-        chalk.magenta(process.env.npm_package_version) +
-        "✨✨"
+  chalk.cyan("Starting Salim Bot ") +
+    chalk.magenta(process.env.npm_package_version) +
+    "✨✨"
 );
 
 // * Using Slash Commands with Cocoa Discord Utils 🍫
@@ -25,25 +25,25 @@ const salimCenter = new SlashCenter(sclient.client, GuildIds);
 salimCenter.addCogs(new Salim(sclient.client), new QuizCog(sclient.client));
 salimCenter.useHelpCommand(style);
 salimCenter.on("error", async (name, err, ctx) => {
-    await ctx.channel?.send(
-        `คำสั่ง ${name} ทำงานผิดพลาด ดิฉันคิดว่าต้องเป็นฝีมือของ${
-            Math.random() >= 0.5 ? "ทักษิณ" : "ไอทอน"
-        }แน่เลย\n${err}`
-    );
+  await ctx.channel?.send(
+    `คำสั่ง ${name} ทำงานผิดพลาด ดิฉันคิดว่าต้องเป็นฝีมือของ${
+      Math.random() >= 0.5 ? "ทักษิณ" : "ไอทอน"
+    }แน่เลย\n${err}`
+  );
 });
 salimCenter.on("interaction", (name, ctx) => {
-    sLogger.log(`[Slash Command ${name}] Invoked by ${ctx.user.tag}`);
+  sLogger.log(`[Slash Command ${name}] Invoked by ${ctx.user.tag}`);
 });
 
 sclient.client.on("ready", async () => {
-    await salimCenter.validateCommands();
-    await salimCenter.syncCommands(true);
+  await salimCenter.validateCommands();
+  await salimCenter.syncCommands(true);
 });
 
 // * Done! That's it required for this bot!
 sLogger.log(
-    `✨✨ Synchronous Setup Done in ${(performance.now() - setupStart).toFixed(
-        3
-    )} ms`,
-    "SUCCESS"
+  `✨✨ Synchronous Setup Done in ${(performance.now() - setupStart).toFixed(
+    3
+  )} ms`,
+  "SUCCESS"
 );
