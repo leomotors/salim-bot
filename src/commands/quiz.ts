@@ -197,7 +197,7 @@ export default class QuizCog extends CogSlashClass {
     this.client = client;
 
     this.client.on("interactionCreate", (interaction) => {
-      if (!interaction.isSelectMenu()) return;
+      if (!interaction.isStringSelectMenu()) return;
 
       this.quizManager[interaction.guildId!]
         ?.handleInteraction(interaction)
