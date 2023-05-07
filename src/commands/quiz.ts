@@ -9,8 +9,8 @@ import {
 import {
   ActionRowBuilder,
   Client,
-  SelectMenuBuilder,
-  SelectMenuInteraction,
+  StringSelectMenuBuilder,
+  StringSelectMenuInteraction,
 } from "discord.js";
 
 import * as fs from "node:fs";
@@ -53,7 +53,9 @@ class QuizManager {
   ongoing = true;
 
   /** Make Index for Quiz, **WARNING**: This method mutates the class */
-  makeEmbed(index: number): [CocoaEmbed, ActionRowBuilder<SelectMenuBuilder>] {
+  makeEmbed(
+    index: number
+  ): [CocoaEmbed, ActionRowBuilder<StringSelectMenuBuilder>] {
     this.currentIndex = index;
     const questions = this.quiz.questions;
     const question = questions[index]!;
@@ -68,7 +70,7 @@ class QuizManager {
       question.question
     }**\n\n${choices.map((c) => `- ${c}`).join("\n")}\n`;
 
-    const select = new SelectMenuBuilder()
+    const select = new StringSelectMenuBuilder()
       .setCustomId(this.quizId)
       .setPlaceholder("คำตอบของคุณ")
       .setMinValues(1)
@@ -80,7 +82,9 @@ class QuizManager {
         }))
       );
 
-    const row = new ActionRowBuilder<SelectMenuBuilder>().addComponents(select);
+    const row = new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(
+      select
+    );
 
     return [
       quiz_style
@@ -91,7 +95,7 @@ class QuizManager {
     ];
   }
 
-  async handleInteraction(ctx: SelectMenuInteraction) {
+  async handleInteraction(ctx: StringSelectMenuInteraction) {
     if (ctx.customId != this.quizId) {
       await ctx
         .editReply({
