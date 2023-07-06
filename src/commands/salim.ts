@@ -50,7 +50,7 @@ export default class Salim extends CogSlashClass {
   @SlashCommand("รับสถานะของบอทสลิ่ม")
   async status(
     ctx: SlashCommand.Context,
-    @Param.Ephemeral ephemeral: Param.Ephemeral.Type
+    @Param.Ephemeral ephemeral: Param.Ephemeral.Type,
   ) {
     const emb = style
       .use(ctx)
@@ -58,7 +58,7 @@ export default class Salim extends CogSlashClass {
       .setDescription(
         `บอทสลิ่มเวอร์ชั่น ${process.env.npm_package_version}
 สลิ่มบอทเฟรมเวิร์กเวอร์ชั่น ${FrameWorkVersion}
-โกโก้ดิสคอร์ดยูทิลลิตี้เวอร์ชั่น ${CocoaVersion}`
+โกโก้ดิสคอร์ดยูทิลลิตี้เวอร์ชั่น ${CocoaVersion}`,
       )
       .addFields(await getStatusFields(ctx));
 
@@ -72,7 +72,7 @@ export default class Salim extends CogSlashClass {
   async train(
     ctx: SlashCommand.Context,
     @Param.String("ประโยค คุ ณ ภ า พ ที่ต้องการนำเข้าคลัง")
-    quote: Param.String.Type
+    quote: Param.String.Type,
   ) {
     await ctx.deferReply();
 
@@ -88,7 +88,7 @@ export default class Salim extends CogSlashClass {
 
     await fs.writeFile(
       "data/morequotes.json",
-      JSON.stringify(morequotes, null, 4)
+      JSON.stringify(morequotes, null, 4),
     );
 
     await ctx.followUp("กระผมน้อนสลิ่มจะจดจำแล้วนำไปใช้ครับ");
@@ -101,7 +101,7 @@ export default class Salim extends CogSlashClass {
   async getquote(
     ctx: SlashCommand.Context,
     @Param.Integer("ดัชนีของประโยคคุณภาพที่ต้องการ")
-    index: Param.Integer.Type
+    index: Param.Integer.Type,
   ) {
     const quote = combinedQuotes.getData()[index - 1];
 
@@ -121,10 +121,10 @@ export default class Salim extends CogSlashClass {
     ctx: SlashCommand.Context,
     @Param.String("คำที่ต้องการค้นหา")
     query: Param.String.Type,
-    @Param.Ephemeral ephemeral: Param.Ephemeral.Type
+    @Param.Ephemeral ephemeral: Param.Ephemeral.Type,
   ) {
     const results = Object.entries(combinedQuotes.getData()).filter((q) =>
-      trim(q[1]).includes(trim(query))
+      trim(q[1]).includes(trim(query)),
     );
 
     let description = "";
@@ -135,7 +135,7 @@ export default class Salim extends CogSlashClass {
       progressed++;
       description += `💭 ${lim(q).replaceAll(
         "*",
-        "\\*"
+        "\\*",
       )} **[${combinedQuotes.getRefIndex(+i)}]**\n`;
       if (description.length > limit) break;
     }
@@ -201,7 +201,7 @@ export default class Salim extends CogSlashClass {
     @Param.User("บุคคลที่ต้องการให้แสดงข้อมูล ปล่อยว่างเพื่อแสดงของตัวคุณเอง", {
       required: false,
     })
-    user: Param.User.Nullable
+    user: Param.User.Nullable,
   ) {
     user ??= ctx.user;
 
@@ -236,7 +236,7 @@ export default class Salim extends CogSlashClass {
         {
           name: "สถานะประชาชน",
           value: this.socialCredit(puser.socialCredit),
-        }
+        },
       );
 
     await ctx.reply({ embeds: [emb] });
@@ -284,7 +284,7 @@ export default class Salim extends CogSlashClass {
       .use(ctx)
       .setTitle("อันดับคะแนนสังคมของประชาชน")
       .setDescription(
-        "ตารางด้านล่างจะแสดงอันดับของประชาชนพลเมืองดี และพวกหนักแผ่นดิน ท่านอาจจะเห็นบุคคลที่อยู่เซิร์ฟเวอร์อื่น ถึงแม้คุณจะไม่รู้จักพวกเขา แต่หากเขาเป็นพลเมืองดี เขาควรได้รับการยกย่อง แต่หากเขาเป็นพวกหนัแผ่นดิน เขาก็ควรได้รับการประนาม"
+        "ตารางด้านล่างจะแสดงอันดับของประชาชนพลเมืองดี และพวกหนักแผ่นดิน ท่านอาจจะเห็นบุคคลที่อยู่เซิร์ฟเวอร์อื่น ถึงแม้คุณจะไม่รู้จักพวกเขา แต่หากเขาเป็นพลเมืองดี เขาควรได้รับการยกย่อง แต่หากเขาเป็นพวกหนัแผ่นดิน เขาก็ควรได้รับการประนาม",
       )
       .addFields(
         {
@@ -293,8 +293,8 @@ export default class Salim extends CogSlashClass {
             .map(
               (u, i) =>
                 `${i + 1}. ท่าน ${u.profile?.username} ${u.socialCredit.toFixed(
-                  2
-                )} แต้ม`
+                  2,
+                )} แต้ม`,
             )
             .join("\n"),
         },
@@ -303,9 +303,8 @@ export default class Salim extends CogSlashClass {
           value: bottomUsers
             .map(
               (u, i) =>
-                `${i + 1}. ไอ้เวร ${
-                  u.profile?.username
-                } ${u.socialCredit.toFixed(2)} แต้ม`
+                `${i + 1}. ไอ้เวร ${u.profile
+                  ?.username} ${u.socialCredit.toFixed(2)} แต้ม`,
             )
             .join("\n"),
         },
@@ -314,7 +313,7 @@ export default class Salim extends CogSlashClass {
           value: avg._avg.socialCredit
             ? `${avg._avg.socialCredit.toFixed(2)} แต้ม`
             : "เกิดข้อผิดพลาดร้ายแรง ฝีมือทักษิณแน่นอน",
-        }
+        },
       );
 
     await ctx.reply({ embeds: [emb] });
@@ -334,8 +333,8 @@ export default class Salim extends CogSlashClass {
     if (Date.now() - cooldown < Salim._16hours) {
       await ctx.reply(
         `ขอบคุณสำหรับความสนใจ แต่คุณต้องรอจนถึง ${this.formatTime(
-          cooldown + Salim._16hours
-        )} ถึงจะเขียนเรียงความอีกครั้งได้`
+          cooldown + Salim._16hours,
+        )} ถึงจะเขียนเรียงความอีกครั้งได้`,
       );
       return;
     }
@@ -352,7 +351,7 @@ export default class Salim extends CogSlashClass {
 
     const row =
       new ActionRowBuilder<ModalActionRowComponentBuilder>().addComponents(
-        form
+        form,
       );
 
     modal.addComponents(row);

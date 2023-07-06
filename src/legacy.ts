@@ -34,18 +34,18 @@ export const sclient = new SBotClient();
 const keywords = new DataLoader("data/keywords.json", "ชังชาติ");
 export const localquotes = new DataLoader(
   "data/morequotes.json",
-  "วาทกรรมสลิ่ม"
+  "วาทกรรมสลิ่ม",
 );
 const awesome_salim_quotes = new OnlineLoader(
   "https://watasalim.vercel.app/api/quotes",
   "quotes",
-  (t) => t.body
+  (t) => t.body,
 );
 awesome_salim_quotes.setAutoRefresh(24 * 60);
 const facebook = new DataLoader(
   "data/facebook.json",
   "คนรักสถาบัน",
-  (t) => `ดิฉันแนะนำให้คุณไปติดตาม ${t.name} นะ เพื่อคุณจะได้ตาสว่าง ${t.url}`
+  (t) => `ดิฉันแนะนำให้คุณไปติดตาม ${t.name} นะ เพื่อคุณจะได้ตาสว่าง ${t.url}`,
 );
 
 // * Combined multiple data into One Category
@@ -69,12 +69,12 @@ sclient.useResponse(
     response: {
       loader: new ComputedLoader(
         () =>
-          `ส วั ส ดี ค รั บ ท่านสมาชิกชมรมคนรักสถาบันทุกท่าน กระผมสลิ่มบอทเวอร์ชั่น ${process.env.npm_package_version}\nขับเคลื่อนโดยสลิ่มบอทเฟรมเวิร์คเวอร์ชั่น ${FrameWorkVersion} และโกโก้ดิสคอร์ดยูทิลิตี้เวอร์ชั่น ${CocoaVersion}\nท่านสามารถช่วยร่วมแรงร่วมใจในการพัฒนาผมได้ที่ https://github.com/Leomotors/Salim-Bot`
+          `ส วั ส ดี ค รั บ ท่านสมาชิกชมรมคนรักสถาบันทุกท่าน กระผมสลิ่มบอทเวอร์ชั่น ${process.env.npm_package_version}\nขับเคลื่อนโดยสลิ่มบอทเฟรมเวิร์คเวอร์ชั่น ${FrameWorkVersion} และโกโก้ดิสคอร์ดยูทิลิตี้เวอร์ชั่น ${CocoaVersion}\nท่านสามารถช่วยร่วมแรงร่วมใจในการพัฒนาผมได้ที่ https://github.com/Leomotors/Salim-Bot`,
       ),
       reply: true,
       audio: true,
     },
-  })
+  }),
 );
 
 sclient.useResponse(
@@ -93,7 +93,7 @@ sclient.useResponse(
       reply: true,
       audio: true,
     },
-  })
+  }),
 );
 
 // * Facebook Recommendation Feature
@@ -108,7 +108,7 @@ sclient.useResponse(
     after: async (msg) => {
       await updateUserCredit(msg, Actions.AskFacebook);
     },
-  })
+  }),
 );
 
 // * Election 2023
@@ -124,7 +124,7 @@ sclient.useResponse(
         return "รักลุงตู่ เลือกเบอร์ 31 ครับ 💛💛💛\nhttps://cunny.skillissue.gay/j3k/prayut31.jpg";
       }),
     },
-  })
+  }),
 );
 
 // * Create Response Variable (instead of putting directly to the function)
@@ -139,7 +139,7 @@ const ชังชาติ = new Response({
   after: async (msg) => {
     await updateUserCredit(
       msg,
-      Actions.SalimTriggerBase - msg.content.length * Actions.SalimTriggerVar
+      Actions.SalimTriggerBase - msg.content.length * Actions.SalimTriggerVar,
     );
   },
 });
@@ -152,12 +152,12 @@ sclient.useResponse(
     response: {
       loader: new ComputedLoader(
         () =>
-          `พวกคุณผิดที่พูดคำว่า ${ชังชาติ.triggered} ถือเป็นการคุกคามสถาบันอย่างยิ่ง`
+          `พวกคุณผิดที่พูดคำว่า ${ชังชาติ.triggered} ถือเป็นการคุกคามสถาบันอย่างยิ่ง`,
       ),
       reply: true,
       audio: true,
     },
-  })
+  }),
 );
 
 // * Bot Activity
@@ -246,7 +246,7 @@ sclient.useDJ(
     afterRequest: async (msg) => {
       await updateUserCredit(msg, Actions.ListenSong);
     },
-  }
+  },
 );
 
 // * Console, used to logout properly
@@ -260,7 +260,7 @@ ctrlConsole.addLoader(
   facebook,
   activityLoader,
   easterEggSong,
-  รักชาติSong
+  รักชาติSong,
 );
 
 // * And Add it to Client, as Client is main Class running this Bot!
@@ -287,7 +287,7 @@ async function afterSetup() {
   if (!warned) {
     sLogger.log(
       "Good! No local quotes duplicate of awesome salim quotes!",
-      "SUCCESS"
+      "SUCCESS",
     );
   }
 }

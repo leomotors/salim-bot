@@ -54,14 +54,14 @@ class QuizManager {
 
   /** Make Index for Quiz, **WARNING**: This method mutates the class */
   makeEmbed(
-    index: number
+    index: number,
   ): [CocoaEmbed, ActionRowBuilder<StringSelectMenuBuilder>] {
     this.currentIndex = index;
     const questions = this.quiz.questions;
     const question = questions[index]!;
 
     const choices = [question.correct, ...question.wrong].sort(
-      (_, __) => Math.random() - 0.5
+      (_, __) => Math.random() - 0.5,
     );
 
     this.currentChoiceOrder = choices;
@@ -79,11 +79,11 @@ class QuizManager {
         ...choices.map((choice, index) => ({
           label: trim(choice, 100),
           value: `${index}`,
-        }))
+        })),
       );
 
     const row = new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(
-      select
+      select,
     );
 
     return [
@@ -126,7 +126,7 @@ class QuizManager {
 
       await updateUserCredit(
         this.originalContext,
-        (this.score / this.quiz.questions.length - 0.6) * Actions.QuizVar
+        (this.score / this.quiz.questions.length - 0.6) * Actions.QuizVar,
       );
 
       await ctx.update({ embeds: [emb.toJSON()], components: [] });
@@ -178,7 +178,7 @@ class QuizManager {
 
 function getChoices() {
   const obj = JSON.parse(
-    fs.readFileSync("./data/quiz.index.json").toString()
+    fs.readFileSync("./data/quiz.index.json").toString(),
   ) as string[];
 
   return obj.map((o, index) => ({ name: o, value: index + "" }));
@@ -191,7 +191,7 @@ export default class QuizCog extends CogSlashClass {
   constructor(client: Client) {
     super(
       "Salim Quiz",
-      "น้อนสลิ่มต้องการทดสอบความรู้คุณเกี่ยวกับประวัติศาสตร์ชาติไทย"
+      "น้อนสลิ่มต้องการทดสอบความรู้คุณเกี่ยวกับประวัติศาสตร์ชาติไทย",
     );
 
     this.client = client;
@@ -212,7 +212,7 @@ export default class QuizCog extends CogSlashClass {
     @Param.String("แบบทดสอบที่คุณต้องการทำ")
     quiz_name: Param.String.Type,
     @Param.Boolean("Force creating new quiz", { required: false })
-    force: Param.Boolean.Nullable
+    force: Param.Boolean.Nullable,
   ) {
     const quiz_id = +quiz_name;
 

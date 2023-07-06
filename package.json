@@ -5,6 +5,7 @@
   "type": "module",
   "main": "dist/bot.js",
   "private": true,
+  "packageManager": "pnpm@8.6.6",
   "scripts": {
     "build": "tsc",
     "start": "node --es-module-specifier-resolution=node dist/bot.js",
@@ -22,30 +23,30 @@
   },
   "homepage": "https://github.com/Leomotors/Salim-Bot",
   "devDependencies": {
-    "@leomotors/scripts": "^3.1.0",
-    "@trivago/prettier-plugin-sort-imports": "^4.1.1",
-    "@types/node": "^20.1.0",
-    "@types/uuid": "^9.0.1",
-    "@typescript-eslint/eslint-plugin": "^5.59.2",
-    "@typescript-eslint/parser": "^5.59.2",
-    "eslint": "^8.40.0",
-    "prettier": "^2.8.8",
-    "prisma": "^4.13.0",
-    "typescript": "^5.0.4"
+    "@leomotors/scripts": "3.1.0",
+    "@trivago/prettier-plugin-sort-imports": "4.1.1",
+    "@types/node": "18.16.19",
+    "@types/uuid": "9.0.2",
+    "@typescript-eslint/eslint-plugin": "5.61.0",
+    "@typescript-eslint/parser": "5.61.0",
+    "eslint": "8.44.0",
+    "prettier": "3.0.0",
+    "prisma": "4.16.2",
+    "typescript": "5.1.6"
   },
   "dependencies": {
-    "@discordjs/opus": "^0.9.0",
-    "@prisma/client": "4.13.0",
-    "chalk": "^5.2.0",
-    "cocoa-discord-utils": "^2.3.0",
-    "discord.js": "^14.11.0",
-    "libsodium-wrappers": "^0.7.11",
-    "s-bot-framework": "^1.1.446",
-    "uuid": "^9.0.0"
+    "@discordjs/opus": "0.9.0",
+    "@prisma/client": "4.16.2",
+    "chalk": "5.3.0",
+    "cocoa-discord-utils": "2.3.0",
+    "discord.js": "14.11.0",
+    "libsodium-wrappers": "0.7.11",
+    "s-bot-framework": "1.1.446",
+    "uuid": "9.0.0"
   },
   "pnpm": {
     "overrides": {
-      "@discordjs/voice": "^0.16.0"
+      "@discordjs/voice": "0.16.0"
     }
   }
 }

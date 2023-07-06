@@ -17,7 +17,7 @@ const setupStart = performance.now();
 console.log(
   chalk.cyan("Starting Salim Bot ") +
     chalk.magenta(process.env.npm_package_version) +
-    "✨✨"
+    "✨✨",
 );
 
 // * Using Slash Commands with Cocoa Discord Utils 🍫
@@ -28,7 +28,7 @@ salimCenter.on("error", async (name, err, ctx) => {
   await ctx.channel?.send(
     `คำสั่ง ${name} ทำงานผิดพลาด ดิฉันคิดว่าต้องเป็นฝีมือของ${
       Math.random() >= 0.5 ? "ทักษิณ" : "ไอทอน"
-    }แน่เลย\n${err}`
+    }แน่เลย\n${err}`,
   );
 });
 salimCenter.on("interaction", (name, ctx) => {
@@ -43,7 +43,7 @@ sclient.client.on("ready", async () => {
 // * Done! That's it required for this bot!
 sLogger.log(
   `✨✨ Synchronous Setup Done in ${(performance.now() - setupStart).toFixed(
-    3
+    3,
   )} ms`,
-  "SUCCESS"
+  "SUCCESS",
 );
