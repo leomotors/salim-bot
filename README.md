@@ -44,6 +44,16 @@ Currently, since version 3 Salim Bot is implemented by Salim Bot Framework, Avai
 Version 4 includes Cocoa Discord Utils which take care of all Slash Commands
 working with _legacy code_ underneath, Just like what Windows 11 is.
 
+## [ใหม่!] ✨✨ Docker Image
+
+คุณเองก็สามารถรันบอทสลิ่มได้ง่าย ๆ เพียงแค่รันคำสั่งนี้
+
+`docker pull ghcr.io/leomotors/salim-bot:latest`
+
+ตัวแปรสิ่งแวดล้อมที่จำเป็นต้องใช้ได้แก่ DISCORD_TOKEN และ DATABASE_URL
+
+อย่าลืมเมล็ดฐานข้อมูลก่อนใช้งาน
+
 ## 🛣️ Previous Version: Legacy Salim Bot
 
 _warning_: Legacy Code
