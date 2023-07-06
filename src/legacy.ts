@@ -19,6 +19,7 @@ import {
 
 import { Actions } from "./actions";
 import { updateUserCredit } from "./prisma";
+import { prismaQuote } from "./prismaQuote";
 
 // ! WARNING: LEGACY CODE
 // ! This file contains stuff related to s-bot-framework (Legacy part of Salim Bot)
@@ -32,10 +33,7 @@ export const sclient = new SBotClient();
 
 // * Import data from files
 const keywords = new DataLoader("data/keywords.json", "ชังชาติ");
-export const localquotes = new DataLoader(
-  "data/morequotes.json",
-  "วาทกรรมสลิ่ม",
-);
+
 const awesome_salim_quotes = new OnlineLoader(
   "https://watasalim.vercel.app/api/quotes",
   "quotes",
@@ -51,8 +49,8 @@ const facebook = new DataLoader(
 // * Combined multiple data into One Category
 export const combinedQuotes = new MultiLoader([
   {
-    loader: localquotes,
-    label: "Local Quotes",
+    loader: prismaQuote,
+    label: "Prisma Quotes",
   },
   {
     loader: awesome_salim_quotes,
@@ -82,7 +80,7 @@ sclient.useResponse(
     trigger: { mention: true, keywords: ["กี่คำ"] },
     response: {
       loader: new ComputedLoader(() => {
-        const locallen = localquotes.getData().length;
+        const locallen = prismaQuote.getData().length;
         const asqlen = awesome_salim_quotes.getData().length;
         return `มันก็จะมีอยู่ ${
           keywords.getData().length
@@ -255,7 +253,7 @@ const ctrlConsole = new Console(sclient);
 // * Add Loaders to Console to be able to reload while bot is running
 ctrlConsole.addLoader(
   keywords,
-  localquotes,
+  prismaQuote,
   awesome_salim_quotes,
   facebook,
   activityLoader,
@@ -273,7 +271,7 @@ async function afterSetup() {
 
   const asq = awesome_salim_quotes.getData();
 
-  const local = localquotes.getData();
+  const local = prismaQuote.getData();
 
   let warned = false;
 

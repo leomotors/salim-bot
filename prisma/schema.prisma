@@ -50,3 +50,10 @@ model Essay {
 
   @@map("essay")
 }
+
+model Quote {
+  id      Int    @id @default(autoincrement())
+  content String
+
+  @@map("quote")
+}

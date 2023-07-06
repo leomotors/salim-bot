@@ -2,6 +2,13 @@
 
 Notable Changes for Salim Bot will be noted here!
 
+## [4.2.1500] - 2023-07-06
+
+- chore: deps
+- feat: add AsyncLoader and use it for Prisma Quote
+- refactor: local quote now in prisma db
+- feat: deploy with docker
+
 ## [4.2.1400] - 2023-05-07
 
 - format: format code to new style

@@ -17,12 +17,12 @@ import {
   TextInputStyle,
 } from "discord.js";
 
-import fs from "fs/promises";
 import { FrameWorkVersion } from "s-bot-framework";
 
 import { Actions } from "../actions";
-import { combinedQuotes, localquotes, sclient } from "../legacy";
+import { combinedQuotes, sclient } from "../legacy";
 import { getUser3rdParty, prisma, updateUserCredit } from "../prisma";
+import { prismaQuote } from "../prismaQuote";
 
 import { style } from "./styles";
 
@@ -76,25 +76,22 @@ export default class Salim extends CogSlashClass {
   ) {
     await ctx.deferReply();
 
-    const morequotes = { วาทกรรมสลิ่ม: localquotes.getData() };
-
     if (combinedQuotes.getData().includes(quote)) {
       await ctx.followUp("ซ้ำครับ หัดใช้สมองบ้างสิครับ ทำตัวเป็นสามกีบไปได้");
       await updateUserCredit(ctx, Actions.DuplicateTrain);
       return;
     }
 
-    morequotes.วาทกรรมสลิ่ม.push(quote);
-
-    await fs.writeFile(
-      "data/morequotes.json",
-      JSON.stringify(morequotes, null, 4),
-    );
+    await prisma.quote.create({
+      data: {
+        content: quote,
+      },
+    });
 
     await ctx.followUp("กระผมน้อนสลิ่มจะจดจำแล้วนำไปใช้ครับ");
     await updateUserCredit(ctx, Actions.TrainQuote);
 
-    await localquotes.loadData();
+    await prismaQuote.reload();
   }
 
   @SlashCommand("รับประโยคคุณภาพจากดัชนี")
