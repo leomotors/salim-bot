@@ -21,14 +21,13 @@ import {
 } from "@discordjs/voice";
 
 import chalk from "chalk";
-import { getAllAudioUrls } from "google-tts-api";
-import { IncomingMessage } from "http";
-import https from "https";
 import ytdl from "ytdl-core";
 
 import { Context, getVoiceChannel } from "../client/index.js";
 import { sLogger } from "../logger/index.js";
 import { shorten } from "../utils/string.js";
+
+import { createTTSResource } from "./tts.js";
 
 export enum VoiceValidateResult {
   OK = 0,
@@ -136,26 +135,9 @@ export class VoiceControl {
       `[TTS] Started Speaking ${shorten(content, 30)} to ${this.channelName}`,
     );
 
-    const results = getAllAudioUrls(content, {
-      lang: "th",
-      slow: false,
-    });
-
     const initiated = !!this.speakQueue.length;
 
-    this.speakQueue = this.speakQueue.concat(
-      await Promise.all(
-        results.map(async (url) =>
-          createAudioResource(
-            await new Promise<IncomingMessage>((res, _) => {
-              https.get(url.url, (stream) => {
-                res(stream);
-              });
-            }),
-          ),
-        ),
-      ),
-    );
+    this.speakQueue = this.speakQueue.concat(await createTTSResource(content));
 
     if (!initiated) this.player.play(this.speakQueue.shift()!);
 

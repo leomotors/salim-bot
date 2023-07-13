@@ -1,3 +1,5 @@
+import "dotenv/config";
+
 import { sclient } from "./legacy.js";
 
 import { SlashCenter } from "cocoa-discord-utils/slash";

@@ -2,6 +2,11 @@
 
 Notable Changes for Salim Bot will be noted here!
 
+## [4.4.1600] - 2023-07-14
+
+- refactor: move s-bot-framework to this repo
+- feat: Niwat TTS
+
 ## [4.2.1500] - 2023-07-06
 
 - chore: deps

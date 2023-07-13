@@ -6,8 +6,8 @@ module.exports = {
   semi: true,
   printWidth: 80,
   importOrder: [
-    "^[.]/legacy",
     "^dotenv",
+    "^[.]/legacy",
     "^cocoa-discord-utils",
     "^discord.js",
     "^@discordjs",
