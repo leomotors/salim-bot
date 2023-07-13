@@ -5,7 +5,9 @@ Notable Changes for Salim Bot will be noted here!
 ## [4.4.1600] - 2023-07-14
 
 - refactor: move s-bot-framework to this repo
+- refactor: Module Resolution `nodenext` (no more specifier flag)
 - feat: Niwat TTS
+- chore: update readme to reduce ความ病
 
 ## [4.2.1500] - 2023-07-06
 
