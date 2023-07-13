@@ -283,24 +283,27 @@ export default class Salim extends CogSlashClass {
       .addFields(
         {
           name: "อันดับประชาชนดีเด่น",
-          value: topUsers
-            .map(
-              (u, i) =>
-                `${i + 1}. ท่าน ${u.profile?.username} ${u.socialCredit.toFixed(
-                  2,
-                )} แต้ม`,
-            )
-            .join("\n"),
+          value:
+            topUsers
+              .map(
+                (u, i) =>
+                  `${i + 1}. ท่าน ${u.profile
+                    ?.username} ${u.socialCredit.toFixed(2)} แต้ม`,
+              )
+              .join("\n") ||
+            "ไม่พบประชาชนดีเด่น หยุดชังชาติแล้วทำความดีกันหน่อย",
         },
         {
           name: "อันดับประชาชนหนักแผ่นดิน",
-          value: bottomUsers
-            .map(
-              (u, i) =>
-                `${i + 1}. ไอ้เวร ${u.profile
-                  ?.username} ${u.socialCredit.toFixed(2)} แต้ม`,
-            )
-            .join("\n"),
+          value:
+            bottomUsers
+              .map(
+                (u, i) =>
+                  `${i + 1}. ไอ้เวร ${u.profile
+                    ?.username} ${u.socialCredit.toFixed(2)} แต้ม`,
+              )
+              .join("\n") ||
+            "ไม่พบประชาชนที่หนักแผ่นดิน ถือเป็นเรื่องดีอย่างยิ่ง",
         },
         {
           name: "คะแนนสังคมเฉลี่ย",
