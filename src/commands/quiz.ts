@@ -16,10 +16,10 @@ import {
 import * as fs from "node:fs";
 import { v4 as uuid } from "uuid";
 
-import { Actions } from "../actions";
-import { updateUserCredit } from "../prisma";
+import { Actions } from "../actions.js";
+import { updateUserCredit } from "../prisma.js";
 
-import { quiz_style } from "./styles";
+import { quiz_style } from "./styles.js";
 
 interface Question {
   question: string;

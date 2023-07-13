@@ -1,6 +1,5 @@
-import { ComputedLoader, sLogger } from "s-bot-framework/dist";
-
-import { prisma } from "./prisma";
+import { ComputedLoader, sLogger } from "./lib/index.js";
+import { prisma } from "./prisma.js";
 
 class AsyncLoader extends ComputedLoader {
   private asyncLoadFunction: () => Promise<string[]>;

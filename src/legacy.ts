@@ -2,12 +2,12 @@ import { CocoaVersion } from "cocoa-discord-utils/meta";
 
 import { ActivityType } from "discord.js";
 
+import { Actions } from "./actions.js";
 import {
   ActivityLoader,
   Console,
   ComputedLoader,
   DataLoader,
-  FrameWorkVersion,
   MultiLoader,
   OnlineLoader,
   SBotClient,
@@ -15,11 +15,9 @@ import {
   Response,
   SongAppearance,
   sLogger,
-} from "s-bot-framework";
-
-import { Actions } from "./actions";
-import { updateUserCredit } from "./prisma";
-import { prismaQuote } from "./prismaQuote";
+} from "./lib/index.js";
+import { updateUserCredit } from "./prisma.js";
+import { prismaQuote } from "./prismaQuote.js";
 
 // ! WARNING: LEGACY CODE
 // ! This file contains stuff related to s-bot-framework (Legacy part of Salim Bot)
@@ -67,7 +65,7 @@ sclient.useResponse(
     response: {
       loader: new ComputedLoader(
         () =>
-          `ส วั ส ดี ค รั บ ท่านสมาชิกชมรมคนรักสถาบันทุกท่าน กระผมสลิ่มบอทเวอร์ชั่น ${process.env.npm_package_version}\nขับเคลื่อนโดยสลิ่มบอทเฟรมเวิร์คเวอร์ชั่น ${FrameWorkVersion} และโกโก้ดิสคอร์ดยูทิลิตี้เวอร์ชั่น ${CocoaVersion}\nท่านสามารถช่วยร่วมแรงร่วมใจในการพัฒนาผมได้ที่ https://github.com/Leomotors/Salim-Bot`,
+          `ส วั ส ดี ค รั บ ท่านสมาชิกชมรมคนรักสถาบันทุกท่าน กระผมสลิ่มบอทเวอร์ชั่น ${process.env.npm_package_version}\nขับเคลื่อนโดยโกโก้ดิสคอร์ดยูทิลิตี้เวอร์ชั่น ${CocoaVersion}\nท่านสามารถช่วยร่วมแรงร่วมใจในการพัฒนาผมได้ที่ https://github.com/Leomotors/Salim-Bot`,
       ),
       reply: true,
       audio: true,

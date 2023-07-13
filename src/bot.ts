@@ -1,14 +1,14 @@
-import { sclient } from "./legacy";
+import { sclient } from "./legacy.js";
 
 import { SlashCenter } from "cocoa-discord-utils/slash";
 
 import chalk from "chalk";
-import { sLogger } from "s-bot-framework";
 
-import QuizCog from "./commands/quiz";
-import Salim from "./commands/salim";
-import { style } from "./commands/styles";
-import { GuildIds } from "./environment";
+import QuizCog from "./commands/quiz.js";
+import Salim from "./commands/salim.js";
+import { style } from "./commands/styles.js";
+import { GuildIds } from "./environment.js";
+import { sLogger } from "./lib/index.js";
 
 // * Salim Bot: Bot that is running in my group's server 24/7
 

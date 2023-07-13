@@ -17,14 +17,12 @@ import {
   TextInputStyle,
 } from "discord.js";
 
-import { FrameWorkVersion } from "s-bot-framework";
+import { Actions } from "../actions.js";
+import { combinedQuotes, sclient } from "../legacy.js";
+import { getUser3rdParty, prisma, updateUserCredit } from "../prisma.js";
+import { prismaQuote } from "../prismaQuote.js";
 
-import { Actions } from "../actions";
-import { combinedQuotes, sclient } from "../legacy";
-import { getUser3rdParty, prisma, updateUserCredit } from "../prisma";
-import { prismaQuote } from "../prismaQuote";
-
-import { style } from "./styles";
+import { style } from "./styles.js";
 
 function trim(str: string) {
   return str.replace(/\s/g, "").toLowerCase();
@@ -57,7 +55,6 @@ export default class Salim extends CogSlashClass {
       .setTitle("สถานะของบอทสลิ่ม")
       .setDescription(
         `บอทสลิ่มเวอร์ชั่น ${process.env.npm_package_version}
-สลิ่มบอทเฟรมเวิร์กเวอร์ชั่น ${FrameWorkVersion}
 โกโก้ดิสคอร์ดยูทิลลิตี้เวอร์ชั่น ${CocoaVersion}`,
       )
       .addFields(await getStatusFields(ctx));

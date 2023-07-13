@@ -1,17 +1,18 @@
 {
-    "compilerOptions": {
-        "target": "esnext",
-        "rootDirs": ["./src"],
-        "outDir": "./dist",
-        "esModuleInterop": true,
-        "forceConsistentCasingInFileNames": true,
-        "strict": true,
-        "skipLibCheck": true,
-        "moduleResolution": "node",
-        "experimentalDecorators": true,
-        "incremental": true,
-        "strictNullChecks": true,
-        "noUncheckedIndexedAccess": true
-    },
-    "include": ["./src/**/*"]
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "ESNext",
+    "rootDirs": ["./src"],
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "moduleResolution": "nodenext",
+    "experimentalDecorators": true,
+    "incremental": true,
+    "strictNullChecks": true,
+    "noUncheckedIndexedAccess": true
+  },
+  "include": ["./src/**/*"]
 }
