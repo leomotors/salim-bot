@@ -4,7 +4,7 @@
 # ? Builder: Complile TypeScript to JS
 # ? -------------------------
 
-FROM node:18-alpine as builder
+FROM node:20-alpine as builder
 
 WORKDIR /app
 
@@ -29,7 +29,7 @@ RUN npx pnpm build
 # ? Deps-prod: Obtaining node_modules that contains just production dependencies
 # ? -------------------------
 
-FROM node:18-alpine as deps-prod
+FROM node:20-alpine as deps-prod
 
 WORKDIR /app
 
@@ -45,7 +45,7 @@ RUN npx prisma generate
 # ? Runner: Production to run
 # ? -------------------------
 
-FROM node:18-alpine as runner
+FROM node:20-alpine as runner
 
 LABEL name "salim-bot"
 
