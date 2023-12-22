@@ -2,9 +2,8 @@ import "dotenv/config";
 
 import { sclient } from "./legacy.js";
 
-import { SlashCenter } from "cocoa-discord-utils/slash";
-
 import chalk from "chalk";
+import { SlashCenter } from "cocoa-discord/slash";
 
 import QuizCog from "./commands/quiz.js";
 import Salim from "./commands/salim.js";
@@ -24,7 +23,7 @@ console.log(
 
 // * Using Slash Commands with Cocoa Discord Utils 🍫
 const salimCenter = new SlashCenter(sclient.client, GuildIds);
-salimCenter.addCogs(new Salim(sclient.client), new QuizCog(sclient.client));
+salimCenter.addModules(new Salim(sclient.client), new QuizCog(sclient.client));
 salimCenter.useHelpCommand(style);
 salimCenter.on("error", async (name, err, ctx) => {
   await ctx.channel?.send(
@@ -39,7 +38,7 @@ salimCenter.on("interaction", (name, ctx) => {
 
 sclient.client.on("ready", async () => {
   await salimCenter.validateCommands();
-  await salimCenter.syncCommands(true);
+  await salimCenter.syncCommands();
 });
 
 // * Done! That's it required for this bot!

@@ -137,7 +137,7 @@ export class SBotClient {
   useComputedActivity(activity: ActivityOptions) {
     const { type, name = "" } = activity;
     this.props.computedActivity = activity;
-    this.client.user?.setActivity(name, { type, name });
+    this.client.user?.setActivity({ type, name });
   }
 
   useActivities(loader: ActivityLoader) {
@@ -160,9 +160,8 @@ export class SBotClient {
 
     if (selectedActivity) {
       const { type, name = "" } = selectedActivity;
-      this.client.user?.setActivity(name, {
-        // @ts-ignore
-        type: ActivityType[type],
+      this.client.user?.setActivity({
+        type: ActivityType[type!] as unknown as ActivityType,
         name,
       });
     }

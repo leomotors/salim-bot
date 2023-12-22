@@ -1,5 +1,5 @@
-import { EmbedStyle } from "cocoa-discord-utils";
-import { getElapsed } from "cocoa-discord-utils/meta";
+import { EmbedStyle } from "cocoa-discord";
+import { getElapsed } from "cocoa-discord/meta";
 
 export const style = new EmbedStyle({
   author: "invoker",

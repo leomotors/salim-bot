@@ -1,11 +1,3 @@
-import { CocoaEmbed, ArrayLoader } from "cocoa-discord-utils";
-import { NonEmptyArray } from "cocoa-discord-utils/internal/base";
-import {
-  CogSlashClass,
-  Param,
-  SlashCommand,
-} from "cocoa-discord-utils/slash/class";
-
 import {
   ActionRowBuilder,
   Client,
@@ -13,6 +5,13 @@ import {
   StringSelectMenuInteraction,
 } from "discord.js";
 
+import { CocoaEmbed, ArrayLoader } from "cocoa-discord";
+import { NonEmptyArray } from "cocoa-discord/internal/base";
+import {
+  SlashModuleClass,
+  Param,
+  SlashCommand,
+} from "cocoa-discord/slash/class";
 import * as fs from "node:fs";
 import { v4 as uuid } from "uuid";
 
@@ -159,10 +158,10 @@ class QuizManager {
             sr >= 0.8
               ? "บุคคลผู้ได้รับรองว่ามีความรักชาติ"
               : sr >= 0.6
-              ? "บุคคลที่ผ่านการทดสอบ"
-              : sr >= 0.3
-              ? "พวกสามกีบชังชาติ"
-              : "สามกีบที่ชังชาติร้ายแรง ต้องถูกกำจัด",
+                ? "บุคคลที่ผ่านการทดสอบ"
+                : sr >= 0.3
+                  ? "พวกสามกีบชังชาติ"
+                  : "สามกีบที่ชังชาติร้ายแรง ต้องถูกกำจัด",
         },
       ]);
 
@@ -184,7 +183,7 @@ function getChoices() {
   return obj.map((o, index) => ({ name: o, value: index + "" }));
 }
 
-export default class QuizCog extends CogSlashClass {
+export default class QuizCog extends SlashModuleClass {
   private quizManager: { [guildIds: string]: QuizManager } = {};
   private client: Client;
 

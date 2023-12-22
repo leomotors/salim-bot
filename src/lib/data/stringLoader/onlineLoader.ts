@@ -6,7 +6,7 @@ import { StringLoader, transformFunction } from "./stringLoader.js";
 export class OnlineLoader extends StringLoader {
   private url: string;
   private data_key?: string;
-  private interval?: NodeJS.Timer;
+  private interval?: NodeJS.Timeout;
 
   constructor(url: string, data_key?: string, transform?: transformFunction) {
     super(transform);

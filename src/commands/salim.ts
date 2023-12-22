@@ -1,11 +1,3 @@
-import { CocoaVersion } from "cocoa-discord-utils/meta";
-import {
-  CogSlashClass,
-  Param,
-  SlashCommand,
-} from "cocoa-discord-utils/slash/class";
-import { getStatusFields } from "cocoa-discord-utils/template";
-
 import {
   ActionRowBuilder,
   Client,
@@ -16,6 +8,14 @@ import {
   TextInputBuilder,
   TextInputStyle,
 } from "discord.js";
+
+import { CocoaVersion } from "cocoa-discord/meta";
+import {
+  SlashModuleClass,
+  Param,
+  SlashCommand,
+} from "cocoa-discord/slash/class";
+import { getStatusFields } from "cocoa-discord/template";
 
 import { Actions } from "../actions.js";
 import { combinedQuotes, sclient } from "../legacy.js";
@@ -32,7 +32,7 @@ function lim(str: string, len = 256) {
   return str.length > len ? str.slice(0, len - 3) + "..." : str;
 }
 
-export default class Salim extends CogSlashClass {
+export default class Salim extends SlashModuleClass {
   constructor(client: Client) {
     super("Salim Cog", "คำสั่งหลักๆของบอทสลิ่ม");
 

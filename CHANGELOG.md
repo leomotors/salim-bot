@@ -2,6 +2,11 @@
 
 Notable Changes for Salim Bot will be noted here!
 
+## [4.5.1610] - 2023-12-22
+
+- feat!: node 20 and cocoa-discord 3
+- feat: docker arm64 image
+
 ## [4.4.1600] - 2023-07-14
 
 - refactor: move s-bot-framework to this repo

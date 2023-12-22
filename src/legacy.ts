@@ -1,6 +1,6 @@
-import { CocoaVersion } from "cocoa-discord-utils/meta";
-
 import { ActivityType } from "discord.js";
+
+import { CocoaVersion } from "cocoa-discord/meta";
 
 import { Actions } from "./actions.js";
 import {
